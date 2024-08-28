@@ -31,6 +31,7 @@ body {
 
     background-image: url("../assets/retangulos.png");
     background-repeat: no-repeat;
+    background-size: 30%;
     background-position: 0% 100%;
 
 }
@@ -115,7 +116,30 @@ body {
 #container-notebook {
 
     width: 55%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     background-color: #7F00FF;
     background-image: linear-gradient(to right, rgb(255, 255, 255) 38%, rgba(0, 0, 0, 0) 20%);
 
+}
+
+/* CONFIGURAÇÕES DE RESPONSIVIDADE ------------------ */
+
+@media screen and (max-width: 700px) {
+    
+    #container-notebook {
+
+        display: none;
+    
+    }
+
+    #container-formulario {
+
+        background-image: none;
+        width: 100vw;
+
+    }
 }
