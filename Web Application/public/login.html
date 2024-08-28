@@ -7,6 +7,7 @@
     <title>Login • DataTech</title>
     <link rel="stylesheet" href="css/login.css">
     <link rel="shortcut icon" href="assets/logo_datatech_-_roxa_escuro.png" type="image/x-icon">
+    <script src="./js/login.js"></script>
 </head>
 
 <body>
@@ -19,16 +20,16 @@
             <div id="container-inputs">
                 <div class="container-input">
                     <span>E-mail:</span>
-                    <input type="text">
+                    <input type="text" id="input_email">
                 </div>
 
                 <div class="container-input">
                     <span>Senha</span>
-                    <input type="text">
+                    <input type="text" id="input_senha">
 
                     <a href="#" id="texto-esqueceu-senha">Esqueceu a senha?</a>
                 </div>
-                <button>Entrar</button>
+                <button onclick="login()">Entrar</button>
             </div>
 
             <p>Ainda não possui uma conta? <a href="#">Cadastre-se</a></p>
