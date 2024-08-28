@@ -8,31 +8,52 @@
 
   <title>DataTech | Cadastro</title>
 
-  <script src="./js/sessao.js"></script>
+  <!-- <script src="./js/sessao.js"></script> -->
   <script src="./js/cadastro.js"></script>
 
-  <link rel="stylesheet" href="./css/estilo.css" />
+
 
   <link rel="preconnect" href="https://fonts.gstatic.com" />
 </head>
 
-<body >
+<body onload=listarEmpresas()>
   <!--header inicio-->
   <div class="header">
-   
+
   </div>
   <!--header fim-->
 
-  <div class="login">
-    
-  </div>
+  <div class="cadastro">
 
-  <!--footer inicio-->
-  <div class="footer">
-    
-  </div>
-  <!--footer fim-->
+    <div class="form">
+      <div class="input-field">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" id="input_nome">
+      </div>
+      <div class="input-field">
+        <label for="email">Email:</label>
+        <input type="text" name="email" id="input_email">
+      </div>
+      <div class="input-field">
+        <label for="senha">Senha:</label>
+        <input type="password" name="senha" id="input_senha">
+      </div>
+      <div class="input-field">
+        <label for="token">Token:</label>
+        <input type="text" name="token" id="input_token">
+      </div>
+      <button onclick="cadastrar()">Cadastrar</button>
+      <br>
+      <div class="success-message">
+        <p id="success_message"></p>
+      </div>
+    </div>
+
+    <!--footer inicio-->
+    <div class="footer">
+
+    </div>
+    <!--footer fim-->
 </body>
 
 </html>
-
