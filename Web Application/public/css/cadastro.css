@@ -8,6 +8,7 @@ body {
     height: 100vh;
     margin: 0;
     position: relative;
+    overflow: hidden;
 }
 
 .container-formulario {
@@ -103,14 +104,18 @@ body {
     background-color: #7F00FF;
     color: white;
     text-align: center;
+
+    
     transition: background-color 0.5s ease-in-out;
 
     font-size: 15px;
 }
 
 .botao button {
+    
     width: 100%;
     text-align: center; /* Alinha o texto do botão ao centro */
+    
 }
 
 .botao:hover {
