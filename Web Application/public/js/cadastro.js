@@ -87,9 +87,10 @@ function cadastrar() {
             console.log("Resposta do servidor de cadastro:", resposta);
 
             if (resposta.ok) {
-                success_message.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+                habilitarMensagemSucesso();
 
                 setTimeout(() => {
+                    ocultarMensagemSucesso();
                     window.location = "login.html";
                 }, 2000)
             } else {
@@ -102,6 +103,18 @@ function cadastrar() {
 
     return false;
 }
+
+function habilitarMensagemSucesso() {
+    const p = document.getElementById('message');
+    p.style.display = "block"
+    p.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+}
+
+function ocultarMensagemSucesso() {
+    const p = document.getElementById('message');
+    p.style.display = "none"
+}
+
 
 function listarEmpresas() {
     fetch('empresas/listar', {

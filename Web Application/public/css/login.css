@@ -6,7 +6,7 @@ body {
 
     margin: 0;
     padding: 0;
-
+    overflow: hidden;
     font-family: "Poppins", sans-serif;
     font-style: normal;
 
@@ -124,6 +124,11 @@ body {
     background-color: #7F00FF;
     background-image: linear-gradient(to right, rgb(255, 255, 255) 38%, rgba(0, 0, 0, 0) 20%);
 
+}
+
+
+#message {
+display: none;
 }
 
 /* CONFIGURAÇÕES DE RESPONSIVIDADE ------------------ */
