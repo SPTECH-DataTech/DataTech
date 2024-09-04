@@ -2,81 +2,247 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AquaTech | Página Inicial</title>
+  <title>Página Inicial | DataTech</title>
 
-    <script src="./js/sessao.js"></script>
-
-    <link rel="stylesheet" href="./css/estilo.css">
-    <link rel="icon" href="./assets/icon/favicon2.ico">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
 
 <body>
-    <div class="header">
-      <div class="container">
-        <h1 class="titulo">AquaTech</h1>
-        <ul class="navbar">
-          <li class="agora">
-            <a href="#">Inicial</a>
-          </li>
-          <li>
-            <a href="simulador.html">Simulador</a>
-          </li>
-          <li>|</li>
-          <li>
-            <a href="login.html">Login</a>
-          </li>
-          <li>
-            <a href="cadastro.html">Cadastro</a>
-          </li>
-        </ul>
+  <div class="header">
+    <div class="container">
+      <div class="logo">
+        <span class="data">Data</span><span class="tech">Tech</span>
+      </div>
+      <div class="navbar">
+        <a href="#">Início</a>
+        <a href="#equipe_link">Nossa equipe</a>
+        <a href="#missao_visao_valores_link">Sobre nós</a>
+        <a href="#contato_link">Contato</a>
+      </div>
+      <div class="botoes_header_container">
+        <a href="link_login" class="botoes_header" id="botao_entrar_header">Entrar</a>
+        <a href="link_cadastro" class="botoes_header" id="botao_registrar_header">Registrar-se</a>
       </div>
     </div>
-  
-    <div class="banner">
-      <div class="container">
-        <p>Preservando <span>hoje</span> para existirem <span>amanhã</span>.</p>
+  </div>
+
+  <div class="banner">
+    <div class="container">
+      <div class="texto_banner">
+        <img src="./assets/logo_datatech_-_roxa_escuro.png" alt="logo datatech" id="logo_datatech_banner">
+        <h1 class="titulo_slogan">Nós implementamos sua ideia</h1>
+        <span class="texto_slogan">Ajudamos empresas a se destacar dos concorrentes, ganhar mais dinheiro e mitigar
+          gastos
+          com insigths váliosos</span>
+        <a href="link_cadastro" id="botao_cadastro_banner">Vamos começar!</a>
+      </div>
+      <img src="./assets/Group 17banner.png" alt="">
+    </div>
+  </div>
+
+  <div id="equipe_link"></div>
+
+  <div id="equipe" data-aos="fade-up">
+    <div class="container">
+      <div class="titulo_equipe">
+        <h1>Conheça nossa equipe</h1>
+        <span>Um grupo especialista e unido para o seu sucesso!</span>
+      </div>
+      <div class="equipe_carrossel">
+        <div class="slide" id="slide1">
+          <div class="card_carrossel">
+            <span>Lucas oliveira</span>
+            <img src="./assets/foto-devpng.png" alt="">
+          </div>
+          <div class="card_carrossel">
+            <span>Raíne Jardim</span>
+            <img src="./assets/foto-devpng.png" alt="">
+          </div>
+          <div class="card_carrossel">
+            <span>Samuel Sales</span>
+            <img src="./assets/foto-devpng.png" alt="">
+          </div>
+        </div>
+        <div class="slide" id="slide2">
+          <div class="card_carrossel">
+            <span>Tiago Pereira</span>
+            <img src="./assets/foto-devpng.png" alt="">
+          </div>
+          <div class="card_carrossel">
+            <span>Vinícius Pajor</span>
+            <img src="./assets/foto-devpng.png" alt="">
+          </div>
+          <div class="card_carrossel">
+            <span>Yasmin Conseição</span>
+            <img src="./assets/foto-devpng.png" alt="">
+          </div>
+        </div>
+      </div>
+      <button onclick="trocarSlides();"></button>
+    </div>
+  </div>
+
+  <div id="missao_visao_valores_link"></div>
+
+  <div class="missao_visao_valores" data-aos="fade-up">
+    <div class="container">
+      <div class="sessao">
+        <h1>Visão</h1>
+        <img src="./assets/img_visao.png" alt="auxílio">
+        <span>
+          Construir parcerias duradouras com nossos clientes, oferecendo soluções tecnológicas que gerem valor para
+          seus negócios
+        </span>
+      </div>
+      <div class="sessao">
+        <h1>Missão</h1>
+        <img src="./assets/img_missao.png" alt="alvo">
+        <span>
+          Empoderamos empresas a se destacar dos concorrentes, ganhar mais dinheiro e mitigar gastos com váliosos
+          insigths.
+        </span>
+      </div>
+      <div class="sessao">
+        <h1>Valores</h1>
+        <img src="./assets/img_valores.png" alt="crescimento">
+        <span>
+          Paixão por tecnologia e pelo desejo de impulsionar o crescimento e sucesso de nossos clientes.
+        </span>
       </div>
     </div>
+  </div>
+
+  <div class="tecnologias" data-aos="fade-up">
+    <div class="container">
+      <h1>Sua jornada digital começa aqui!</h1>
+      <div class="cards">
+        <div class="card" id="ia">
+          <h1>Inteligência Artificial</h1>
+          <span>
+            Com nossa estratégia digital, fornecemos ampla cobertura e recomendações geradas pela I.A para os seu
+            negócio, garantindo que você esteja sempre à frente do jogo.
+          </span>
+        </div>
+        <div class="card" id="analytics">
+          <h1>Analytics</h1>
+          <span>
+            Transforme seus dados em decisões inteligentes. Com a DataTech, você obtém insights profundos e
+            personalizados
+            para impulsionar seu negócio.
+          </span>
+        </div>
+        <div class="card" id="cloud">
+          <h1>Cloud</h1>
+          <span>
+            A habilitação da nuvem é o processo de análise do cenário de TI existente de uma organização. Por meio da
+            nuvem, é possível operar a infraestrutura de TI interna, software e recursos.
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
   
-    <div class="social">
-      <div class="container">
-        <div class="boxes">
-          <div class="box">
-            <img src="assets/imgs/planet-earth_color.png">
-            <h4>Missão</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quas cupiditate asperiores provident magnam
-              vitae illum iusto fugiat atque deleniti nulla sed iure suscipit, laborum, aliquid accusantium cum dicta
-              minima.</p>
+  <div id="contato_link"></div>
+
+  <div class="contato" data-aos="fade-up">
+    <div class="container">
+      <div class="form">
+        <div class="titulo_contato">
+          <h1>Entre em contato</h1>
+          <span>Estamos aqui por você! Como podemos ajudar?</span>
+        </div>
+        <div class="campo">
+          <span>Nome</span>
+          <input id="ctt_nome">
+        </div>
+        <div class="campo">
+          <span>Empresa</span>
+          <input id="ctt_empresa">
+        </div>
+        <div class="campo">
+          <span>E-mail</span>
+          <input id="ctt_email">
+        </div>
+        <div class="campo">
+          <span>Mensagem</span>
+          <textarea name=""></textarea>
+        </div>
+        <div class="contato_button">
+          <button>Enviar</button>
+        </div>
+      </div>
+
+      <div class="img_direita">
+        <img src="./assets/imagem_contato.png" alt="">
+        <div class="lista_contatos">
+          <div class="sessao_contato">
+            <img src="./assets/icone_endereco.png" alt="">
+            <span>Rua Haddock Lobo, 595</span>
           </div>
-          <div class="box">
-            <img src="assets/imgs/lightbulb_color.png">
-            <h4>Visão</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quas cupiditate asperiores provident magnam
-              vitae illum iusto fugiat atque deleniti nulla sed iure suscipit, laborum, aliquid accusantium cum dicta
-              minima.</p>
+          <div class="sessao_contato">
+            <img src="./assets/icone_telefone.png" alt="">
+            <span>+55 11 2584 3030</span>
           </div>
-          <div class="box">
-            <img src="assets/imgs/growth_color.png">
-            <h4>Valores</h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et, quas cupiditate asperiores provident magnam
-              vitae illum iusto fugiat atque deleniti nulla sed iure suscipit, laborum, aliquid accusantium cum dicta
-              minima.</p>
+          <div class="sessao_contato">
+            <img src="./assets/icone_email.png" alt="">
+            <span>datatech@datatech.com</span>
           </div>
         </div>
       </div>
     </div>
-  
-    <div class="footer">
-      <div class="container">
-        <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
-        <span class="version">v1.0.0</span>
-      </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer_titulo">
+      <span class="data">Data</span><span class="tech">Tech</span>
     </div>
-  </body>
+    <span class="direitos">© 2024 Todos os direitos reservados</span>
+  </div>
+</body>
 
 </html>
+<script>
+
+  AOS.init();
+</script>
+
+<script>
+
+  let slideAtual = 1;
+
+  function trocarSlides() {
+    const slide1 = document.getElementById("slide1");
+    const slide2 = document.getElementById("slide2");
+
+    if (slideAtual == 1) {
+      slide1.style.animation = "passarSlide";
+      slide1.style.animationDuration = "0.5s";
+      setTimeout(() => {
+        slide1.style.display = "none";
+        slide2.style.display = "flex";
+      }, 400);
+      slideAtual++;
+    } else {
+      slide2.style.animation = "passarSlide";
+      slide2.style.animationDuration = "0.5s";
+      setTimeout(() => {
+        slide2.style.display = "none";
+        slide1.style.display = "flex";
+      }, 400);
+      slideAtual--;
+    }
+
+  }
+
+</script>
