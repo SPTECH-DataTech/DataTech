@@ -13,15 +13,64 @@ function validarToken(token_informado) {
 
 function cadastrar() {
     let nome = input_nome.value;
+    let cpf = input_cpf.value;
     let email = input_email.value;
     let senha = input_senha.value;
+    let confirmacaoSenha = input_confirmacaoSenha.value;
     let token_informado = input_token.value;
 
-    let empresa = validarToken(token_informado);
-    if (!empresa) {
-        return;
+    // ERROS DE VERIFICAÇÃO
+    let erroNome = nome.length <= 1;
+    let erroCPF = cpf.length != 14;
+    let erroEmail = email.indexOf("@gmail.com") == -1;
+    let erroSenhaNumero = true;
+    let erroSenhaQtd = senha.length < 6;
+    let erroConfirmacaoSenha = confirmacaoSenha != senha;
+    
+    // verificação de números 
+    for (let i = 0; i < senha.length; i++){
+        
+        if (!isNaN(senha[i])){
+            erroSenhaNumero = false;
+            break;
+        }
     }
 
+    if (nome === "" || email === "" || senha === "" || token_informado === "" ){
+        alert ("Preencha todos os campos para continuar")
+        return false;
+    }
+    else if (erroNome){
+        alert ("Nome inválido!")
+        return false;
+    }
+    else if (erroCPF){
+        alert ("Erro no CPF. Deve haver 14 dígitos.")
+    }
+    else if (erroEmail){
+        alert("Email inválidol!")
+        return false;
+    }
+    else if(erroSenhaQtd){
+        alert("Erro na senha. Deve haver mais de 5 digitos.")
+        return false;
+    }
+    else if (erroSenhaNumero){
+        alert("Erro na senha, deve haver números.")
+        return false;
+    }
+    else if (erroConfirmacaoSenha){
+        alert("A confirmação de senha deve ser a mesma que a senha.")
+        return false;
+    }
+
+    let empresa = validarToken(token_informado);
+     if (!empresa) {
+        return ;
+    }
+    
+    
+    
     fetch('usuarios/cadastrar', {
         method: "POST",
         headers: {
@@ -83,4 +132,6 @@ function listarEmpresas() {
         .catch(function (erro) {
             console.log(`#ERRO: ${erro}`);
         });
+
+        
 }
