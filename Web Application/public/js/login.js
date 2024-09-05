@@ -28,8 +28,6 @@ function verificarEmail() {
 
     }
 
-    verificarSenha();
-
 }
 
 function verificarSenha() {
@@ -51,8 +49,6 @@ function verificarSenha() {
         mensagemErroSenha.innerHTML = "";
 
     }
-
-    login();
 
 }
 

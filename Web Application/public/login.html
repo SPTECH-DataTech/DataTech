@@ -20,18 +20,18 @@
             <div id="container-inputs">
                 <div class="container-input">
                     <span id="spanEmail">E-mail</span>
-                    <input type="text" id="input_email">
+                    <input type="text" id="input_email" onblur="verificarEmail()">
                     <p class="mensagemErroCampo" id="mensagemErroEmail"></p>
                 </div>
 
                 <div class="container-input">
                     <span id="spanSenha">Senha</span>
-                    <input type="password" id="input_senha">
+                    <input type="password" id="input_senha" onblur="verificarSenha()">
                     <p class="mensagemErroCampo" id="mensagemErroSenha"></p>
 
                     <a href="#" id="texto-esqueceu-senha">Esqueceu a senha?</a>
                 </div>
-                <button onclick="verificarEmail()">Entrar</button>
+                <button onclick="login()">Entrar</button>
             </div>
             <p>Ainda não possui uma conta? <a href="./cadastro.html">Cadastre-se</a></p>
             <p id="message"></p>
