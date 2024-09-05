@@ -6,7 +6,7 @@ body {
 
     margin: 0;
     padding: 0;
-    overflow: hidden;
+
     font-family: "Poppins", sans-serif;
     font-style: normal;
 
@@ -26,13 +26,15 @@ body {
     flex-direction: column;
     align-items: center;
 
-    width: 50%;
+    width: 50vw;
     height: 100vh;
 
     background-image: url("../assets/retangulos.png");
     background-repeat: no-repeat;
     background-size: 30%;
     background-position: 0% 100%;
+
+    font-size: 1vw;
 
 }
 
@@ -50,7 +52,7 @@ body {
     font-style: normal;
 
     margin: 0;
-    margin-top: 5%;
+    margin-top: 5vh;
 
 }
 
@@ -63,11 +65,11 @@ body {
 #container-inputs {
 
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
 
     width: 50%;
 
-    padding-bottom: 2%;
+    padding-bottom: 2vh;
 
 }
 
@@ -76,38 +78,47 @@ body {
     display: flex;
     flex-direction: column;
 
-    padding-bottom: 5%;
+    padding-bottom: 2vh;
 
 }
 
 .container-input input {
 
     height: 2rem;
+    padding: 1%;
 
-    border: 1px solid #7F00FF;
-    border-radius: 4px;
+    border: 0.15vw solid #7F00FF;
+    border-radius: 0.25rem;
+
+}
+
+.mensagemErroCampo {
+
+    color: red;
+    margin: 0;
+    font-size: 0.8vw;
 
 }
 
 #texto-esqueceu-senha {
 
     padding-top: 1%;
-    font-size: 10pt;
+    font-size: 0.8vw;
 
 }
 
 #container-inputs button {
 
-    height: 2.5rem;
+    height: 5vh;
 
     background-color: #7F00FF;
 
     color: white;
     font-weight: bold;
-    font-size: 12pt;
+    font-size: 1vw;
 
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
 
 }
 
@@ -115,7 +126,7 @@ body {
 
 #container-notebook {
 
-    width: 55%;
+    width: 50vw;
 
     display: flex;
     align-items: center;
@@ -126,47 +137,81 @@ body {
 
 }
 
-
-#message {
-display: none;
-}
-
 /* CONFIGURAÇÕES DE RESPONSIVIDADE ------------------ */
 
-@media screen and (max-width: 1024px) and (orientation: portrait) {
+@media screen and (max-width: 1366px) and (orientation: landscape) {
+
+    #container-formulario {
     
+        font-size: 1.8vw;
+    
+    }
+    
+    .container-input input {
+
+        border-width: 0.15vw;
+    
+    }
+    
+    .mensagemErroCampo {
+
+        font-size: 1.2vw;
+    
+    }
+    
+    #texto-esqueceu-senha {
+
+        font-size: 1.2vw;
+    
+    }
+    
+    #container-inputs button {
+    
+        font-size: 2vw;
+    
+    }
+
+}
+
+@media screen and (max-width: 1024px) and (orientation: portrait) {
+
     #container-notebook {
 
         display: none;
-    
+
     }
 
     #container-formulario {
 
         justify-content: center;
         background-image: none;
+        
         width: 100vw;
-        font-size: 3vw;
+        font-size: 3.5vw;
 
     }
 
     .container-input input {
 
-        height: 3vh;
-        border: 3px solid #7F00FF;
+        border-width: 0.4vw;
 
+    }
+
+    .mensagemErroCampo {
+
+        font-size: 3vw;
+    
     }
 
     #texto-esqueceu-senha {
 
-        font-size: 2.5vw;
+        font-size: 3vw;
 
     }
 
     #container-inputs button {
 
-        height: 4vh;
-        font-size: 3vw;
+        font-size: 3.5vw;
 
     }
 
@@ -175,17 +220,6 @@ display: none;
         text-align: center;
         padding-right: 2%;
         padding-left: 2%;
-
-    }
-
-}
-
-@media screen and (max-width: 600px) and (orientation: portrait) {
-
-    .container-input input {
-
-        height: 3vh;
-        border-width: 1px;
 
     }
 

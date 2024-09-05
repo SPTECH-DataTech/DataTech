@@ -10,19 +10,21 @@ function verificarEmail() {
         spanEmail.style.color = "red";
         input_email.style.borderColor = "red";
         tudoCertoEmail = false;
+        mensagemErroEmail.innerHTML = "Campo obrigatório!";
 
     } else if (email.indexOf("@") < 0 || email.indexOf(".") < email.indexOf("@") || email.indexOf(".") == email.length - 1) {
 
-        alert("Email inválido!");
         spanEmail.style.color = "red";
         input_email.style.borderColor = "red";
         tudoCertoEmail = false;
+        mensagemErroEmail.innerHTML = "E-mail inválido!";
 
     } else {
 
         tudoCertoEmail = true;
         spanEmail.style.color = "black";
         input_email.style.borderColor = "#7F00FF";
+        mensagemErroEmail.innerHTML = "";
 
     }
 
@@ -39,12 +41,14 @@ function verificarSenha() {
         spanSenha.style.color = "red";
         input_senha.style.borderColor = "red";
         tudoCertoSenha = false;
+        mensagemErroSenha.innerHTML = "Campo obrigatório!";
 
     } else {
 
         tudoCertoSenha = true;
         spanSenha.style.color = "black";
         input_senha.style.borderColor = "#7F00FF";
+        mensagemErroSenha.innerHTML = "";
 
     }
 
