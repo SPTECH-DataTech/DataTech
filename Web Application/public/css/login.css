@@ -139,40 +139,6 @@ body {
 
 /* CONFIGURAÇÕES DE RESPONSIVIDADE ------------------ */
 
-@media screen and (max-width: 1366px) and (orientation: landscape) {
-
-    #container-formulario {
-    
-        font-size: 1.8vw;
-    
-    }
-    
-    .container-input input {
-
-        border-width: 0.15vw;
-    
-    }
-    
-    .mensagemErroCampo {
-
-        font-size: 1.2vw;
-    
-    }
-    
-    #texto-esqueceu-senha {
-
-        font-size: 1.2vw;
-    
-    }
-    
-    #container-inputs button {
-    
-        font-size: 2vw;
-    
-    }
-
-}
-
 @media screen and (max-width: 1024px) and (orientation: portrait) {
 
     #container-notebook {
