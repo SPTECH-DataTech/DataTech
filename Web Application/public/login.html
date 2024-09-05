@@ -19,17 +19,17 @@
 
             <div id="container-inputs">
                 <div class="container-input">
-                    <span>E-mail:</span>
+                    <span id="spanEmail">E-mail:</span>
                     <input type="text" id="input_email">
                 </div>
 
                 <div class="container-input">
-                    <span>Senha</span>
+                    <span id="spanSenha">Senha</span>
                     <input type="text" id="input_senha">
 
                     <a href="#" id="texto-esqueceu-senha">Esqueceu a senha?</a>
                 </div>
-                <button onclick="login()">Entrar</button>
+                <button onclick="verificarEmail()">Entrar</button>
             </div>
             <p id="message"></p>
             <p>Ainda não possui uma conta? <a href="./cadastro.html">Cadastre-se</a></p>
