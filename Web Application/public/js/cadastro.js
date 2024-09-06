@@ -22,7 +22,7 @@ function cadastrar() {
     // ERROS DE VERIFICAÇÃO
     let erroNome = nome.length <= 1;
     let erroCPF = cpf.length != 14;
-    let erroEmail = email.indexOf("@gmail.com") == -1;
+    let erroEmail = email.indexOf("@") == -1 || email.indexOf(".com") == -1;
     let erroSenhaNumero = true;
     let erroSenhaQtd = senha.length < 6;
     let erroConfirmacaoSenha = confirmacaoSenha != senha;
@@ -48,7 +48,7 @@ function cadastrar() {
         alert ("Erro no CPF. Deve haver 14 dígitos.")
     }
     else if (erroEmail){
-        alert("Email inválidol!")
+        alert("Email inválidol Deve haver @ e .com!")
         return false;
     }
     else if(erroSenhaQtd){
@@ -68,6 +68,7 @@ function cadastrar() {
     //     return ;
     // }
     else {
+        alert("Cadastro realizado com sucesso. Redirecionando para tela de Login!")
      window.location.href = "./login.html"   
     }
     
