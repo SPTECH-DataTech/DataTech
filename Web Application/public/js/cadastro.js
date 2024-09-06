@@ -63,10 +63,12 @@ function cadastrar() {
         alert("A confirmação de senha deve ser a mesma que a senha.")
         return false;
     }
-
-    let empresa = validarToken(token_informado);
-     if (!empresa) {
-        return ;
+    // let empresa = validarToken(token_informado);
+    //  if (!empresa) {
+    //     return ;
+    // }
+    else {
+     window.location.href = "./login.html"   
     }
     
     

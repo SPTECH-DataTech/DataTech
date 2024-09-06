@@ -130,4 +130,48 @@ body {
 }
 
 
+/* Responsividade */
+@media (max-width: 768px) {
+    .container-formulario {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .imagem-1 {
+        display: none; 
+    }
+
+    .formulario-cadastro {
+        width: 80%; 
+        padding: 5%; 
+        margin-right: 0; 
+        
+    }
+
+    .card-inputs {
+        width: 100%; 
+    }
+
+    .botao {
+        width: 100%; 
+    }
+}
+
+
+@media (max-width: 480px) {
+    body {
+        padding: 0 10px;
+    }
+
+    .card-inputs input {
+        padding: 8px; 
+    }
+
+    .botao {
+        font-size: 14px; 
+    }
+}
+
+
+
 
