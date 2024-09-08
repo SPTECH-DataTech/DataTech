@@ -17,42 +17,55 @@
 </head>
 
 <body onload=listarEmpresas()>
-      <!-- inicio container -->
-    <div class="container-formulario">
-      <div class="imagem-1">
-          <img src="./assets/imgs/Group 20.png" class="imagem-principal">
+  <!-- inicio container -->
+  <div class="container-formulario">
+    <div class="imagem-1">
+      <img src="./assets/imgs/Group 20.png" class="imagem-principal">
+    </div>
+
+    <!-- Formulário à direita -->
+    <div class="formulario-cadastro">
+
+
+      <div class="card-inputs">
+        Nome Completo:
+        <input type="text" id="input_nome">
+        <span class="erro" id="erro_nome"></span>
+
+        CPF:
+        <input type="number" id="input_cpf">
+        <span class="erro" id="erro_cpf"></span>
+
+        E-mail:
+        <input type="text" id="input_email">
+        <span class="erro" id="erro_email"></span>
+
+        Senha:
+        <input type="password" id="input_senha">
+        <span class="erro" id="erro_senha"></span>
+
+        Confirme sua Senha:
+        <input type="password" id="input_confirmacaoSenha">
+        <span class="erro" id="erro_confirmacaoSenha"></span>
+
+        Digite seu Token:
+        <input type="number" id="input_token">
+        <span class="erro" id="erro_token"></span>
+
+        <div class="container-botao-mensagem">
+          <button class="botao" onclick="cadastrar()">Próximo Passo</button>
+
+          <p>Já possuo uma conta! <a href="./login.html"><b style="color: #7F00FF;">Entrar</b></a></p>
+        </div>
       </div>
-  
-      <!-- Formulário à direita -->
-      <div class="formulario-cadastro">
-         
-  
-          <div class="card-inputs">
-              Nome Completo:
-              <input type="text" id="input_nome">
-              CPF:
-              <input type="number" id="input_cpf">
-              E-mail:
-              <input type="text" id="input_email">
-              Senha:
-              <input type="password" id="input_senha">
-              Confirme sua Senha:
-              <input type="password" id="input_confirmacaoSenha">
-              Digite seu Token:
-              <input type="number" id="input_token">
-  
-              <div class="container-botao-mensagem">
-                <button class="botao" onclick="cadastrar()">Próximo Passo</button>
-    
-                <p>Já possuo uma conta! <a href="./login.html"><b style="color: #7F00FF;">Entrar</b></a></p>
-              </div>
-          </div>
-      </div>
+
+    </div>
   </div>
-  
-    <!-- container fim -->
-  
-    <div class="login"></div>
-    <div class="footer"></div>
-  </body>
+
+  <!-- container fim -->
+
+  <div class="login"></div>
+  <div class="footer"></div>
+</body>
+
 </html>

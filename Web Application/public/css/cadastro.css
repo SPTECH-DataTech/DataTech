@@ -91,7 +91,7 @@ body {
     padding: 10px;
     border: 0.15vw solid #7F00FF;
     border-radius: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;  /* Diminuir a margem inferior para aproximar o span */
 }
 
 .botao {
@@ -105,7 +105,6 @@ body {
     color: white;
     text-align: center;
 
-    
     transition: background-color 0.5s ease-in-out;
 
     font-size: 15px;
@@ -127,6 +126,18 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+/*mensagem de erro*/
+.erro {
+    color: red;
+    font-size: 12px;
+    margin: 0;;
+    display: none; /* Por padrão, o erro não é exibido */
+}
+
+.input-erro {
+    border: 2px solid red;
 }
 
 
