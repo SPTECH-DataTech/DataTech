@@ -350,6 +350,90 @@ textarea {
     margin: 0;
 }
 
+/* --------------SERVIÇOS CAFÉ----------- */
+.servico-cafe {
+    padding: 2%;
+    align-items: flex-start;
+    display: flex;
+    justify-content: space-between;
+}
+
+.servico-cafe h1 {
+    text-align: center;
+    font-size: 4.75rem;
+    margin-bottom: 6.25rem;
+}
+
+.servico-cafe h2 {
+    font-size: 3.75rem;
+    color: #783fd9;
+}
+
+.servico-cafe h3 {
+    font-size: 2.45rem;
+}
+
+.texto-servicos {
+    font-size: x-large;
+    width: 100%; 
+}
+.divisor {
+    display: flex;
+}
+
+#cafeeiro-servico {
+    padding-left: 10px;
+    width: 50%;
+    height: auto;
+    border-radius: 20px;
+}
+
+.card-servico {
+    top: -180px;
+    position: relative;
+    padding: 1.25rem;
+    color: white;
+    width: 100%;
+    max-width: 550px; 
+    height: 130px;
+    border: .5rem solid #ddd9e5;
+    border-radius: 1.875rem;
+    background-color: var(--roxoCards);
+    align-items: center;
+    text-align: center;
+    box-shadow: 0rem .1875rem .5rem black;
+}
+
+
+.card-servico span {
+    position: absolute;
+    font-size:large;
+    top: 25%;
+    left: 10px;
+    width: 97%;
+    transition: opacity 0.3s ease-in-out;
+    text-align: center;
+}
+
+.texto-inicial {
+    opacity: 1;
+}
+
+.texto-hover {
+    opacity: 0;
+    font-size: 20px;
+}
+
+.card-servico:hover .texto-inicial {
+    opacity: 0;
+}
+
+.card-servico:hover .texto-hover {
+    opacity: 1;
+}
+
+
+
 /* ------------------CONTATO---------------- */
 
 .contato {
