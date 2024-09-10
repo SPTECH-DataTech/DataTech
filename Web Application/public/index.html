@@ -61,35 +61,47 @@
       </div>
       <div class="equipe_carrossel">
         <div class="slide" id="slide1">
-          <div class="card_carrossel">
+          <div class="card_carrossel" id="card_lucas">
             <span>Lucas oliveira</span>
-            <img src="./assets/foto-devpng.png" alt="">
+            <div class="foto_integrante">
+              <img src="./assets/Lucas.png" alt="">
+            </div>
           </div>
-          <div class="card_carrossel">
+          <div class="card_carrossel" id="card_raine">
             <span>Raíne Jardim</span>
-            <img src="./assets/foto-devpng.png" alt="">
+            <div class="foto_integrante">
+              <img src="./assets/Raíne.png" alt="">
+            </div>
           </div>
-          <div class="card_carrossel">
+          <div class="card_carrossel" id="card_samuel">
             <span>Samuel Sales</span>
-            <img src="./assets/foto-devpng.png" alt="">
+            <div class="foto_integrante">
+              <img src="./assets/Samuel.png" alt="">
+            </div>
           </div>
         </div>
         <div class="slide" id="slide2">
-          <div class="card_carrossel">
+          <div class="card_carrossel"id="card_tiago">
             <span>Tiago Pereira</span>
-            <img src="./assets/foto-devpng.png" alt="">
+            <div class="foto_integrante">
+              <img src="./assets/Tiago.png" alt="">
+            </div>
           </div>
-          <div class="card_carrossel">
+          <div class="card_carrossel" id="card_vinicius">
             <span>Vinícius Pajor</span>
-            <img src="./assets/foto-devpng.png" alt="">
+            <div class="foto_integrante">
+              <img src="./assets/Vinícius.png" alt="">
+            </div>
           </div>
           <div class="card_carrossel">
             <span>Yasmin Conseição</span>
-            <img src="./assets/foto-devpng.png" alt="">
+            <div class="foto_integrante" id="card_yasmim">
+              <img src="./assets/Yasmim.png" alt="">
+            </div>
           </div>
         </div>
       </div>
-      <button onclick="trocarSlides();"></button>
+      <button onclick="trocarSlidesEquipe();"></button>
     </div>
   </div>
 
@@ -156,51 +168,62 @@
   <div class="servico-cafe">
     <div class="container">
       <h1>Nossos Serviços em Ação!</h1>
-      <h2> Entenda como ajudamos cafeicultores</h2>
-      <h3> Com o sucesso em suas fazendas (EM BREVE!)</h3>
+      <div class="titulo_servicos">
+        <h2> Entenda como ajudamos cafeicultores</h2>
+        <h3> Com o sucesso em suas fazendas (EM BREVE!)</h3>
+      </div>
 
-      <div class="texto-servicos">
-        <div class="divisor">
-          <span>A agricultura de precisão chegou ao café! Com a nossa plataforma, você tem acesso a ferramentas e dados
-            que te ajudam a tomar decisões mais assertivas para plantio e colheita de suas mudas de cafés.</span>
-          <img src="img/cafeeiro.jpeg" id="cafeeiro-servico">
+      <div class="apresentacao_servicos">
+        <div class="texto_carrossel">
+          <div class="texto-servicos">
+            <span>
+              A agricultura de precisão chegou ao café! Com a nossa plataforma, você tem acesso a ferramentas e dados
+              que te ajudam a tomar decisões mais assertivas para plantio e colheita de suas mudas de cafés.
+            </span>
+          </div>
+
+          <div class="carrossel_servico">
+
+            <button class="carrossel_servico_button" id="foward_button" onclick="anteriorSlideProduto()">
+              <img src="./assets/seta_produto_carrossel_esquerda.svg" alt="">
+            </button>
+
+            <div class="card-servico" id="card-servico1">
+              <span class="texto-inicial">Planejamento 🎯 </span>
+              <span class="texto-hover">Indicamos o melhor período para plantar e colher, considerando as condições
+                climáticas da sua região.</span>
+            </div>
+
+            <div class="card-servico" id="card-servico2">
+              <span class="texto-inicial">Notificações personalizadas 🚨 </span>
+              <span class="texto-hover">Notificamos eventos climáticos extremos como geadas, secas ou chuvas excessivas,
+                os
+                produtores podem tomar medidas preventivas para minimizar os danos à lavoura.</span>
+            </div>
+
+            <div class="card-servico" id="card-servico3">
+              <span class="texto-inicial">Comparativo entre regiões 📊 </span>
+              <span class="texto-hover">Comparamos os dados climáticos de diferentes regiões, os produtores podem
+                identificar áreas com condições mais favoráveis para o cultivo de café.</span>
+            </div>
+
+            <div class="card-servico" id="card-servico4">
+              <span class="texto-inicial">Gerenciamento de Equipe 🫱🏻‍🫲🏼 </span>
+              <span class="texto-hover">O produtor pode criar contas para cada membro da equipe (engenheiros agrônomos,
+                analistas, etc.) definindo um nível de acesso específico para cada um.</span>
+            </div>
+
+            <button class="carrossel_servico_button" id="previous_button" onclick="proximoSilideProduto()">
+              <img src="./assets/seta_produto_carrossel_direita.svg" alt="">
+            </button>
+
+          </div>
+          <a class="botao_cadastro_carrossel" href="#contato_link">Tenho interesse</a>
         </div>
-
-
-
-      </div>
-
-
-      <div class="card-servico">
-        <span class="texto-inicial">Planejamento <br> 🎯 </span>
-        <span class="texto-hover">Indicamos o melhor período para plantar e colher, considerando as condições
-          climáticas da sua região.</span>
-      </div>
-
-      <div class="card-servico">
-        <span class="texto-inicial">Notificações personalizada <br> 🚨 </span>
-        <span class="texto-hover">Notificamos eventos climáticos extremos como geadas, secas ou chuvas excessivas, os
-          produtores podem tomar medidas preventivas para minimizar os danos à lavoura.</span>
-      </div>
-
-      <div class="card-servico">
-        <span class="texto-inicial">Comparativo entre regiões <br> 📊 </span>
-        <span class="texto-hover">Comparamos os dados climáticos de diferentes regiões, os produtores podem
-          identificar áreas com condições mais favoráveis para o cultivo de café.</span>
-      </div>
-
-      <div class="card-servico">
-        <span class="texto-inicial">Gerenciamento de Equipe <br> 🫱🏻‍🫲🏼 </span>
-        <span class="texto-hover">O produtor pode criar contas para cada membro da equipe (engenheiros agrônomos,
-          analistas, etc.) definindo um nível de acesso específico para cada um.</span>
+        <img src="img/cafeeiro.jpeg" id="cafeeiro-servico">
       </div>
     </div>
   </div>
-  </div>
-
-
-  </div>
-
 
   <div id="contato_link"></div>
 
@@ -268,30 +291,93 @@
 
 <script>
 
-  let slideAtual = 1;
+  let slideEquipeAtual = 1;
 
-  function trocarSlides() {
+  function trocarSlidesEquipe() {
     const slide1 = document.getElementById("slide1");
     const slide2 = document.getElementById("slide2");
 
-    if (slideAtual == 1) {
-      slide1.style.animation = "passarSlide";
+    if (slideEquipeAtual == 1) {
+      slide1.style.animation = "passarSlideEquipe_sumir";
+      slide2.style.animation = "passarSlideEquipe_aparecer";
       slide1.style.animationDuration = "0.5s";
+      slide2.style.animationDuration = "0.5s";
       setTimeout(() => {
         slide1.style.display = "none";
         slide2.style.display = "flex";
       }, 400);
-      slideAtual++;
+      slideEquipeAtual++;
     } else {
-      slide2.style.animation = "passarSlide";
+      slide2.style.animation = "passarSlideEquipe_sumir";
+      slide1.style.animation = "passarSlideEquipe_aparecer"
       slide2.style.animationDuration = "0.5s";
+      slide1.style.animationDuration = "0.5s";
       setTimeout(() => {
         slide2.style.display = "none";
         slide1.style.display = "flex";
       }, 400);
-      slideAtual--;
+      slideEquipeAtual--;
+    }
+  }
+
+  let slideProdutoAtual = 1;
+
+  function proximoSilideProduto() {
+    slideProdutoAtual++;
+
+    
+    if (slideProdutoAtual > 4) {
+      slideProdutoAtual = 1;
     }
 
+    for(let i = 1; i <= 4; i++) {
+      let cardAtual = document.getElementById(`card-servico${i}`);
+      let slideAtual = document.getElementById(`card-servico${slideProdutoAtual}`)
+      if (cardAtual == slideAtual) {
+        cardAtual.style.animation = "passarSlideProduto_foward_aparecer";
+        cardAtual.style.animationDuration = "0.3s";
+        setTimeout(() => {
+          cardAtual.style.display = "flex";
+        },200)
+      }
+
+      if (cardAtual != slideAtual) {
+        cardAtual.style.animation = "passarSlideProduto_foward_sumir";
+        cardAtual.style.animationDuration = "0.3s";
+        setTimeout(() => {
+          cardAtual.style.display = "none";
+        },200)
+      }
+    }
+
+  }
+
+  function anteriorSlideProduto() {
+    slideProdutoAtual--;
+
+    if (slideProdutoAtual < 1) {
+      slideProdutoAtual = 4;
+    }
+
+    for(let i = 1; i <= 4; i++) {
+      let cardAtual = document.getElementById(`card-servico${i}`);
+      let slideAtual = document.getElementById(`card-servico${slideProdutoAtual}`)
+      if (cardAtual == slideAtual) {
+        cardAtual.style.animation = "passarSlideProduto_backward_aparecer";
+        cardAtual.style.animationDuration = "0.3s";
+        setTimeout(() => {
+          cardAtual.style.display = "flex";
+        }, 200);
+      }
+
+      if (cardAtual != slideAtual) {
+        cardAtual.style.animation = "passarSlideProduto_backward_sumir";
+        cardAtual.style.animationDuration = "0.3s";
+        setTimeout(() => {
+          cardAtual.style.display = "none";
+        }, 200);
+      }
+    }
   }
 
 </script>
