@@ -73,7 +73,7 @@ function cadastrar() {
 
     if (nome == "" || email == "" || senha == "" || token_informado == "" || cpf == "" || confirmacaoSenha == "") {
         alert("Preencha todos os campos para continuar")
-        return false;
+        return false;    
     }
     else if (erroNome) {
 
