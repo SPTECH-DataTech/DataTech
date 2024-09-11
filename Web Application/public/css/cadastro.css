@@ -20,6 +20,31 @@ body {
     z-index: 3; /* Para garantir que o formulário esteja sobre as imagens de fundo */
 }
 
+.div-logo {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.div-logo img {
+    width: 6rem;
+}
+
+.div-logo a {
+    
+    display: flex;
+    justify-content: center;
+    
+    width: 6rem;
+
+}
+
+.formulario-cadastro span {
+    color: #7F00FF;
+}
+
 .imagem-1 {
     flex: 1;
     position: relative;
