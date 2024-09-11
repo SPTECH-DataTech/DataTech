@@ -38,6 +38,22 @@ body {
 
 }
 
+.div-logo {
+
+    display: flex;
+    justify-content: center;
+
+}
+
+.div-logo a {
+    
+    display: flex;
+    justify-content: center;
+
+    width: 10rem;
+
+}
+
 #container-formulario a {
 
     color: #7F00FF;
