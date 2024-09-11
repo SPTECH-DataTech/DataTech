@@ -12,7 +12,7 @@ function verificarEmail() {
         tudoCertoEmail = false;
         mensagemErroEmail.innerHTML = "Campo obrigatório!";
 
-    } else if (email.indexOf("@") < 0 || email.indexOf(".") < email.indexOf("@") || email.indexOf(".") == email.length - 1) {
+    } else if (email.indexOf("@") < 0 || email.lastIndexOf(".") < email.indexOf("@") || email.lastIndexOf(".") == email.length - 1) {
 
         spanEmail.style.color = "red";
         input_email.style.borderColor = "red";

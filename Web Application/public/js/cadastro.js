@@ -28,8 +28,9 @@ function cadastrar() {
 
     // ERROS DE VERIFICAÇÃO
     let erroNome = nome.length <= 1;
+    let erroNomeComNumeros = false;
     let erroCPF = cpf.length != 14;
-    let erroEmail = email.indexOf("@") == -1 || email.indexOf(".com") == -1;
+    let erroEmail = email.indexOf("@") < 0 || email.lastIndexOf(".") < email.indexOf("@") || email.lastIndexOf(".") == email.length ;
     let erroSenhaNumero = true;
     let erroSenhaQtd = senha.length < 6;
     let erroConfirmacaoSenha = confirmacaoSenha != senha;
@@ -44,6 +45,16 @@ function cadastrar() {
             break;
         }
     }
+
+    // verificação nome com números
+    for (let i = 0; i < nome.length; i++){
+
+        if (!isNaN(nome[i])){
+            erroNomeComNumeros = true;
+            break;
+        }
+    }   
+
 
     // Para limpar mensagem de erro.
     input_nome.addEventListener("input", function () {
@@ -81,6 +92,13 @@ function cadastrar() {
         erro_nome.style.display = "block";
         input_nome.classList.add("input-erro");
         erroEncontrado = true;
+    } 
+    else if (erroNomeComNumeros){
+
+        erro_nome.innerText = "Nome inválido!";
+        erro_nome.style.display = "block";
+        input_nome.classList.add("input-erro");
+        erroEncontrado = true;
     }
     else if (erroCPF) {
 
@@ -91,7 +109,7 @@ function cadastrar() {
     }
     else if (erroEmail) {
 
-        erro_email.innerText = "Email inválido! Deve haver @ e .com!";
+        erro_email.innerText = "Deve haver '@' e '.' ! O ponto não pode ser o último, nem vir antes do '@'.";
         erro_email.style.display = "block";
         input_email.classList.add("input-erro");
         erroEncontrado = true;
