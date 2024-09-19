@@ -166,6 +166,11 @@ body {
 }
 
 
+.container-mensagem {
+    color: #420085;
+    text-align: center;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
     .container-formulario {
