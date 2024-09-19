@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperação de Senha • DataTech</title>
+    <link rel="shortcut icon" href="assets/logo_datatech_-_roxa_escuro.png" type="image/x-icon">
+    <link rel="stylesheet" href="./css/recuperarSenha.css">
+    <script src="./js/recuperarSenha.js"></script>
+</head>
+
+<body>
+
+    <div id="container">
+
+        <div id="container-notebook">
+            <img src="assets/Notebook.png" alt="" width="90%">
+        </div>
+
+        <div id="container-formulario">
+            <h1 id="texto-logo">Data<span>Tech</span></h1>
+            <div class="div-logo">
+                <a href="./index.html"><img src="assets/logo_datatech_-_roxa_escuro.png" alt="logo DataTech"
+                        width="100rem"></a>
+            </div>
+
+            <h3 id="tituloRecuperacao">Recuperação de Senha</h3>
+            <p id="textoRecuperacao">Uma senha temporaria será encaminhada para o seu e-mail.</p>
+
+            <div id="container-inputs">
+                <div class="container-input">
+                    <span id="spanEmail">E-mail</span>
+                    <input type="text" id="input_email" onblur="verificarEmail()">
+                    <p class="mensagemErroCampo" id="mensagemErroEmail"></p>
+                </div>
+                <button onclick="enviarEmail()">Enviar</button>
+            </div>
+            <a href="./login.html">Entrar em uma conta existente.</a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
