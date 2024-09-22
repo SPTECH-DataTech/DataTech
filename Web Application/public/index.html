@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
   <meta charset="UTF-8">
@@ -24,6 +24,9 @@
       <div class="logo">
         <span class="data">Data</span><span class="tech">Tech</span>
       </div>
+      <div class="logo_mobile" >
+        <img src="assets/Logo-Mobile.png" alt="Logo Mobile">
+      </div>
       <div class="navbar">
         <a href="#">Início</a>
         <a href="#equipe_link">Nossa equipe</a>
@@ -33,6 +36,11 @@
       <div class="botoes_header_container">
         <a href="./login.html" class="botoes_header" id="botao_entrar_header">Entrar</a>
         <a href="./cadastro.html" class="botoes_header" id="botao_registrar_header">Registrar-se</a>
+      </div>
+      <div class="mobile_menu">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
       </div>
     </div>
   </div>
@@ -44,8 +52,10 @@
         <h1 class="titulo_slogan">Nós implementamos sua ideia</h1>
         <span class="texto_slogan">Ajudamos empresas a se destacar dos concorrentes, ganhar mais dinheiro e mitigar
           gastos
-          com insigths váliosos</span>
-        <a href="link_cadastro" id="botao_cadastro_banner">Vamos começar!</a>
+          com insigths valiosos</span>
+        <div class="botao-cadastro-banner">
+          <a href="./cadastro.html" id="botao_cadastro_banner">Vamos começar!</a>
+        </div>
       </div>
       <img src="./assets/Group 17banner.png" alt="">
     </div>
@@ -62,7 +72,7 @@
       <div class="equipe_carrossel">
         <div class="slide" id="slide1">
           <div class="card_carrossel" id="card_lucas">
-            <span>Lucas oliveira</span>
+            <span>Lucas Oliveira</span>
             <div class="foto_integrante">
               <img src="./assets/Lucas.png" alt="">
             </div>
@@ -81,7 +91,7 @@
           </div>
         </div>
         <div class="slide" id="slide2">
-          <div class="card_carrossel"id="card_tiago">
+          <div class="card_carrossel" id="card_tiago">
             <span>Tiago Pereira</span>
             <div class="foto_integrante">
               <img src="./assets/Tiago.png" alt="">
@@ -94,7 +104,7 @@
             </div>
           </div>
           <div class="card_carrossel">
-            <span>Yasmin Conseição</span>
+            <span>Yasmin Conceição</span>
             <div class="foto_integrante" id="card_yasmim">
               <img src="./assets/Yasmim.png" alt="">
             </div>
@@ -121,7 +131,7 @@
         <h1>Missão</h1>
         <img src="./assets/img_missao.png" alt="alvo">
         <span>
-          Empoderamos empresas a se destacar dos concorrentes, ganhar mais dinheiro e mitigar gastos com váliosos
+          Empoderamos empresas a se destacar dos concorrentes, ganhar mais dinheiro e mitigar gastos com valiosos
           insigths.
         </span>
       </div>
@@ -196,7 +206,8 @@
 
             <div class="card-servico" id="card-servico2">
               <span class="texto-inicial">Notificações personalizadas 🚨 </span>
-              <span class="texto-hover">Notificamos eventos climáticos extremos como geadas, secas ou chuvas excessivas,
+              <span class="texto-hover">Notificamos eventos climáticos extremos como geadas, secas ou chuvas
+                excessivas,
                 os
                 produtores podem tomar medidas preventivas para minimizar os danos à lavoura.</span>
             </div>
@@ -209,7 +220,8 @@
 
             <div class="card-servico" id="card-servico4">
               <span class="texto-inicial">Gerenciamento de Equipe 🫱🏻‍🫲🏼 </span>
-              <span class="texto-hover">O produtor pode criar contas para cada membro da equipe (engenheiros agrônomos,
+              <span class="texto-hover">O produtor pode criar contas para cada membro da equipe (engenheiros
+                agrônomos,
                 analistas, etc.) definindo um nível de acesso específico para cada um.</span>
             </div>
 
@@ -325,12 +337,12 @@
   function proximoSilideProduto() {
     slideProdutoAtual++;
 
-    
+
     if (slideProdutoAtual > 4) {
       slideProdutoAtual = 1;
     }
 
-    for(let i = 1; i <= 4; i++) {
+    for (let i = 1; i <= 4; i++) {
       let cardAtual = document.getElementById(`card-servico${i}`);
       let slideAtual = document.getElementById(`card-servico${slideProdutoAtual}`)
       if (cardAtual == slideAtual) {
@@ -338,7 +350,7 @@
         cardAtual.style.animationDuration = "0.3s";
         setTimeout(() => {
           cardAtual.style.display = "flex";
-        },200)
+        }, 200)
       }
 
       if (cardAtual != slideAtual) {
@@ -346,7 +358,7 @@
         cardAtual.style.animationDuration = "0.3s";
         setTimeout(() => {
           cardAtual.style.display = "none";
-        },200)
+        }, 200)
       }
     }
 
@@ -359,7 +371,7 @@
       slideProdutoAtual = 4;
     }
 
-    for(let i = 1; i <= 4; i++) {
+    for (let i = 1; i <= 4; i++) {
       let cardAtual = document.getElementById(`card-servico${i}`);
       let slideAtual = document.getElementById(`card-servico${slideProdutoAtual}`)
       if (cardAtual == slideAtual) {
