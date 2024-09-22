@@ -137,6 +137,23 @@ textarea {
     width: 9.375rem;
 }
 
+.logo_mobile {
+    display: none;
+}
+
+.mobile_menu {
+    cursor: pointer;
+}
+
+.mobile_menu div {
+    display: none;
+    width: 40px;
+    height: 5px;
+    margin: 8px;
+    background: #210042;
+    border-radius: 100px;
+}
+
 /* ----------------------BANNER----------------- */
 
 .banner {
@@ -178,7 +195,7 @@ textarea {
     background-color: var(--roxoBotao);
     color: white;
     width: 37%;
-    height: 12%;
+    height: 100%;
     border-radius: 1.25rem;
     display: flex;
     align-items: center;
@@ -188,6 +205,13 @@ textarea {
     font-weight: bold;
     font-size: 1.25rem;
     box-shadow: 0rem .125rem .1875rem black;
+}
+
+.botao-cadastro-banner {
+    display: flex;
+
+    height: 50px;
+    justify-content: start;
 }
 
 /* ----------------------EQUIPE----------------- */
@@ -245,7 +269,7 @@ textarea {
 }
 
 .card_carrossel {
-    
+
     height: 12.9375rem;
     width: 12.9375rem;
     border: .0625rem solid black;
@@ -471,7 +495,7 @@ textarea {
     text-align: center;
     box-shadow: 0rem .1875rem .5rem black;
     text-align: center;
-    
+
 }
 
 .card-servico span {
@@ -718,5 +742,103 @@ button {
         position: relative;
         right: 0;
         opacity: 100%;
+    }
+}
+
+/*              REPONSIVIDADE           */
+
+@media only screen and (max-width: 600px) {
+
+    /* HEADER */
+
+    .header {
+        width: 100vw;
+        height: 60px;
+
+        margin-top: -60px;
+
+        justify-content: center;
+    }
+
+    .header
+    .logo {
+        display: none;
+    }
+
+    .navbar {
+        display: none;
+    }
+
+    .logo_mobile {
+        margin-top: 0.8%;
+        display: block;
+    }
+
+    .botoes_header_container {
+        display: none;
+    }
+
+    .mobile_menu div {
+        display: block;
+    }
+
+    /* BANNER */
+
+    .banner {
+        width: 100%;
+        height: 300px;
+
+        margin-top: 60px;
+        padding-top: 14px;
+
+    }
+
+    .banner .container {
+        width: 100%;
+        height: 100%;
+
+        margin-left: 1%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .banner .container img {
+        width: 50%;
+        height: 250px;
+
+    }
+
+    .texto_banner {
+        width: 50%;
+    }
+
+    .texto_banner img {
+        display: none;
+    }
+
+    .banner .titulo_slogan {
+        font-size: 4vw;
+    }
+    
+    .texto_slogan {
+        display: flex;
+
+        width: 100%;
+
+        font-size: 1rem;
+    }
+
+    .banner #botao_cadastro_banner {
+        width: 50%;
+        height: 40px;
+
+        border-radius: 9px;
+        font-size: 0.8rem;
+
+    }
+
+    .botao-cadastro-banner {
+        display: flex;
+        justify-content: start;
     }
 }
