@@ -27,7 +27,8 @@ function validarToken(token_informado) {
             id = listarEmpresasCadastradas[i].id;
             break;
         } else {
-            alert("Token inválido!")
+            alert("Token inválido!");
+            return null;
         }
 
     }
@@ -52,7 +53,7 @@ function cadastrar() {
     // ERROS DE VERIFICAÇÃO
     let erroNome = nome.length <= 1;
     let erroNomeComNumeros = false;
-    let erroCPF = cpf.length != 11;
+    let erroCPF = cpf.length < 14;
     let erroEmail = email.indexOf("@") < 0 || email.lastIndexOf(".") < email.indexOf("@") || email.lastIndexOf(".") == email.length;
     let erroSenhaNumero = true;
     let erroSenhaQtd = senha.length < 6;
@@ -125,7 +126,7 @@ function cadastrar() {
     }
     else if (erroCPF) {
 
-        erro_cpf.innerText = "Erro no CPF. Deve haver 11 dígitos.";
+        erro_cpf.innerText = "Erro no CPF. Deve haver 14 dígitos.";
         erro_cpf.style.display = "block";
         input_cpf.classList.add("input-erro");
         erroEncontrado = true;
@@ -212,6 +213,26 @@ function habilitarMensagemSucesso() {
 function ocultarMensagemSucesso() {
     const p = document.getElementById('message');
     p.style.display = "none"
+}
+
+function verModal(){
+   const modal = document.getElementById("div-dica-token");
+   modal.classList.add('show');
+}
+
+function ocultarModal(){
+    const modal = document.getElementById("div-dica-token");
+    modal.classList.remove('show');
+}
+
+function fomatarCpf(input){
+    // Remove todos os caracteres não numéricos
+    let cpf = input.value.replace(/\D/g, '');
+
+    //Formata o CPF em XXX.XXX.XXX.-XX
+    cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+
+    input.value = cpf;
 }
 
 
