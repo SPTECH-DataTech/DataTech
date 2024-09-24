@@ -30,11 +30,32 @@ function verificarEmail() {
 }
 
 function enviarEmail() {
+    const email = input_email.value;
 
-    if (tudoCertoEmail) {
-
-        alert("Senha provisória enviada para o seu email!");
-
+    if (!tudoCertoEmail) {
+     return;
     }
+        fetch('/email/sendEmail', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: email
+            }),
+        })
+        .then(function (resposta){
+            console.log("Resposta do servidor (email): ", resposta);
+            
+            if (resposta.ok){
+                alert("A senha provisória foi enviada no email informado!");
+            }else {
+                throw "Houve um erro ao enviar o email!"
+            }
+        })
+        .catch(function (resposta){
+            console.log(`#ERRO: ${resposta}`);
+        });
+    
 
 }

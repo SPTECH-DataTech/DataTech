@@ -184,7 +184,6 @@ body {
     text-align: center;
 }
 
-/* Icone de info */
 
 .div-dica-token {
     position: absolute;
@@ -195,7 +194,6 @@ body {
     z-index: 1000;
     color: #ffffff;
     background-color: #303030;
-    /* display: none; */
     border-radius: 5px;
     padding: 10px;
     font-size: 10px;
@@ -203,12 +201,15 @@ body {
     transform: scale(0.9);
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
+
 .div-dica-token.show{
     opacity: 1;
     transform: scale(1);
 }
 
-
+.bi {
+    cursor: pointer;
+}
 
 /* Responsividade */
 @media (max-width: 768px) {
