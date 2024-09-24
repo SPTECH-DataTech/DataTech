@@ -8,8 +8,8 @@ CREATE TABLE empresa (
     token INT NOT NULL
 );
 
-INSERT INTO empresa (razao_social, cnpj)
-VALUES ('DataTech LTDA.', '12.345.678/0001-00');
+INSERT INTO empresa (razao_social, cnpj, token)
+VALUES ('DataTech LTDA.', '12.345.678/0001-00', 1234);
 
 CREATE TABLE usuario (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -23,4 +23,4 @@ CREATE TABLE usuario (
 );
 
 SELECT * FROM empresa;
-SELECT * FROM usuario; 
+SELECT * FROM usuario;  

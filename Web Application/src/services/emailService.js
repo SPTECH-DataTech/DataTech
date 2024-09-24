@@ -3,32 +3,28 @@ var transporter = require('./emailConfig');
 require('dotenv').config();
 
 
-function sendEmail(req, res) {
-    const email = req.body.emailServer;
-
-    if (!email) {
-        return res.status(400).send("Seu email está undefined!");
-    }
-
-    const emailOptions = {
-        from: process.env.EMAIL_USER,
-        to: email,
-        subject: "Redefinição de Senha",
-        html: "<span>Testando email</span>"
-    }
-
-    //Enviando o email
-    transporter.sendMail(emailOptions, function (error, info) {
-        if (error) {
-            res.status(500).json({ message: 'Erro ao enviar e-mail', error });
+function enviarEmail(to, subject, htmlContent) {
+    return new Promise((resolve, reject) => {
+        const emailOptions = {
+            from: process.env.EMAIL_USER,
+            to: to,
+            subject: subject,
+            html: htmlContent
         }
-        console.log("E-mail enviado com sucesso!", info);
-        res.status(200).json({ message: 'E-mail enviado com sucesso!', info });
-    });
+    
+        //Enviando o email
+        transporter.sendMail(emailOptions, function (erro, success) {
+            if (erro) {
+                return reject(erro);
+            } 
+            resolve(success);
+        });
+    })
+    
 }
 
 module.exports = {
-    sendEmail
+    enviarEmail
 };
 
 
