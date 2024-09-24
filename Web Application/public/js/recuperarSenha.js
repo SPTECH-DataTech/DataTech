@@ -33,29 +33,33 @@ function enviarEmail() {
     const email = input_email.value;
 
     if (!tudoCertoEmail) {
-     return;
+        return;
     }
-        fetch('/email/sendEmail', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                emailServer: email
-            }),
-        })
-        .then(function (resposta){
-            console.log("Resposta do servidor (email): ", resposta);
-            
-            if (resposta.ok){
+    fetch('/recuperarSenha/enviarSenha', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            emailServer: email
+        }),
+    })
+        .then(function (resposta) {
+            console.log("Resposta do servidor (Senha provisória): ", resposta);
+
+            if (resposta.ok) {
                 alert("A senha provisória foi enviada no email informado!");
-            }else {
-                throw "Houve um erro ao enviar o email!"
+            } else if (resposta.status === 404) {
+                alert("Email não encontrado. Por favor, verifique se o email está correto.");
+            }
+            else {
+                throw "Houve um erro ao enviar o email!";
             }
         })
-        .catch(function (resposta){
-            console.log(`#ERRO: ${resposta}`);
+        .catch(function (erro) {
+            console.log(`#ERRO: ${erro}`);
+            alert(erro);
         });
-    
+
 
 }
