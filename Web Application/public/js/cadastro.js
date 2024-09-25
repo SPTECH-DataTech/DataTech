@@ -1,15 +1,40 @@
 const listarEmpresasCadastradas = [];
 
-function validarToken(token_informado) {
-    const empresa = listarEmpresasCadastradas.find(comparar => comparar.token === token_informado);
-    if (!empresa) {
-        alert("O Token informado é inválido!");
-        return false;
-    } else {
-        console.log("Token válidado com sucesso!");
-        return empresa.id;
-    }
+function listarEmpresas() {
+    fetch('empresas/listar', {
+        method: "GET",
+    })
+        .then(function (resposta) {
+            resposta.json().then((empresas) => {
+                empresas.forEach(empresa => {
+                    listarEmpresasCadastradas.push(empresa);
+                    console.log("Empresas cadastradas:");
+                    console.log(listarEmpresasCadastradas[0]);
+                });
+            });
+        })
+        .catch(function (erro) {
+            console.log(`#ERRO: ${erro}`);
+        });
 }
+
+
+function validarToken(token_informado) {
+    let id;
+    for (let i = 0; i < listarEmpresasCadastradas.length; i++) {
+        if (listarEmpresasCadastradas[i].token == token_informado) {
+            console.log("Token validado com sucesso!");
+            id = listarEmpresasCadastradas[i].id;
+            break;
+        } else {
+            alert("Token inválido!");
+            return null;
+        }
+
+    }
+    return id;
+}
+
 
 // Função para quando a mensagem estiver certa, sumir o texto.
 function removerErros(erroElemento) {
@@ -17,8 +42,6 @@ function removerErros(erroElemento) {
 }
 
 function cadastrar() {
-
-
     let nome = input_nome.value.trim();
     let cpf = input_cpf.value.trim();
     let email = input_email.value.trim();
@@ -26,11 +49,12 @@ function cadastrar() {
     let confirmacaoSenha = input_confirmacaoSenha.value.trim();
     let token_informado = input_token.value.trim();
 
+
     // ERROS DE VERIFICAÇÃO
     let erroNome = nome.length <= 1;
     let erroNomeComNumeros = false;
-    let erroCPF = cpf.length != 14;
-    let erroEmail = email.indexOf("@") < 0 || email.lastIndexOf(".") < email.indexOf("@") || email.lastIndexOf(".") == email.length ;
+    let erroCPF = cpf.length < 14;
+    let erroEmail = email.indexOf("@") < 0 || email.lastIndexOf(".") < email.indexOf("@") || email.lastIndexOf(".") == email.length;
     let erroSenhaNumero = true;
     let erroSenhaQtd = senha.length < 6;
     let erroConfirmacaoSenha = confirmacaoSenha != senha;
@@ -47,13 +71,13 @@ function cadastrar() {
     }
 
     // verificação nome com números
-    for (let i = 0; i < nome.length; i++){
+    // for (let i = 0; i < nome.length; i++){
 
-        if (!isNaN(nome[i])){
-            erroNomeComNumeros = true;
-            break;
-        }
-    }   
+    //     if (!isNaN(nome[i])){
+    //         erroNomeComNumeros = true;
+    //         break;
+    //     }
+    // }   
 
 
     // Para limpar mensagem de erro.
@@ -84,7 +108,7 @@ function cadastrar() {
 
     if (nome == "" || email == "" || senha == "" || token_informado == "" || cpf == "" || confirmacaoSenha == "") {
         alert("Preencha todos os campos para continuar")
-        return false;    
+        return false;
     }
     else if (erroNome) {
 
@@ -92,8 +116,8 @@ function cadastrar() {
         erro_nome.style.display = "block";
         input_nome.classList.add("input-erro");
         erroEncontrado = true;
-    } 
-    else if (erroNomeComNumeros){
+    }
+    else if (erroNomeComNumeros) {
 
         erro_nome.innerText = "Nome inválido!";
         erro_nome.style.display = "block";
@@ -135,21 +159,16 @@ function cadastrar() {
         input_confirmacaoSenha.classList.add("input-erro");
         erroEncontrado = true;
     }
-    // let empresa = validarToken(token_informado);
-    //  if (!empresa) {
-    //     return ;
-    // }
 
     if (erroEncontrado) {
         return false;
     }
 
-    else {
-        alert("Cadastro realizado com sucesso. Redirecionando para tela de Login!")
-        window.location.href = "./login.html"
+    const empresa = validarToken(token_informado);
+    if (!empresa) {
+        return;
     }
-
-
+    
     fetch('usuarios/cadastrar', {
         method: "POST",
         headers: {
@@ -159,11 +178,12 @@ function cadastrar() {
             nomeServer: nome,
             emailServer: email,
             senhaServer: senha,
+            cpfServer: cpf,
             idEmpresaServer: empresa,
         }),
     })
         .then(function (resposta) {
-            console.log("Resposta do servidor de cadastro:", resposta);
+            console.log("Resposta do servidor de cadastro:", resposta.data);
 
             if (resposta.ok) {
                 habilitarMensagemSucesso();
@@ -171,13 +191,14 @@ function cadastrar() {
                 setTimeout(() => {
                     ocultarMensagemSucesso();
                     window.location = "login.html";
-                }, 2000)
+                }, 3000)
             } else {
                 throw "Houve um erro ao tentar realizar o cadastro!";
             }
         })
         .catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
+            alert("Erro ao realizar o cadastro!")
         });
 
     return false;
@@ -194,21 +215,24 @@ function ocultarMensagemSucesso() {
     p.style.display = "none"
 }
 
-
-function listarEmpresas() {
-    fetch('empresas/listar', {
-        method: "GET",
-    })
-        .then(function (resposta) {
-            resposta.json().then((empresas) => {
-                empresas.forEach(empresa => {
-                    listarEmpresasCadastradas.push(empresa);
-                    console.log("Empresas cadastradas:");
-                    console.log(listarEmpresasCadastradas[0]);
-                });
-            });
-        })
-        .catch(function (erro) {
-            console.log(`#ERRO: ${erro}`);
-        });
+function verModal(){
+   const modal = document.getElementById("div-dica-token");
+   modal.classList.add('show');
 }
+
+function ocultarModal(){
+    const modal = document.getElementById("div-dica-token");
+    modal.classList.remove('show');
+}
+
+function fomatarCpf(input){
+    // Remove todos os caracteres não numéricos
+    let cpf = input.value.replace(/\D/g, '');
+
+    //Formata o CPF em XXX.XXX.XXX.-XX
+    cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+
+    input.value = cpf;
+}
+
+

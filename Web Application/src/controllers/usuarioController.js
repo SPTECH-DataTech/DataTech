@@ -18,7 +18,7 @@ function autenticar(req, res) {
 
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
-                       res.json({message: "Login realizado com sucesso!"});
+                       res.json();
                        
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
@@ -40,6 +40,7 @@ function autenticar(req, res) {
 function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nome = req.body.nomeServer;
+    var cpf = req.body.cpfServer;
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
     var fkEmpresa = req.body.idEmpresaServer;
@@ -55,8 +56,7 @@ function cadastrar(req, res) {
         res.status(400).send("Sua empresa a vincular está undefined!");
     } else {
 
-        
-        usuarioModel.cadastrar(nome, email, senha, fkEmpresa)
+        usuarioModel.cadastrar(nome, email, senha, fkEmpresa, cpf)
             .then(
                 function (resultado) {
                     res.json(resultado);

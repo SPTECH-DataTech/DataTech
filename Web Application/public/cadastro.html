@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="shortcut icon" href="assets/logo_datatech_-_roxa_escuro.png" type="image/x-icon">
   <link rel="stylesheet" href="./css/cadastro.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <title>Cadastro • DataTech</title>
 
   <!-- <script src="./js/sessao.js"></script> -->
@@ -37,7 +38,7 @@
         <span class="erro" id="erro_nome"></span>
 
         CPF:
-        <input type="text" id="input_cpf" placeholder="XXX.XXX.XXX.XX">
+        <input type="text" id="input_cpf" maxlength="14" placeholder="XXX.XXX.XXX.XX" oninput="fomatarCpf(this)">
         <span class="erro" id="erro_cpf"></span>
 
         E-mail:
@@ -52,7 +53,7 @@
         <input type="password" id="input_confirmacaoSenha">
         <span class="erro" id="erro_confirmacaoSenha"></span>
 
-        Digite seu Token:
+        <div>Digite seu Token: <span onmouseover="verModal()" onmouseout="ocultarModal()" ><i class="bi bi-info-circle"></i></span></div>
         <input type="number" id="input_token">
         <span class="erro" id="erro_token"></span>
 
@@ -61,10 +62,21 @@
 
           <p>Já possuo uma conta! <a href="./login.html"><b style="color: #7F00FF;">Entrar</b></a></p>
         </div>
+        
+        <div class="container-mensagem">
+          <p id="message">
+
+          </p>
+        </div>
+       
       </div>
 
     </div>
+
+  <!--Modal de Informação-->
+    <div id="div-dica-token" class="div-dica-token">O token foi gerado automaticamente no cadastro da empresa. Consulte seu superior.</div>
   </div>
+  <!--Fim do Modal de Informação-->
 
   <!-- container fim -->
 

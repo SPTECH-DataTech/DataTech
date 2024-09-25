@@ -1,18 +1,19 @@
 CREATE DATABASE dataTech;
 USE dataTech;
 
-CREATE TABLE empresa(
-id int primary key auto_increment,
-razao_social varchar(60),
-cnpj varchar(20),
-token varchar(10 )not null default (substring(md5(rand()), 1, 10))
+CREATE TABLE empresa (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    razao_social VARCHAR(60),
+    cnpj VARCHAR(20),
+    token INT NOT NULL
 );
 
-insert into empresa (razao_social, cnpj)
-values ('DataTech LTDA.', '12.345.678/0001-00');
+INSERT INTO empresa (razao_social, cnpj, token)
+VALUES ('DataTech LTDA.', '12.345.678/0001-00', 1234);
 
 CREATE TABLE usuario (
     id INT PRIMARY KEY AUTO_INCREMENT,
+    cpf char(11) NOT NULL UNIQUE,
     nome VARCHAR(50) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     senha VARCHAR(20) NOT NULL,
@@ -20,3 +21,6 @@ CREATE TABLE usuario (
     FOREIGN KEY (fk_empresa)
         REFERENCES empresa (id)
 );
+
+SELECT * FROM empresa;
+SELECT * FROM usuario;  

@@ -18,7 +18,22 @@ body {
 
 }
 
-/* FORMULÁRIO - LOGIN ------------------- */
+/* NOTEBOOK ------------------- */
+
+#container-notebook {
+
+    width: 50vw;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #7F00FF;
+    background-image: linear-gradient(to left, rgb(255, 255, 255) 38%, rgba(0, 0, 0, 0) 20%);
+
+}
+
+/* FORMULÁRIO - RECUPERAÇÃO DE SENHA ------------------- */
 
 #container-formulario {
 
@@ -29,10 +44,10 @@ body {
     width: 50vw;
     height: 100vh;
 
-    background-image: url("../assets/retangulos.png");
+    background-image: url("../assets/retangulosInvertido.png");
     background-repeat: no-repeat;
     background-size: 30%;
-    background-position: 0% 100%;
+    background-position: 100% 100%;
 
     font-size: 1vw;
 
@@ -54,13 +69,6 @@ body {
 
 }
 
-#container-formulario a {
-
-    color: #7F00FF;
-    font-weight: bold;
-
-}
-
 #texto-logo {
 
     font-family: "Poppins", sans-serif;
@@ -78,12 +86,26 @@ body {
 
 }
 
+#tituloRecuperacao {
+
+    margin-bottom: 1%;
+
+}
+
+#textoRecuperacao {
+
+    margin-top: 0;
+    text-align: center;
+    width: 40%;
+
+}
+
 #container-inputs {
 
     display: flex;
     flex-direction: column; 
 
-    width: 50%;
+    width: 70%;
 
     padding-bottom: 2vh;
 
@@ -101,7 +123,7 @@ body {
 .container-input input {
 
     height: 2rem;
-    padding: 1%;
+    padding: 1.5%;
 
     font-size: 1vw;
 
@@ -114,13 +136,6 @@ body {
 
     color: red;
     margin: 0;
-    font-size: 0.8vw;
-
-}
-
-#texto-esqueceu-senha {
-
-    padding-top: 1%;
     font-size: 0.8vw;
 
 }
@@ -140,18 +155,9 @@ body {
 
 }
 
-/* NOTEBOOK ------------------- */
+#container-formulario a {
 
-#container-notebook {
-
-    width: 50vw;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background-color: #7F00FF;
-    background-image: linear-gradient(to right, rgb(255, 255, 255) 38%, rgba(0, 0, 0, 0) 20%);
+    color: black;
 
 }
 
