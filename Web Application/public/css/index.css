@@ -760,8 +760,7 @@ button {
         justify-content: center;
     }
 
-    .header
-    .logo {
+    .header .logo {
         display: none;
     }
 
@@ -817,13 +816,20 @@ button {
     }
 
     .banner .titulo_slogan {
+        display: flex;
+        text-align: start;
+
+        margin-left: 15px;
+
         font-size: 4vw;
     }
-    
+
     .texto_slogan {
         display: flex;
+        text-align: justify;
 
-        width: 100%;
+        width: 85.8%;
+        margin-left: 15px;
 
         font-size: 1rem;
     }
@@ -839,6 +845,176 @@ button {
 
     .botao-cadastro-banner {
         display: flex;
-        justify-content: start;
+        justify-content: center;
     }
+
+    /*  NOSSA EQUIPE  */
+
+    #equipe {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 100%;
+        height: 350px;
+
+        padding: 0%;
+    }
+
+    #equipe .container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        margin-top: -30%;
+        width: 65%;
+        height: 50%;
+    }
+
+    .titulo_equipe {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+
+        height: 40%;
+        margin-left: 40%;
+    }
+
+    .titulo_equipe h1 {
+        font-size: 1.7rem;
+    }
+
+    .titulo_equipe span {
+        font-size: 1rem;
+        width: 100%;
+    }
+
+    .equipe_carrossel {
+
+        margin-left: 10%;
+        margin-top: 5%;
+
+        width: 90vw;
+    }
+
+    .card_carrossel {
+
+        width: 26%;
+        height: 180px;
+
+        margin: 0 20px;
+    }
+
+    .slide {
+        gap: 1%;
+    }
+
+    .foto_integrante img {
+        object-fit: cover;
+    }
+
+    #equipe button {
+        width: 20%;
+        height: 15%;
+
+        margin-left: 20px;
+        margin-top: -30%;
+
+    }
+
+    /* MISSÃO VISÃO E VALORES */
+
+    .missao_visao_valores {
+        height: 1000px;
+    }
+
+    .missao_visao_valores .container {
+        width: 100%;
+        margin-left: 0%;
+
+        flex-direction: column;
+    }
+
+    .sessao {
+        width: 100%;
+        border-top: #210042 solid 1px;
+        padding: 0%;
+    }
+
+    .sessao h1 {
+        font-size: 3rem;
+    }
+
+    .sessao span {
+        width: 50%;
+
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .sessao img {
+        width: 20%;
+        height: 130px;
+
+        margin-bottom: 5px;
+    }
+
+
+    /* TECNOLOGIAS */
+
+    .tecnologias {
+        display: flex;
+        justify-content: center;
+
+        margin: 0 auto;
+        width: 100%;
+        height: 500px;
+
+        overflow: hidden;
+        position: relative;
+        
+        /* border: black solid; */
+    }
+
+    #titulo_tecnologias {
+        font-size: 1.6rem;
+
+        margin-top: -70px;
+        margin-bottom: 50px;
+        margin-left: 7%;
+
+        /* border: yellow solid; */
+    }
+    
+    .tecnologias .container {
+        height: 80%;
+        margin-left: 0%;
+    }
+    
+    .cards {
+        display: flex;
+        width: 26%; 
+    }
+    
+    .card {
+        min-width: 80%;
+        margin-right: 33px;
+        
+        flex: 0 0 60%;
+
+        padding: 0 10% 0 10%;
+        border-radius: 10px;
+        text-align: center;
+    }
+    
+    .card h1 {      
+        font-size: 1.5rem;
+    }
+
+    .card span {
+        display: flex;
+        text-align: justify;
+        font-size: 1rem;
+    }
+
 }
