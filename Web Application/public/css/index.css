@@ -913,10 +913,6 @@ button {
         object-fit: cover;
     }
 
-    #card_tiago img {
-        border: #210042;
-    }
-
     #equipe button {
         width: 20%;
         height: 15%;
@@ -924,6 +920,43 @@ button {
         margin-left: 20px;
         margin-top: -30%;
 
+    }
+
+    /* MISSÃO VISÃO E VALORES */
+
+    .missao_visao_valores {
+        height: 1000px;
+    }
+
+    .missao_visao_valores .container {
+        width: 100%;
+        margin-left: 0%;
+
+        flex-direction: column;
+    }
+
+    .sessao {
+        width: 100%;
+        border-top: #210042 solid 1px;
+        padding: 0%;
+    }
+
+    .sessao h1 {
+        font-size: 3rem;
+    }
+
+    .sessao span {
+        width: 50%;
+        
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .sessao img {
+        width: 20%;
+        height: 130px;
+
+        margin-bottom: 5px;
     }
 
 }
