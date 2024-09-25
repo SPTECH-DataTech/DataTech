@@ -947,7 +947,7 @@ button {
 
     .sessao span {
         width: 50%;
-        
+
         font-size: 1rem;
         text-align: center;
     }
@@ -957,6 +957,64 @@ button {
         height: 130px;
 
         margin-bottom: 5px;
+    }
+
+
+    /* TECNOLOGIAS */
+
+    .tecnologias {
+        display: flex;
+        justify-content: center;
+
+        margin: 0 auto;
+        width: 100%;
+        height: 500px;
+
+        overflow: hidden;
+        position: relative;
+        
+        /* border: black solid; */
+    }
+
+    #titulo_tecnologias {
+        font-size: 1.6rem;
+
+        margin-top: -70px;
+        margin-bottom: 50px;
+        margin-left: 7%;
+
+        /* border: yellow solid; */
+    }
+    
+    .tecnologias .container {
+        height: 80%;
+        margin-left: 0%;
+    }
+    
+    .cards {
+        display: flex;
+        width: 26%; 
+    }
+    
+    .card {
+        min-width: 80%;
+        margin-right: 33px;
+        
+        flex: 0 0 60%;
+
+        padding: 0 10% 0 10%;
+        border-radius: 10px;
+        text-align: center;
+    }
+    
+    .card h1 {      
+        font-size: 1.5rem;
+    }
+
+    .card span {
+        display: flex;
+        text-align: justify;
+        font-size: 1rem;
     }
 
 }
