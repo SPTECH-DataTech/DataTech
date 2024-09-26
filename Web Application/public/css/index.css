@@ -972,8 +972,7 @@ button {
 
         overflow: hidden;
         position: relative;
-        
-        /* border: black solid; */
+
     }
 
     #titulo_tecnologias {
@@ -983,31 +982,30 @@ button {
         margin-bottom: 50px;
         margin-left: 7%;
 
-        /* border: yellow solid; */
     }
-    
+
     .tecnologias .container {
         height: 80%;
         margin-left: 0%;
     }
-    
+
     .cards {
         display: flex;
-        width: 26%; 
+        width: 26%;
     }
-    
+
     .card {
         min-width: 80%;
         margin-right: 33px;
-        
+
         flex: 0 0 60%;
 
         padding: 0 10% 0 10%;
         border-radius: 10px;
         text-align: center;
     }
-    
-    .card h1 {      
+
+    .card h1 {
         font-size: 1.5rem;
     }
 
@@ -1017,4 +1015,67 @@ button {
         font-size: 1rem;
     }
 
+    /* NOSSOS SERVIÇOS */
+
+    .servico-cafe {
+        height: 800px;
+    }
+
+    .servico-cafe .container {
+        margin: 0%;
+    }
+
+    .servico-cafe .container h1 {
+        font-size: 1.8rem;
+    }
+
+    .titulo_servicos {
+        display: flex;
+        align-items: center;
+
+        margin-top: -15%;
+        margin-left: 5%;
+
+        width: 500px;
+    }
+
+    .titulo_servicos h2 {
+        font-size: 1.5rem;
+    }
+
+    .titulo_servicos h3 {
+        font-size: 1rem;
+    }
+
+    .apresentacao_servicos {
+        flex-direction: column;
+
+        margin-top: 5%;
+    }
+
+    #cafeeiro-servico{
+        width: 80%;
+        margin: 3% 0 0 8%;
+    }
+
+    .botao_cadastro_carrossel {
+        width: 50%;
+
+        font-size: 1rem;
+    }
+
+    .texto-servicos {
+        text-align: justify;
+
+        margin: 0 0 2% 0;
+        font-size: 1rem;
+    }
+
+    .texto-inicial {
+        font-size: 1.5rem;
+    }
+
+    .texto-hover {
+        font-size: ;
+    }
 }
