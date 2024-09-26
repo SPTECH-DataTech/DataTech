@@ -662,6 +662,10 @@ button {
     color: white;
 }
 
+.footer .lista_contatos {
+    display: none;
+}
+
 /* -------------------- ANIMAÇÕES ------------------ */
 
 @keyframes passarSlideEquipe_sumir {
@@ -1148,6 +1152,52 @@ button {
         width: 50%;
 
         margin-top: 5%;
+    }
+
+    /* FOOTER */
+
+    .footer {
+        align-items: start;
+        justify-content: space-between;
+
+        margin: 0%;
+
+        height: 250px;
+        border: gray solid;
+    }
+
+    .footer_titulo {
+        border: #7C00F8 solid;
+        margin: 8% 0 0 1%;
+    }
+
+    .footer_titulo .data {
+        font-size: 2rem;
+    }
+
+    .footer_titulo .tech {
+        font-size: 2rem;
+    }
+
+    .direitos {
+        border: #7C00F8 solid;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+
+        font-size: 0.8rem;
+    }
+
+    .footer .lista_contatos {
+        border: green solid;
+        display: block;
+        display: flex;
+        align-items: start;
+
+        color: white;
+        font-size: 0.8rem;
+
+        margin: 0 0 0 50%;
     }
 
 }
