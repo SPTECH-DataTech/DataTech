@@ -51,7 +51,7 @@ textarea {
     justify-content: space-around;
     align-items: center;
     position: fixed;
-    z-index: 4;
+    z-index: 999;
 }
 
 .container {
@@ -476,7 +476,6 @@ textarea {
     height: 100px;
     box-shadow: none;
     filter: drop-shadow(0px 1px 1px black);
-    z-index: 999;
 }
 
 .card-servico {
@@ -616,6 +615,10 @@ textarea {
 
 .sessao_contato img {
     margin-right: .625rem;
+}
+
+.imagem-contato-mobile {
+    display: none;
 }
 
 .contato_button {
@@ -1075,7 +1078,76 @@ button {
         font-size: 1.5rem;
     }
 
-    .texto-hover {
-        font-size: ;
+    /* CONTATO */
+
+    .contato {
+        flex-direction: column;
+        justify-content: center;
+        
+        border-top: #7C00F8 solid;
+        border-radius: 20px;
+
+        height: 750px;
     }
+
+    .contato .container {
+        flex-direction: column;
+
+        margin: 0%;
+
+    }
+
+    .form {
+        width: 100%;
+        align-items: center;
+
+        height: 100%;
+
+    }
+
+    .titulo_contato {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+    }
+
+    .titulo_contato h1 {
+        font-size: 1.8rem;
+    }
+
+    .imagem-contato {
+        display: none;
+    }
+
+    .imagem-contato-mobile {
+        display: block;
+
+        width: 50%;
+    }
+
+    .lista_contatos {
+        display: none;
+    }
+
+    .campo {
+        align-items: start;
+
+        width: 80%;
+    }
+
+    .campo input {
+        width: 100%;
+    }
+
+    #input_mensagem {
+        width: 100%;
+    }
+
+    .form button {
+        width: 50%;
+
+        margin-top: 5%;
+    }
+
 }
