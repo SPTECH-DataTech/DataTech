@@ -41,7 +41,7 @@ h1{
     width: 17%;
     background-color: #F1F2F7;
 
-    border-right: 1px solid #7C00F8;
+     /* border-right: 1px solid #7C00F8;  */
 }
 
 
@@ -89,7 +89,7 @@ h1{
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    background-color: #F1F2F7;
+    background-color: #ffffff;
     width: 83%;
 
     overflow-x: hidden;
@@ -104,7 +104,7 @@ h1{
 
     padding: 10px;
 
-    border-bottom: solid 1px #7C00F8;
+    /* border-bottom: solid 1px #7C00F8; */
 }
 
 .navbar h3{
