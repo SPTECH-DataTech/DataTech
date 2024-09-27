@@ -45,20 +45,26 @@ function enviarEmail() {
         }),
     })
         .then(function (resposta) {
-            console.log("Resposta do servidor (Senha provisória): ", resposta);
-
+        
             if (resposta.ok) {
-                alert("A senha provisória foi enviada no email informado!");
-            } else if (resposta.status === 404) {
-                alert("Email não encontrado. Por favor, verifique se o email está correto.");
+                console.log("Resposta do servidor: ", resposta);
+
+                alert('E-mail enviado com sucesso!');
+
+                setTimeout(() => {
+                    window.location = "./login.html";
+                }, 2000);
             }
             else {
-                throw "Houve um erro ao enviar o email!";
+                console.log("Houve um erro ao enviar o email!");
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    alert(texto);
+                });
             }
         })
         .catch(function (erro) {
             console.log(`#ERRO: ${erro}`);
-            alert(erro);
         });
 
 
