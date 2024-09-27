@@ -44,28 +44,37 @@ function enviarEmail() {
             emailServer: email
         }),
     })
-        .then(function (resposta) {
-        
-            if (resposta.ok) {
-                console.log("Resposta do servidor: ", resposta);
+        .then(resposta => {
+            return resposta.json().then(data => {
+                console.log("Resposta do servidor: ", data);
 
-                alert('E-mail enviado com sucesso!');
-
-                setTimeout(() => {
-                    window.location = "./login.html";
-                }, 2000);
-            }
-            else {
-                console.log("Houve um erro ao enviar o email!");
-                resposta.text().then(texto => {
-                    console.error(texto);
-                    alert(texto);
-                });
-            }
+                if (!resposta.ok) {
+                    console.log("Houve um erro ao enviar o email: ", data.erro);
+                    throw new Error(data.erro);
+                }
+                else {
+                    habilitarMensagem(data.message);
+                    setTimeout(() => {
+                        window.location = "./login.html";
+                    }, 4000);
+                }
+            })
         })
-        .catch(function (erro) {
+        .catch(erro => {
             console.log(`#ERRO: ${erro}`);
+            habilitarMensagem(erro.message);
         });
 
+    return false;
+}
 
+function habilitarMensagem(mensagem) {
+    const p = document.getElementById('message');
+    p.style.display = "block"
+    p.innerHTML = mensagem;
+}
+
+function ocultarMensagem() {
+    const p = document.getElementById('message');
+    p.style.display = "none"
 }
