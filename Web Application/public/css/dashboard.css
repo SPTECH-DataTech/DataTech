@@ -40,8 +40,10 @@ h1{
 
     width: 17%;
     background-color: #F1F2F7;
+    
+    margin-right: 10px;
+    box-shadow: 5px 0px 15px rgba(0, 0, 0, 0.2);
 
-     /* border-right: 1px solid #7C00F8;  */
 }
 
 
@@ -50,8 +52,8 @@ h1{
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-
-
+    
+    
     padding: 10px;
 }
 
@@ -65,7 +67,7 @@ h1{
     border: none;
     border-radius: 10%;
     font-size: 1.02rem;
-
+    
     background-color: transparent;
     
     transition: ease-in-out 0.2s;
@@ -91,8 +93,9 @@ h1{
     justify-content: flex-start;
     background-color: #ffffff;
     width: 83%;
-
+    
     overflow-x: hidden;
+    
 }
 
 .navbar {
@@ -101,10 +104,10 @@ h1{
     justify-content: flex-end;
     width: 100%;
     box-sizing: border-box;
-
+    
     padding: 10px;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
 
-    /* border-bottom: solid 1px #7C00F8; */
 }
 
 .navbar h3{
