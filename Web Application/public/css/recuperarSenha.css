@@ -155,6 +155,10 @@ body {
 
 }
 
+#message{
+    display: none;
+}
+
 #container-formulario a {
 
     color: black;

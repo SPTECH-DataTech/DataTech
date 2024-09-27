@@ -44,22 +44,37 @@ function enviarEmail() {
             emailServer: email
         }),
     })
-        .then(function (resposta) {
-            console.log("Resposta do servidor (Senha provisória): ", resposta);
+        .then(resposta => {
+            return resposta.json().then(data => {
+                console.log("Resposta do servidor: ", data);
 
-            if (resposta.ok) {
-                alert("A senha provisória foi enviada no email informado!");
-            } else if (resposta.status === 404) {
-                alert("Email não encontrado. Por favor, verifique se o email está correto.");
-            }
-            else {
-                throw "Houve um erro ao enviar o email!";
-            }
+                if (!resposta.ok) {
+                    console.log("Houve um erro ao enviar o email: ", data.erro);
+                    throw new Error(data.erro);
+                }
+                else {
+                    habilitarMensagem(data.message);
+                    setTimeout(() => {
+                        window.location = "./login.html";
+                    }, 4000);
+                }
+            })
         })
-        .catch(function (erro) {
+        .catch(erro => {
             console.log(`#ERRO: ${erro}`);
-            alert(erro);
+            habilitarMensagem(erro.message);
         });
 
+    return false;
+}
 
+function habilitarMensagem(mensagem) {
+    const p = document.getElementById('message');
+    p.style.display = "block"
+    p.innerHTML = mensagem;
+}
+
+function ocultarMensagem() {
+    const p = document.getElementById('message');
+    p.style.display = "none"
 }
