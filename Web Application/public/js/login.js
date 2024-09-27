@@ -1,3 +1,4 @@
+
 let tudoCertoEmail = false;
 let tudoCertoSenha = false;
 
@@ -53,13 +54,12 @@ function verificarSenha() {
 }
 
 function login() {
+    const email = input_email.value.trim();
+    const senha = input_senha.value.trim();
 
     if (!tudoCertoEmail && !tudoCertoSenha) {
         return;
     }
-
-    const email = input_email.value;
-    const senha = input_senha.value;
 
     fetch('usuarios/autenticar', {
         method: "POST",
@@ -72,22 +72,27 @@ function login() {
         }),
     })
         .then(function (resposta) {
-            if (resposta.ok) {
-                const mensagem = "Login realizado com sucesso..."
-                habilitarMensagem(mensagem);
-                setTimeout(function () {
-                    ocultarMensagem();
-                }, 3000)
-            } else {
-                throw 'Houve um erro ao realizar o login.'
-            }
-        })
-        .catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-            habilitarMensagem(resposta);
-        });
-    return false;
+            return resposta.json().then(data => {
+                console.log("Resposta do servidor: ", data);
 
+                if (!resposta.ok) {
+                    throw new Error(data.erro)
+                }
+                else {
+                    habilitarMensagem(data.message);
+                    sessionStorage.EMAIL_USUARIO = data.email;
+                    sessionStorage.NOME_USUARIO = data.nome;
+                    sessionStorage.ID_USUARIO = data.id;
+                    sessionStorage.ID_EMPRESA = data.idEmpresa;
+                }
+            });
+        })
+        .catch(function (erro) {
+            console.log(`#ERRO: ${erro}`);
+            habilitarMensagem(erro.message);
+        });
+
+    return false;
 }
 
 function habilitarMensagem(mensagem) {

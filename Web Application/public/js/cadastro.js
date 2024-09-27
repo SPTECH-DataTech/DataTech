@@ -168,7 +168,7 @@ function cadastrar() {
     if (!empresa) {
         return;
     }
-    
+
     fetch('usuarios/cadastrar', {
         method: "POST",
         headers: {
@@ -182,50 +182,53 @@ function cadastrar() {
             idEmpresaServer: empresa,
         }),
     })
-        .then(function (resposta) {
-            console.log("Resposta do servidor de cadastro:", resposta.data);
+        .then(resposta => {
+            resposta.json().then(data => {
+                console.log("Resposta do servidor: ", data);
 
-            if (resposta.ok) {
-                habilitarMensagemSucesso();
+                if (!resposta.ok) {
+                    throw new Error(data.erro);
+                }
+                else {
+                    habilitarMensagem(data.message);
 
-                setTimeout(() => {
-                    ocultarMensagemSucesso();
-                    window.location = "login.html";
-                }, 3000)
-            } else {
-                throw "Houve um erro ao tentar realizar o cadastro!";
-            }
+                    setTimeout(() => {
+                        ocultarMensagem();
+                        window.location = "login.html";
+                    }, 3000);
+                }
+            })
         })
-        .catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-            alert("Erro ao realizar o cadastro!")
+        .catch(function (erro) {
+            console.log(`#ERRO: ${erro}`);
+            habilitarMensagem(erro.message);
         });
 
     return false;
 }
 
-function habilitarMensagemSucesso() {
+function habilitarMensagem(mensagem) {
     const p = document.getElementById('message');
     p.style.display = "block"
-    p.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+    p.innerHTML = mensagem;
 }
 
-function ocultarMensagemSucesso() {
+function ocultarMensagem() {
     const p = document.getElementById('message');
     p.style.display = "none"
 }
 
-function verModal(){
-   const modal = document.getElementById("div-dica-token");
-   modal.classList.add('show');
+function verModal() {
+    const modal = document.getElementById("div-dica-token");
+    modal.classList.add('show');
 }
 
-function ocultarModal(){
+function ocultarModal() {
     const modal = document.getElementById("div-dica-token");
     modal.classList.remove('show');
 }
 
-function fomatarCpf(input){
+function fomatarCpf(input) {
     // Remove todos os caracteres não numéricos
     let cpf = input.value.replace(/\D/g, '');
 

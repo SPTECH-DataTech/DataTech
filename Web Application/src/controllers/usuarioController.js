@@ -1,4 +1,5 @@
 var usuarioModel = require("../models/usuarioModel");
+const consultarEmail = require('../models/recuperarSenhaModel');
 
 function autenticar(req, res) {
     var email = req.body.emailServer;
@@ -18,19 +19,25 @@ function autenticar(req, res) {
 
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
-                       res.json();
-                       
+                        res.status(200).json({ 
+                            message: "Login realizado com sucesso!", 
+                            id: resultadoAutenticar[0].id,
+                            nome: resultadoAutenticar[0].nome,
+                            email: resultadoAutenticar[0].email,
+                            idEmpresa: resultadoAutenticar[0].fk_empresa
+                        });
+
                     } else if (resultadoAutenticar.length == 0) {
-                        res.status(403).send("Email e/ou senha inválido(s)");
+                        res.status(403).json({ erro: "Email e/ou senha inválido(s)" });
                     } else {
-                        res.status(403).send("Mais de um usuário com o mesmo login e senha!");
+                        res.status(403).json({ erro: "Mais de um usuário com o mesmo login e senha!" });
                     }
                 }
             ).catch(
                 function (erro) {
                     console.log(erro);
                     console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
-                    res.status(500).json(erro.sqlMessage);
+                    res.status(500).json({ erro: "Houve um erro ao realizar o login!", erro: erro.sqlMessage });
                 }
             );
     }
@@ -59,18 +66,24 @@ function cadastrar(req, res) {
         usuarioModel.cadastrar(nome, email, senha, fkEmpresa, cpf)
             .then(
                 function (resultado) {
-                    res.json(resultado);
-                }
-            ).catch(
+                    if (resultado.length > 0){
+                        res.status(409).json({erro: "Usuário já cadastrado!"});
+                    }
+                    res.status(200).json({ 
+                        resultado,
+                        message: "Cadastro realizado com sucesso!"
+                     });
+                })
+            .catch(
                 function (erro) {
                     console.log(erro);
                     console.log(
                         "\nHouve um erro ao realizar o cadastro! Erro: ",
                         erro.sqlMessage
                     );
-                    res.status(500).json(erro.sqlMessage);
+                    res.status(500).json({ erro: erro.sqlMessage });
                 }
-            );
+            )
     }
 }
 
