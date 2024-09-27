@@ -38,13 +38,22 @@
         <a href="./login.html" class="botoes_header" id="botao_entrar_header">Entrar</a>
         <a href="./cadastro.html" class="botoes_header" id="botao_registrar_header">Registrar-se</a>
       </div>
-      <div class="mobile_menu">
+      <div class="mobile_menu" id="hamburger-menu">
         <div class="line1"></div>
         <div class="line2"></div>
         <div class="line3"></div>
       </div>
     </div>
   </div>
+
+  <!-- <div class="mobile_navbar" id="mobile-nav">
+    <a href="#">Início</a>
+    <a href="#equipe_link">Nossa equipe</a>
+    <a href="#missao_visao_valores_link">Sobre nós</a>
+    <a href="#contato_link">Contato</a>
+    <a href="./login.html" class="botoes_header">Entrar</a>
+    <a href="./cadastro.html" class="botoes_header">Registrar-se</a>
+</div> -->
 
   <div class="banner">
     <div class="container">
@@ -289,10 +298,12 @@
       </div>
     </div>
   </div>
-<!-- asdasdasdasdsdassd -->
+
   <div class="footer">
     <div class="footer_titulo">
-      <span class="data">Data</span><span class="tech">Tech</span>
+      <div class="logo-nome">
+        <span class="data">Data</span><span class="tech">Tech</span>
+      </div>
       <div class="lista_contatos">
         <div class="sessao_contato">
           <img src="./assets/icone_endereco.png" alt="">
@@ -306,7 +317,7 @@
           <img src="./assets/icone_email.png" alt="">
           <span>datatech@datatech.com</span>
         </div>
-    </div>
+      </div>
     </div>
     <span class="direitos">© 2024 Todos os direitos reservados</span>
   </div>
@@ -408,5 +419,42 @@
       }
     }
   }
+
+  let currentSlide = 0;
+
+
+const cards = document.querySelectorAll('.card');
+const totalSlides = cards.length;
+
+function atualizarCarrossel() {
+  const carrossel = document.querySelector('.cards');
+  const slideWidth = document.querySelector('.card').clientWidth + 20;
+
+  if (window.innerWidth <= 768) { 
+    carrossel.style.transform = `translateX(${-currentSlide * slideWidth}px)`;
+  } else {
+    carrossel.style.transform = 'none';
+  }
+}
+
+cards.forEach((card, index) => {
+  card.addEventListener('click', () => {
+    if (window.innerWidth <= 768) {
+      currentSlide = index;
+      atualizarCarrossel();
+    }
+  });
+});
+
+window.addEventListener('resize', atualizarCarrossel);
+window.onload = atualizarCarrossel;
+
+// const hamburgerMenu = document.getElementById('hamburger-menu');
+// const mobileNav = document.getElementById('mobile-nav');
+
+// hamburgerMenu.addEventListener('click', () => {
+//     mobileNav.classList.toggle('show');
+//     hamburgerMenu.classList.toggle('menu_open');
+// });
 
 </script>

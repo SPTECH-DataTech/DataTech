@@ -788,6 +788,52 @@ button {
         display: block;
     }
 
+   /* .mobile_menu div {
+        background-color: green;
+        border: blue solid;
+        height: 3px;
+        width: 100%;
+        transition: all 0.3s ease;
+    }
+
+    .menu_open .line1 {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu_open .line2 {
+        opacity: 0;
+    }
+
+    .menu_open .line3 {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+
+    .mobile_navbar {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 200px;
+        background-color: var(--roxoFooter);
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+        padding: 60px 20px;
+        flex-direction: column;
+        gap: 50px;
+        z-index: 100;
+    }
+
+    .mobile_navbar a {
+        text-decoration: none;
+        color: white;
+        font-size: 18px;
+    }
+
+    .mobile_navbar.show {
+        display: flex;
+    } */
+
     /* BANNER */
 
     .banner {
@@ -999,6 +1045,9 @@ button {
     .cards {
         display: flex;
         width: 26%;
+
+        
+        transition: transform 0.5s ease-in-out;
     }
 
     .card {
@@ -1010,6 +1059,9 @@ button {
         padding: 0 10% 0 10%;
         border-radius: 10px;
         text-align: center;
+
+        cursor: pointer;
+
     }
 
     .card h1 {
@@ -1163,12 +1215,17 @@ button {
         margin: 0%;
 
         height: 250px;
-        border: gray solid;
+
     }
 
     .footer_titulo {
-        border: #7C00F8 solid;
-        margin: 8% 0 0 1%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        width: 100%;
+
+        margin: 10% 0 0 0;
     }
 
     .footer_titulo .data {
@@ -1180,7 +1237,6 @@ button {
     }
 
     .direitos {
-        border: #7C00F8 solid;
         display: flex;
         justify-content: center;
         width: 100%;
@@ -1189,7 +1245,6 @@ button {
     }
 
     .footer .lista_contatos {
-        border: green solid;
         display: block;
         display: flex;
         align-items: start;
@@ -1197,7 +1252,6 @@ button {
         color: white;
         font-size: 0.8rem;
 
-        margin: 0 0 0 50%;
     }
 
 }
