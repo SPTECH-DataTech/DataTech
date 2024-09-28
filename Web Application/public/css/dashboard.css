@@ -30,6 +30,9 @@ h1{
 
 .menu-lateral a{
     text-decoration: none;
+    width: 90%;
+    display: flex;
+    margin-bottom: 5px;
 }
 
 .menu-lateral {
@@ -37,13 +40,11 @@ h1{
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-
-    width: 17%;
+    width: 15%;
     background-color: #F1F2F7;
-    
+
     margin-right: 10px;
     box-shadow: 5px 0px 15px rgba(7, 6, 6, 0.2);
-
 }
 
 
@@ -52,37 +53,65 @@ h1{
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    
-    
-    padding: 10px;
+
+    padding: 5%;
+    width: 95%;
+
+}
+
+.btn-dashboard{
+    background-color: #9ba8ff20; 
+    color: #5A6ACF;
+    font-weight: 600;
+    cursor: pointer;
+    width: 95%; 
+    box-sizing: border-box; 
+    filter: invert(38%) sepia(64%) saturate(2382%) hue-rotate(211deg) brightness(97%) contrast(101%);
+
     
 }
 
+.btn-dashboard {
+    filter: invert(38%) sepia(64%) saturate(2382%) hue-rotate(211deg) brightness(97%) contrast(101%);
+}
 
 .menu-lateral button {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 8% 15% 8% 0% ;
-    
+    padding: 10px;
+
     border: none;
-    border-radius: 10%;
+    border-radius: 5px;
     font-size: 1.02rem;
     
-    background-color: transparent;
-    
-    transition: ease-in-out 0.2s;
+    width: 95%;
+    box-sizing: border-box;
 }
 
 .menu-lateral button:hover {
-    background-color: #A6ABC8 ; 
-    color: black;
+    background-color: #9ba8ff20; 
+    color: #5A6ACF;
+    font-weight: 600;
     cursor: pointer;
+    width: 95%; 
+    box-sizing: border-box; 
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.14);
+
 }
 
 .menu-lateral img.icon {
     width: 25px;
     height: 25px;
+}
+
+.menu-lateral .icon {
+    filter: invert(50%) sepia(2%) saturate(10%) hue-rotate(19deg) brightness(2%) contrast(20%);
+}
+
+/* Troca a cor da imagem no hover */
+.menu-lateral button:hover .icon {
+    filter: invert(38%) sepia(64%) saturate(2382%) hue-rotate(211deg) brightness(97%) contrast(101%);
 }
 
 /* ------------------------- MAIN SECTION ------------------------- */
@@ -93,10 +122,8 @@ h1{
     align-items: center;
     justify-content: flex-start;
     background-color: #ffffff;
-    width: 83%;
-    
+    width: 90%;
     overflow-x: hidden;
-    
 }
 
 .navbar {
@@ -105,10 +132,10 @@ h1{
     justify-content: flex-end;
     width: 100%;
     box-sizing: border-box;
-    
-    padding: 10px;
-    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.2);
 
+    padding: 10px;
+
+    border-bottom: solid 1px #C8CBD9;
 }
 
 .navbar h3{
@@ -118,10 +145,153 @@ h1{
 .icon-navbar{
     width: 20px;
     height: 20px;
-    
 }
+
 
 .navbar .icon{
     cursor: pointer;
+    filter: invert(50%) sepia(2%) saturate(10%) hue-rotate(19deg) brightness(2%) contrast(20%);
 }
 
+/* ------------------------- DASHBOARD ------------------------- */
+
+
+.dashboard-kpis {
+    
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between; 
+ 
+
+}
+
+.kpi {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    background-color: #ffffff;
+    width: 350px;
+    height: 120px;
+    border: 1px solid #C8CBD9; 
+    border-radius: 10px;
+    font-size: 20px;
+    color: #5400BB;
+    margin: 0 20px; 
+    margin-top: 3%;
+    margin-block-end: 30px;
+    margin-right: 80px
+}
+
+.kpi h4 {
+    text-align: center; 
+    margin: 2%;
+}
+
+
+
+.kpi-dados {
+    display: flex; 
+    justify-content: space-between;
+    width: 100%; 
+}
+
+.kpi p {
+    font-weight: 400;
+    color: #000;
+    margin: 0; 
+    padding: 0 10px; 
+}
+.linha-separadora{
+    width: 1px; 
+    background-color: #C8CBD9; 
+    height: 100%; 
+    margin: 0 20px; 
+}
+
+.linha-separadora2 {
+    height: 1px; 
+    background-color: #C8CBD9; 
+    width: 100%; 
+}
+.API-TEMPERATURA{
+    
+    text-align: center;
+}
+
+.graficos{
+    margin: 2%;
+    display: flex;
+    flex-direction: row;
+}
+
+.titulo1{
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.titulo1 h1{
+    margin: 0;
+    padding: 0 10px; 
+    color: #000000;
+    font-size: x-large;
+}
+
+
+select {
+    padding: 10px; 
+    font-size: 16px;
+    border: 1px solid #C8CBD9; 
+    border-radius: 5px; 
+    background-color: #ffffff; 
+    color: #000000; 
+    cursor: pointer; 
+    margin-right: 20px;
+}
+
+.botao-grafico {
+    padding: 10px 15px; 
+    font-size: 16px; 
+    color: #ffffff; 
+    background-color: #707FDD; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+}
+
+
+.botao-grafico:hover {
+    background-color: #3244b9;
+}
+
+.container {
+    margin-left: 10px;
+
+   
+    margin: 0;
+}
+
+
+h2 {
+    margin: 20px 0;
+    font-size: medium;
+    font-weight: 400;;
+}
+
+canvas {
+    width: 700px; 
+    height: 400px; 
+    max-width: 100%; 
+    background-color: transparent;
+    position: relative; 
+    z-index: 1; 
+}
+
+.dashboard-kpis2 {
+    margin-left: 200px;
+    margin-top: 200px;
+        display: flex;
+        flex-direction: column; 
+}
