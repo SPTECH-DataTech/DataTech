@@ -58,7 +58,7 @@
 
         <section class="dashboard-kpis">
             <div class="kpi">
-                <h4> Varidade Mais Produzida </h4>
+                <h4> Variedade Mais Produzida </h4>
                 <div class="kpi-dados">
                     <p> TIPO CAFÉ </p>
                     <p> TONELADAS CAFÉ </p>
@@ -66,10 +66,10 @@
             </div>
 
             <div class="kpi">
-                <h4> Varidade Mais Produzida </h4>
+                <h4> Melhor região Cultivo</h4>
                 <div class="kpi-dados">
-                    <p> TIPO CAFÉ </p>
-                    <p> TONELADAS CAFÉ </p>
+                    <p> ESTADO </p>
+                    <p> SACAS </p>
                 </div>
             </div>
 
@@ -86,15 +86,15 @@
                 </div>
             </div>
 
-
         </section>
 
         <div class="linha-separadora2">
             <p></p>
         </div>
 
-
+        <!-- -------------------------GRAFICO 1------------------------- -->
         <section class="graficos">
+
             <div class="grafico1">
                 <div class="titulo1">
                     <h1>Plantio e Colheita do Café Arábica</h1>
@@ -143,13 +143,74 @@
                         <p style="color: red;"> qtd </p>
                     </div>
                 </div>
-            </section>
 
+            </section>
         </section>
 
-        <div class="linha-separadora2"></div>
+        <div class="linha-separadora2">
+            <p></p>
+        </div>
 
 
+        <!-- -------------------------GRAFICO 2------------------------- -->
+        <!-- Temperatura x Estado -->
+
+
+
+
+
+        <!-- -------------------------GRAFICO 3------------------------- -->
+
+        <section class="graficos">
+            <div class="grafico1">
+                <div class="titulo1">
+                    <h1>Café Arábica x Café Robusta</h1>
+                </div>
+
+                <div>
+
+                    <select id="ano">
+                        <option value="2017">2017</option>
+                    </select>
+
+                    <button class="botao-grafico">Ok</button>
+                </div>
+
+                <div class="container">
+                    <div>
+                        <h2>Arábica x Robusta nos Estados em 2017</h2>
+                        <canvas id="myChart3"></canvas> <!-- Novo canvas para o segundo gráfico -->
+                    </div>
+                </div>
+            </div>
+
+            <section class="dashboard-kpis2">
+                <div class="kpi">
+                    <h4 style="color: green;">...</h4>
+                    <div class="kpi-dados">
+                        <p> Estado </p>
+                        <p style="color: green;"> qtd </p>
+                    </div>
+                </div>
+
+
+                <div class="kpi">
+                    <h4 style="color: red">...</h4>
+                    <div class="kpi-dados">
+                        <p> Estado </p>
+                        <p style="color: red;"> qtd </p>
+                    </div>
+                </div>
+
+            </section>
+        </section>
+
+        <div class="linha-separadora2">
+            <p></p>
+        </div>
+
+
+        <!-- -------------------------CANVAS 1------------------------- -->
 
         <script>
             const ctx = document.getElementById('myChart').getContext('2d');
@@ -181,6 +242,61 @@
                             title: {
                                 display: true,
                                 text: 'Toneladas'
+                            }
+                        }
+                    },
+                    responsive: true,
+                }
+            }
+            );
+        </script>
+
+        <!-- -------------------------CANVAS 2------------------------- -->
+        <!-- Temperatura x Estado -->
+
+
+
+
+
+
+
+        <!-- -------------------------CANVAS 3------------------------- -->
+
+        <script>
+            const ctx3 = document.getElementById('myChart3').getContext('2d');
+            const myChart3 = new Chart(ctx3, {
+                type: 'bar',
+                data: {
+                    labels: ['SP', 'MG', 'RJ', 'MS', 'MT', 'AL'],
+                    datasets: [{
+                        label: 'Café Arábica',
+                        data: [11, 13, 7, 6, 9, 6],
+                        backgroundColor: '#A7B4C7',
+                        barThickness: 15,
+                        categoryPercentage: 0.5,
+                        barPercentage: 0.5
+                    },
+                    {
+                        label: 'Café Robusta',
+                        data: [9, 11, 10, 11, 3, 3],
+                        backgroundColor: '#E0D5BA',
+                        barThickness: 15,
+                        categoryPercentage: 0.5,
+                        barPercentage: 0.5
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            min: 0,
+                            max: 15,
+                            title: {
+                                display: true,
+                                text: 'Toneladas'
+                            },
+                            ticks: {
+                                stepSize: 5
 
                             }
                         }
@@ -192,4 +308,5 @@
         </script>
 
 </body>
+
 </html>
