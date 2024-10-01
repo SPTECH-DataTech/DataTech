@@ -4,7 +4,7 @@ let tudoCertoSenha = false;
 
 function verificarEmail() {
 
-    const email = input_email.value;
+    const email = input_email.value.trim();
 
     if (email == "") {
 
@@ -13,7 +13,8 @@ function verificarEmail() {
         tudoCertoEmail = false;
         mensagemErroEmail.innerHTML = "Campo obrigatório!";
 
-    } else if (email.indexOf("@") < 0 || email.lastIndexOf(".") < email.indexOf("@") || email.lastIndexOf(".") == email.length - 1) {
+    }
+    else if (email.indexOf("@") < 0 || email.lastIndexOf(".") < email.indexOf("@") || email.lastIndexOf(".") == email.length - 1) {
 
         spanEmail.style.color = "red";
         input_email.style.borderColor = "red";
@@ -33,7 +34,24 @@ function verificarEmail() {
 
 function verificarSenha() {
 
-    const senha = input_senha.value;
+    const senha = input_senha.value.trim();
+    let erroSenhaNumero = true;
+    let erroSenhaMaiusculo = true;
+    let erroSenhaEspecial = true;
+
+    for (let i = 0; i < senha.length; i++) {
+
+        if (/[0-9]/.test(senha[i])) {
+            erroSenhaNumero = false;
+        }
+        if (/[A-Z]/.test(senha[i])) {
+            erroSenhaMaiusculo = false;
+        }
+        if (/[!@#$.?]/.test(senha[i])) {
+            erroSenhaEspecial = false;
+        }
+
+    }
 
     if (senha == "") {
 
@@ -42,7 +60,40 @@ function verificarSenha() {
         tudoCertoSenha = false;
         mensagemErroSenha.innerHTML = "Campo obrigatório!";
 
-    } else {
+    }
+    else if (senha.length < 5){
+
+        spanSenha.style.color = "red";
+        input_senha.style.borderColor = "red";
+        tudoCertoSenha = false;
+        mensagemErroSenha.innerHTML = "A senha deve ter pelo menos 5 dígitos.";
+
+    } 
+    else if (erroSenhaEspecial) {
+
+        spanSenha.style.color = "red";
+        input_senha.style.borderColor = "red";
+        tudoCertoSenha = false;
+        mensagemErroSenha.innerHTML = "A senha deve conter um caractere especial (ex:!@#$.?)";
+        
+    }
+    else if (erroSenhaMaiusculo) {
+
+        spanSenha.style.color = "red";
+        input_senha.style.borderColor = "red";
+        tudoCertoSenha = false;
+        mensagemErroSenha.innerHTML = "A senha deve incluir uma letra maiúscula.";
+       
+    }
+    else if (erroSenhaNumero) {
+
+        spanSenha.style.color = "red";
+        input_senha.style.borderColor = "red";
+        tudoCertoSenha = false;
+        mensagemErroSenha.innerHTML = "A senha deve conter um número.";
+      
+    }
+    else {
 
         tudoCertoSenha = true;
         spanSenha.style.color = "black";
@@ -57,6 +108,9 @@ function login() {
     const email = input_email.value.trim();
     const senha = input_senha.value.trim();
 
+    verificarEmail();
+    verificarSenha();
+    
     if (!tudoCertoEmail && !tudoCertoSenha) {
         return;
     }

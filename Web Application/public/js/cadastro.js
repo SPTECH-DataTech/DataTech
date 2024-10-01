@@ -37,8 +37,10 @@ function validarToken(token_informado) {
 
 
 // Função para quando a mensagem estiver certa, sumir o texto.
-function removerErros(erroElemento) {
+function removerErros(erroElemento, inputElemento, spanElemento) {
     erroElemento.style.display = "none"; // Esconder a mensagem de erro
+    inputElemento.style.borderColor = "";  // Remover a borda vermelha 
+    spanElemento.style.color = ""; // Remover a cor vermelha do span (label)
 }
 
 function cadastrar() {
@@ -48,7 +50,7 @@ function cadastrar() {
     let senha = input_senha.value.trim();
     let confirmacaoSenha = input_confirmacaoSenha.value.trim();
     let token_informado = input_token.value.trim();
-
+    let campos = [nome, cpf, email, senha, confirmacaoSenha, token_informado];
 
     // ERROS DE VERIFICAÇÃO
     let erroNome = nome.length <= 1;
@@ -56,6 +58,8 @@ function cadastrar() {
     let erroCPF = cpf.length < 14;
     let erroEmail = email.indexOf("@") < 0 || email.lastIndexOf(".") < email.indexOf("@") || email.lastIndexOf(".") == email.length;
     let erroSenhaNumero = true;
+    let erroSenhaMaiusculo = true;
+    let erroSenhaEspecial = true;
     let erroSenhaQtd = senha.length < 6;
     let erroConfirmacaoSenha = confirmacaoSenha != senha;
     let erroEncontrado = false;
@@ -64,41 +68,38 @@ function cadastrar() {
     // verificação de números na senha
     for (let i = 0; i < senha.length; i++) {
 
-        if (!isNaN(senha[i])) {
+        if (/[0-9]/.test(senha[i])) {
             erroSenhaNumero = false;
-            break;
         }
+        if (/[A-Z]/.test(senha[i])) {
+            erroSenhaMaiusculo = false;
+        }
+        if (/[!@#$.?]/.test(senha[i])) {
+            erroSenhaEspecial = false;
+        }
+
     }
-
-    // verificação nome com números
-    // for (let i = 0; i < nome.length; i++){
-
-    //     if (!isNaN(nome[i])){
-    //         erroNomeComNumeros = true;
-    //         break;
-    //     }
-    // }   
 
 
     // Para limpar mensagem de erro.
     input_nome.addEventListener("input", function () {
-        removerErros(erro_nome);
+        removerErros(erro_nome, input_nome, spanNome);
     });
 
     input_cpf.addEventListener("input", function () {
-        removerErros(erro_cpf);
+        removerErros(erro_cpf, input_cpf, spanCpf);
     });
 
     input_email.addEventListener("input", function () {
-        removerErros(erro_email);
+        removerErros(erro_email, input_email, spanEmail);
     });
 
     input_senha.addEventListener("input", function () {
-        removerErros(erro_senha);
+        removerErros(erro_senha, input_senha, spanSenha);
     });
 
     input_confirmacaoSenha.addEventListener("input", function () {
-        removerErros(erro_confirmacaoSenha);
+        removerErros(erro_confirmacaoSenha, input_confirmacaoSenha, spanConfirmarSenha);
     });
 
     input_token.addEventListener("input", function () {
@@ -106,15 +107,17 @@ function cadastrar() {
     });
 
 
-    if (nome == "" || email == "" || senha == "" || token_informado == "" || cpf == "" || confirmacaoSenha == "") {
-        alert("Preencha todos os campos para continuar")
-        return false;
+    if (campos.some(campo => campo == "")) {
+        alert("Preencha todos os campos para continuar!")
+        return;
     }
     else if (erroNome) {
 
-        erro_nome.innerText = "Nome inválido!";
+        erro_nome.innerHTML = "Nome inválido!";
         erro_nome.style.display = "block";
         input_nome.classList.add("input-erro");
+        spanNome.style.color = "red";
+        input_nome.style.borderColor = "red";
         erroEncontrado = true;
     }
     else if (erroNomeComNumeros) {
@@ -122,34 +125,61 @@ function cadastrar() {
         erro_nome.innerText = "Nome inválido!";
         erro_nome.style.display = "block";
         input_nome.classList.add("input-erro");
+
         erroEncontrado = true;
     }
     else if (erroCPF) {
 
-        erro_cpf.innerText = "Erro no CPF. Deve haver 14 dígitos.";
+        erro_cpf.innerText = "O CPF deve conter 14 dígitos.";
         erro_cpf.style.display = "block";
         input_cpf.classList.add("input-erro");
+        spanCpf.style.color = "red";
+        input_cpf.style.borderColor = "red";
         erroEncontrado = true;
     }
     else if (erroEmail) {
 
-        erro_email.innerText = "Deve haver '@' e '.' ! O ponto não pode ser o último, nem vir antes do '@'.";
+        erro_email.innerText = "E-mail inválido!";
         erro_email.style.display = "block";
         input_email.classList.add("input-erro");
+        spanEmail.style.color = "red";
+        input_email.style.borderColor = "red";
         erroEncontrado = true;
     }
     else if (erroSenhaQtd) {
 
-        erro_senha.innerText = "Erro na senha. Deve haver mais de 5 dígitos.";
+        erro_senha.innerText = "A senha deve ter pelo menos 5 dígitos.";
         erro_senha.style.display = "block";
         input_senha.classList.add("input-erro");
+        spanSenha.style.color = "red";
+        input_senha.style.borderColor = "red";
+        erroEncontrado = true;
+    }
+    else if (erroSenhaEspecial) {
+
+        erro_senha.innerText = "A senha deve conter um caractere especial (ex:!@#$.?)";
+        erro_senha.style.display = "block";
+        input_senha.classList.add("input-erro");
+        spanSenha.style.color = "red";
+        input_senha.style.borderColor = "red";
+        erroEncontrado = true;
+    }
+    else if (erroSenhaMaiusculo) {
+
+        erro_senha.innerText = "A senha deve incluir uma letra maiúscula.";
+        erro_senha.style.display = "block";
+        input_senha.classList.add("input-erro");
+        spanSenha.style.color = "red";
+        input_senha.style.borderColor = "red";
         erroEncontrado = true;
     }
     else if (erroSenhaNumero) {
 
-        erro_senha.innerText = "Erro na senha. Deve haver números.";
+        erro_senha.innerText = "A senha deve conter um número.";
         erro_senha.style.display = "block";
         input_senha.classList.add("input-erro");
+        spanSenha.style.color = "red";
+        input_senha.style.borderColor = "red";
         erroEncontrado = true;
     }
     else if (erroConfirmacaoSenha) {
@@ -157,11 +187,13 @@ function cadastrar() {
         erro_confirmacaoSenha.innerText = "A confirmação de senha deve ser a mesma que a senha.";
         erro_confirmacaoSenha.style.display = "block";
         input_confirmacaoSenha.classList.add("input-erro");
+        spanConfirmarSenha.style.color = "red";
+        input_confirmacaoSenha.style.borderColor = "red";
         erroEncontrado = true;
     }
 
     if (erroEncontrado) {
-        return false;
+        return;
     }
 
     const empresa = validarToken(token_informado);
