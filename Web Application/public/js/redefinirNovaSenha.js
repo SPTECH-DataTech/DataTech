@@ -10,7 +10,7 @@ function getToken() {
 }
 
 function verificarToken() {
-    const token = getToken();
+    const token = getToken();   
 
     const payload = JSON.parse(atob(token.split('.')[1])); // Acessa a carga útil do token
     const horaAtual = new Date().getTime() / 1000;

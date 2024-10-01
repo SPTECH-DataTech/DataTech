@@ -33,27 +33,28 @@
 
 
       <div class="card-inputs">
-        Nome :
+        <span class="label"  id="spanNome">Nome:</span>
         <input type="text" id="input_nome">
         <span class="erro" id="erro_nome"></span>
 
-        CPF:
+        <span  class="label" id="spanCpf">CPF:</span>
         <input type="text" id="input_cpf" maxlength="14" placeholder="XXX.XXX.XXX.XX" oninput="fomatarCpf(this)">
         <span class="erro" id="erro_cpf"></span>
 
-        E-mail:
+        <span class="label"  id="spanEmail">E-mail:</span>
         <input type="text" id="input_email">
         <span class="erro" id="erro_email"></span>
 
-        Senha:
+        <span  class="label" id="spanSenha">Senha:</span>
         <input type="password" id="input_senha">
         <span class="erro" id="erro_senha"></span>
 
-        Confirme sua Senha:
+        <span class="label" id="spanConfirmarSenha">Confirme sua Senha:</span>
         <input type="password" id="input_confirmacaoSenha">
         <span class="erro" id="erro_confirmacaoSenha"></span>
 
-        <div>Digite seu Token: <span onmouseover="verModal()" onmouseout="ocultarModal()" ><i class="bi bi-info-circle"></i></span></div>
+        <span class="label" >Digite seu Token: <span onmouseover="verModal()" onmouseout="ocultarModal()"><i
+              class="bi bi-info-circle"></i></span></span>
         <input type="number" id="input_token">
         <span class="erro" id="erro_token"></span>
 
@@ -62,19 +63,20 @@
 
           <p>Já possuo uma conta! <a href="./login.html"><b style="color: #7F00FF;">Entrar</b></a></p>
         </div>
-        
+
         <div class="container-mensagem">
           <p id="message">
 
           </p>
         </div>
-       
+
       </div>
 
     </div>
 
-  <!--Modal de Informação-->
-    <div id="div-dica-token" class="div-dica-token">O token foi gerado automaticamente no cadastro da empresa. Consulte seu superior.</div>
+    <!--Modal de Informação-->
+    <div id="div-dica-token" class="div-dica-token">O token foi gerado automaticamente no cadastro da empresa. Consulte
+      seu superior.</div>
   </div>
   <!--Fim do Modal de Informação-->
 

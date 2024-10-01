@@ -15,7 +15,8 @@ function enviarSenhaTemporaria(req, res) {
             function (resultado) {
                 if (resultado.length > 0) {
                     const token = gerarToken(resultado[0].id, resultado[0].email);
-                    const url = `http://localhost:3333/redefinirSenha.html?token=${token}`
+                    
+                    const url = `http://${process.env.IP_CONEXAO}:3333/redefinirNovaSenha.html?token=${token}`
                     const assunto = "Recuperação de Senha";
                     const conteudo = `<span> Acesse o seguinte link: <a href="${url}">Redefinir senha</a></span>`;
 
