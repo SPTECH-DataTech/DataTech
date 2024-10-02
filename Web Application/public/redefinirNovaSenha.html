@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redefinir Senha</title>
+    <link rel="stylesheet" href="./css/redefinirNovaSenha.css">
     <script src="./js/redefinirNovaSenha.js"></script>
 </head>
 
-<style>
+<!-- <style>
     #container {
         display: none;
     }
@@ -16,23 +17,42 @@
     #message {
         display: none;
     }
-</style>
+</style> -->
 
 <body onload="verificarToken()">
     <div id="container" class="container">
-        <h1>Informe a nova senha:</h1>
-        Senha:
-        <input type="text" id="input_senha">
-        <br>
-        Confirmar Senha:
-        <input type="text" id="input_confirmacaoSenha">
-        <br>
-        <button onclick="redefinirSenha()">Redefinir</button>
-        <br>
-        <p id="message"></p>
+
+        <div id="container-notebook">
+            <img src="assets/Notebook.png" alt="" width="90%">
+        </div>
+
+            <div id="container-formulario">
+                <h1 id="texto-logo">Data<span>Tech</span></h1>
+                <div class="div-logo">
+                    <a href="./index.html"><img src="assets/logo_datatech_-_roxa_escuro.png" alt="logo DataTech"
+                            width="100rem"></a>
+                </div>
+                <h3 id ="tituloRecuperacao">Redefinição de Senha</h3>
+                <p id="textoRecuperacao">Coloque as informações necessárias para continuar.</p>
+
+                <div id ="container-inputs">
+                    <div class="container-input">
+                        <span id="spanSenha">Senha</span>
+                        <input type="text" id="input_senha">
+                        <p class="mensagemErroCampo" id="mensagemErroEmail"></p>
+                        <br>
+                        <span id="spanConfirmacaoSenha">Confirmar Senha</span>
+                        <input type="text" id="input_confirmacaoSenha">
+                        <p class="mensagemErroCampo" id="mensagemErroEmail"></p>
+                    </div>
+                    <button onclick="redefinirSenha()">Redefinir</button>
+                </div>
+                <br>
+                <p id="message"></p>
+            </div>
+        
+
     </div>
 </body>
 
 </html>
-
-
