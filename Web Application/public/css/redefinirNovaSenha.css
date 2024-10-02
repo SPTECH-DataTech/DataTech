@@ -33,7 +33,7 @@ body {
 
 }
 
-/* FORMULÁRIO - RECUPERAÇÃO DE SENHA ------------------- */
+/* FORMULÁRIO - REDEFINIÇÃO DE SENHA ------------------- */
 
 #container-formulario {
 
@@ -92,6 +92,17 @@ body {
 
 }
 
+#texto-logo span {
+
+    color: #7F00FF;
+
+}
+
+#tituloRecuperacao {
+
+    margin-bottom: 1%;
+
+}
 
 .container-input {
 
@@ -144,60 +155,5 @@ body {
 #container-formulario a {
 
     color: black;
-
-}
-
-/* CONFIGURAÇÕES DE RESPONSIVIDADE ------------------ */
-
-@media screen and (max-width: 1024px) and (orientation: portrait) {
-
-    #container-notebook {
-
-        display: none;
-
-    }
-
-    #container-formulario {
-
-        justify-content: center;
-        background-image: none;
-        
-        width: 100vw;
-        font-size: 3.5vw;
-
-    }
-
-    .container-input input {
-
-        border-width: 0.4vw;
-        font-size: 3.5vw;
-
-    }
-
-    .mensagemErroCampo {
-
-        font-size: 3vw;
-    
-    }
-
-    #texto-esqueceu-senha {
-
-        font-size: 3vw;
-
-    }
-
-    #container-inputs button {
-
-        font-size: 3.5vw;
-
-    }
-
-    #linkCadastro {
-
-        text-align: center;
-        padding-right: 2%;
-        padding-left: 2%;
-
-    }
 
 }
