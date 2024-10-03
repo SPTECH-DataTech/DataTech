@@ -92,7 +92,18 @@ body {
 
 }
 
+#textoRecuperacao {
+    margin-top: 0;
+    text-align: center;
+    width: 40%;
+}
 
+#container-inputs {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    padding-bottom: 2vh;
+}
 .container-input {
 
     display: flex;
