@@ -86,23 +86,25 @@ body {
 
 }
 
-#tituloRecuperacao {
+#tituloRedefinicao {
 
     margin-bottom: 1%;
 
 }
 
-#texto-logo span {
-
-    color: #7F00FF;
-
+#textoRecuperacao {
+    margin-top: 0;
+    text-align: center;
+    width: 40%;
 }
 
-#tituloRecuperacao {
-
-    margin-bottom: 1%;
-
+#container-inputs {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    padding-bottom: 2vh;
 }
+
 
 .container-input {
 
@@ -155,5 +157,59 @@ body {
 #container-formulario a {
 
     color: black;
+
+}
+
+@media screen and (max-width: 1024px) and (orientation: portrait) {
+
+    #container-notebook {
+
+        display: none;
+
+    }
+
+    #container-formulario {
+
+        justify-content: center;
+        background-image: none;
+        
+        width: 100vw;
+        font-size: 3.5vw;
+
+    }
+
+    .container-input input {
+
+        border-width: 0.4vw;
+        font-size: 3.5vw;
+
+    }
+
+    .mensagemErroCampo {
+
+        font-size: 3vw;
+    
+    }
+
+    #texto-esqueceu-senha {
+
+        font-size: 3vw;
+
+    }
+
+    #container-inputs button {
+
+        font-size: 3.5vw;
+
+    }
+
+    #linkCadastro {
+
+        text-align: center;
+        padding-right: 2%;
+        padding-left: 2%;
+
+    }
+
 
 }
