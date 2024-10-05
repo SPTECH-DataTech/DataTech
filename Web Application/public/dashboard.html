@@ -11,7 +11,9 @@
     <title>Dashboard • DataTech </title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+    
 </head>
 
 <body>
@@ -51,262 +53,250 @@
         <div class="navbar">
             <img src="./assets/Group 376.png" alt="perfil icon" class="icon">
             <h3 id="b_usuario">Cliente</h3>
-            <img src="./assets/Notif Icon.png" alt="notificacao icon" class="icon">
         </div>
 
+          <!-- -------------------------GRAFICO 1------------------------- -->
+        <section class="dashboard">
+
+            <div class="titulo-dash"> 
+                <h2>Análise da Produção de Café e Relação com as Condições Climáticas</h2>
+                <button class="btn-proxima-tela">Próxima tela</button>
+            </div>
 
 
-        <section class="dashboard-kpis">
+            <div class="grafico-1">
+                <div class="titulo-grafico">
+                <h1>Plantio e Colheita do Café Arábica</h1>
+                <select class="select-cafe">
+                    <option>Café Arabica</option>
+                    <option>Café Robusta</option>
+                </select>
+                </div>
+                
+                <div class="escolher-info">
+                <div class="container">
+                    <select class="select-ano">
+                      <option value="2017">2017</option>
+                      <option value=""></option>
+                      <option value=""></option>
+                    </select>
+
+
+                    <button class="btn-atualizar">Atualizar</button>
+                  </div>
+                </div>
+            
+    
+           
+         
+            <div class="grafico-plantacao">
+            <canvas id="graficoCafe"></canvas>
+
+            <div class="kpis">
             <div class="kpi">
-                <h4> Variedade Mais Produzida </h4>
-                <div class="kpi-dados">
-                    <p> TIPO CAFÉ </p>
-                    <p> TONELADAS CAFÉ </p>
+                <div class="titulo-kpi">
+                    <h2 style="color: #10BB00;">Região com maior colheita</h2>
+                </div>
+                <div class="infos-kpi"> 
+                    <h3> Estado 1  </h3>
+                    <h3> Tonelada</h3>
+                </div>
+                <div class="percentagem">
+                    <h4 style="color: #10BB00;">70% Prod.</h4>
                 </div>
             </div>
 
             <div class="kpi">
-                <h4> Melhor região Cultivo</h4>
-                <div class="kpi-dados">
-                    <p> ESTADO </p>
-                    <p> SACAS </p>
+                <div class="titulo-kpi">
+                    <h2 style="color: #ff0000;">Região com menor colheita</h2>
+                </div>
+                <div class="infos-kpi"> 
+                    <h3> Estado 1  </h3>
+                    <h3> Tonelada</h3>
+                </div>
+                <div class="percentagem">
+                    <h4 style="color: #ff0000;">20% Prod.</h4>
                 </div>
             </div>
-
-            <div class="linha-separadora"></div>
-            <div class="API-TEMPERATURA">
-                <div class="lugar">
-                    <h2> Belo Horizonte - BR </h2>
-                </div>
-                <div class="dia-hora">
-                    <p>Sexta-feira, 4 Dezembro 2024 - 20:50 </p>
-                </div>
-                <div class="temperatura">
-                    20ºC
-                </div>
-            </div>
-
-        </section>
-
-        <div class="linha-separadora2">
-            <p></p>
         </div>
+            
+            </div>
+                
+            
+            </div>
 
-        <!-- -------------------------GRAFICO 1------------------------- -->
-        <section class="graficos">
 
-            <div class="grafico1">
-                <div class="titulo1">
-                    <h1>Plantio e Colheita do Café Arábica</h1>
-                    <select id="tipo-cafe" style="color: rgb(97, 61, 255);">
-                        <option value="arabica">Café Arabica</option>
-                        <option value="robusta">Café Robusta</option>
-                    </select>
-                </div>
 
-                <div>
-                    <select id="estado">
-                        <option value="São Paulo">São Paulo</option>
-
-                    </select>
-
-                    <select id="ano">
-                        <option value="2017">2017</option>
-
-                    </select>
-
-                    <button class="botao-grafico">Ok</button>
-                </div>
+            <div class="grafico-1">
+                <div class="titulo-grafico2">
+                <h1>Climograma por Estado</h1>
 
                 <div class="container">
-                    <div>
-                        <h2>Plantio e Colheita em $São Paulo$ em $2017$</h2>
-                        <canvas id="myChart"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <section class="dashboard-kpis2">
-                <div class="kpi">
-                    <h4 style="color: green;">Região com maior colheita </h4>
-                    <div class="kpi-dados">
-                        <p> Estado </p>
-                        <p style="color: green;"> qtd </p>
-                    </div>
-                </div>
-
-
-                <div class="kpi">
-                    <h4 style="color: red"> Região com menor colheita </h4>
-                    <div class="kpi-dados">
-                        <p> Estado </p>
-                        <p style="color: red;"> qtd </p>
-                    </div>
-                </div>
-
-            </section>
-        </section>
-
-        <div class="linha-separadora2">
-            <p></p>
-        </div>
-
-
-        <!-- -------------------------GRAFICO 2------------------------- -->
-        <!-- Temperatura x Estado -->
-
-
-
-
-
-        <!-- -------------------------GRAFICO 3------------------------- -->
-
-        <section class="graficos">
-            <div class="grafico1">
-                <div class="titulo1">
-                    <h1>Café Arábica x Café Robusta</h1>
-                </div>
-
-                <div>
-
-                    <select id="ano">
-                        <option value="2017">2017</option>
+                    <select class="select-ano">
+                      <option value="2017">2017</option>
+                      <option value="2018">2018</option>
+                      <option value="2019">2019</option>
                     </select>
 
-                    <button class="botao-grafico">Ok</button>
-                </div>
+                    <select class="select-estado">
+                        <option value="SP">São Paulo</option>
+                        <option value=""></option>
+                        <option value=""></option>
+                      </select>
 
-                <div class="container">
-                    <div>
-                        <h2>Arábica x Robusta nos Estados em 2017</h2>
-                        <canvas id="myChart3"></canvas> <!-- Novo canvas para o segundo gráfico -->
+
+                    <button class="btn-atualizar">Atualizar</button>
+                  </div>
+
+            </div>
+       
+           
+         
+            <div class="grafico-plantacao">
+                <canvas id="climograma"></canvas>
+            
+                <div class="kpis">
+                <div class="kpi2">
+                    <div class="titulo-kpi">
+                       <center> <h3 style="color: #ff0000;">Mêses Inadequado Produção</h2> </center>
+                    </div>
+                    <div class="infos-kpi2"> 
+                        <h3> Mês  </h3>
+                        <h3> 30mm </h3>
+                        <h3> 20º </h3>
+                    </div>
+
+                    <div class="infos-kpi2"> 
+                        <h3> Mês  </h3>
+                        <h3> 30mm </h3>
+                        <h3> 20º </h3>
                     </div>
                 </div>
             </div>
-
-            <section class="dashboard-kpis2">
-                <div class="kpi">
-                    <h4 style="color: green;">...</h4>
-                    <div class="kpi-dados">
-                        <p> Estado </p>
-                        <p style="color: green;"> qtd </p>
-                    </div>
-                </div>
-
-
-                <div class="kpi">
-                    <h4 style="color: red">...</h4>
-                    <div class="kpi-dados">
-                        <p> Estado </p>
-                        <p style="color: red;"> qtd </p>
-                    </div>
-                </div>
-
-            </section>
+        
+            </div>
+                
+            
+            </div>
         </section>
 
-        <div class="linha-separadora2">
-            <p></p>
-        </div>
-
-
-        <!-- -------------------------CANVAS 1------------------------- -->
-
-        <script>
-            const ctx = document.getElementById('myChart').getContext('2d');
-            const myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Município 1', 'Município 2', 'Município 3', 'Município 4', 'Município 5', 'Município 6'], // plotar municipios
-                    datasets: [{
-                        label: 'Plantio',
-                        data: [10, 15, 7, 12, 6, 8], // Dados do plantio
-                        backgroundColor: 'rgba(200, 200, 200, 0.7)',
-                        barThickness: 15,
-                        categoryPercentage: 0.5,
-                        barPercentage: 0.5
-                    },
-                    {
-                        label: 'Colheita',
-                        data: [5, 12, 8, 9, 5, 10], // Dados da colheita
-                        backgroundColor: 'rgba(230, 200, 150, 0.7)',
-                        barThickness: 15,
-                        categoryPercentage: 0.5,
-                        barPercentage: 0.5
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Toneladas'
-                            }
-                        }
-                    },
-                    responsive: true,
-                }
-            }
-            );
-        </script>
-
-        <!-- -------------------------CANVAS 2------------------------- -->
-        <!-- Temperatura x Estado -->
-
-
-
-
-
-
-
-        <!-- -------------------------CANVAS 3------------------------- -->
-
-        <script>
-            const ctx3 = document.getElementById('myChart3').getContext('2d');
-            const myChart3 = new Chart(ctx3, {
-                type: 'bar',
-                data: {
-                    labels: ['SP', 'MG', 'RJ', 'MS', 'MT', 'AL'],
-                    datasets: [{
-                        label: 'Café Arábica',
-                        data: [11, 13, 7, 6, 9, 6],
-                        backgroundColor: '#A7B4C7',
-                        barThickness: 15,
-                        categoryPercentage: 0.5,
-                        barPercentage: 0.5
-                    },
-                    {
-                        label: 'Café Robusta',
-                        data: [9, 11, 10, 11, 3, 3],
-                        backgroundColor: '#E0D5BA',
-                        barThickness: 15,
-                        categoryPercentage: 0.5,
-                        barPercentage: 0.5
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            min: 0,
-                            max: 15,
-                            title: {
-                                display: true,
-                                text: 'Toneladas'
-                            },
-                            ticks: {
-                                stepSize: 5
-
-                            }
-                        }
-                    },
-                    responsive: true,
-                }
-            }
-            );
-        </script>
+    </section>
 
 </body>
 
+<script>
+    const ctx = document.getElementById('graficoCafe').getContext('2d');
+    const graficoCafe = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Estado 1', 'Estado 2', 'Estado 3', 'Estado 4', 'Estado 5'], // Estados
+            datasets: [
+                {
+                    label: 'Café Plantado (Toneladas)',
+                    data: [300, 400, 250, 400, 400], // Dados de toneladas de café plantado por estado
+                    backgroundColor: 'rgba(230, 232, 236, 100)', // Cor para o plantio
+                    borderWidth: 1,
+                    barThickness: 20 // Define a espessura da barra (ajuste conforme necessário)
+                },
+                {
+                    label: 'Café Colhido (Toneladas)',
+                    data: [290, 370, 230, 250, 250], // Dados de toneladas de café colhido por estado
+                    backgroundColor: 'rgba(224, 213, 188, 100)', // Cor para a colheita
+                    borderWidth: 1,
+                    barThickness: 20 // Define a espessura da barra (ajuste conforme necessário)
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true, // Inicia o eixo Y em 0
+                    title: {
+                        display: true,
+                        text: 'Toneladas'
+                    }
+                }, 
+                 x: {
+                    stacked: false, // Configura para não empilhar as barras
+                    categoryPercentage: 100, // Ajuste para controlar o espaço das categorias
+                    barPercentage: 0.5 // Ajuste para controlar o espaço das barras
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Produção de Café por Estado (Toneladas)'
+                }
+            }
+        }
+    });
+</script>
+<script>
+    const ctx1 = document.getElementById('climograma').getContext('2d');
+    const climograma = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [
+                {
+                    label: 'Precipitação (mm)',
+                    data: [120, 100, 80, 60, 40, 20, 0, 10, 30, 90, 110, 130],
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1,
+                    yAxisID: 'y precipitation',
+                    barThickness: 20 // Define a espessura da barra (ajuste conforme necessário)
+                },
+                {
+                    label: 'Temperatura Média (°C)',
+                    data: [22, 23, 24, 26, 28, 30, 31, 30, 28, 25, 23, 21],
+                    type: 'line',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 2,
+                    fill: false,
+                    yAxisID: 'y temperature'
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                },
+                'y precipitation': {
+                    type: 'linear',
+                    position: 'left',
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Precipitação (mm)'
+                    }
+                },
+                'y temperature': {
+                    type: 'linear',
+                    position: 'right',
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Temperatura Média (°C)'
+                    },
+                    grid: {
+                        drawOnChartArea: false, // Evita que a grade do lado direito interfira nas barras
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Climograma: Temperatura e Precipitação'
+                }
+            }
+        }
+    });
+</script>
+
+
 </html>
+      
+   
+        
