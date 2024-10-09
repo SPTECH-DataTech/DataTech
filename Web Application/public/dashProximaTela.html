@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/logo_datatech_-_roxa_escuro.png" type="image/x-icon">
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <script src="./js/dashProximaTela.js"></script>
+
+    <title>Dashboard2 • DataTech </title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+</head>
+
+<body>
+
+    <section class="menu-lateral">
+        <div class="identificacao-empresa">
+            <h1>Empresa</h1>
+        </div>
+
+        <div>
+            <b>
+                <p>Menu</p>
+            </b>
+            <a href="dash"><button class="btn-dashboard"><img src="./assets/Chart.png" alt="dashboard icon"
+                        class=".dashboard-icon"> Dashboard</button></a>
+            <a href="fazenda"><button class="btn-fazenda"> <img src="./assets/Vector.png" alt="fazenda icon"
+                        class="icon">Fazendas</button></a>
+            <a href="equipe"><button class="btn-equipe"><img src="./assets/Group.png" alt="equipe icon" class="icon">
+                    Equipe</button></a>
+            <a href="recomendacoes"><button class="btn-recomendacoes"><img src="./assets/Chat.png"
+                        alt="recomendacoes icon" class="icon"> Recomendações</button></a>
+
+            <b>
+                <p>Outros</p>
+            </b>
+            <a href="conta"><button class="btn-conta"><img src="./assets/Profile.png" alt="conta icon" class="icon">
+                    Conta</button></a>
+            <a href="suporte" target="_blank"><button class="btn-suporte"> <img src="./assets/Info Square.png"
+                        alt="suporte icon" class="icon">Suporte</button></a>
+            <a href="login.html"><button onclick="limparSessao()" class="btn-sair"><img
+                        src="./assets/icons8-exit-50.png" alt="exit icon" class="icon"> Sair</button></a>
+        </div>
+
+    </section>
+
+    <section class="main-section">
+        <div class="navbar">
+            <img src="./assets/Group 376.png" alt="perfil icon" class="icon">
+            <h3 id="b_usuario">Cliente</h3>
+        </div>
+
+        <!-- -------------------------GRAFICO 1------------------------- -->
+        <section class="dashboard">
+
+            <div class="titulo-dash">
+                <h2>Café Arábica x Café Robusta</h2>
+                <button class="btn-proxima-tela">Próxima tela</button>
+            </div>
+
+
+            <div class="grafico-1">
+                <div class="titulo-grafico">
+                    <h1>Comparação Café Arábica x Café Robusta nos Estados em 2017</h1>
+                    <select class="select-cafe">
+                        <option>Café Arabica</option>
+                        <option>Café Robusta</option>
+                    </select>
+                </div>
+
+                <div class="escolher-info">
+                    <div class="container">
+                        <select class="select-ano">
+                            <option value="2017">2017</option>
+                            <option value=""></option>
+                            <option value=""></option>
+                        </select>
+                        <button class="btn-atualizar">Atualizar</button>
+                    </div>
+                </div>
+
+                <div class="grafico-plantacao">
+                    <canvas id="graficoCafe"></canvas>
+
+                    <div class="kpis">
+                        <div class="kpi">
+                            <div class="titulo-kpi">
+                                <h2 style="color: #5400BB;">Variedade mais Produzida</h2>
+                            </div>
+                            <div class="infos-kpi">
+                                <h3>Café Arábica</h3>
+                                <h3>Tonelada</h3>
+                            </div>
+                            <div class="percentagem">
+                                <h4 style="color: #492576;">80% Produzida</h4>
+                            </div>
+                        </div>
+
+                        <div class="kpi">
+                            <div class="titulo-kpi">
+                                <h2 style="color: #5400BB;">Variedade menos Produzida</h2>
+                            </div>
+                            <div class="infos-kpi">
+                                <h3>Café Robusta</h3>
+                                <h3>Toneladas</h3>
+                            </div>
+                            <div class="percentagem">
+                                <h4 style="color: #492576;">20% Produzida</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="container-Regioes-Indicador">
+                <div class="containerTopRegioes">
+
+                    <div class="titulo-kpi">
+                        <center>
+                            <h2 style="color: #5400BB;">Top 5 regiões Produção</h2>
+                        </center>
+                    </div>
+                    <div class="infos-kpi2">
+                        <h3> Estado 1 </h3>
+                        <h3> 70% Produção </h3>
+                        <h3 style="color: #492576;"> (t) </h3>
+                    </div>
+
+                    <div class="infos-kpi2">
+                        <h3> Estado 2 </h3>
+                        <h3> 70% Produção </h3>
+                        <h3 style="color: #492576;"> (t) </h3>
+                    </div>
+
+                    <div class="infos-kpi2">
+                        <h3> Estado 3 </h3>
+                        <h3> 70% Produção </h3>
+                        <h3 style="color: #492576;"> (t) </h3>
+                    </div>
+
+                    <div class="infos-kpi2">
+                        <h3> Estado 4 </h3>
+                        <h3> 70% Produção </h3>
+                        <h3 style="color: #492576;"> (t) </h3>
+                    </div>
+
+                    <div class="infos-kpi2">
+                        <h3> Estado 5 </h3>
+                        <h3> 70% Produção </h3>
+                        <h3 style="color: #492576;"> (t) </h3>
+                    </div>
+
+                </div>
+
+                <div class="containerIndicadorSaca">
+
+                    <div class="titulo-kpi">
+                        <h2 style="color: black;">Indicador da saca</h2>
+                        <p style="color: rgb(0, 0, 0);">Análise de preço da Safra dos cafés</p>
+                    </div>
+                    <div class="infos-kpi2">
+                        <h3> Café 1 </h3>
+
+                        <h3> (kg) </h3>
+                    </div>
+
+                    <div class="infos-kpi2">
+                        <h3> Café 2 </h3>
+
+                        <h3> (kg) </h3>
+                    </div>
+
+                    <div class="infos-kpi2">
+                        <h3> Café 3 </h3>
+                        <h3> (kg) </h3>
+                    </div>
+
+                    <div class="infos-kpi2">
+                        <h3> Café 4 </h3>
+                        <h3> (kg) </h3>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </section>
+
+</body>
+
+<script>
+    const ctx = document.getElementById('graficoCafe').getContext('2d');
+    const graficoCafe = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['SP', 'MG', 'RJ', 'MS', 'MT'], // Estados
+            datasets: [
+                {
+                    label: 'Café Arábica',
+                    data: [8, 10, 5, 8, 11], // Dados de toneladas de café plantado por estado
+                    backgroundColor: 'rgba(230, 232, 236, 100)', // Cor para o plantio
+                    borderWidth: 1,
+                    barThickness: 20 // Define a espessura da barra (ajuste conforme necessário)
+                },
+                {
+                    label: 'Café Robusta',
+                    data: [7, 5, 7, 9, 8], // Dados de toneladas de café colhido por estado
+                    backgroundColor: 'rgba(224, 213, 188, 100)', // Cor para a colheita
+                    borderWidth: 1,
+                    barThickness: 20 // Define a espessura da barra (ajuste conforme necessário)
+                }
+            ]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true, // Inicia o eixo Y em 0
+                    title: {
+                        display: true,
+                        text: 'Toneladas'
+                    }
+                },
+                x: {
+                    stacked: false, // Configura para não empilhar as barras
+                    categoryPercentage: 100, // Ajuste para controlar o espaço das categorias
+                    barPercentage: 0.5 // Ajuste para controlar o espaço das barras
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Produção de Café por Estado (Toneladas)'
+                }
+            }
+        }
+    });
+</script>
+<!-- <script>
+        const ctx1 = document.getElementById('climograma').getContext('2d');
+        const climograma = new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [
+                    {
+                        label: 'Precipitação (mm)',
+                        data: [120, 100, 80, 60, 40, 20, 0, 10, 30, 90, 110, 130],
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1,
+                        yAxisID: 'y precipitation',
+                        barThickness: 20 // Define a espessura da barra (ajuste conforme necessário)
+                    },
+                    {
+                        label: 'Temperatura Média (°C)',
+                        data: [22, 23, 24, 26, 28, 30, 31, 30, 28, 25, 23, 21],
+                        type: 'line',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 2,
+                        fill: false,
+                        yAxisID: 'y temperature'
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                    },
+                    'y precipitation': {
+                        type: 'linear',
+                        position: 'left',
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Precipitação (mm)'
+                        }
+                    },
+                    'y temperature': {
+                        type: 'linear',
+                        position: 'right',
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Temperatura Média (°C)'
+                        },
+                        grid: {
+                            drawOnChartArea: false, // Evita que a grade do lado direito interfira nas barras
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Climograma: Temperatura e Precipitação'
+                    }
+                }
+            }
+        }); -->
+</script>
+
+
+</html>

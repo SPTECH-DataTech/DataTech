@@ -9,7 +9,7 @@
 body {
 
     display: flex;
-    margin: 0;
+    margin: 0;  
     padding: 0;
 
     font-family: "Poppins", sans-serif;
@@ -338,14 +338,14 @@ spam {
   
   .infos-kpi {
     display: flex;
-    flex-direction: row;
     gap: 50px;
   }
 
   .infos-kpi2 {
     display: flex;
-    flex-direction: row;
     gap: 50px;
+    margin: 0;
+    
   }
 
 
@@ -369,3 +369,65 @@ spam {
     margin: -2px;
     font-size: 15px; 
   }
+
+  /*--------------------------- tela 2 --------------------------------------*/
+  
+  .containerTopRegioes {
+    margin: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    height: fit-content; 
+    border: 2px solid #C8CBD9;
+    border-radius: 8px;
+    gap: 0;
+  }
+
+  .containerTopRegioes-kpi {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+  }
+
+  .containerTopRegioes-kpi2 {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+  }
+
+  .container-Regioes-Indicador{
+    display: flex;
+    justify-content: end;
+  }
+
+
+  .containerIndicadorSaca {
+    margin: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 20%;
+    height: fit-content; 
+    gap: 0;
+    margin-left: auto;
+  }
+
+  .infos-kpi2 {
+    display: flex;
+    width: 90%;
+    justify-content: space-between; /* Distribui os itens uniformemente */
+    align-items: center; /* Alinha verticalmente os itens */
+    padding: 10px 20px; /* Espaçamento interno para dar mais "respiro" */
+    margin: 10px 0; /* Espaçamento externo entre os itens */
+    border-bottom: 1px solid #C8CBD9; /* Linha de separação entre os itens */
+    gap: 30px; /* Ajusta o espaço entre os elementos dentro da div */
+}
+
+.infos-kpi2 h3 {
+    font-size: 16px; /* Tamanho de texto ajustado para ficar uniforme */
+    color: #555555; /* Cor suave para o texto */
+    margin: 0; /* Remove margem padrão */
+    padding: 0 5px; /* Pequeno espaçamento para dar clareza entre os textos */
+    overflow: hidden;
+}
