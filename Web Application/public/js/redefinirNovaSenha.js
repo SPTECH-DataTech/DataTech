@@ -10,7 +10,7 @@ function getToken() {
 }
 
 function verificarToken() {
-    const token = getToken();   
+    const token = getToken();
 
     const payload = JSON.parse(atob(token.split('.')[1])); // Acessa a carga útil do token
     const horaAtual = new Date().getTime() / 1000;
@@ -23,17 +23,112 @@ function verificarToken() {
     }
 }
 
+let tudoCertoSenha = false;
+
+function verificarSenha() {
+    const senha = input_senha.value.trim();
+    const confirmarSenha = input_confirmacaoSenha.value;
+
+    let erroSenhaNumero = true;
+    let erroSenhaMaiusculo = true;
+    let erroSenhaEspecial = true;
+
+
+
+    for (let i = 0; i < senha.length; i++) {
+
+        if (/[0-9]/.test(senha[i])) {
+            erroSenhaNumero = false;
+        }
+        if (/[A-Z]/.test(senha[i])) {
+            erroSenhaMaiusculo = false;
+        }
+        if (/[!@#$.?]/.test(senha[i])) {
+            erroSenhaEspecial = false;
+        }
+
+    }
+
+    if (senha == "") {
+
+        spanSenha.style.color = "red";
+        input_senha.style.borderColor = "red";
+        tudoCertoSenha = false;
+        mensagemErroSenha.innerHTML = "Campo obrigatório!";
+
+    }
+    if (confirmarSenha == "") {
+
+        spanConfirmacaoSenha.style.color = "red";
+        input_confirmacaoSenha.style.borderColor = "red";
+        tudoCertoSenha = false;
+        mensagemErroConfirmacaoSenha.innerHTML = "Campo obrigatório!";
+
+    }
+    else if (senha.length < 5) {
+
+        spanSenha.style.color = "red";
+        input_senha.style.borderColor = "red";
+        tudoCertoSenha = false;
+        mensagemErroSenha.innerHTML = "A senha deve ter pelo menos 5 dígitos.";
+
+    }
+    else if (erroSenhaEspecial) {
+
+        spanSenha.style.color = "red";
+        input_senha.style.borderColor = "red";
+        tudoCertoSenha = false;
+        mensagemErroSenha.innerHTML = "A senha deve conter um caractere especial (ex:!@#$.?)";
+
+    }
+    else if (erroSenhaMaiusculo) {
+
+        spanSenha.style.color = "red";
+        input_senha.style.borderColor = "red";
+        tudoCertoSenha = false;
+        mensagemErroSenha.innerHTML = "A senha deve incluir uma letra maiúscula.";
+
+    }
+    else if (erroSenhaNumero) {
+
+        spanSenha.style.color = "red";
+        input_senha.style.borderColor = "red";
+        tudoCertoSenha = false;
+        mensagemErroSenha.innerHTML = "A senha deve conter um número.";
+
+    }
+    else if (senha != confirmarSenha) {
+        spanConfirmacaoSenha.style.color = "red";
+        input_confirmacaoSenha.style.borderColor = "red";
+        tudoCertoSenha = false;
+        mensagemErroConfirmacaoSenha.innerHTML = "As senhas são diferentes!";
+    }
+    else {
+
+        tudoCertoSenha = true;
+        spanSenha.style.color = "black";
+        input_senha.style.borderColor = "#7F00FF";
+        spanConfirmacaoSenha.style.color = "black";
+        input_confirmacaoSenha.style.borderColor = "#7F00FF";
+        mensagemErroSenha.innerHTML = "";
+        mensagemErroConfirmacaoSenha.innerHTML = "";
+
+    }
+
+}
+
+
 
 function redefinirSenha() {
-    const senha = input_senha.value;
-    const confirmarSenha = input_confirmacaoSenha.value;
-    const token = getToken();
 
-    if (senha != confirmarSenha) {
-        alert("Senhas diferentes!");
+    const token = getToken();
+    const senha = input_senha.value;
+
+    verificarSenha();
+    if (!tudoCertoSenha) {
         return;
     }
-    //Arrumar backend
+
     fetch('/recuperarSenha/atualizarSenha', {
         method: "POST",
         headers: {
