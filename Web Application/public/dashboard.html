@@ -194,32 +194,32 @@
                 {
                     label: 'Café Plantado (Toneladas)',
                     data: [300, 400, 250, 400, 400], // Dados de toneladas de café plantado por estado
-                    backgroundColor: 'rgba(230, 232, 236, 100)', // Cor para o plantio
+                    backgroundColor: 'rgba(230, 232, 236, 100)', 
                     borderWidth: 1,
-                    barThickness: 20 // Define a espessura da barra (ajuste conforme necessário)
+                    barThickness: 20
                 },
                 {
                     label: 'Café Colhido (Toneladas)',
                     data: [290, 370, 230, 250, 250], // Dados de toneladas de café colhido por estado
-                    backgroundColor: 'rgba(224, 213, 188, 100)', // Cor para a colheita
+                    backgroundColor: 'rgba(224, 213, 188, 100)',
                     borderWidth: 1,
-                    barThickness: 20 // Define a espessura da barra (ajuste conforme necessário)
+                    barThickness: 20 
                 }
             ]
         },
         options: {
             scales: {
                 y: {
-                    beginAtZero: true, // Inicia o eixo Y em 0
+                    beginAtZero: true,
                     title: {
                         display: true,
                         text: 'Toneladas'
                     }
                 }, 
                  x: {
-                    stacked: false, // Configura para não empilhar as barras
-                    categoryPercentage: 100, // Ajuste para controlar o espaço das categorias
-                    barPercentage: 0.5 // Ajuste para controlar o espaço das barras
+                    stacked: false, 
+                    categoryPercentage: 100, 
+                    barPercentage: 0.5 
                 }
             },
             plugins: {
@@ -245,7 +245,7 @@
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1,
                     yAxisID: 'y precipitation',
-                    barThickness: 20 // Define a espessura da barra (ajuste conforme necessário)
+                    barThickness: 20 
                 },
                 {
                     label: 'Temperatura Média (°C)',
@@ -281,7 +281,7 @@
                         text: 'Temperatura Média (°C)'
                     },
                     grid: {
-                        drawOnChartArea: false, // Evita que a grade do lado direito interfira nas barras
+                        drawOnChartArea: false, 
                     }
                 }
             },
