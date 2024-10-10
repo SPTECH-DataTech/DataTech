@@ -1,4 +1,4 @@
-            <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -13,7 +13,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    
+
 </head>
 
 <body>
@@ -55,10 +55,10 @@
             <h3 id="b_usuario">Cliente</h3>
         </div>
 
-          <!-- -------------------------GRAFICO 1------------------------- -->
+        <!-- -------------------------GRAFICO 1------------------------- -->
         <section class="dashboard">
 
-            <div class="titulo-dash"> 
+            <div class="titulo-dash">
                 <h2>Análise da Produção de Café e Relação com as Condições Climáticas</h2>
                 <a href="./dashProximaTela.html"><button class="btn-proxima-tela">Próxima tela</button></a>
             </div>
@@ -66,117 +66,119 @@
 
             <div class="grafico-1">
                 <div class="titulo-grafico">
-                <h1>Plantio e Colheita do Café Arábica</h1>
-                <select class="select-cafe">
-                    <option>Café Arabica</option>
-                    <option>Café Robusta</option>
-                </select>
-                </div>
-                
-                <div class="escolher-info">
-                <div class="container">
-                    <select class="select-ano">
-                      <option value="2017">2017</option>
-                      <option value=""></option>
-                      <option value=""></option>
+                    <h1>Plantio e Colheita do Café Arábica</h1>
+                    <select class="select-cafe">
+                        <option>Café Arabica</option>
+                        <option>Café Robusta</option>
                     </select>
+                </div>
+
+                <div class="escolher-info">
+                    <div class="container">
+                        <select class="select-ano">
+                            <option value="2017">2017</option>
+                            <option value=""></option>
+                            <option value=""></option>
+                        </select>
 
 
-                    <button class="btn-atualizar">Atualizar</button>
-                  </div>
+                        <button class="btn-atualizar">Atualizar</button>
+                    </div>
                 </div>
-            
-    
-           
-         
-            <div class="grafico-plantacao">
-            <canvas id="graficoCafe"></canvas>
 
-            <div class="kpis">
-            <div class="kpi">
-                <div class="titulo-kpi">
-                    <h2 style="color: #10BB00;">Região com maior colheita</h2>
-                </div>
-                <div class="infos-kpi"> 
-                    <h3> Estado 1  </h3>
-                    <h3> Tonelada</h3>
-                </div>
-                <div class="percentagem">
-                    <h4 style="color: #10BB00;">70% Prod.</h4>
-                </div>
-            </div>
 
-            <div class="kpi">
-                <div class="titulo-kpi">
-                    <h2 style="color: #ff0000;">Região com menor colheita</h2>
+
+
+                <div class="grafico-plantacao">
+                    <canvas id="graficoCafe"></canvas>
+
+                    <div class="kpis">
+                        <div class="kpi">
+                            <div class="titulo-kpi">
+                                <h2 style="color: #10BB00;">Região com maior colheita</h2>
+                            </div>
+                            <div class="infos-kpi">
+                                <h3> Estado 1 </h3>
+                                <h3> Tonelada</h3>
+                            </div>
+                            <div class="percentagem">
+                                <h4 style="color: #10BB00;">70% Prod.</h4>
+                            </div>
+                        </div>
+
+                        <div class="kpi">
+                            <div class="titulo-kpi">
+                                <h2 style="color: #ff0000;">Região com menor colheita</h2>
+                            </div>
+                            <div class="infos-kpi">
+                                <h3> Estado 1 </h3>
+                                <h3> Tonelada</h3>
+                            </div>
+                            <div class="percentagem">
+                                <h4 style="color: #ff0000;">20% Prod.</h4>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="infos-kpi"> 
-                    <h3> Estado 1  </h3>
-                    <h3> Tonelada</h3>
-                </div>
-                <div class="percentagem">
-                    <h4 style="color: #ff0000;">20% Prod.</h4>
-                </div>
-            </div>
-        </div>
-            
-            </div>
-                
-            
+
+
             </div>
 
 
 
             <div class="grafico-1">
                 <div class="titulo-grafico2">
-                <h1>Climograma por Estado</h1>
+                    <h1>Climograma por Estado</h1>
 
-                <div class="container">
-                    <select class="select-ano">
-                      <option value="2017">2017</option>
-                      <option value="2018">2018</option>
-                      <option value="2019">2019</option>
-                    </select>
+                    <div class="container">
+                        <select class="select-ano">
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                        </select>
 
-                    <select class="select-estado">
-                        <option value="SP">São Paulo</option>
-                        <option value=""></option>
-                        <option value=""></option>
-                      </select>
+                        <select class="select-estado">
+                            <option value="SP">São Paulo</option>
+                            <option value=""></option>
+                            <option value=""></option>
+                        </select>
 
 
-                    <button class="btn-atualizar">Atualizar</button>
-                  </div>
-
-            </div>
-       
-           
-         
-            <div class="grafico-plantacao">
-                <canvas id="climograma"></canvas>
-            
-                <div class="kpis">
-                <div class="kpi2">
-                    <div class="titulo-kpi">
-                       <center> <h3 style="color: #ff0000;">Mêses Inadequado Produção</h2> </center>
-                    </div>
-                    <div class="infos-kpi2"> 
-                        <h3> Mês  </h3>
-                        <h3> 30mm </h3>
-                        <h3> 20º </h3>
+                        <button class="btn-atualizar">Atualizar</button>
                     </div>
 
-                    <div class="infos-kpi2"> 
-                        <h3> Mês  </h3>
-                        <h3> 30mm </h3>
-                        <h3> 20º </h3>
-                    </div>
                 </div>
-            </div>
-        
-            </div>
-                
-            
+
+
+
+                <div class="grafico-plantacao">
+                    <canvas id="climograma"></canvas>
+
+                    <div class="kpis">
+                        <div class="kpi2">
+                            <div class="titulo-kpi">
+                                <center>
+                                    <h3 style="color: #ff0000;">Mêses Inadequado Produção</h2>
+                                </center>
+                            </div>
+                            <div class="infos-kpi2">
+                                <h3> Mês </h3>
+                                <h3> 30mm </h3>
+                                <h3> 20º </h3>
+                            </div>
+
+                            <div class="infos-kpi2">
+                                <h3> Mês </h3>
+                                <h3> 30mm </h3>
+                                <h3> 20º </h3>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
             </div>
         </section>
 
@@ -194,7 +196,7 @@
                 {
                     label: 'Café Plantado (Toneladas)',
                     data: [300, 400, 250, 400, 400], // Dados de toneladas de café plantado por estado
-                    backgroundColor: 'rgba(230, 232, 236, 100)', 
+                    backgroundColor: 'rgba(230, 232, 236, 100)',
                     borderWidth: 1,
                     barThickness: 20
                 },
@@ -203,7 +205,7 @@
                     data: [290, 370, 230, 250, 250], // Dados de toneladas de café colhido por estado
                     backgroundColor: 'rgba(224, 213, 188, 100)',
                     borderWidth: 1,
-                    barThickness: 20 
+                    barThickness: 20
                 }
             ]
         },
@@ -215,11 +217,11 @@
                         display: true,
                         text: 'Toneladas'
                     }
-                }, 
-                 x: {
-                    stacked: false, 
-                    categoryPercentage: 100, 
-                    barPercentage: 0.5 
+                },
+                x: {
+                    stacked: false,
+                    categoryPercentage: 100,
+                    barPercentage: 0.5
                 }
             },
             plugins: {
@@ -245,7 +247,7 @@
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1,
                     yAxisID: 'y precipitation',
-                    barThickness: 20 
+                    barThickness: 20
                 },
                 {
                     label: 'Temperatura Média (°C)',
@@ -281,7 +283,7 @@
                         text: 'Temperatura Média (°C)'
                     },
                     grid: {
-                        drawOnChartArea: false, 
+                        drawOnChartArea: false,
                     }
                 }
             },
@@ -297,6 +299,3 @@
 
 
 </html>
-      
-   
-        

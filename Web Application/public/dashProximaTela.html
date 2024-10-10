@@ -60,7 +60,7 @@
 
             <div class="titulo-dash">
                 <h2>Café Arábica x Café Robusta</h2>
-                <button class="btn-proxima-tela">Próxima tela</button>
+                <a href="./dashboard.html"><button class="btn-proxima-tela">Voltar</button></a>
             </div>
 
 
@@ -88,7 +88,7 @@
                     <canvas id="graficoCafe"></canvas>
 
                     <div class="kpis">
-                        <div class="kpi">
+                        <div class="kpi-tela2">
                             <div class="titulo-kpi">
                                 <h2 style="color: #5400BB;">Variedade mais Produzida</h2>
                             </div>
@@ -97,11 +97,11 @@
                                 <h3>Tonelada</h3>
                             </div>
                             <div class="percentagem">
-                                <h4 style="color: #492576;">80% Produzida</h4>
+                                <h4 style="color: #492576; font-size: 20px;">80% Produzida</h4>
                             </div>
                         </div>
 
-                        <div class="kpi">
+                        <div class="kpi-tela2">
                             <div class="titulo-kpi">
                                 <h2 style="color: #5400BB;">Variedade menos Produzida</h2>
                             </div>
@@ -110,7 +110,7 @@
                                 <h3>Toneladas</h3>
                             </div>
                             <div class="percentagem">
-                                <h4 style="color: #492576;">20% Produzida</h4>
+                                <h4 style="color: #492576; font-size: 20px;">20% Produzida</h4>
                             </div>
                         </div>
                     </div>
@@ -165,27 +165,28 @@
                         <p style="color: rgb(0, 0, 0);">Análise de preço da Safra dos cafés</p>
                     </div>
                     <div class="infos-kpi2">
+                        <img src="./assets/" alt="Café 1" class="icon-cafe">
                         <h3> Café 1 </h3>
-
                         <h3> (kg) </h3>
                     </div>
-
+                    
                     <div class="infos-kpi2">
+                        <img src="./assets/" alt="Café 2" class="icon-cafe">
                         <h3> Café 2 </h3>
-
                         <h3> (kg) </h3>
                     </div>
-
+                    
                     <div class="infos-kpi2">
+                        <img src="./assets/" alt="Café 3" class="icon-cafe">
                         <h3> Café 3 </h3>
                         <h3> (kg) </h3>
                     </div>
-
+                    
                     <div class="infos-kpi2">
+                        <img src="./assets/" alt="Café 4" class="icon-cafe">
                         <h3> Café 4 </h3>
                         <h3> (kg) </h3>
-                    </div>
-                </div>
+                    </div>                    
             </div>
 
         </section>
@@ -204,14 +205,14 @@
                 {
                     label: 'Café Arábica',
                     data: [8, 10, 5, 8, 11], // Dados de toneladas de café plantado por estado
-                    backgroundColor: 'rgba(230, 232, 236, 100)', // Cor para o plantio
+                    backgroundColor: '#A7B4C7', // Cor para o plantio
                     borderWidth: 1,
                     barThickness: 20 // Define a espessura da barra (ajuste conforme necessário)
                 },
                 {
                     label: 'Café Robusta',
                     data: [7, 5, 7, 9, 8], // Dados de toneladas de café colhido por estado
-                    backgroundColor: 'rgba(224, 213, 188, 100)', // Cor para a colheita
+                    backgroundColor: '#E0D5BA', // Cor para a colheita
                     borderWidth: 1,
                     barThickness: 20 // Define a espessura da barra (ajuste conforme necessário)
                 }
