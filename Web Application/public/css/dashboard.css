@@ -187,15 +187,20 @@ h1 {
   background-color: #6877e5;
   border: none;
   color: white;
-  padding: 5px 40px;
+  padding: 10px 30px; 
   text-align: center;
   font-size: 16px;
   border-radius: 8px;
   cursor: pointer;
-  margin-left: 700px;
   height: 50px;
+    
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
+.btn-proxima-tela:hover {
+  background-color: #5a6bc0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
 
 
 .titulo-grafico {
@@ -239,10 +244,9 @@ spam {
   justify-content: space-between;
 }
 
-
 canvas {
   max-width: 1000px;
-  max-height: 300px;
+  max-height: 270px;
 }
 
 .titulo-grafico2 {
@@ -256,17 +260,15 @@ canvas {
   flex-direction: column;
 }
 
-.titulo-grafico2 h1 {
+.titulo-grafico h1, .titulo-grafico2 h1 {
   font-size: 20px;
   color: #000000;
   font-weight: 800;
 }
 
 .escolher-info {
-  margin: 0px 30px 0px;
+  margin: 10px 30px; 
 }
-
-
 
 .container {
   display: flex;
@@ -296,12 +298,20 @@ canvas {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+
+  transition: background-color 0.3s, box-shadow 0.3s;
+
+}
+
+.btn-atualizar:hover {
+  background-color: #5a6bc0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 
 .grafico-plantacao {
   display: flex;
-  margin: 20px 0; 
+  margin: 20px 10px; 
   justify-content: space-between;
 }
 
@@ -314,8 +324,6 @@ canvas {
   height: fit-content; 
   gap: 10px; 
 }
-
-
 
 
 .kpi {
@@ -390,7 +398,10 @@ h1 {
   border: 2px solid #C8CBD9;
   border-radius: 8px;
   gap: 0;
+  box-shadow: 10px 15px 10px rgba(124, 0, 248, 0.3);
 }
+
+
 
 .containerTopRegioes-kpi {
   display: flex;
@@ -423,10 +434,10 @@ h1 {
 
 .infos-kpi2 {
   display: flex;
-  width: 90%;
+  width: 81%;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 7px 20px;
   margin: 10px 0;
   border-bottom: 1px solid #C8CBD9;
   gap: 30px;
@@ -478,65 +489,32 @@ h1 {
   filter: invert(50%) sepia(2%) saturate(10%) hue-rotate(19deg) brightness(2%) contrast(20%);
 }
 
-/* ------------------------- GRAFICO E KPIs ------------------------- */
-
-
-/* ------------------------- TÍTULOS ------------------------- */
-
 .titulo-grafico, .titulo-grafico2 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 10px 30px; /* Mantenha a mesma margem em ambas as telas */
+  margin: 10px 30px;
 }
-
-.titulo-grafico h1, .titulo-grafico2 h1 {
-  font-size: 20px;
-  color: #000000;
-  font-weight: 800;
-}
-
-/* ------------------------- BUTTONS ------------------------- */
-
-.btn-proxima-tela {
-  margin: 5px;
-  background-color: #6877e5;
-  border: none;
-  color: white;
-  padding: 10px 30px; /* Tamanho consistente do botão */
-  text-align: center;
-  font-size: 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  height: 50px; /* Altura consistente */
-}
-
-/* ------------------------- SELECT BOXES ------------------------- */
 
 .select-cafe, .select-ano, .select-estado {
   padding: 10px; 
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin: 10px; /* Consistência entre as seleções */
-}
-
-/* ------------------------- CONTAINER ------------------------- */
-
-.escolher-info {
-  margin: 10px 30px; /* Ajuste conforme necessário */
+  margin: 10px;
 }
 
 .container {
-  display: flex; /* Flexbox para alinhar os elementos */
-  align-items: center; /* Alinha verticalmente os elementos */
-  gap: 10px; /* Espaçamento entre os itens */
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
   margin: auto;
+  
 }
 
 .select-ano, .select-cafe, .btn-atualizar {
-  padding: 10px; /* Estilo para os botões e selects */
-  font-size: 16px; /* Tamanho da fonte */
+  padding: 10px; 
+  font-size: 16px; 
 }
 
 
