@@ -1,13 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
 * {
   font-family: "Poppins";
 }
 
 body {
-  
   display: flex;
   margin: 0;
   padding: 0;
@@ -24,21 +21,20 @@ body {
   height: 100vh;
 
   overflow: hidden;
-
 }
 
 /* -------------------------MENU LATERAL------------------------- */
 
 h1 {
   color: #7F00FF;
-  margin: 6px;
+  margin: 2px;
 }
 
 .menu-lateral a {
   text-decoration: none;
   width: 90%;
   display: flex;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
 }
 
 .menu-lateral {
@@ -53,16 +49,14 @@ h1 {
   box-shadow: 5px 0px 15px rgba(7, 6, 6, 0.2);
 }
 
-
 .menu-lateral div {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
 
-  padding: 5%;
+  padding: 3%;
   width: 100%;
-
 }
 
 .btn-dashboard {
@@ -72,24 +66,17 @@ h1 {
   cursor: pointer;
   width: 95%;
   box-sizing: border-box;
-  filter: invert(38%) sepia(64%) saturate(2382%) hue-rotate(211deg) brightness(97%) contrast(101%);
-
-
-}
-
-.btn-dashboard {
-  filter: invert(38%) sepia(64%) saturate(2382%) hue-rotate(211deg) brightness(97%) contrast(101%);
 }
 
 .menu-lateral button {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px;
+  gap: 6px;
+  padding: 6px;
 
   border: none;
-  border-radius: 5px;
-  font-size: 1.02rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
 
   box-sizing: border-box;
   width: 100%;
@@ -101,15 +88,12 @@ h1 {
   color: #5A6ACF;
   font-weight: 600;
   cursor: pointer;
-  width: 100%;
-  box-sizing: border-box;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.14);
-
 }
 
 .menu-lateral img.icon {
-  width: 25px;
-  height: 25px;
+  width: 18px;
+  height: 18px;
 }
 
 .menu-lateral .icon {
@@ -140,20 +124,19 @@ h1 {
   width: 100%;
   box-sizing: border-box;
 
-  padding: 10px;
+  padding: 6px;
 
   border-bottom: solid 1px #C8CBD9;
 }
 
 .navbar h3 {
-  margin: 0 25px;
+  margin: 0 15px;
 }
 
 .icon-navbar {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
 }
-
 
 .navbar .icon {
   cursor: pointer;
@@ -165,35 +148,33 @@ h1 {
 .dashboard {
   display: flex;
   flex-direction: column;
-  
-
 }
 
 .titulo-dash {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0;
+  margin: 0 4%;
 }
 
 .titulo-dash h2 {
-  font-size: 20px;
+  font-size: 16px;
   color: #1F384C;
   font-weight: 500;
 }
 
 .btn-proxima-tela {
-  margin: 5px;
+  margin: 3px;
   background-color: #6877e5;
   border: none;
   color: white;
-  padding: 10px 30px; 
+  padding: 6px 20px; 
   text-align: center;
-  font-size: 16px;
-  border-radius: 8px;
+  font-size: 12px;
+  border-radius: 5px;
   cursor: pointer;
-  height: 50px;
-    
+  height: 40px;
+
   transition: background-color 0.3s, box-shadow 0.3s;
 }
 
@@ -202,37 +183,35 @@ h1 {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-
 .titulo-grafico {
   display: flex;
   flex-direction: row;
-  margin: 5px 30px;
+  margin: 3px 15px;
 }
 
 .titulo-grafico h1 {
-  font-size: 20px;
+  font-size: 16px;
   color: #000000;
   font-weight: 800;
 }
 
 .select-cafe {
-  margin-left: 400px;
-  padding: 5px 10px;
-  font-size: 16px;
+  margin-left: 200px;
+  padding: 3px 6px;
+  font-size: 12px;
   color: #6877e5;
   background-color: #f9fbfe;
   border: 1px solid #dcdfe6;
-  border-radius: 8px;
+  border-radius: 5px;
   text-align: center;
   cursor: pointer;
 }
 
 spam {
-  margin: 0px 35px;
+  margin: 0px 25px;
   color: #555555;
   font-weight: 400;
 }
-
 
 .grafico-kpi {
   display: flex;
@@ -245,14 +224,14 @@ spam {
 }
 
 canvas {
-  max-width: 1000px;
-  max-height: 270px;
+  max-width: 750px;
+  max-height: 230px;
 }
 
 .titulo-grafico2 {
   display: flex;
   flex-direction: row;
-  margin: 5px 30px;
+  margin: 3px 15px;
 }
 
 .titulo-grafico2 {
@@ -261,38 +240,38 @@ canvas {
 }
 
 .titulo-grafico h1, .titulo-grafico2 h1 {
-  font-size: 20px;
+  font-size: 16px;
   color: #000000;
   font-weight: 800;
 }
 
 .escolher-info {
-  margin: 10px 30px; 
+  margin: 6px 15px; 
 }
 
 .container {
   display: flex;
   flex-direction: row; 
   justify-content: flex-start; 
-  margin: 20px 30px; 
+  margin: 14px 15px; 
 }
 
 .select-ano {
   margin: 0;
-  padding: 10px;
+  padding: 6px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
 .select-estado {
   margin: 0;
-  padding: 10px;
+  padding: 6px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
 .btn-atualizar {
-  padding: 10px 20px;
+  padding: 6px 14px;
   background-color: #6877e5;
   color: #fff;
   border: none;
@@ -300,7 +279,6 @@ canvas {
   cursor: pointer;
 
   transition: background-color 0.3s, box-shadow 0.3s;
-
 }
 
 .btn-atualizar:hover {
@@ -308,10 +286,9 @@ canvas {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-
 .grafico-plantacao {
   display: flex;
-  margin: 20px 10px; 
+  margin: 6px 6px; 
   justify-content: space-between;
 }
 
@@ -322,21 +299,19 @@ canvas {
   justify-content: center;
   width: 45%; 
   height: fit-content; 
-  gap: 10px; 
+  gap: 6px; 
 }
 
-
 .kpi {
-  margin: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 35%;
+  width: 80%;
+  height: 30%;
   border: 2px solid #C8CBD9;
   border-radius: 8px;
   gap: 0;
-  margin: 5%;
+  margin: 4%;
 }
 
 .kpi2 {
@@ -352,44 +327,40 @@ canvas {
 
 .infos-kpi {
   display: flex;
-  gap: 50px;
+  gap: 30px;
 }
 
 .infos-kpi2 {
   display: flex;
-  gap: 50px;
+  gap: 30px;
   margin: 0;
-
 }
-
-
 
 h1 {
   margin: 0;
 }
 
-
 .kpi h2 {
-  font-size: 18px;
-  margin: 10px 10px 10px;
+  font-size: 14px;
+  margin: 8px 8px 8px;
 }
 
 .kpi h3 {
   font-weight: 600;
-  font-size: 15px;
+  font-size: 12px;
   margin: 1px;
 }
 
 .kpi h4 {
   font-weight: 600;
   margin: -2px;
-  font-size: 15px;
+  font-size: 12px;
 }
 
 /*--------------------------- tela 2 --------------------------------------*/
 
 .containerTopRegioes {
-  margin: 3%;
+  margin: 1%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -401,18 +372,16 @@ h1 {
   box-shadow: 10px 15px 10px rgba(124, 0, 248, 0.3);
 }
 
-
-
 .containerTopRegioes-kpi {
   display: flex;
   flex-direction: row;
-  gap: 50px;
+  gap: 30px;
 }
 
 .containerTopRegioes-kpi2 {
   display: flex;
   flex-direction: row;
-  gap: 50px;
+  gap: 30px;
 }
 
 .container-Regioes-Indicador {
@@ -420,9 +389,7 @@ h1 {
   justify-content: end;
 }
 
-
 .containerIndicadorSaca {
-  margin: 2%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -437,14 +404,14 @@ h1 {
   width: 81%;
   justify-content: space-between;
   align-items: center;
-  padding: 7px 20px;
-  margin: 10px 0;
+  padding: 5px 15px;
+  margin: 6px 0;
   border-bottom: 1px solid #C8CBD9;
-  gap: 30px;
+  gap: 20px;
 }
 
 .infos-kpi2 h3 {
-  font-size: 16px;
+  font-size: 14px;
   color: #555555;
   margin: 0;
   padding: 0 5px;
@@ -462,30 +429,30 @@ h1 {
   border-radius: 8px;
   gap: 0;
   justify-content: space-between;
-  margin: 5%;
+  margin: 4%;
 }
 
 .kpi-tela2 h2 {
-  font-size: 18px;
-  margin: 10px 10px 10px;
+  font-size: 14px;
+  margin: 8px 8px 8px;
 }
 
 .kpi-tela2 h3 {
   font-weight: 600;
-  font-size: 15px;
+  font-size: 12px;
   margin: 1px;
 }
 
 .kpi-tela2 h4 {
   font-weight: 600;
   margin: -2px;
-  font-size: 15px;
+  font-size: 12px;
 }
 
 .icon-cafe {
-  width: 25px;
-  height: 25px;
-  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
   filter: invert(50%) sepia(2%) saturate(10%) hue-rotate(19deg) brightness(2%) contrast(20%);
 }
 
@@ -493,28 +460,24 @@ h1 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 10px 30px;
+  margin: 0 5%;
 }
 
 .select-cafe, .select-ano, .select-estado {
-  padding: 10px; 
-  font-size: 16px;
+  padding: 6px; 
+  font-size: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin: 10px;
+  margin: 6px;
 }
 
 .container {
   display: flex; 
   align-items: center; 
-  gap: 10px; 
-  margin: auto;
-  
+  margin: 0 4%;
 }
 
 .select-ano, .select-cafe, .btn-atualizar {
-  padding: 10px; 
-  font-size: 16px; 
+  padding: 6px; 
+  font-size: 12px; 
 }
-
-
