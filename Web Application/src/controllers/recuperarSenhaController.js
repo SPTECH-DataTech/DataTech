@@ -15,8 +15,11 @@ function enviarSenhaTemporaria(req, res) {
             function (resultado) {
                 if (resultado.length > 0) {
                     const token = gerarToken(resultado[0].id, resultado[0].email);
+                    const IP = String(process.env.IP_CONEXAO);
+                    console.log(IP);
                     
-                    const url = `http://${process.env.IP_CONEXAO}:3333/redefinirNovaSenha.html?token=${token}`
+                    
+                    const url = `http://${IP}:3333/redefinirNovaSenha.html?token=${token}`
                     const assunto = "Recuperação de Senha";
                     const conteudo = `<span> Acesse o seguinte link: <a href="${url}">Redefinir senha</a></span>`;
 
@@ -53,7 +56,7 @@ function atualizarSenha(req, res) {
 
         jwt.verify(token, process.env.JWT_SECRET, (erro, decoded) => {
             if (erro) {
-                return res.status(401).send("Token inválido!");
+                 res.status(401).json({erro: "Token inválido!"});
             }
 
             const { id } = decoded;
@@ -63,7 +66,7 @@ function atualizarSenha(req, res) {
                     function (resultado) {
                         console.log(resultado);
 
-                        res.status(200).json({message: "Senha atualizad com sucesso", resultado});
+                        res.status(200).json({message: "Senha atualizada com sucesso!", resultado});
                     })
                 .catch(
                     function (erro) {
