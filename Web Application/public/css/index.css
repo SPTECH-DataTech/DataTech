@@ -1368,4 +1368,14 @@ button {
         border: #210042 solid;
     }
 
+    .contato {
+        margin-top: 2%;
+        margin-bottom: 10%;
+    }
+
+    .contato .container {
+        width: 100%;
+    }
+
+
 }
