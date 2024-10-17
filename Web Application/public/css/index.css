@@ -76,6 +76,18 @@ button:hover {
     text-align: justify;
 }
 
+#equipe {
+    scroll-margin-top: 180px;
+}
+
+#missao_visao_valores {
+    scroll-margin-top: 170px;
+}
+
+#contato {
+    scroll-margin-top: 170px;
+}
+
 /* -------------------------HEADER------------------ */
 
 .header {
@@ -209,6 +221,7 @@ button:hover {
 /* ----------------------BANNER----------------- */
 
 .banner {
+    margin-top: 5%;
     padding-top: 4rem;
     display: flex;
     flex-direction: column;
@@ -417,10 +430,9 @@ button:hover {
 .missao_visao_valores .container {
     height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     justify-content: space-around;
     align-items: center;
-    flex-wrap: wrap;
     gap: 3rem;
 }
 
@@ -479,10 +491,9 @@ button:hover {
     width: 100%;
     max-width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
     gap: 2rem;
 }
 
@@ -678,7 +689,7 @@ button:hover {
 }
 
 .contato .container {
-    width: 90%;
+    width: 50%;
     gap: 10%;
     display: flex;
     flex-direction: row;
@@ -689,7 +700,7 @@ button:hover {
 }
 
 .form {
-    width: 45%;
+    width: 85%;
     height: 90%;
     display: flex;
     flex-direction: column;
@@ -718,7 +729,7 @@ button:hover {
 
 .form input {
     width: 70%;
-    height: 1.875rem;
+    height: 2.875rem;
     border: .125rem solid var(--roxoBotao);
     border-radius: .625rem;
     box-sizing: border-box;
@@ -744,10 +755,10 @@ button:hover {
     width: 80%;
     height: 50%;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    flex-flow: column wrap;
+    justify-content: center;
+    gap: 2%;
     align-items: start;
-    flex-wrap: wrap;
 }
 
 .sessao_contato span {
@@ -757,10 +768,9 @@ button:hover {
 .sessao_contato {
     width: 50%;
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     justify-content: flex-start;
     align-items: center;
-    flex-wrap: wrap;
 }
 
 .sessao_contato img {
@@ -809,6 +819,7 @@ button {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    margin-top: 2%;
 }
 
 .footer_titulo {
@@ -928,8 +939,12 @@ button {
 }
 
 @media only screen and (max-width: 1250px) {
-    
-    .foto-integrante #foto{
+
+    .foto-integrante {
+        flex: 0 0 100%;
+    }
+
+    .foto-integrante #foto {
         width: 100%;
     }
 
@@ -943,6 +958,15 @@ button {
 
     .cards {
         flex-wrap: nowrap;
+    }
+
+    .contato_button {
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+
+    .footer {
+        margin-top: 2%;
     }
 }
 
@@ -976,7 +1000,7 @@ button {
         flex: 0 0 48%;
     }
 
-    .foto-integrante #foto{
+    .foto-integrante #foto {
         width: 90%;
     }
 
@@ -989,7 +1013,7 @@ button {
     }
 
     .slide {
-        width: calc(100% * 6 / 2); 
+        width: calc(100% * 6 / 2);
     }
 
     .missao_visao_valores {
@@ -1121,8 +1145,14 @@ button {
         flex: 0 0 48.3%;
     }
 
+    .foto-integrante #foto {
+        margin-top: 14%;
+        width: 100%;
+        height: 80%;
+    }
+
     .slide {
-        width: calc(100% * 6 / 1); 
+        width: calc(100% * 6 / 1);
     }
 
     .sessao {
@@ -1261,7 +1291,7 @@ button {
         width: 100%;
     }
 
-    .titulo_equipe .span{
+    .titulo_equipe .span {
         text-align: center;
     }
 
@@ -1299,23 +1329,43 @@ button {
 
 }
 
-@media only screen and (max-width: 460px) {
+@media only screen and (min-width: 460px) and (max-width: 600px) {
 
     .cards_integrantes {
-        flex: 0 0 97%;
+        flex: 0 0 98%;
     }
 
     .foto-integrante #foto {
         height: 90%;
         margin-top: 30px;
+        width: 70%;
     }
 
+    #card_tiago #foto {
+        width: 60%;
+    }
+
+    #card_vinicius #foto {
+        width: 60%;
+    }
 }
 
 @media only screen and (max-width: 425px) {
 
     .cards_integrantes {
-        flex: 0 0 89%;
+        flex: 0 0 98%;
+        width: 36px;
+        height: 75%;
+        margin-top: 15%;
+    }
+
+    .foto-integrante #foto {
+        width: 80%;
+    }
+
+    #card_yasmim #foto {
+        width: 70%;
+        border: #210042 solid;
     }
 
 }
