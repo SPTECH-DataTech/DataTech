@@ -20,7 +20,6 @@ function enviarEmail(to, subject, htmlContent) {
             resolve(success);
         });
     })
-    
 }
 
 module.exports = {

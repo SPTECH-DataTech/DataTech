@@ -20,7 +20,7 @@
 </head>
 
 <body>
-  <div class="header">
+  <header class="header">
     <div class="container">
       <div class="logo">
         <span class="data">Data</span><span class="tech">Tech</span>
@@ -28,254 +28,309 @@
       <div class="logo_mobile">
         <img src="assets/Logo-Mobile.png" alt="Logo Mobile">
       </div>
-      <div class="navbar">
-        <a href="#">Início</a>
-        <a href="#equipe_link">Nossa equipe</a>
-        <a href="#missao_visao_valores_link">Sobre nós</a>
-        <a href="#contato_link">Contato</a>
+
+      <div class="navbar_botoes">
+        <nav class="navbar">
+          <a class="span" href="#">Início</a>
+          <a class="span" href="#equipe">Nossa equipe</a>
+          <a class="span" href="#missao_visao_valores">Sobre nós</a>
+          <a class="span" href="#contato">Contato</a>
+        </nav>
+        <div class="botoes_header_container">
+          <a href="./login.html" class="botoes_header" id="botao_entrar_header">Entrar</a>
+          <a href="./cadastro.html" class="botoes_header" id="botao_registrar_header">Registrar-se</a>
+        </div>
       </div>
-      <div class="botoes_header_container">
-        <a href="./login.html" class="botoes_header" id="botao_entrar_header">Entrar</a>
-        <a href="./cadastro.html" class="botoes_header" id="botao_registrar_header">Registrar-se</a>
-      </div>
+
       <div class="mobile_menu" id="hamburger-menu">
         <div class="line1"></div>
         <div class="line2"></div>
         <div class="line3"></div>
       </div>
     </div>
-  </div>
+  </header>
 
-  <div class="mobile_navbar" id="mobile-nav">
-    <a href="#">Início</a>
-    <a href="#equipe_link">Nossa equipe</a>
-    <a href="#missao_visao_valores_link">Sobre nós</a>
-    <a href="#contato_link">Contato</a>
-    <a href="./login.html" id="entrar" class="botoes_header">Entrar</a>
-    <a href="./cadastro.html" id="cadastrar" class="botoes_header">Registrar-se</a>
-  </div>
+  <nav class="mobile_navbar" id="mobile-nav">
+    <a class="span" href="#">Início</a>
+    <a class="span" href="#equipe">Nossa equipe</a>
+    <a class="span" href="#missao_visao_valores">Sobre nós</a>
+    <a class="span" href="#contato">Contato</a>
+    <a href="./login.html" id="entrar" class="botoes_header span">Entrar</a>
+    <a href="./cadastro.html" id="cadastrar" class="botoes_header span">Registrar-se</a>
+  </nav>
 
-  <div class="banner">
-    <div class="container">
-      <div class="texto_banner">
-        <img src="./assets/logo_datatech_-_roxa_escuro.png" alt="logo datatech" id="logo_datatech_banner">
-        <h1 class="titulo_slogan">A eficácia de uma análise preditiva</h1>
-        <span class="texto_slogan">Ajudamos empresas a se destacar dos concorrentes, ganhar mais dinheiro e mitigar
-          gastos
-          com insigths valiosos.</span>
-        <div class="botao-cadastro-banner">
-          <a href="./cadastro.html" id="botao_cadastro_banner">Vamos começar!</a>
+  <main>
+    <section class="banner">
+      <div class="container">
+        <div class="texto_botao">
+          <div class="texto_banner">
+            <div class="logo_banner">
+              <img src="./assets/logo_datatech_-_roxa_escuro.png" alt="logo datatech" id="logo_datatech_banner">
+            </div>
+            <div class="textos">
+              <h1 class="titulos">A eficácia de uma análise preditiva</h1>
+              <span class="span">Ajudamos empresas a se destacar dos concorrentes, ganhar mais dinheiro e mitigar
+                gastos
+                com insigths valiosos.</span>
+            </div>
+            <div class="botao-cadastro-banner">
+              <a href="./cadastro.html" id="botao_cadastro_banner">Vamos começar!</a>
+            </div>
+          </div>
         </div>
+        <img id="imagem-banner" src="./assets/Group 17banner.png" alt="">
       </div>
-      <img src="./assets/Group 17banner.png" alt="">
-    </div>
-  </div>
+    </section>
 
-  <div id="equipe_link"></div>
-
-  <div id="equipe" data-aos="fade-up">
-    <div class="container">
+    <section id="equipe" data-aos="fade-up">
       <div class="titulo_equipe">
-        <h1>Conheça nossa equipe</h1>
-        <span>Um grupo especialista e unido para o seu sucesso!</span>
+        <h1 class="titulos">Conheça nossa equipe</h1>
+        <span class="span">Um grupo especialista e unido para o seu sucesso!</span>
       </div>
-      <div class="equipe_carrossel">
-        <div class="slide" id="slide1">
-          <div class="card_carrossel" id="card_lucas">
-            <span>Lucas Oliveira</span>
-            <div class="foto_integrante">
-              <img src="./assets/Lucas.png" alt="">
-            </div>
-          </div>
-          <div class="card_carrossel" id="card_raine">
-            <span>Raíne Jardim</span>
-            <div class="foto_integrante">
-              <img src="./assets/Raíne.png" alt="">
-            </div>
-          </div>
-          <div class="card_carrossel" id="card_samuel">
-            <span>Samuel Sales</span>
-            <div class="foto_integrante">
-              <img src="./assets/Samuel.png" alt="">
-            </div>
+
+      <div class="container">
+        <img class="seta seta-esquerda" src="assets/seta_produto_carrossel_esquerda.svg" alt="">
+        <div class="carrossel_equipe">
+          <div class="slide">
+
+            <article class="cards_integrantes" id="card_lucas">
+              <div class="foto-integrante">
+                <img id="foto" src="assets/Lucas.png" alt="Foto Lucas">
+              </div>
+              <div class="desc">
+                <span class="titulos_h3">Lucas Moraes</span>
+                <div class="svg-icons">
+                  <a href="https://github.com/lucasomsilva" target="_blank">
+                    <img id="svg" src="assets/github.svg" alt="Logo GitHub" width="50" height="50">
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <article class="cards_integrantes" id="card_raine">
+              <div class="foto-integrante">
+                <img id="foto" src="assets/Raíne.png" alt="Foto Raíne">
+              </div>
+              <div class="desc">
+                <span class="titulos_h3">Raíne Jardim</span>
+                <div class="svg-icons">
+                  <a href="https://github.com/Raine-Jardim" target="_blank">
+                    <img id="svg" src="assets/github.svg" alt="Logo GitHub" width="50" height="50">
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <article class="cards_integrantes" id="card_samuel">
+              <div class="foto-integrante">
+                <img id="foto" src="assets/Samuel.png" alt="Foto Samuel">
+              </div>
+              <div class="desc">
+                <span class="titulos_h3">Samuel Sales</span>
+                <div class="svg-icons">
+                  <a href="https://github.com/samussouza" target="_blank">
+                    <img id="svg" src="assets/github.svg" alt="Logo GitHub" width="50" height="50">
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <article class="cards_integrantes" id="card_tiago">
+              <div class="foto-integrante">
+                <img id="foto" src="assets/Tiago.png" alt="Foto Tiago">
+              </div>
+              <div class="desc">
+                <span class="titulos_h3">Tiago Pereira</span>
+                <div class="svg-icons">
+                  <a href="https://github.com/TiagoPesouzaa" target="_blank">
+                    <img id="svg" src="assets/github.svg" alt="Logo GitHub" width="50" height="50">
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <article class="cards_integrantes" id="card_vinicius">
+              <div class="foto-integrante">
+                <img id="foto" src="assets/Vinícius.png" alt="Foto Vinícius">
+              </div>
+              <div class="desc">
+                <span class="titulos_h3">Vinícius Pajor</span>
+                <div class="svg-icons">
+                  <a href="https://github.com/PajorVi" target="_blank">
+                    <img id="svg" src="assets/github.svg" alt="Logo GitHub" width="50" height="50">
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <article class="cards_integrantes" id="card_yasmim">
+              <div class="foto-integrante">
+                <img id="foto" src="assets/Yasmim.png" alt="Foto Yasmim">
+              </div>
+              <div class="desc">
+                <span class="titulos_h3">Yasmim Conceição</span>
+                <div class="svg-icons">
+                  <a href="https://github.com/ysilvv" target="_blank">
+                    <img id="svg" src="assets/github.svg" alt="Logo GitHub" width="50" height="50">
+                  </a>
+                </div>
+              </div>
+            </article>
+
           </div>
         </div>
-        <div class="slide" id="slide2">
-          <div class="card_carrossel" id="card_tiago">
-            <span>Tiago Pereira</span>
-            <div class="foto_integrante">
-              <img src="./assets/Tiago.png" alt="">
-            </div>
-          </div>
-          <div class="card_carrossel" id="card_vinicius">
-            <span>Vinícius Pajor</span>
-            <div class="foto_integrante">
-              <img src="./assets/Vinícius.png" alt="">
-            </div>
-          </div>
-          <div class="card_carrossel">
-            <span>Yasmin Conceição</span>
-            <div class="foto_integrante" id="card_yasmim">
-              <img src="./assets/Yasmim.png" alt="">
-            </div>
-          </div>
-        </div>
+        <img class="seta seta-direita" src="assets/seta_produto_carrossel_direita.svg" alt="">
       </div>
-    </div>
-    <button onclick="trocarSlidesEquipe();"></button>
-  </div>
-  <!-- oi -->
-  <!-- oi -->
+    </section>
 
-  <div id="missao_visao_valores_link"></div>
-
-  <div class="missao_visao_valores" data-aos="fade-up">
-    <div class="container">
-      <div class="sessao">
-        <h1>Visão</h1>
-        <img src="./assets/img_visao.png" alt="auxílio">
-        <span>
-          Construir parcerias duradouras com nossos clientes, oferecendo soluções tecnológicas que geram valor para
-          seus negócios.
-        </span>
-      </div>
-      <div class="sessao">
-        <h1>Missão</h1>
-        <img src="./assets/img_missao.png" alt="alvo">
-        <span>
-          Empoderamos empresas a se destacar dos concorrentes, ganhar mais dinheiro e mitigar gastos com valiosos
-          insigths.
-        </span>
-      </div>
-      <div class="sessao">
-        <h1>Valores</h1>
-        <img src="./assets/img_valores.png" alt="crescimento">
-        <span>
-          Paixão por tecnologia e pelo desejo de impulsionar o crescimento e sucesso de nossos clientes.
-        </span>
-      </div>
-    </div>
-  </div>
-
-  <div class="tecnologias" data-aos="fade-up">
-    <div class="container">
-      <h1 id="titulo_tecnologias">Sua jornada digital começa aqui!</h1>
-      <div class="cards">
-        <div class="card" id="ia">
-          <h1>Inteligência Artificial</h1>
-          <span>
-            Com nossa estratégia digital, fornecemos ampla cobertura e recomendações geradas pela I.A para o seu
-            negócio, garantindo que você esteja sempre à frente do jogo.
+    <section id="missao_visao_valores" class="missao_visao_valores" data-aos="fade-up">
+      <div class="container">
+        <article class="sessao">
+          <h1 class="titulos">Visão</h1>
+          <img src="./assets/img_visao.png" alt="auxílio">
+          <span class="span">
+            Construir parcerias duradouras com nossos clientes, oferecendo soluções tecnológicas que geram valor para
+            seus negócios.
           </span>
-        </div>
-        <div class="card" id="analytics">
-          <h1>Analytics</h1>
-          <span>
-            Transforme seus dados em decisões inteligentes. Com a DataTech, você obtém insights profundos e
-            personalizados para impulsionar seu negócio.
+        </article>
+        <article class="sessao">
+          <h1 class="titulos">Missão</h1>
+          <img src="./assets/img_missao.png" alt="alvo">
+          <span class="span">
+            Empoderamos empresas a se destacar dos concorrentes, ganhar mais dinheiro e mitigar gastos com valiosos
+            insigths.
           </span>
-        </div>
-        <div class="card" id="cloud">
-          <h1>Cloud</h1>
-          <span>
-            A habilitação da nuvem é o processo de análise do cenário de TI existente de uma organização. Por meio da
-            nuvem, é possível operar a infraestrutura de TI interna, software e recursos.
+        </article>
+        <article class="sessao">
+          <h1 class="titulos">Valores</h1>
+          <img src="./assets/img_valores.png" alt="crescimento">
+          <span class="span">
+            Paixão por tecnologia e pelo desejo de impulsionar o crescimento e sucesso de nossos clientes.
           </span>
-        </div>
+        </article>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <div class="servico-cafe">
-    <div class="container">
-      <h1>Nossos Serviços em Ação!</h1>
-      <div class="titulo_servicos">
-        <h2> Entenda como ajudamos cafeicultores</h2>
-        <h3> Com o sucesso em suas fazendas (EM BREVE!)</h3>
-      </div>
-
-      <div class="apresentacao_servicos">
-        <div class="texto_carrossel">
-          <div class="texto-servicos">
-            <span>
-              A agricultura de precisão chegou ao café! Com a nossa plataforma, você tem acesso a ferramentas e dados
-              que te ajudam a tomar decisões mais assertivas para plantio e colheita de suas mudas de cafés.
+    <section class="tecnologias" data-aos="fade-up">
+      <div class="container">
+        <h1 class="titulos">Sua jornada digital começa aqui!</h1>
+        <div class="cards">
+          <article class="card" id="ia">
+            <h1 class="titulos">Inteligência Artificial</h1>
+            <span class="span">
+              Com nossa estratégia digital, fornecemos ampla cobertura e recomendações geradas pela I.A para o seu
+              negócio, garantindo que você esteja sempre à frente do jogo.
             </span>
-          </div>
-
-          <div class="carrossel_servico">
-
-            <button class="carrossel_servico_button" id="foward_button" onclick="anteriorSlideProduto()">
-              <img src="./assets/seta_produto_carrossel_esquerda.svg" alt="">
-            </button>
-
-            <div class="card-servico" id="card-servico1">
-              <span class="texto-inicial">Planejamento 🎯 </span>
-              <span class="texto-hover">Indicamos o melhor período para plantar e colher, considerando as condições
-                climáticas da sua região.</span>
-            </div>
-
-            <div class="card-servico" id="card-servico2">
-              <span class="texto-inicial">Notificações personalizadas 🚨 </span>
-              <span class="texto-hover">Notificamos eventos climáticos extremos como geadas, secas ou chuvas
-                excessivas.
-                Os
-                produtores podem tomar medidas preventivas para minimizar os danos à lavoura.</span>
-            </div>
-
-            <div class="card-servico" id="card-servico3">
-              <span class="texto-inicial">Comparativo entre regiões 📊 </span>
-              <span class="texto-hover">Comparamos os dados climáticos de diferentes regiões. Os produtores podem
-                identificar áreas com condições mais favoráveis para o cultivo de café.</span>
-            </div>
-
-            <div class="card-servico" id="card-servico4">
-              <span class="texto-inicial">Gerenciamento de Equipe 🫱🏻‍🫲🏼 </span>
-              <span class="texto-hover">O produtor pode criar contas para cada membro da equipe (engenheiros
-                agrônomos,
-                analistas, etc.) definindo um nível de acesso específico para cada um.</span>
-            </div>
-
-            <button class="carrossel_servico_button" id="previous_button" onclick="proximoSilideProduto()">
-              <img src="./assets/seta_produto_carrossel_direita.svg" alt="">
-            </button>
-
-          </div>
-          <a class="botao_cadastro_carrossel" href="#contato_link">Tenho interesse</a>
+          </article>
+          <article class="card" id="analytics">
+            <h1 class="titulos">Analytics</h1>
+            <span class="span">
+              Transforme seus dados em decisões inteligentes. Com a DataTech, você obtém insights profundos e
+              personalizados para impulsionar seu negócio.
+            </span>
+          </article>
+          <article class="card" id="cloud">
+            <h1 class="titulos">Cloud</h1>
+            <span class="span">
+              A habilitação da nuvem é o processo de análise do cenário de TI existente de uma organização. Por meio da
+              nuvem, é possível operar a infraestrutura de TI interna, software e recursos.
+            </span>
+          </article>
         </div>
-        <img src="img/cafeeiro.jpeg" id="cafeeiro-servico">
       </div>
-    </div>
-  </div>
+    </section>
 
-  <div id="contato_link"></div>
+    <secion class="servico-cafe" data-aos="fade-up">
+      <div class="container">
+        <h1 class="titulos">Nossos Serviços em Ação!</h1>
 
-  <div class="contato" data-aos="fade-up">
-    <div class="container">
-      <div class="form">
-        <div class="titulo_contato">
-          <h1>Entre em contato</h1>
-          <span>Estamos aqui por você! Como podemos ajudar?</span>
+        <div class="apresentacao_servicos">
+          <div class="texto_carrossel">
+            <div class="texto-servicos">
+              <div class="titulo_servicos">
+                <h2 class="titulos_h2"> Entenda como ajudamos cafeicultores</h2>
+                <h3 class="titulos_h3"> Com o sucesso em suas fazendas (EM BREVE!)</h3>
+              </div>
+              <span class="span">
+                A agricultura de precisão chegou ao café! Com a nossa plataforma, você tem acesso a ferramentas e dados
+                que te ajudam a tomar decisões mais assertivas para plantio e colheita de suas mudas de cafés.
+              </span>
+            </div>
+
+            <div class="carrossel_servico">
+
+              <button class="carrossel_servico_button" id="foward_button" onclick="anteriorSlideProduto()">
+                <img src="./assets/seta_produto_carrossel_esquerda.svg" alt="">
+              </button>
+
+              <article class="card-servico" id="card-servico1">
+                <span class="texto-inicial span">Planejamento 🎯 </span>
+                <span class="texto-hover">Indicamos o melhor período para plantar e colher, considerando as condições
+                  climáticas da sua região.</span>
+              </article>
+
+              <article class="card-servico" id="card-servico2">
+                <span class="texto-inicial span">Notificações personalizadas 🚨 </span>
+                <span class="texto-hover">Notificamos eventos climáticos extremos como geadas, secas ou chuvas
+                  excessivas.
+                  Os
+                  produtores podem tomar medidas preventivas para minimizar os danos à lavoura.</span>
+              </article>
+
+              <article class="card-servico" id="card-servico3">
+                <span class="texto-inicial span">Comparativo entre regiões 📊 </span>
+                <span class="texto-hover">Comparamos os dados climáticos de diferentes regiões. Os produtores podem
+                  identificar áreas com condições mais favoráveis para o cultivo de café.</span>
+              </article>
+
+              <article class="card-servico" id="card-servico4">
+                <span class="texto-inicial span">Gerenciamento de Equipe 🫱🏻‍🫲🏼 </span>
+                <span class="texto-hover">O produtor pode criar contas para cada membro da equipe (engenheiros
+                  agrônomos,
+                  analistas, etc.) definindo um nível de acesso específico para cada um.</span>
+              </article>
+
+              <button class="carrossel_servico_button" id="previous_button" onclick="proximoSilideProduto()">
+                <img src="./assets/seta_produto_carrossel_direita.svg" alt="">
+              </button>
+
+            </div>
+            <div class="button_carrossel">
+              <a class="botao_cadastro_carrossel" href="#contato_link">Tenho interesse</a>
+            </div>
+          </div>
+          <img src="img/cafeeiro.jpeg" id="cafeeiro-servico">
         </div>
-        <img class="imagem-contato-mobile" src="./assets/imagem_contato.png" alt="">
-        <div class="campo">
-          <span>Nome</span>
-          <input id="ctt_nome">
-        </div>
-        <div class="campo">
-          <span>Empresa</span>
-          <input id="ctt_empresa">
-        </div>
-        <div class="campo">
-          <span>E-mail</span>
-          <input id="ctt_email">
-        </div>
-        <div class="campo">
-          <span>Mensagem</span>
-          <textarea id="input_mensagem" name=""></textarea>
-        </div>
-        <div class="contato_button">
-          <button>Enviar</button>
+      </div>
+    </secion>
+
+    <section id="contato" class="contato" data-aos="fade-up">
+      <div class="container">
+        <div class="form">
+          <div class="titulo_contato">
+            <h1 class="titulos">Entre em contato</h1>
+            <span class="span">Estamos aqui por você! Como podemos ajudar?</span>
+          </div>
+          <img class="imagem-contato-mobile" src="./assets/imagem_contato.png" alt="">
+          <div class="campo">
+            <span>Nome</span>
+            <input id="ctt_nome">
+          </div>
+          <div class="campo">
+            <span>Empresa</span>
+            <input id="ctt_empresa">
+          </div>
+          <div class="campo">
+            <span>E-mail</span>
+            <input id="ctt_email">
+          </div>
+          <div class="campo">
+            <span>Mensagem</span>
+            <textarea id="input_mensagem" name=""></textarea>
+          </div>
+          <div class="contato_button">
+            <button>Enviar</button>
+          </div>
         </div>
       </div>
 
@@ -284,177 +339,45 @@
         <div class="lista_contatos">
           <div class="sessao_contato">
             <img src="./assets/icone_endereco.png" alt="">
-            <span>Rua Haddock Lobo, 595</span>
+            <span class="span">Rua Haddock Lobo, 595</span>
           </div>
           <div class="sessao_contato">
             <img src="./assets/icone_telefone.png" alt="">
-            <span>+55 11 2584 3030</span>
+            <span class="span">+55 11 2584 3030</span>
           </div>
           <div class="sessao_contato">
             <img src="./assets/icone_email.png" alt="">
-            <span>datatech@datatech.com</span>
+            <span class="span">datatech@datatech.com</span>
           </div>
         </div>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <div class="footer">
-    <div class="footer_titulo">
-      <div class="logo-nome">
-        <span class="data">Data</span><span class="tech">Tech</span>
+    <footer class="footer">
+      <div class="footer_titulo">
+        <div class="logo-nome">
+          <span class="data">Data</span><span class="tech">Tech</span>
+        </div>
+        <div class="lista_contatos">
+          <div class="sessao_contato">
+            <img src="./assets/icone_endereco.png" alt="">
+            <span class="span">Rua Haddock Lobo, 595</span>
+          </div>
+          <div class="sessao_contato">
+            <img src="./assets/icone_telefone.png" alt="">
+            <span class="span">+55 11 2584 3030</span>
+          </div>
+          <div class="sessao_contato">
+            <img src="./assets/icone_email.png" alt="">
+            <span class="span">datatech@datatech.com</span>
+          </div>
+        </div>
       </div>
-      <div class="lista_contatos">
-        <div class="sessao_contato">
-          <img src="./assets/icone_endereco.png" alt="">
-          <span>Rua Haddock Lobo, 595</span>
-        </div>
-        <div class="sessao_contato">
-          <img src="./assets/icone_telefone.png" alt="">
-          <span>+55 11 2584 3030</span>
-        </div>
-        <div class="sessao_contato">
-          <img src="./assets/icone_email.png" alt="">
-          <span>datatech@datatech.com</span>
-        </div>
-      </div>
-    </div>
-    <span class="direitos">© 2024 Todos os direitos reservados</span>
-  </div>
+      <span class="direitos span">© 2024 Todos os direitos reservados</span>
+    </footer>
+  </main>
 </body>
 
 </html>
-<script>
 
-  AOS.init();
-</script>
-
-<script>
-
-  let slideEquipeAtual = 1;
-
-  function trocarSlidesEquipe() {
-    const slide1 = document.getElementById("slide1");
-    const slide2 = document.getElementById("slide2");
-
-    if (slideEquipeAtual == 1) {
-      slide1.style.animation = "passarSlideEquipe_sumir";
-      slide2.style.animation = "passarSlideEquipe_aparecer";
-      slide1.style.animationDuration = "0.5s";
-      slide2.style.animationDuration = "0.5s";
-      setTimeout(() => {
-        slide1.style.display = "none";
-        slide2.style.display = "flex";
-      }, 400);
-      slideEquipeAtual++;
-    } else {
-      slide2.style.animation = "passarSlideEquipe_sumir";
-      slide1.style.animation = "passarSlideEquipe_aparecer"
-      slide2.style.animationDuration = "0.5s";
-      slide1.style.animationDuration = "0.5s";
-      setTimeout(() => {
-        slide2.style.display = "none";
-        slide1.style.display = "flex";
-      }, 400);
-      slideEquipeAtual--;
-    }
-  }
-
-  let slideProdutoAtual = 1;
-
-  function proximoSilideProduto() {
-    slideProdutoAtual++;
-
-
-    if (slideProdutoAtual > 4) {
-      slideProdutoAtual = 1;
-    }
-
-    for (let i = 1; i <= 4; i++) {
-      let cardAtual = document.getElementById(`card-servico${i}`);
-      let slideAtual = document.getElementById(`card-servico${slideProdutoAtual}`)
-      if (cardAtual == slideAtual) {
-        cardAtual.style.animation = "passarSlideProduto_foward_aparecer";
-        cardAtual.style.animationDuration = "0.3s";
-        setTimeout(() => {
-          cardAtual.style.display = "flex";
-        }, 200)
-      }
-
-      if (cardAtual != slideAtual) {
-        cardAtual.style.animation = "passarSlideProduto_foward_sumir";
-        cardAtual.style.animationDuration = "0.3s";
-        setTimeout(() => {
-          cardAtual.style.display = "none";
-        }, 200)
-      }
-    }
-
-  }
-
-  function anteriorSlideProduto() {
-    slideProdutoAtual--;
-
-    if (slideProdutoAtual < 1) {
-      slideProdutoAtual = 4;
-    }
-
-    for (let i = 1; i <= 4; i++) {
-      let cardAtual = document.getElementById(`card-servico${i}`);
-      let slideAtual = document.getElementById(`card-servico${slideProdutoAtual}`)
-      if (cardAtual == slideAtual) {
-        cardAtual.style.animation = "passarSlideProduto_backward_aparecer";
-        cardAtual.style.animationDuration = "0.3s";
-        setTimeout(() => {
-          cardAtual.style.display = "flex";
-        }, 200);
-      }
-
-      if (cardAtual != slideAtual) {
-        cardAtual.style.animation = "passarSlideProduto_backward_sumir";
-        cardAtual.style.animationDuration = "0.3s";
-        setTimeout(() => {
-          cardAtual.style.display = "none";
-        }, 200);
-      }
-    }
-  }
-
-  let currentSlide = 0;
-
-
-  const cards = document.querySelectorAll('.card');
-  const totalSlides = cards.length;
-
-  function atualizarCarrossel() {
-    const carrossel = document.querySelector('.cards');
-    const slideWidth = document.querySelector('.card').clientWidth + 20;
-
-    if (window.innerWidth <= 768) {
-      carrossel.style.transform = `translateX(${-currentSlide * slideWidth}px)`;
-    } else {
-      carrossel.style.transform = 'none';
-    }
-  }
-
-  cards.forEach((card, index) => {
-    card.addEventListener('click', () => {
-      if (window.innerWidth <= 768) {
-        currentSlide = index;
-        atualizarCarrossel();
-      }
-    });
-  });
-
-  window.addEventListener('resize', atualizarCarrossel);
-  window.onload = atualizarCarrossel;
-
-  const hamburgerMenu = document.getElementById('hamburger-menu');
-  const mobileNav = document.getElementById('mobile-nav');
-
-  hamburgerMenu.addEventListener('click', () => {
-    mobileNav.classList.toggle('show');
-    hamburgerMenu.classList.toggle('menu_open');
-  });
-
-</script>
+<script src="./js/index.js"></script>

@@ -19,6 +19,29 @@ a {
     text-decoration: none;
 }
 
+::selection {
+    background-color: var(--roxoBotao);
+    color: white;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: white;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #8A2BE2;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #210042;
+}
+
 a:hover {
     transform: scale(1.1);
     transition: 0.3s;
@@ -33,12 +56,36 @@ button:hover {
     transition: 0.3s;
 }
 
-input {
-    padding: 3px;
+.titulos {
+    font-size: xx-large;
+    text-align: center;
 }
 
-textarea {
-    padding: 3px;
+.titulos_h2 {
+    text-align: center;
+    font-size: x-large;
+}
+
+.titulos_h3 {
+    text-align: center;
+    font-size: larger;
+}
+
+.span {
+    font-size: larger;
+    text-align: justify;
+}
+
+#equipe {
+    scroll-margin-top: 180px;
+}
+
+#missao_visao_valores {
+    scroll-margin-top: 170px;
+}
+
+#contato {
+    scroll-margin-top: 170px;
 }
 
 /* -------------------------HEADER------------------ */
@@ -46,26 +93,22 @@ textarea {
 .header {
     background-color: white;
     width: 100%;
-    height: 6.25rem;
+    height: 10%;
+    max-width: 100%;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
     position: fixed;
     z-index: 999;
-}
-
-.container {
-    margin-left: 4.375rem;
-    margin-right: 4.375rem;
+    top: 0;
+    box-sizing: border-box;
 }
 
 .logo {
-    margin-right: 12.5rem;
-    height: 100%;
     font-size: 1.5625rem;
     font-weight: 600;
+    flex: 0 0 15%;
+    width: 15%;
     display: flex;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
 }
 
@@ -73,12 +116,12 @@ textarea {
 .header .container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     width: 100%;
     height: 100%;
-    gap: 1.25rem;
-    font-size: 1.1875rem;
+    max-width: 100%;
+    font-size: large;
     font-weight: 500;
 }
 
@@ -86,12 +129,18 @@ textarea {
     color: var(--roxoTexto);
 }
 
-.navbar {
-    width: 50rem;
+.navbar_botoes {
     display: flex;
-    justify-content: right;
-    gap: 1.875rem;
-    width: 40%;
+    width: 85%;
+    justify-content: space-evenly;
+    height: 100%;
+    align-items: center;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-evenly;
+    width: 60%;
 }
 
 .navbar a {
@@ -112,7 +161,6 @@ textarea {
 }
 
 .botoes_header {
-    padding: .625rem;
     height: 1.875rem;
     border-radius: .625rem;
     text-align: center;
@@ -123,6 +171,10 @@ textarea {
     border: .1875rem solid var(--roxoTexto);
     color: black;
     width: 6.25rem;
+    height: 2.5rem;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
 
 #botao_entrar_header:hover {
@@ -134,7 +186,11 @@ textarea {
 #botao_registrar_header {
     background-color: var(--roxoBotao);
     color: white;
-    width: 9.375rem;
+    width: 8.6rem;
+    height: 2.8rem;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
 
 .logo_mobile {
@@ -142,7 +198,10 @@ textarea {
 }
 
 .mobile_menu {
+    width: 12%;
     cursor: pointer;
+    position: relative;
+    z-index: 2000;
 }
 
 .mobile_menu div {
@@ -152,50 +211,78 @@ textarea {
     margin: 8px;
     background: #210042;
     border-radius: 100px;
+    transition: all 0.3s ease;
+}
+
+.mobile_navbar {
+    display: none;
 }
 
 /* ----------------------BANNER----------------- */
 
 .banner {
-    padding-top: 6.25rem;
-    width: 100%;
-    height: 87vh;
+    margin-top: 5%;
+    padding-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: relative;
 }
 
 .banner .container {
-    width: 90%;
-    height: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
+    gap: 1%;
+    align-items: self-start;
 }
 
 #logo_datatech_banner {
-    width: 9.375rem;
-    height: 7.1875rem;
+    width: 20%;
+    margin-top: 1%;
+}
+
+.logo_banner {
+    display: flex;
+    justify-content: flex-start;
 }
 
 .texto_banner {
-    width: 50%;
-    height: 90%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: flex-start;
+    align-items: center;
+    flex-grow: 1;
+    gap: 10%;
 }
 
-.titulo_slogan {
-    font-size: 3.75rem;
+.textos {
+    display: flex;
+    gap: 10%;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+    height: 30%;
 }
 
-.texto_slogan {
-    font-size: 1.4375rem;
-    width: 40.625rem;
+.texto_botao {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 60%;
+    flex-grow: 1;
+    height: 500px;
+}
+
+#imagem-banner {
+    width: 50%;
 }
 
 #botao_cadastro_banner {
     background-color: var(--roxoBotao);
     color: white;
-    width: 37%;
-    height: 100%;
+    width: 40%;
+    height: 50%;
     border-radius: 1.25rem;
     display: flex;
     align-items: center;
@@ -203,186 +290,217 @@ textarea {
     text-decoration: none;
     text-align: center;
     font-weight: bold;
-    font-size: 1.25rem;
+    font-size: large;
     box-shadow: 0rem .125rem .1875rem black;
 }
 
 .botao-cadastro-banner {
     display: flex;
-
-    height: 50px;
-    justify-content: start;
+    height: 25%;
+    width: 90%;
+    justify-content: flex-start;
 }
 
 /* ----------------------EQUIPE----------------- */
 
 #equipe {
-    height: 15.625rem;
-    padding-top: 6.25rem;
-    padding-bottom: 6.25rem;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    gap: 5%;
+    height: 550px;
+    margin-bottom: 2%;
+    margin-top: 2%;
 }
 
 #equipe .container {
-    height: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    gap: 2%;
+    justify-content: space-evenly;
+    align-items: center;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+.seta {
+    cursor: pointer;
+    width: 40px;
+    filter: drop-shadow(0px 1px 1px black);
+    cursor: pointer;
+    z-index: 1;
+    margin: 1% 1% 0 1%;
+}
+
+.seta:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
 }
 
 .titulo_equipe {
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    margin-right: 6.25rem;
+    align-items: center;
+    width: 100%;
 }
 
-.titulo_equipe h1 {
-    width: 31.25rem;
-    line-height: 3.4375rem;
-    font-size: 3.75rem;
+.titulo_equipe .titulos {
+    width: 83%;
 }
 
-.titulo_equipe span {
-    font-size: 1.4375rem;
+.carrossel_equipe {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 90%;
+    overflow: hidden;
 }
 
 .slide {
-    width: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    width: calc(100% * 6 / 3);
+    height: 90%;
+    transition: transform 0.5s ease-in-out;
+    gap: 2%;
 }
 
-#slide2 {
-    display: none;
+.cards_integrantes {
+    border-radius: 20px;
+    box-sizing: border-box;
+    flex: 0 0 calc(100% / 3.18);
+    height: 100%;
 }
 
-.equipe_carrossel {
-    width: 100%;
+.foto-integrante {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.card_carrossel {
-
-    height: 12.9375rem;
-    width: 12.9375rem;
-    border: .0625rem solid black;
-    border-radius: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
+    justify-content: center;
+    background-color: #210042;
+    border-radius: 20px 20px 0 0;
+    height: 80%;
     overflow: hidden;
-    box-shadow: 0rem .125rem .25rem black;
 }
 
-.card_carrossel span {
-    padding-left: 8px;
-    padding-top: 5px;
-    width: 50%;
-    font-weight: bold;
-    line-height: 15px;
+.foto-integrante img {
+    width: 80%;
 }
 
-.foto_integrante {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
+#card_tiago #foto {
+    width: 60%;
 }
 
-.card_carrossel img {
-    width: 100%;
-    height: 200px;
+#card_vinicius #foto {
+    width: 60%;
 }
 
-#equipe button {
-    width: 5.5rem;
-    height: 4.6875rem;
-    border-radius: 100%;
-    background-color: white;
-    border: none;
-    background-image: url("../assets/seta-carrossel.svg");
-    background-repeat: no-repeat;
-    background-size: 2.1875rem;
-    background-position: 50%;
+.desc {
+    background-color: #D9D9D9;
+    border-radius: 0 0 20px 20px;
+    height: 40%;
+    margin-top: -30px;
+    z-index: 1;
     position: relative;
-    right: 1.875rem;
-    top: 5rem;
-    box-shadow: 0rem .1875rem .3125rem black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.desc .span {
+    font-size: medium;
+}
+
+.svg-icons {
+    display: flex;
+    width: 100%;
+    height: 60%;
+    justify-content: space-around;
+    align-items: center;
 }
 
 /* ---------------MISSÃO VISÃO E VALORES------------ */
 
 .missao_visao_valores {
-    height: 37.5rem;
+    height: 80vh;
     background-color: var(--roxoTexto);
 }
 
 .missao_visao_valores .container {
     height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     justify-content: space-around;
     align-items: center;
+    gap: 3rem;
 }
 
 .sessao {
     color: white;
-    width: 20%;
-    height: 80%;
+    width: 100%;
+    gap: 2%;
+    max-width: 300px;
+    height: 70%;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     text-align: center;
 }
 
+.sessao .span {
+    text-align: center;
+}
+
 .sessao h1 {
-    font-size: 3.75rem;
     filter: drop-shadow(0rem .0625rem .1875rem black);
 }
 
-/* .sessao img {
+.sessao img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
     filter: drop-shadow(0rem .0625rem .1875rem black);
-} */
+}
 
 /* --------------------TECNOLOGIAS----------------- */
 
 .tecnologias {
-    height: 43.75rem;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tecnologias .titulos {
+    text-align: center;
 }
 
 .tecnologias .container {
-    padding-top: 6.25rem;
+    height: 100%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
 }
 
-.tecnologias h1 {
-    font-size: 3.75rem;
-    margin-bottom: 6.25rem;
-}
-
 .cards {
-    height: 100%;
+    height: 78%;
     width: 100%;
+    max-width: 100%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
 }
 
 .card {
-    padding: 1.25rem;
     color: white;
-    width: 21.875rem;
-    height: 18.75rem;
+    width: 30%;
+    height: 300px;
     border: .5rem solid #ddd9e5;
     border-radius: 1.875rem;
     background-color: var(--roxoCards);
@@ -394,19 +512,17 @@ textarea {
     box-shadow: 0rem .1875rem .5rem black;
 }
 
+.card .span {
+    text-align: center;
+}
+
 .card:hover {
     transform: scale(1.1);
     transition: 0.3s;
 }
 
-.card h1 {
-    font-size: 2.1875rem;
-    margin: 0;
-}
-
 /* --------------SERVIÇOS CAFÉ----------- */
 .servico-cafe {
-    padding: 2%;
     align-items: flex-start;
     display: flex;
     justify-content: space-between;
@@ -420,43 +536,46 @@ textarea {
 .titulo_servicos {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
 }
 
 .servico-cafe h1 {
     text-align: center;
-    font-size: 4.75rem;
-    margin-bottom: 6.25rem;
 }
 
 .servico-cafe h2 {
-    font-size: 3.75rem;
     color: #783fd9;
-}
-
-.servico-cafe h3 {
-    font-size: 2.45rem;
 }
 
 .apresentacao_servicos {
     display: flex;
+    gap: 2%;
     flex-direction: row;
-    height: 480px;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    min-height: 480px;
 }
 
 .texto-servicos {
-    font-size: x-large;
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: large;
+    width: 90%;
+    height: 50%;
+}
+
+.texto-servicos .span {
+    text-align: justify;
 }
 
 #cafeeiro-servico {
-    padding-left: 10px;
-    width: 50%;
-    height: 400px;
+    width: 40%;
     border-radius: 20px;
 }
 
 .carrossel_servico {
-    margin-bottom: 20px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -465,8 +584,12 @@ textarea {
 
 .texto_carrossel {
     display: flex;
+    width: 50%;
+    height: 100%;
+    min-height: 400px;
     flex-direction: column;
-    justify-content: center;
+    gap: 8%;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -482,12 +605,11 @@ textarea {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1.25rem;
     color: white;
     width: 70%;
     max-width: 550px;
     height: 130px;
-    border: .5rem solid #ddd9e5;
+    border: .5rem #ddd9e5;
     border-radius: 1.875rem;
     background-color: var(--roxoCards);
     align-items: center;
@@ -505,7 +627,7 @@ textarea {
 .texto-inicial {
     opacity: 1;
     position: absolute;
-    font-size: 30px;
+    font-size: large;
 }
 
 .texto-hover {
@@ -518,7 +640,7 @@ textarea {
 
 .card-servico:hover .texto-hover {
     opacity: 1;
-
+    font-size: medium;
 }
 
 
@@ -540,8 +662,7 @@ textarea {
 }
 
 .botao_cadastro_carrossel {
-    width: 75%;
-    height: 40px;
+    width: 60%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -552,29 +673,47 @@ textarea {
     text-align: center;
 }
 
+.button_carrossel {
+    display: flex;
+    justify-content: center;
+    width: 85%;
+    height: 40px;
+}
+
 /* ------------------CONTATO---------------- */
 
 .contato {
-    margin-bottom: 1.875rem;
+    display: flex;
+    justify-content: center;
+    flex: 1;
 }
 
 .contato .container {
+    width: 50%;
+    gap: 10%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
+    height: auto;
+    min-height: 70vh;
 }
 
 .form {
-    width: 50%;
-    height: 31.25rem;
+    width: 85%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
 .form h1 {
-    font-size: 2.5rem;
     color: var(--roxoTexto);
+}
+
+.titulo_contato {
+    font-size: large;
+    text-align: center;
 }
 
 .campo {
@@ -584,11 +723,16 @@ textarea {
     align-items: start;
 }
 
+.campo span {
+    font-size: medium;
+}
+
 .form input {
     width: 70%;
-    height: 1.875rem;
+    height: 2.875rem;
     border: .125rem solid var(--roxoBotao);
     border-radius: .625rem;
+    box-sizing: border-box;
 }
 
 .form textarea {
@@ -596,29 +740,54 @@ textarea {
     height: 6.25rem;
     border: .125rem solid var(--roxoBotao);
     border-radius: .625rem;
+    box-sizing: border-box;
+}
+
+.img_direita {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    height: auto;
 }
 
 .lista_contatos {
-    height: 6.25rem;
+    width: 80%;
+    height: 50%;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex-flow: column wrap;
+    justify-content: center;
+    gap: 2%;
     align-items: start;
+}
+
+.sessao_contato span {
+    flex-wrap: wrap;
 }
 
 .sessao_contato {
+    width: 50%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: start;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .sessao_contato img {
-    margin-right: .625rem;
+    width: 10%;
+}
+
+.sessao_contato span {
+    font-size: smaller;
 }
 
 .imagem-contato-mobile {
     display: none;
+}
+
+.imagem-contato {
+    width: 80%;
+    height: 70%;
 }
 
 .contato_button {
@@ -628,10 +797,14 @@ textarea {
 }
 
 button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 90%;
     height: 2.1875rem;
     background-color: var(--roxoBotao);
     color: white;
+    font-size: medium;
     border: none;
     border-radius: .5rem;
     box-shadow: 0rem .1875rem .3125rem black;
@@ -640,26 +813,33 @@ button {
 /* -----------------FOOTER--------------- */
 
 .footer {
-    height: 6.25rem;
+    height: auto;
     background-color: var(--roxoFooter);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    margin-top: 2%;
+}
+
+.footer_titulo {
+    height: 3rem;
+    gap: 1rem;
 }
 
 .footer .data {
     color: white;
-    font-size: 3.125rem;
+    font-size: xx-large;
 }
 
 .footer .tech {
     color: var(--roxoTexto);
-    font-size: 3.125rem;
+    font-size: xx-large;
 }
 
 .direitos {
     color: white;
+    font-size: medium;
 }
 
 .footer .lista_contatos {
@@ -752,1082 +932,450 @@ button {
     }
 }
 
-/*              REPONSIVIDADE PARA CELULAR            */
+@media only screen and (max-width: 1350px) {
+    .button_carrossel {
+        margin-top: 2%;
+    }
+}
+
+@media only screen and (max-width: 1250px) {
+
+    .foto-integrante {
+        flex: 0 0 100%;
+    }
+
+    .foto-integrante #foto {
+        width: 100%;
+    }
+
+    #card_tiago #foto {
+        width: 80%;
+    }
+
+    #card_vinicius #foto {
+        width: 80%;
+    }
+
+    .cards {
+        flex-wrap: nowrap;
+    }
+
+    .contato_button {
+        margin-top: 2%;
+        margin-bottom: 2%;
+    }
+
+    .footer {
+        margin-top: 2%;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+
+    .titulos {
+        font-size: x-large;
+    }
+
+    .titulos_h2 {
+        font-size: larger;
+    }
+
+    .titulos_h3 {
+        font-size: large;
+    }
+
+    .span {
+        font-size: medium;
+    }
+
+    .header .span {
+        font-size: smaller;
+    }
+
+    .botoes_header_container a {
+        font-size: smaller;
+    }
+
+    .cards_integrantes {
+        flex: 0 0 48%;
+    }
+
+    .foto-integrante #foto {
+        width: 90%;
+    }
+
+    #card_tiago #foto {
+        width: 75%;
+    }
+
+    #card_vinicius #foto {
+        width: 75%;
+    }
+
+    .slide {
+        width: calc(100% * 6 / 2);
+    }
+
+    .missao_visao_valores {
+        height: auto;
+        gap: 1rem;
+    }
+
+    .cards {
+        flex-wrap: nowrap;
+    }
+
+    .sessao {
+        width: 45%;
+        height: auto;
+    }
+
+    .sessao img {
+        width: 40%;
+    }
+
+    .button_carrossel {
+        margin-top: 2%;
+    }
+
+    .contato_button {
+        margin-top: 2%;
+    }
+
+}
+
+@media only screen and (max-width: 768px) {
+
+    .titulos {
+        font-size: larger;
+    }
+
+    .titulos_h2 {
+        font-size: large;
+    }
+
+    .titulos_h3 {
+        font-size: medium;
+    }
+
+    .mobile_navbar {
+        display: none;
+    }
+
+    .header {
+        justify-content: center;
+    }
+
+    .header .container {
+        width: 90%;
+        justify-content: space-between;
+    }
+
+    .navbar_botoes,
+    .logo,
+    #logo_datatech_banner,
+    #imagem-banner {
+        display: none;
+    }
+
+    .logo_mobile,
+    .mobile_menu div {
+        display: block;
+    }
+
+    .menu_open .line1 {
+        transform: rotate(45deg) translate(7px, 13px);
+    }
+
+    .menu_open .line2 {
+        opacity: 0;
+    }
+
+    .menu_open .line3 {
+        transform: rotate(-45deg) translate(4px, -12px);
+    }
+
+    .mobile_navbar.show {
+        display: flex;
+        position: fixed;
+        flex-direction: column;
+
+        right: 0;
+        height: auto;
+        width: 30%;
+
+        background-color: var(--roxoFooter);
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+        border-radius: 0 0 0 25px;
+
+        padding: 70px 20px;
+        gap: 50px;
+        z-index: 998;
+    }
+
+    .botoes_header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        background-color: var(--roxoBotao);
+    }
+
+    #entrar {
+        background-color: white;
+        color: black;
+    }
+
+    .mobile_navbar .span {
+        text-decoration: none;
+        color: white;
+    }
+
+    #botao_cadastro_banner {
+        width: 30%;
+        height: 50%;
+        font-size: medium;
+    }
+
+    .botao-cadastro-banner {
+        justify-content: center;
+    }
+
+    .cards_integrantes {
+        flex: 0 0 48.3%;
+    }
+
+    .foto-integrante #foto {
+        margin-top: 14%;
+        width: 100%;
+        height: 80%;
+    }
+
+    .slide {
+        width: calc(100% * 6 / 1);
+    }
+
+    .sessao {
+        width: 90%;
+    }
+
+    .sessao img {
+        width: 40%;
+    }
+
+    .tecnologias {
+        height: auto;
+        margin-top: 5%;
+    }
+
+    .card {
+        width: 45%;
+        height: 250px;
+    }
+
+    .card .span {
+        font-size: small;
+        text-align: center;
+    }
+
+    .cards {
+        height: auto;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 5%;
+        margin-bottom: 5%;
+        flex-wrap: wrap;
+    }
+
+    .apresentacao_servicos {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 5%;
+    }
+
+    #cafeeiro-servico {
+        width: 80%;
+        margin-top: 5%;
+    }
+
+    .card-servico,
+    .texto_carrossel {
+        width: 100%;
+        gap: 17px;
+    }
+
+    .card-servico:hover .texto-hover {
+        font-size: small;
+    }
+
+    .lista_contatos,
+    .img_direita {
+        display: none;
+    }
+
+    .contato {
+        margin-bottom: 5%;
+    }
+
+    .form {
+        justify-content: center;
+        gap: 2%;
+        width: 100%;
+    }
+
+    .campo {
+        align-items: center;
+    }
+
+    .contato_button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .contato_button button {
+        width: 50%;
+    }
+
+    .footer {
+        height: auto;
+        min-height: 250px;
+    }
+
+    .footer img {
+        width: 8%;
+    }
+
+    .footer .lista_contatos {
+        display: flex;
+        width: 100%;
+        color: white;
+        flex-direction: column;
+        align-items: center;
+        gap: 5%;
+    }
+
+    .footer_titulo {
+        width: 100%;
+        height: auto;
+        min-height: 50%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .sessao_contato {
+        justify-content: center;
+    }
+
+}
 
 @media only screen and (max-width: 600px) {
 
-    /* HEADER */
+    .titulos {
+        font-size: large;
+    }
 
-    .header {
+    .span {
+        font-size: smaller;
+    }
+
+    .titulos_h2 {
+        font-size: medium;
+    }
+
+    .titulos_h3 {
+        font-size: smaller;
+    }
+
+    .texto_botao {
         width: 100%;
-        max-width: 100%;
-        height: 60px;
-
-        margin-top: -60px;
-
-        justify-content: space-around;
     }
 
-    .header .logo {
-        display: none;
-    }
-
-    .navbar {
-        display: none;
-    }
-
-    .logo_mobile {
-        margin-top: 0.8%;
-        display: block;
-    }
-
-    .botoes_header_container {
-        display: none;
-    }
-
-    .mobile_menu div {
-        display: block;
-    }
-
-   .mobile_menu div {
-        background: #210042;
-        height: 3px;
-        width: 100%;
-        transition: all 0.3s ease;
-    }
-
-    .menu_open .line1 {
-        transform: rotate(45deg) translate(5px, 5px);
-    }
-
-    .menu_open .line2 {
-        opacity: 0;
-    }
-
-    .menu_open .line3 {
-        transform: rotate(-45deg) translate(9px, -10px);
-    }
-
-    .mobile_menu {
-        width: 10%;
-    }
-
-    .mobile_navbar {
-        display: none;
-        position: fixed;
-        flex-direction: column;
-
-        right: 0;
-        height: auto;
-        width: 30%;
-
-        background-color: var(--roxoFooter);
-        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-        border-radius: 0 0 0 25px;
-
-        padding: 60px 20px;
-        gap: 50px;
-        z-index: 1000;
-    }
-
-    .mobile_navbar a {
-        text-decoration: none;
-        color: white;
-        font-size: 1rem;
-    }
-
-    .mobile_navbar.show {
-        display: flex;
-    }
-
-    .mobile_navbar
-    #entrar {
-        border: var(--roxoTexto) solid;
-    }
-
-    .mobile_navbar 
-    #cadastrar {
-        background-color: var(--roxoBotao);
-    }
-
-    /* BANNER */
-
-    .banner {
-        width: 100%;
-        max-width: 100%;
-        min-width: 100%;
-
-        height: 300px;
-
-        margin-top: 60px;
-        padding-top: 14px;
-
-    }
-
-    .banner .container {
-        height: 100%;
-        max-width: 100%;
-
-        margin-left: 1%;
-        display: flex;
-        justify-content: center;
-    }
-
-    .banner .container img {
-        width: 50%;
-        
-        height: 250px;
-
-    }
-
-    .texto_banner {
-        width: 50%;
-    }
-
-    .texto_banner img {
-        display: none;
-    }
-
-    .banner .titulo_slogan {
-        display: flex;
-        text-align: start;
-
-        margin-left: 15px;
-
-        font-size: 1.5rem;
-    }
-
-    .texto_slogan {
-        display: flex;
-        text-align: justify;
-
-        width: 85.8%;
-        margin-left: 15px;
-
-        font-size: 0.9rem;
-    }
-
-    .banner #botao_cadastro_banner {
-        width: 50%;
-        height: 40px;
-
-        border-radius: 9px;
-        font-size: 0.8rem;
-
-    }
-
-    .botao-cadastro-banner {
-        display: flex;
-        justify-content: center;
-    }
-
-    /*  NOSSA EQUIPE  */
-
-    #equipe {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        width: 100%;
-        max-width: 100%;
-        
-        height: 350px;
-
-        margin-top: -20%;
-        margin-bottom: 0;
-        padding-bottom: 10%;
-        padding-top: 5%;
-    }
-
-    #equipe .container {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-
-        margin-top: -30%;
-        width: 65%;
-        height: 50%;
-    }
-
-    .titulo_equipe {
-        display: flex;
+    .titulo_equipe .span {
         text-align: center;
-        justify-content: center;
-
-        height: 40%;
-        margin-left: 40%;
     }
 
-    .titulo_equipe h1 {
-        font-size: 1.8rem;
-    }
-
-    .titulo_equipe span {
-        font-size: 1rem;
-        width: 100%;
-    }
-
-    .equipe_carrossel {
-
-        margin-left: 10%;
-        margin-top: 5%;
-
-        width: 90vw;
-    }
-
-    .card_carrossel {
-
-        width: 26%;
-        height: 180px;
-
-        margin: 0 20px;
-    }
-
-    .slide {
-        gap: 1%;
-    }
-
-    .foto_integrante img {
-        object-fit: cover;
-    }
-
-    #equipe button {
-        width: 20%;
-        height: 15%;
-
-        margin-left: 20px;
-        margin-top: -30%;
-
-        background-size: 1.1875rem;
-
-    }
-    
-    /* MISSÃO VISÃO E VALORES */
-
-    .missao_visao_valores {
-        height: auto;
-        width: 100%;
-    }
-
-    .missao_visao_valores .container {
-        width: 100%;
-        max-width: 100%;
-
-        margin-left: 0%;
-
-        flex-direction: column;
+    .cards_integrantes {
+        flex: 0 0 98.3%;
     }
 
     .sessao {
-        width: 100%;
-        border-top: #210042 solid 1px;
-        padding: 0%;
-    }
-
-    .sessao h1 {
-        font-size: 5rem;
-    }
-
-    .sessao span {
-        width: 50%;
-
-        font-size: 1rem;
-        text-align: center;
+        height: auto;
     }
 
     .sessao img {
-        width: 20%;
-        max-width: 100%;
-        height: 130px;
-
-        margin-bottom: 5px;
-    }
-
-
-    /* TECNOLOGIAS */
-
-    .tecnologias {
-        display: flex;
-        justify-content: center;
-
-        margin: 0 auto;
-        width: 100%;
-        height: 500px;
-
-        overflow: hidden;
-        position: relative;
-
-    }
-
-    #titulo_tecnologias {
-        font-size: 1.6rem;
-
-        margin-top: -70px;
-        margin-bottom: 50px;
-        margin-left: 7%;
-
-    }
-
-    .tecnologias .container {
-        height: 80%;
-        margin-left: 0%;
-    }
-
-    .cards {
-        display: flex;
-        width: 26%;
-
-        
-        transition: transform 0.5s ease-in-out;
+        width: 30%;
     }
 
     .card {
-        min-width: 80%;
-        margin-right: 33px;
-
-        flex: 0 0 60%;
-
-        padding: 0 10% 0 10%;
-        border-radius: 10px;
-        text-align: center;
-
-        cursor: pointer;
-
-    }
-
-    .card h1 {
-        font-size: 1.5rem;
-    }
-
-    .card span {
-        display: flex;
-        text-align: justify;
-        font-size: 1rem;
-    }
-
-    /* NOSSOS SERVIÇOS */
-
-    .servico-cafe {
-        height: 800px;
-    }
-
-    .servico-cafe .container {
-        margin: 0%;
-    }
-
-    .servico-cafe .container h1 {
-        font-size: 1.8rem;
-    }
-
-    .titulo_servicos {
-        display: flex;
-        align-items: center;
-
-        margin-top: -15%;
-        margin-left: 5%;
-
-        width: 500px;
-    }
-
-    .titulo_servicos h2 {
-        font-size: 1.5rem;
-    }
-
-    .titulo_servicos h3 {
-        font-size: 1rem;
+        width: 73%;
+        height: 250px;
     }
 
     .apresentacao_servicos {
-        flex-direction: column;
-
-        margin-top: 5%;
+        gap: 2%;
     }
 
-    #cafeeiro-servico{
-        width: 80%;
-        margin: 3% 0 0 8%;
-    }
-
-    .botao_cadastro_carrossel {
-        width: 50%;
-
-        font-size: 1rem;
-    }
-
-    .texto-servicos {
-        text-align: justify;
-
-        margin: 0 0 2% 0;
-        font-size: 1rem;
-    }
-
-    .texto-inicial {
-        font-size: 1.5rem;
-    }
-
-    /* CONTATO */
-
-    .contato {
-        flex-direction: column;
+    .sessao_contato {
+        display: flex;
+        width: 70%;
         justify-content: center;
-        
-        border-top: #7C00F8 solid;
-        border-radius: 20px;
-
-        height: 750px;
+        flex-direction: row;
     }
 
-    .contato .container {
-        flex-direction: column;
-
-        margin: 0%;
-
-    }
-
-    .form {
-        width: 100%;
-        align-items: center;
-
-        height: 100%;
-
-    }
-
-    .titulo_contato {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-
-    }
-
-    .titulo_contato h1 {
-        font-size: 1.8rem;
-    }
-
-    .imagem-contato {
-        display: none;
-    }
-
-    .imagem-contato-mobile {
-        display: block;
-
-        width: 50%;
-    }
-
-    .lista_contatos {
-        display: none;
-    }
-
-    .campo {
-        align-items: start;
-
-        width: 80%;
-    }
-
-    .campo input {
-        width: 100%;
-    }
-
-    #input_mensagem {
-        width: 100%;
-    }
-
-    .form button {
-        width: 50%;
-
-        margin-top: 5%;
-    }
-
-    /* FOOTER */
-
-    .footer {
-        align-items: start;
-        justify-content: space-between;
-
-        margin-top: -50%;
-
-        max-width: 100%;
-
-        height: 250px;
-
-    }
-
-    .footer_titulo {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-
-        width: 100%;
-
-        margin: 10% 0 0 0;
-    }
-
-    .footer_titulo .data {
-        font-size: 2rem;
-    }
-
-    .footer_titulo .tech {
-        font-size: 2rem;
-    }
-
-    .direitos {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-
-        font-size: 0.8rem;
-    }
-
-    .footer .lista_contatos {
-        display: block;
-        display: flex;
-        align-items: start;
-
-        color: white;
-        font-size: 0.8rem;
-
+    .sessao_contato span {
+        font-size: small;
     }
 
 }
 
-/*              REPONSIVIDADE PARA TABLET            */
+@media only screen and (min-width: 460px) and (max-width: 600px) {
 
-
-@media only screen and (max-width: 768px) {
-    
-   /* HEADER */
-
-    .header {
-        width: 100%;
-        max-width: 100%;
-        height: 60px;
-
-        margin-top: -60px;
-
-        justify-content: space-around;
-    }
-
-    .header .logo {
-        display: none;
-    }
-
-    .navbar {
-        display: none;
-    }
-
-    .logo_mobile {
-        margin-top: 0.8%;
-        display: block;
-    }
-
-    .botoes_header_container {
-        display: none;
-    }
-
-    .mobile_menu div {
-        display: block;
-    }
-
-   .mobile_menu div {
-        background: #210042;
-        height: 3px;
-        width: 100%;
-        transition: all 0.3s ease;
-    }
-
-    .menu_open .line1 {
-        transform: rotate(45deg) translate(5px, 5px);
-    }
-
-    .menu_open .line2 {
-        opacity: 0;
-    }
-
-    .menu_open .line3 {
-        transform: rotate(-45deg) translate(9px, -10px);
-    }
-
-    .mobile_menu {
-        width: 10%;
-    }
-
-    .mobile_navbar {
-        display: none;
-        position: fixed;
-        flex-direction: column;
-
-        right: 0;
-        height: auto;
-        width: 30%;
-
-        background-color: var(--roxoFooter);
-        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
-        border-radius: 0 0 0 25px;
-
-        padding: 60px 20px;
-        gap: 50px;
-        z-index: 1000;
-    }
-
-    .mobile_navbar a {
-        text-decoration: none;
-        color: white;
-        font-size: 1rem;
-    }
-
-    .mobile_navbar.show {
-        display: flex;
-    }
-
-    .mobile_navbar
-    #entrar {
-        border: var(--roxoTexto) solid;
-    }
-
-    .mobile_navbar
-    #entrar:hover {
-        background-color: white;
-        color: #210042;
-    }
-
-    .mobile_navbar 
-    #cadastrar {
-        background-color: var(--roxoBotao);
-    }
-
-    /* BANNER */
-
-    .banner {
-        width: 100%;
-        max-width: 100%;
-        min-width: 100%;
-
-        height: 300px;
-
-        margin-top: 60px;
-        padding-top: 14px;
-
-    }
-
-    .banner .container {
-        height: 100%;
-        max-width: 100%;
-
-        margin-left: 1%;
-        display: flex;
-        justify-content: center;
-    }
-
-    .banner .container img {
-        width: 50%;
-        
-        height: 250px;
-
-    }
-
-    .texto_banner {
-        width: 50%;
-    }
-
-    .texto_banner img {
-        display: none;
-    }
-
-    .banner .titulo_slogan {
-        display: flex;
-        text-align: start;
-
-        margin-left: 15px;
-
-        font-size: 1.5rem;
-    }
-
-    .texto_slogan {
-        display: flex;
-        text-align: justify;
-
-        width: 85.8%;
-        margin-left: 15px;
-
-        font-size: 0.9rem;
-    }
-
-    .banner #botao_cadastro_banner {
-        width: 50%;
-        height: 40px;
-
-        border-radius: 9px;
-        font-size: 0.8rem;
-
-    }
-
-    .botao-cadastro-banner {
-        display: flex;
-        justify-content: center;
-    }
-
-    /*  NOSSA EQUIPE  */
-
-    #equipe {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        width: 100%;
-        margin-top: -10%;
-        
-        height: 350px;
-    }
-
-    #equipe .container {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-
-        margin-top: -30%;
-        width: 65%;
-        height: 50%;
-    }
-
-    .titulo_equipe {
-        display: flex;
-        text-align: center;
-        justify-content: center;
-
-        height: 40%;
-        margin-left: 40%;
-    }
-
-    .titulo_equipe h1 {
-        font-size: 1.8rem;
-    }
-
-    .titulo_equipe span {
-        width: 100%;
-        
-        font-size: 1rem;
-    }
-
-    .equipe_carrossel {
-
-        margin-left: 10%;
-        margin-top: 5%;
-
-        width: 90vw;
-    }
-
-    .card_carrossel {
-
-        width: 26%;
-        height: 180px;
-
-        margin: 0 20px;
-    }
-
-    .slide {
-        gap: 1%;
-    }
-
-    .foto_integrante img {
-        object-fit: cover;
-    }
-
-    #equipe button {
-        width: 10%;
-        height: 15%;
-
-        margin-left: 30px;
-        margin-top: -30%;
-
-        background-size: 1.1875rem;
-
-    }
-
-    /* MISSÃO VISÃO E VALORES */
-
-    .missao_visao_valores {
-        height: auto;
-        width: 100%;
-
-        margin-top: -15%;
-    }
-
-    .missao_visao_valores .container {
-        width: 100%;
-        max-width: 100%;
-
-        margin-left: 0%;
-
-        flex-direction: column;
-    }
-    
-    .sessao h1 {
-        font-size: 2rem;
-    }
-
-    .sessao {
-        width: 100%;
-        border-top: #210042 solid 1px;
-        padding: 0%;
-    }
-
-    .sessao span {
-        width: 50%;
-
-        font-size: 1rem;
-        text-align: center;
-    }
-
-    .sessao img {
-        width: 20%;
-        max-width: 100%;
-        height: 130px;
-
-        margin-bottom: 5px;
-    }
-
-
-    /* TECNOLOGIAS */
-
-    .tecnologias {
-        display: flex;
-        justify-content: center;
-
-        margin: 0 auto;
-        width: 100%;
-        height: 500px;
-
-        overflow: hidden;
-        position: relative;
-
-    }
-
-    #titulo_tecnologias {
-        font-size: 1.6rem;
-
-        margin-top: -70px;
-        margin-bottom: 50px;
-        margin-left: 7%;
-
-    }
-
-    .tecnologias .container {
-        height: 80%;
-        margin-left: 0%;
-    }
-
-    .cards {
-        display: flex;
-        width: 26%;
-
-        
-        transition: transform 0.5s ease-in-out;
-    }
-
-    .card {
-        min-width: 80%;
-        margin-right: 33px;
-
-        flex: 0 0 60%;
-
-        padding: 0 10% 0 10%;
-        border-radius: 10px;
-        text-align: center;
-
-        cursor: pointer;
-
-    }
-
-    .card h1 {
-        font-size: 1.5rem;
-    }
-
-    .card span {
-        display: flex;
-        text-align: justify;
-        font-size: 1rem;
-    }
-
-    /* NOSSOS SERVIÇOS */
-
-    .servico-cafe {
-        height: 800px;
-    }
-
-    .servico-cafe .container {
-        margin: 0%;
-    }
-
-    .servico-cafe .container h1 {
-        font-size: 1.8rem;
-    }
-
-    .titulo_servicos {
-        display: flex;
-        align-items: center;
-
-        margin-top: -15%;
-        margin-left: 5%;
-
-        width: 500px;
-    }
-
-    .titulo_servicos h2 {
-        font-size: 1.5rem;
-    }
-
-    .titulo_servicos h3 {
-        font-size: 1rem;
-    }
-
-    .apresentacao_servicos {
-        flex-direction: column;
-
-        margin-top: 5%;
-    }
-
-    #cafeeiro-servico{
-        width: 80%;
-        margin: 3% 0 0 8%;
-    }
-
-    .botao_cadastro_carrossel {
-        width: 50%;
-
-        font-size: 1rem;
-    }
-
-    .texto-servicos {
-        text-align: justify;
-
-        margin: 0 0 2% 0;
-        font-size: 1rem;
-    }
-
-    .texto-inicial {
-        font-size: 1.5rem;
-    }
-
-    /* CONTATO */
-
-    .contato {
-        flex-direction: column;
-        justify-content: center;
-        
-        border-top: #7C00F8 solid;
-        border-radius: 20px;
-
-        height: 750px;
-        margin-top: 5%;
-    }
-
-    .contato .container {
-        flex-direction: column;
-
-        margin: 0%;
-
-    }
-
-    .form {
-        width: 100%;
-        align-items: center;
-
-        height: 100%;
-
-    }
-
-    .titulo_contato {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-
-    }
-
-    .titulo_contato h1 {
-        font-size: 1.8rem;
-    }
-
-    .imagem-contato {
-        display: none;
-    }
-
-    .imagem-contato-mobile {
-        display: block;
-
-        width: 50%;
+    .cards_integrantes {
+        flex: 0 0 98%;
     }
 
-    .lista_contatos {
-        display: none;
+    .foto-integrante #foto {
+        height: 90%;
+        margin-top: 30px;
+        width: 70%;
     }
 
-    .campo {
-        align-items: start;
-
-        width: 80%;
-    }
-
-    .campo input {
-        width: 100%;
-    }
-
-    #input_mensagem {
-        width: 100%;
-    }
-
-    .form button {
-        width: 50%;
-
-        margin-top: 5%;
-    }
-
-    /* FOOTER */
-
-    .footer {
-        align-items: start;
-        justify-content: space-between;
-
-        margin-top: 10%;
-
-        max-width: 100%;
-
-        height: 250px;
-
-    }
-
-    .footer_titulo {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-
-        width: 100%;
-
-        margin: 10% 0 0 0;
-    }
-
-    .footer_titulo .data {
-        font-size: 2rem;
+    #card_tiago #foto {
+        width: 60%;
     }
-
-    .footer_titulo .tech {
-        font-size: 2rem;
-    }
-
-    .direitos {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-
-        font-size: 0.8rem;
-    }
-
-    .footer .lista_contatos {
-        display: block;
-        display: flex;
-        align-items: start;
-
-        color: white;
-        font-size: 0.8rem;
 
+    #card_vinicius #foto {
+        width: 60%;
     }
 }
 
+@media only screen and (max-width: 425px) {
+
+    .cards_integrantes {
+        flex: 0 0 98%;
+        width: 36px;
+        height: 75%;
+        margin-top: 15%;
+    }
+
+    .foto-integrante #foto {
+        width: 80%;
+    }
+
+    #card_yasmim #foto {
+        width: 70%;
+        border: #210042 solid;
+    }
+
+    .contato {
+        margin-top: 2%;
+        margin-bottom: 10%;
+    }
+
+    .contato .container {
+        width: 100%;
+    }
+
+
+}
