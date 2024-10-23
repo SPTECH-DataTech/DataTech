@@ -19,7 +19,7 @@ function verificarToken() {
         alert("Token expirado. Solicite a redefinição de senha novamente!");
         window.location.href = "./recuperarSenha.html";
     } else {
-        document.getElementById('container').style.display = "block";
+        document.body.style.display = 'block';
     }
 }
 
