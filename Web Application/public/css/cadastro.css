@@ -54,7 +54,6 @@ body {
     flex-direction: column;
     align-items: center;
     z-index: 2;
-    /* Para garantir que a imagem principal esteja sobre as imagens de fundo */
 }
 
 .imagem-1 img {
@@ -169,9 +168,7 @@ body {
     color: red;
     font-size: 12px;
     margin: 0;
-    ;
     display: none;
-    /* Por padrão, o erro não é exibido */
 }
 
 .input-erro {
@@ -189,7 +186,8 @@ body {
     position: absolute;
     width: 200px;
     height: 50px;
-    top: 460px;
+    top: 490px;
+    left: 60%;
     right: 240px;
     z-index: 1000;
     color: #ffffff;
@@ -207,12 +205,17 @@ body {
     transform: scale(1);
 }
 
-.bi {
+.bi-info-circle {
     cursor: pointer;
     color: #000;
 }
 
-/* Responsividade */
+@media (max-width: 1024px) {
+    .div-dica-token {
+        top: 460px;
+    }
+}
+
 @media (max-width: 768px) {
     .container-formulario {
         flex-direction: column;
@@ -237,6 +240,11 @@ body {
     .botao {
         width: 100%;
     }
+
+    .div-dica-token {
+        top: 470px;
+        left: 7%;
+    }
 }
 
 
@@ -252,4 +260,16 @@ body {
     .botao {
         font-size: 14px;
     }
+
+    .div-dica-token {
+        top: 430px;
+    }
+}
+
+@media (max-width: 320px) {
+
+    .div-dica-token {
+        width: 120px;
+    }
+
 }
