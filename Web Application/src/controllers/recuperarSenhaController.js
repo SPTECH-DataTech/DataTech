@@ -15,9 +15,8 @@ function enviarSenhaTemporaria(req, res) {
             function (resultado) {
                 if (resultado.length > 0) {
                     const token = gerarToken(resultado[0].id, resultado[0].email);
-                    const IP = String(process.env.IP_CONEXAO);
+                    const IP = process.env.IP_CONEXAO;
                     console.log(IP);
-                    
                     
                     const url = `http://${IP}:3333/redefinirNovaSenha.html?token=${token}`
                     const assunto = "Recuperação de Senha";
@@ -41,7 +40,7 @@ function enviarSenhaTemporaria(req, res) {
 }
 
 function gerarToken(id, email) {
-    const token = jwt.sign({ id: id, email: email }, process.env.JWT_SECRET, { expiresIn: '15m' });
+    const token = jwt.sign({ id: id, email: email }, process.env.JWT_SECRET, { expiresIn: '1m' });
     return token;
 }
 
