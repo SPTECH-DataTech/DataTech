@@ -138,6 +138,10 @@ function login() {
                     sessionStorage.NOME_USUARIO = data.nome;
                     sessionStorage.ID_USUARIO = data.id;
                     sessionStorage.ID_EMPRESA = data.idEmpresa;
+
+                    setTimeout(() => {
+                        window.location.href = "./dashboard.html"
+                    },3000)
                 }
             });
         })

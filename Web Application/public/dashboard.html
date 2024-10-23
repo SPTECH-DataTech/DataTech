@@ -248,7 +248,7 @@
                     backgroundColor: 'rgba(54, 162, 235, 0.6)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1,
-                    yAxisID: 'y precipitation',
+                    yAxisID: 'y moisture',
                     barThickness: 20
                 },
                 {
@@ -267,13 +267,13 @@
                 y: {
                     beginAtZero: true,
                 },
-                'y precipitation': {
+                'y moisture': {
                     type: 'linear',
-                    position: 'left',
+                    position: 'left',   
                     beginAtZero: true,
                     title: {
                         display: true,
-                        text: 'Precipitação (mm)'
+                        text: 'Umidade (%)'
                     }
                 },
                 'y temperature': {
@@ -292,7 +292,7 @@
             plugins: {
                 title: {
                     display: true,
-                    text: 'Climograma: Temperatura e Precipitação'
+                    text: 'Climograma: Temperatura e Umidade'
                 }
             }
         }

@@ -384,14 +384,17 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 40%;
+  width: 70%;
   gap: 0;
-  margin-left: auto;
+  margin: 0 0 0 10%;
+
+  
+
 }
 
 .infos-kpi2 {
   display: flex;
-  width: 81%;
+  width: 85%;
   justify-content: space-between;
   align-items: center;
   padding: 5px 15px;
