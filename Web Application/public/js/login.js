@@ -6,6 +6,8 @@ function verificarEmail() {
 
     const email = input_email.value.trim();
 
+    
+
     if (email == "") {
 
         spanEmail.style.color = "red";
