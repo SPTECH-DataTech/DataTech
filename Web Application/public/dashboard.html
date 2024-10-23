@@ -96,27 +96,28 @@
                     <div class="kpis">
                         <div class="kpi">
                             <div class="titulo-kpi">
-                                <h2 style="color: #10BB00;">Região com maior colheita</h2>
+                                <h2 style="color: #10BB00;">Maior eficiência de Produção</h2>
                             </div>
                             <div class="infos-kpi">
-                                <h3> Estado 1 </h3>
-                                <h3> Toneladas</h3>
+                                <h3> São Paulo </h3>
+                                <h3> 10 / 300 (t)</h3>
                             </div>
                             <div class="percentagem">
-                                <h4 style="color: #10BB00; font-size: 20px;">70% Produzida</h4>
+                                <h4 style="color: #10BB00; font-size: 20px;"> 3,3% Perdido<d/h4>
                             </div>
                         </div>
 
                         <div class="kpi">
                             <div class="titulo-kpi">
-                                <h2 style="color: #ff0000;">Região com menor colheita</h2>
+                                <h2 style="color: #ff0000;"> Menor eficiência de Produção</h2>
                             </div>
                             <div class="infos-kpi">
-                                <h3> Estado 1 </h3>
-                                <h3> Toneladas</h3>
+                                <h3>Mato Grosso
+                                </h3>
+                                <h3> 150 / 400 (t)</h3>
                             </div>
                             <div class="percentagem">
-                                <h4 style="color: #ff0000; font-size: 20px;">20% Produzida</h4>
+                                <h4 style="color: #ff0000; font-size: 20px;">37% Perdido </h4>
                             </div>
                         </div>
                     </div>
@@ -193,18 +194,18 @@
     const graficoCafe = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Estado 1', 'Estado 2', 'Estado 3', 'Estado 4', 'Estado 5'], // Estados
+            labels: ['SP', 'MG', 'RJ', 'RS', 'MT'], // Estados
             datasets: [
                 {
                     label: 'Café Plantado (Toneladas)',
-                    data: [300, 400, 250, 400, 400], // Dados de toneladas de café plantado por estado
+                    data: [300, 400, 250, 370, 400], // Dados de toneladas de café plantado por estado
                     backgroundColor: 'rgba(230, 232, 236, 100)',
                     borderWidth: 1,
                     barThickness: 20
                 },
                 {
                     label: 'Café Colhido (Toneladas)',
-                    data: [290, 370, 230, 250, 250], // Dados de toneladas de café colhido por estado
+                    data: [290, 370, 230, 200, 250], // Dados de toneladas de café colhido por estado
                     backgroundColor: 'rgba(224, 213, 188, 100)',
                     borderWidth: 1,
                     barThickness: 20
@@ -248,7 +249,7 @@
                     backgroundColor: 'rgba(54, 162, 235, 0.6)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1,
-                    yAxisID: 'y precipitation',
+                    yAxisID: 'y moisture',
                     barThickness: 20
                 },
                 {
@@ -267,13 +268,13 @@
                 y: {
                     beginAtZero: true,
                 },
-                'y precipitation': {
+                'y moisture': {
                     type: 'linear',
-                    position: 'left',
+                    position: 'left',   
                     beginAtZero: true,
                     title: {
                         display: true,
-                        text: 'Precipitação (mm)'
+                        text: 'Umidade (%)'
                     }
                 },
                 'y temperature': {
@@ -292,7 +293,7 @@
             plugins: {
                 title: {
                     display: true,
-                    text: 'Climograma: Temperatura e Precipitação'
+                    text: 'Climograma: Temperatura e Umidade'
                 }
             }
         }
