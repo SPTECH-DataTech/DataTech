@@ -198,6 +198,7 @@ button:hover {
 }
 
 .mobile_menu {
+    display: none;
     width: 12%;
     cursor: pointer;
     position: relative;
@@ -392,6 +393,10 @@ button:hover {
 }
 
 #card_vinicius #foto {
+    width: 60%;
+}
+
+#card_yasmim #foto {
     width: 60%;
 }
 
@@ -718,9 +723,10 @@ button:hover {
 
 .campo {
     display: flex;
+    width: 100%;
     flex-direction: column;
-    justify-content: start;
-    align-items: start;
+    justify-content: center;
+    align-items: center;
 }
 
 .campo span {
@@ -791,7 +797,7 @@ button:hover {
 }
 
 .contato_button {
-    width: 70%;
+    width: 100%;
     display: flex;
     justify-content: center;
 }
@@ -800,7 +806,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 90%;
+    width: 60%;
     height: 2.1875rem;
     background-color: var(--roxoBotao);
     color: white;
@@ -1079,6 +1085,7 @@ button {
     }
 
     .logo_mobile,
+    .mobile_menu,
     .mobile_menu div {
         display: block;
     }
@@ -1151,6 +1158,10 @@ button {
         height: 80%;
     }
 
+    #card_yasmim #foto {
+        width: 80%;
+    }
+
     .slide {
         width: calc(100% * 6 / 1);
     }
@@ -1215,6 +1226,10 @@ button {
 
     .contato {
         margin-bottom: 5%;
+    }
+
+    .contato .container {
+        width: 100%;
     }
 
     .form {
@@ -1338,14 +1353,18 @@ button {
     .foto-integrante #foto {
         height: 90%;
         margin-top: 30px;
-        width: 70%;
-    }
-
-    #card_tiago #foto {
         width: 60%;
     }
 
+    #card_tiago #foto {
+        width: 50%;
+    }
+
     #card_vinicius #foto {
+        width: 50%;
+    }
+
+    #card_yasmim #foto {
         width: 60%;
     }
 }
@@ -1355,7 +1374,7 @@ button {
     .cards_integrantes {
         flex: 0 0 98%;
         width: 36px;
-        height: 75%;
+        height: 85%;
         margin-top: 15%;
     }
 
@@ -1368,6 +1387,14 @@ button {
         border: #210042 solid;
     }
 
+    #card_tiago #foto {
+        width: 60%;
+    }
+
+    #card_vinicius #foto {
+        width: 60%;
+    }
+
     .contato {
         margin-top: 2%;
         margin-bottom: 10%;
@@ -1376,6 +1403,4 @@ button {
     .contato .container {
         width: 100%;
     }
-
-
 }
