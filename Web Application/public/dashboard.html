@@ -208,14 +208,14 @@
                 {
                     label: 'Café Plantado (Toneladas)',
                     data: [300, 400, 250, 370, 400], // Dados de toneladas de café plantado por estado
-                    backgroundColor: 'rgba(230, 232, 236, 100)',
+                    backgroundColor: '#a56aec',
                     borderWidth: 1,
                     barThickness: 20
                 },
                 {
                     label: 'Café Colhido (Toneladas)',
                     data: [290, 370, 230, 200, 250], // Dados de toneladas de café colhido por estado
-                    backgroundColor: 'rgba(224, 213, 188, 100)',
+                    backgroundColor: '#6c81dd',
                     borderWidth: 1,
                     barThickness: 20
                 }
@@ -252,16 +252,7 @@
         data: {
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
             datasets: [
-                {
-                    label: 'Umidade (%)',
-                    data: [85, 80, 75, 70, 65, 60, 55, 60, 70, 75, 80, 85],
-                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1,
-                    yAxisID: 'y moisture',
-                    barThickness: 20
-                },
-                {
+            {
                     label: 'Temperatura Média (°C)',
                     data: [22, 23, 24, 26, 28, 30, 31, 30, 28, 25, 23, 21],
                     type: 'line',
@@ -269,7 +260,17 @@
                     borderWidth: 2,
                     fill: false,
                     yAxisID: 'y temperature'
-                }
+                },
+                {
+                    label: 'Umidade (%)',
+                    data: [85, 80, 75, 70, 65, 60, 55, 60, 70, 75, 80, 85],
+                    backgroundColor: '#6c81dd',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1,
+                    yAxisID: 'y moisture',
+                    barThickness: 20
+                },
+               
             ]
         },
         options: {
