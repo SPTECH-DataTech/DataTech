@@ -23,6 +23,31 @@ body {
   overflow: hidden;
 }
 
+::selection {
+  background-color: var(--roxoBotao);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #8A2BE2;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #210042;
+}
+
+
+
 /* -------------------------MENU LATERAL------------------------- */
 
 h1 {
@@ -59,13 +84,13 @@ h1 {
   width: 100%;
 }
 
-.btn-dashboard {
+.btn-dashboard.active,
+.btn-fazenda.active,
+.btn-equipe.active,
+.btn-recomendacoes.active,
+.btn-conta.active,
+.btn-suporte.active {
   background-color: #9ba8ff20;
-  color: #5A6ACF;
-  font-weight: 600;
-  cursor: pointer;
-  width: 95%;
-  box-sizing: border-box;
 }
 
 .menu-lateral button {
@@ -100,7 +125,6 @@ h1 {
   filter: invert(50%) sepia(2%) saturate(10%) hue-rotate(19deg) brightness(2%) contrast(20%);
 }
 
-/* Troca a cor da imagem no hover */
 .menu-lateral button:hover .icon {
   filter: invert(38%) sepia(64%) saturate(2382%) hue-rotate(211deg) brightness(97%) contrast(101%);
 }
@@ -168,7 +192,7 @@ h1 {
   background-color: #6877e5;
   border: none;
   color: white;
-  padding: 6px 20px; 
+  padding: 6px 20px;
   text-align: center;
   font-size: 12px;
   border-radius: 5px;
@@ -234,21 +258,22 @@ canvas {
   flex-direction: column;
 }
 
-.titulo-grafico h1, .titulo-grafico2 h1 {
+.titulo-grafico h1,
+.titulo-grafico2 h1 {
   font-size: 16px;
   color: #000000;
   font-weight: 800;
 }
 
 .escolher-info {
-  margin: 6px 15px; 
+  margin: 6px 15px;
 }
 
 .container {
   display: flex;
-  flex-direction: row; 
-  justify-content: flex-start; 
-  margin: 14px 15px; 
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 14px 15px;
 }
 
 .select-ano {
@@ -283,9 +308,9 @@ canvas {
 
 .grafico-plantacao {
   display: flex;
-  margin: 6px; 
+  margin: 6px;
   justify-content: space-between;
-    
+
 }
 
 .kpis {
@@ -293,9 +318,9 @@ canvas {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 280px; 
-  height: fit-content; 
-  gap: 6px; 
+  width: 280px;
+  height: fit-content;
+  gap: 6px;
 }
 
 .kpi {
@@ -388,7 +413,7 @@ h1 {
   gap: 0;
   margin: 0 0 0 10%;
 
-  
+
 
 }
 
@@ -448,15 +473,18 @@ h1 {
   filter: invert(50%) sepia(2%) saturate(10%) hue-rotate(19deg) brightness(2%) contrast(20%);
 }
 
-.titulo-grafico, .titulo-grafico2 {
+.titulo-grafico,
+.titulo-grafico2 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin: 0 5%;
 }
 
-.select-cafe, .select-ano, .select-estado {
-  padding: 6px; 
+.select-cafe,
+.select-ano,
+.select-estado {
+  padding: 6px;
   font-size: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -464,14 +492,14 @@ h1 {
 }
 
 .container {
-  display: flex; 
-  align-items: center; 
+  display: flex;
+  align-items: center;
   margin: 0 4%;
 }
 
-.select-ano, .select-cafe, .btn-atualizar {
-  padding: 6px; 
-  font-size: 12px; 
+.select-ano,
+.select-cafe,
+.btn-atualizar {
+  padding: 6px;
+  font-size: 12px;
 }
-
-
