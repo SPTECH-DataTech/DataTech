@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/logo_datatech_-_roxa_escuro.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/equipe.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script src="js/equipe.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <title>Dashboard • DataTech</title>
+</head>
+
+<body>
+
+    <section class="menu-lateral">
+        <div class="identificacao-empresa">
+            <h1>Empresa</h1>
+        </div>
+
+        <div>
+            <b>
+                <p>Menu</p>
+            </b>
+            <a href="dashboard.html"><button class="btn-dashboard"><img src="./assets/Chart.png" alt="dashboard icon"
+                        class=".dashboard-icon"> Dashboard</button></a>
+            <a href="fazendas.html"><button class="btn-fazenda"> <img src="./assets/Vector.png" alt="fazenda icon"
+                        class="icon">Fazendas</button></a>
+            <a href="equipe.html"><button class="btn-equipe"><img src="./assets/Group.png" alt="equipe icon"
+                        class="icon">
+                    Equipe</button></a>
+            <a href="recomendacoes.html"><button class="btn-recomendacoes"><img src="./assets/Chat.png"
+                        alt="recomendacoes icon" class="icon"> Recomendações</button></a>
+
+            <b>
+                <p>Outros</p>
+            </b>
+            <a href="conta.html"><button class="btn-conta"><img src="./assets/Profile.png" alt="conta icon"
+                        class="icon">
+                    Conta</button></a>
+            <a href="suporte.html" target="_blank"><button class="btn-suporte"> <img src="./assets/Info Square.png"
+                        alt="suporte icon" class="icon">Suporte</button></a>
+            <a href="login.html"><button onclick="limparSessao()" class="btn-sair"><img
+                        src="./assets/icons8-exit-50.png" alt="exit icon" class="icon"> Sair</button></a>
+        </div>
+
+    </section>
+
+    <section class="main-section">
+
+        <div class="navbar">
+            <img src="./assets/Group 376.png" alt="perfil icon" class="icon">
+            <h3 id="b_usuario">Cliente</h3>
+        </div>
+
+        <div class="equipe">
+            Equipe:<span class="name-equipe">BIGCOFEE</span>
+        </div>
+
+        <section class="search-add-remove">
+            <div class="container">
+                <div class="input_busca">
+                    <i class="fas fa-search"></i>
+                    <input type="search" placeholder="Buscar..." id="input-search">
+                </div>
+                <div class="botoes-add-remove">
+                    <button onclick="adicionarMembro()" class="add-button">➕</button>
+                    <button onclick="removerMembro()" class="remove-button">➖</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="lista-funcionarios">
+            <div class="campos-lista">
+                <div class="descricao">
+                    <span>Nome</span>
+                    <span>E-mail</span>
+                    <span>Cargo</span>
+                </div>
+            </div>
+
+            
+        </section>
+
+        <section></section>
+
+    </section>
+
+</body>
+
+</html>
