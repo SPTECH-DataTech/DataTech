@@ -84,6 +84,8 @@
     align-items: center;
     width: 90%;
     gap: 10%;
+    font-weight: bold;
+
 }
 
 .descricao span,
@@ -309,4 +311,9 @@ input[type="checkbox"] {
 
 .modal.remover .botao-modal{
     margin-top: 10%;
+}
+
+.erro {
+    color: red;
+    font-size: small;
 }

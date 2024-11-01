@@ -166,25 +166,34 @@
                     </div>
                     <div class="formulario">
                         <div class="inputs">
-                            Nome completo:
-                            <input class="inputs-modal" id="nome-modal" type="text">
+                            <span id="spanNome">Nome:</span>
+                            <input class="inputs-modal" id="input_nome" type="text">
+                            <span class="erro" id="erro_nome"></span>
                         </div>
                         <div class="inputs">
-                            CPF:
-                            <input class="inputs-modal" id="cpf-modal" type="text" maxlength="14"
+                            <span id="spanSobrenome">Sobrenome:</span>
+                            <input class="inputs-modal" id="input_sobrenome" type="text">
+                            <span class="erro" id="erro_sobrenome"></span>
+                        </div>
+                        <div class="inputs">
+                            <span id="spanCpf">CPF:</span>
+                            <input class="inputs-modal" id="input_cpf" type="text" maxlength="14"
                                 placeholder="XXX.XXX.XXX.XX" oninput="fomatarCpf(this)">
+                            <span class="erro" id="erro_cpf"></span>
                         </div>
                         <div class="inputs">
-                            E-mail:
-                            <input class="inputs-modal" id="email-modal" type="email">
+                            <span id="spanEmail">E-mail:</span>
+                            <input class="inputs-modal" id="input_email" type="email">
+                            <span class="erro" id="erro_email"></span>
                         </div>
                         <div class="inputs">
-                            Senha provisória:
-                            <input class="inputs-modal" id="senha-modal" type="text">
+                            <span id="spanSenha">Senha provisória:</span>
+                            <input class="inputs-modal" id="input_senha" type="text">
+                            <span class="erro" id="erro_senha"></span>
                         </div>
                         <div class="inputs">
-                            Cargo:
-                            <select class="inputs-modal" name="select_cargos" id="cargos-modal">
+                            <span id="spanCargo">Cargo:</span>
+                            <select class="inputs-modal" id="select_cargos">
                                 <option style="display: none;" value="#" id="vazio">Selecione um cargo</option>
                                 <option value="Gerente" id="gerente">Gerente</option>
                                 <option value="Scrum Master" id="scrum">Scrum Master</option>
@@ -192,6 +201,7 @@
                                 <option value="Dev Front-end" id="front-end">Dev Front-end</option>
                                 <option value="Analista de TI" id="analista-ti">Analista de TI</option>
                             </select>
+                            <span class="erro" id="erro_cargo"></span>
                         </div>
                     </div>
                 </div>
@@ -223,7 +233,8 @@
                     </div>
 
                     <div class="botao-modal">
-                        <button class="button-modal" onclick="removerFuncionario()">Remover funcionário</button>
+                        <button class="button-modal" id="button-modal" onclick="removerFuncionario()" disabled>Remover
+                            funcionário</button>
                     </div>
                 </div>
             </div>
