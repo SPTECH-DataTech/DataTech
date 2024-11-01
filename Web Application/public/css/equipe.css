@@ -35,8 +35,6 @@
     height: 100%;
 }
 
-
-
 #input-search {
     border-radius: 5px;
     border: #A9ADB3 solid 1px;
@@ -88,7 +86,8 @@
     gap: 10%;
 }
 
-.descricao span, .campo span {
+.descricao span,
+.campo span {
     display: inline-block;
     text-align: left;
     text-align: center;
@@ -101,7 +100,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    
+
     width: 100%;
     height: 50px;
     gap: 3%;
@@ -121,7 +120,9 @@
     overflow-x: hidden;
 }
 
-#nome, #email, #cargo {
+#nome,
+#email,
+#cargo {
     display: block;
     justify-content: center;
     align-items: center;
@@ -148,3 +149,164 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
+.janela-modal {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    background-color: #00000080;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 30%;
+    height: 90%;
+    background-color: #FFFFFF;
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+}
+
+.fechar {
+    position: absolute;
+    top: -13px;
+    right: -10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 0;
+    background-color: #7F00FF;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+}
+
+.fechar:hover {
+    background-color: #420085;
+}
+
+.janela-modal.abrir {
+    display: flex;
+}
+
+@keyframes abrirModal {
+    from {
+        opacity: 0;
+        transform: translate3d(-20px, 0, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.abrir .modal {
+    animation: abrirModal 0.5s;
+}
+
+.box-modal {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+
+    height: 80%;
+    width: 85%;
+}
+
+.formulario {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    height: 80%;
+    width: 100%;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    height: 90%;
+}
+
+.inputs-modal {
+    border-radius: 5px;
+    border: #A9ADB3 solid 1px;
+    width: 100%;
+    height: 50%;
+    box-shadow: 1px 1px rgba(7, 6, 6, 0.2);
+}
+
+.botao-modal {
+    width: 85%;
+}
+
+.modal .button-modal {
+    background-color: #7F00FF;
+    width: 100%;
+    height: 50px;
+    border-radius: 8px;
+    color: white;
+    font-size: 20px;
+    border: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.modal .button-modal:hover {
+    background-color: #420085;
+    cursor: pointer;
+}
+
+.modal.remover {
+    height: 70%;    
+    padding: 2%;
+}
+
+.modal.remover .titulo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 20%;
+}
+
+.box-modal.remover {
+    height: 500px;
+}
+
+.nomes-funcionarios {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 40%;
+    width: 97.5%;
+    font-weight: bold;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#funcionarios-para-remover {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+.checkbox_confirmacao {
+    text-align: justify;
+    margin-top: 5%;
+}
+
+.modal.remover .botao-modal{
+    margin-top: 10%;
+}

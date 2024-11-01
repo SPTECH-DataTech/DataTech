@@ -65,8 +65,10 @@
                     <input type="search" onkeyup="procurarFuncionario()" placeholder="Buscar..." id="input-search">
                 </div>
                 <div class="botoes-add-remove">
-                    <button onclick="adicionarMembro()" class="add-button">➕</button>
-                    <button onclick="removerMembro()" class="remove-button">➖</button>
+                    <button id="adicionar-funcionario" onclick="modalAdicionarFuncionario()"
+                        class="add-button">➕</button>
+                    <button id="remover-funcionario" onclick="modalRemoverFuncionario()" class="remove-button"
+                        disabled>➖</button>
                 </div>
             </div>
         </section>
@@ -82,80 +84,154 @@
 
         <section class="funcionarios">
             <div class="campo">
-                <input type="checkbox" class="checkbox-class" id="checkbox">
+                <input type="checkbox" class="checkbox-class">
                 <img id="foto" src="./assets/Group 376.png" alt="perfil icon" class="icon">
-                <span id="nome">Lucas Oliveira</span>
-                <span id="email">lucas.msilva@sptech.school</span>
-                <span id="cargo">Gerente</span>
+                <span id="nome" class="nome">Lucas Oliveira</span>
+                <span id="email" class="email">lucas.msilva@sptech.school</span>
+                <span id="cargo" class="cargo">Gerente</span>
             </div>
             <div class="campo">
-                <input type="checkbox" class="checkbox-class" id="checkbox">
+                <input type="checkbox" class="checkbox-class">
                 <img id="foto" src="./assets/Group 376.png" alt="perfil icon" class="icon">
-                <span id="nome">Raíne Jardim</span>
-                <span id="email">lucas.msilva@sptech.school</span>
-                <span id="cargo">Scrum Master</span>
+                <span id="nome" class="nome">Raíne Jardim</span>
+                <span id="email" class="email">raine.jardim@sptech.school</span>
+                <span id="cargo" class="cargo">Scrum Master</span>
             </div>
             <div class="campo">
-                <input type="checkbox" class="checkbox-class" id="checkbox">
+                <input type="checkbox" class="checkbox-class">
                 <img id="foto" src="./assets/Group 376.png" alt="perfil icon" class="icon">
-                <span id="nome">Samuel Sales</span>
-                <span id="email">samuel.sales@sptech.school</span>
-                <span id="cargo">Dev Back-End</span>
+                <span id="nome" class="nome">Samuel Sales</span>
+                <span id="email" class="email">samuel.sales@sptech.school</span>
+                <span id="cargo" class="cargo">Dev Back-End</span>
             </div>
             <div class="campo">
-                <input type="checkbox" class="checkbox-class" id="checkbox">
+                <input type="checkbox" class="checkbox-class">
                 <img id="foto" src="./assets/Group 376.png" alt="perfil icon" class="icon">
-                <span id="nome">Tiago Pereira</span>
-                <span id="email">tiago.pereira@sptech.school</span>
-                <span id="cargo">Analista de TI</span>
+                <span id="nome" class="nome">Tiago Pereira</span>
+                <span id="email" class="email">tiago.pereira@sptech.school</span>
+                <span id="cargo" class="cargo">Analista de TI</span>
             </div>
             <div class="campo">
-                <input type="checkbox" class="checkbox-class" id="checkbox">
+                <input type="checkbox" class="checkbox-class">
                 <img id="foto" src="./assets/Group 376.png" alt="perfil icon" class="icon">
-                <span id="nome">Vinícius Pajor</span>
-                <span id="email">vinicius.pajor@sptech.school</span>
-                <span id="cargo">Arquiteto de Solução</span>
+                <span id="nome" class="nome">Vinícius Pajor</span>
+                <span id="email" class="email">vinicius.pajor@sptech.school</span>
+                <span id="cargo" class="cargo">Arquiteto de Solução</span>
             </div>
             <div class="campo">
-                <input type="checkbox" class="checkbox-class" id="checkbox">
+                <input type="checkbox" class="checkbox-class">
                 <img id="foto" src="./assets/Group 376.png" alt="perfil icon" class="icon">
-                <span id="nome">Yasmim Conceição</span>
-                <span id="email">yasmim.conceicao@sptech.school</span>
-                <span id="cargo">Engenheira de Software</span>
+                <span id="nome" class="nome">Yasmim Conceição</span>
+                <span id="email" class="email">yasmim.conceicao@sptech.school</span>
+                <span id="cargo" class="cargo">Engenheira de Software</span>
             </div>
             <div class="campo">
-                <input type="checkbox" class="checkbox-class" id="checkbox">
+                <input type="checkbox" class="checkbox-class">
                 <img id="foto" src="./assets/Group 376.png" alt="perfil icon" class="icon">
-                <span id="nome">Pedro Henrique</span>
-                <span id="email">pedro.henrique@sptech.school</span>
-                <span id="cargo">Product Owner</span>
+                <span id="nome" class="nome">Pedro Henrique</span>
+                <span id="email" class="email">pedro.henrique@sptech.school</span>
+                <span id="cargo" class="cargo">Product Owner</span>
             </div>
             <div class="campo">
-                <input type="checkbox" class="checkbox-class" id="checkbox">
+                <input type="checkbox" class="checkbox-class">
                 <img id="foto" src="./assets/Group 376.png" alt="perfil icon" class="icon">
-                <span id="nome">Lais Campioto</span>
-                <span id="email">lais.campioto@sptech.school</span>
-                <span id="cargo">Desenvolvedor Front-End</span>
+                <span id="nome" class="nome">Lais Campioto</span>
+                <span id="email" class="email">lais.campioto@sptech.school</span>
+                <span id="cargo" class="cargo">Desenvolvedor Front-End</span>
             </div>
             <div class="campo">
-                <input type="checkbox" class="checkbox-class" id="checkbox">
+                <input type="checkbox" class="checkbox-class">
                 <img id="foto" src="./assets/Group 376.png" alt="perfil icon" class="icon">
-                <span id="nome">Miguel Ferreira</span>
-                <span id="email">miguel.ferreira@sptech.school</span>
-                <span id="cargo">Analista de Redes</span>
+                <span id="nome" class="nome">Miguel Ferreira</span>
+                <span id="email" class="email">miguel.ferreira@sptech.school</span>
+                <span id="cargo" class="cargo">Analista de Redes</span>
             </div>
             <div class="campo">
-                <input type="checkbox" class="checkbox-class" id="checkbox">
+                <input type="checkbox" class="checkbox-class">
                 <img id="foto" src="./assets/Group 376.png" alt="perfil icon" class="icon">
-                <span id="nome">Bruno Lima</span>
-                <span id="email">bruno.lima@sptech.school</span>
-                <span id="cargo">Assistente Administrativo</span>
+                <span id="nome" class="nome">Bruno Lima</span>
+                <span id="email" class="email">bruno.lima@sptech.school</span>
+                <span id="cargo" class="cargo">Assistente Administrativo</span>
             </div>
         </section>
 
+        <section class="janela-modal" id="janela-modal">
+
+            <div class="modal">
+                <button class="fechar" id="fechar">&times;</button>
+                <div class="box-modal">
+                    <div class="titulo">
+                        <span>Adicionar novo funcionário na equipe</span>
+                        <h1 class="name-equipe">BIGCOFEE</h1>
+                    </div>
+                    <div class="formulario">
+                        <div class="inputs">
+                            Nome completo:
+                            <input class="inputs-modal" id="nome-modal" type="text">
+                        </div>
+                        <div class="inputs">
+                            CPF:
+                            <input class="inputs-modal" id="cpf-modal" type="text" maxlength="14"
+                                placeholder="XXX.XXX.XXX.XX" oninput="fomatarCpf(this)">
+                        </div>
+                        <div class="inputs">
+                            E-mail:
+                            <input class="inputs-modal" id="email-modal" type="email">
+                        </div>
+                        <div class="inputs">
+                            Senha provisória:
+                            <input class="inputs-modal" id="senha-modal" type="text">
+                        </div>
+                        <div class="inputs">
+                            Cargo:
+                            <select class="inputs-modal" name="select_cargos" id="cargos-modal">
+                                <option style="display: none;" value="#" id="vazio">Selecione um cargo</option>
+                                <option value="Gerente" id="gerente">Gerente</option>
+                                <option value="Scrum Master" id="scrum">Scrum Master</option>
+                                <option value="Dev Back-end" id="back-end">Dev Back-end</option>
+                                <option value="Dev Front-end" id="front-end">Dev Front-end</option>
+                                <option value="Analista de TI" id="analista-ti">Analista de TI</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="botao-modal">
+                    <button class="button-modal" onclick="adicionarFuncionario()">Adicionar funcionário</button>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="janela-modal" id="janela-modal-remover">
+
+            <div class="modal remover">
+                <button class="fechar" id="fechar">&times;</button>
+                <div class="box-modal remover">
+                    <div class="titulo">
+                        <h1 class="name-equipe">Remover funcionario</h1>
+                        <span>Você deseja remover os seguintes funcionários:</span>
+                    </div>
+                    <div class="nomes-funcionarios">
+                        <span id="funcionarios-para-remover">
+                            <p></p>
+                        </span>
+                    </div>
+                    <div class="checkbox_confirmacao">
+                        <input type="checkbox" class="checkbox-class remover" id="checkbox">
+                        Ao marcar esta caixa, autorizo a exclusão deste membro da equipe e concordo que ele não terá
+                        mais acesso aos recursos da equipe. Esta ação é irreversível.
+                    </div>
+
+                    <div class="botao-modal">
+                        <button class="button-modal" onclick="removerFuncionario()">Remover funcionário</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
 
     </section>
-
+    <script src="js/equipe.js"></script>
 </body>
 
 </html>
