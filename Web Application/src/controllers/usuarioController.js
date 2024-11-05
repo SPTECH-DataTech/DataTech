@@ -71,6 +71,7 @@ function cadastrar(req, res) {
                     }
                     res.status(200).json({ 
                         resultado,
+                        fkEmpresa,
                         message: "Cadastro realizado com sucesso!"
                      });
                 })
