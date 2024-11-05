@@ -1,11 +1,15 @@
+var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
+var nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
+b_usuario.innerHTML = `${nomeUsuario}`;
+
 function procurarFuncionario() {
     const input = document.getElementById('input-search');
     const filter = input.value.toLowerCase();
     const funcionarios = document.querySelectorAll('.campo');
 
     funcionarios.forEach(funcionario => {
-        const nome = funcionario.querySelector('#nome').innerText.toLowerCase();
-        if (nome.includes(filter)) {
+        const nome = funcionario.querySelector('.nome').innerText.toLowerCase();
+        if (nome.startsWith(filter)) {
             funcionario.style.display = '';
         } else {
             funcionario.style.display = 'none';
@@ -33,6 +37,9 @@ function removerErros(erroElemento, inputElemento, spanElemento) {
 }
 
 function adicionarFuncionario() {
+
+    const modal = document.getElementById('janela-modal');
+
     let nome = input_nome.value.trim();
     let sobrenome = input_sobrenome.value.trim();
     let cpf = input_cpf.value.trim();
@@ -198,6 +205,8 @@ function adicionarFuncionario() {
         return;
     }
 
+    modal.classList.remove('abrir');
+
 }
 
 function fomatarCpf(input) {
@@ -210,6 +219,12 @@ function fomatarCpf(input) {
 
 function modalRemoverFuncionario() {
     const modal = document.getElementById('janela-modal-remover');
+    const checkboxes = document.querySelectorAll('.campo .checkbox-class');
+    const names = document.querySelectorAll('.campo .nome');
+
+    const modalContent = document.getElementById('funcionarios-para-remover');
+    modalContent.innerHTML = '';
+
     modal.classList.add('abrir');
 
     modal.addEventListener('click', (e) => {
@@ -218,11 +233,6 @@ function modalRemoverFuncionario() {
         }
     });
 
-    const checkboxes = document.querySelectorAll('.campo .checkbox-class');
-    const names = document.querySelectorAll('.campo .nome');
-
-    const modalContent = document.getElementById('funcionarios-para-remover');
-    modalContent.innerHTML = '';
 
     checkboxes.forEach((checkbox, index) => {
         if (checkbox.checked) {
@@ -236,21 +246,26 @@ function modalRemoverFuncionario() {
 
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const botaoRemover = document.getElementById('remover-funcionario');
-    const checkboxes = document.querySelectorAll('.checkbox-class');
+// Função para abrir a modal apenas se tiver pelo menos um funcionário com o check ativo
 
-    botaoRemover.disabled = true;
+// document.addEventListener("DOMContentLoaded", function () {
+//     const botaoRemover = document.getElementById('remover-funcionario');
+//     const checkboxes = document.querySelectorAll('.checkbox-class');
 
-    function atualizarEstadoBotao() {
-        const algumaCheckboxMarcada = Array.from(checkboxes).some(checkbox => checkbox.checked);
-        botaoRemover.disabled = !algumaCheckboxMarcada;
-    }
+//     botaoRemover.disabled = true;
 
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', atualizarEstadoBotao);
-    });
-});
+//     function atualizarEstadoBotao() {
+//         const algumaCheckboxMarcada = Array.from(checkboxes).some(checkbox => checkbox.checked);x
+//         botaoRemover.disabled = !algumaCheckboxMarcada;
+//     }
+
+//     checkboxes.forEach(checkbox => {
+//         checkbox.addEventListener('change', atualizarEstadoBotao);
+//     });
+// });
+
+
+// Função para o botão de remover funcionário só estiver clicável se o checkbox da modal estiver ativo
 
 document.addEventListener("DOMContentLoaded", function () {
     const botaoRemover = document.getElementById('button-modal');
@@ -264,3 +279,82 @@ document.addEventListener("DOMContentLoaded", function () {
 
     atualizarEstadoBotao();
 });
+
+function removerFuncionario() {
+    const checkbox = document.querySelector('.checkbox_confirmacao .checkbox-class');
+    const modal = document.getElementById('janela-modal-remover');
+    const botaoRemover = document.getElementById('button-modal');
+    const popup = document.getElementById('popup-remover');
+
+    checkbox.checked = false;
+    botaoRemover.disabled = true;
+
+    console.log("Funcionário removido")
+    modal.classList.remove('abrir');
+    popup.style.display = "flex";
+
+}
+
+// CONEXÃO COM WEB-DATA-VIZ
+
+function listarFuncionarios(idEmpresa) {
+    if (!idEmpresa) {
+        console.error('idEmpresa está undefined!');
+        return;
+    }
+
+    fetch(`/equipe/listarFuncionarios/${idEmpresa}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+        .then(function (resposta) {
+            resposta.json().then((dados) => {
+                const container = document.querySelector('.funcionarios');
+                container.innerHTML = '';
+                dados.forEach(funcionario => {
+                    const div = document.createElement('div');
+                    div.classList.add('campo');
+
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.classList.add('checkbox-class');
+
+                    const img = document.createElement('img');
+                    img.src = './assets/Group 376.png';
+                    img.alt = 'perfil icon';
+                    img.classList.add('icon');
+
+                    const nomeSpan = document.createElement('span');
+                    nomeSpan.classList.add('nome');
+                    nomeSpan.innerText = funcionario.nome;
+
+                    const emailSpan = document.createElement('span');
+                    emailSpan.classList.add('email');
+                    emailSpan.innerText = funcionario.email;
+
+                    const cargoSpan = document.createElement('span');
+                    cargoSpan.classList.add('cargo');
+                    cargoSpan.innerText = funcionario.cargo;
+
+                    div.appendChild(checkbox);
+                    div.appendChild(img);
+                    div.appendChild(nomeSpan);
+                    div.appendChild(emailSpan);
+                    div.appendChild(cargoSpan);
+
+                    container.appendChild(div);
+                });
+            });
+        })
+        .catch(error => console.error('Erro ao listar funcionários:', error));
+}
+
+window.onload = function () {
+    if (idEmpresa) {
+        listarFuncionarios(idEmpresa);
+    } else {
+        console.error("idEmpresa está undefined no window.onload");
+    }
+}

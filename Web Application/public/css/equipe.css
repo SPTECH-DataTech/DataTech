@@ -69,6 +69,10 @@
     background-color: #A9ADB3;
 }
 
+.fa-pencil {
+    color: #785DC8;
+}
+
 .campos-lista {
     display: flex;
     justify-content: flex-end;
@@ -122,24 +126,24 @@
     overflow-x: hidden;
 }
 
-#nome,
-#email,
-#cargo {
+.nome,
+.email,
+.cargo {
     display: block;
     justify-content: center;
     align-items: center;
     text-overflow: ellipsis;
 }
 
-#nome {
+.nome {
     width: 30%;
 }
 
-#email {
+.email {
     width: 40%;
 }
 
-#cargo {
+.cargo {
     width: 35%;
 }
 
@@ -271,7 +275,7 @@ input[type="checkbox"] {
 }
 
 .modal.remover {
-    height: 70%;    
+    height: 70%;
     padding: 2%;
 }
 
@@ -309,11 +313,90 @@ input[type="checkbox"] {
     margin-top: 5%;
 }
 
-.modal.remover .botao-modal{
+.modal.remover .botao-modal {
     margin-top: 10%;
 }
 
 .erro {
     color: red;
     font-size: small;
+}
+
+.popup.adicionar {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    height: 35%;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 90%;
+    height: 90%;
+}
+
+.popup.adicionar img {
+    width: 15%;
+    height: 30%;
+}
+
+.texto-popup {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 100%;
+}
+
+.button-ok {
+    background-color: #20BF55;
+    color: black;
+    border: none;
+    width: 30%;
+    height: 30px;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
+
+.button-ok:hover {
+    cursor: pointer;
+    background-color: #499362;
+}
+
+@keyframes abrirPopup {
+    from {
+        opacity: 0;
+        transform: translate3d(-20px, 0, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.abrir .popup.adicionar .popup.remover {
+    animation: abrirPopup 0.5s;
+}
+
+
+.popup.remover {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    height: 30%;
+    background-color: white;
+    border-radius: 8px;
+    border: none;
+}
+
+.popup.remover img {
+    width: 15%;
+    height: 50%;
 }

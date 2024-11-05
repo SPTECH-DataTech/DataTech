@@ -17,7 +17,7 @@
 
     <section class="menu-lateral">
         <div class="identificacao-empresa">
-            <h1>Empresa</h1>
+            <h1 id="name_equipe">Empresa</h1>
         </div>
 
         <div>
@@ -52,7 +52,7 @@
 
         <div class="navbar">
             <img src="./assets/Group 376.png" alt="perfil icon" class="icon">
-            <h3 id="b_usuario">Cliente</h3>
+            <h3 id="b_usuario"></h3>
         </div>
 
         <div class="equipe">
@@ -67,8 +67,10 @@
                 <div class="botoes-add-remove">
                     <button id="adicionar-funcionario" onclick="modalAdicionarFuncionario()"
                         class="add-button">➕</button>
-                    <button id="remover-funcionario" onclick="modalRemoverFuncionario()" class="remove-button"
-                        disabled>➖</button>
+                    <button id="remover-funcionario" onclick="modalRemoverFuncionario()"
+                        class="remove-button">➖</button>
+                    <button id="editar-funcionario" onclick="modalEditarFuncionario()" class="edit-button"><i
+                            class="fas fa-pencil"></i></button>
                 </div>
             </div>
         </section>
@@ -82,78 +84,7 @@
         </div>
 
 
-        <section class="funcionarios">
-            <div class="campo">
-                <input type="checkbox" class="checkbox-class">
-                <img id="foto" src="./assets/Group 376.png" alt="perfil icon" class="icon">
-                <span id="nome" class="nome">Lucas Oliveira</span>
-                <span id="email" class="email">lucas.msilva@sptech.school</span>
-                <span id="cargo" class="cargo">Gerente</span>
-            </div>
-            <div class="campo">
-                <input type="checkbox" class="checkbox-class">
-                <img id="foto" src="./assets/Group 376.png" alt="perfil icon" class="icon">
-                <span id="nome" class="nome">Raíne Jardim</span>
-                <span id="email" class="email">raine.jardim@sptech.school</span>
-                <span id="cargo" class="cargo">Scrum Master</span>
-            </div>
-            <div class="campo">
-                <input type="checkbox" class="checkbox-class">
-                <img id="foto" src="./assets/Group 376.png" alt="perfil icon" class="icon">
-                <span id="nome" class="nome">Samuel Sales</span>
-                <span id="email" class="email">samuel.sales@sptech.school</span>
-                <span id="cargo" class="cargo">Dev Back-End</span>
-            </div>
-            <div class="campo">
-                <input type="checkbox" class="checkbox-class">
-                <img id="foto" src="./assets/Group 376.png" alt="perfil icon" class="icon">
-                <span id="nome" class="nome">Tiago Pereira</span>
-                <span id="email" class="email">tiago.pereira@sptech.school</span>
-                <span id="cargo" class="cargo">Analista de TI</span>
-            </div>
-            <div class="campo">
-                <input type="checkbox" class="checkbox-class">
-                <img id="foto" src="./assets/Group 376.png" alt="perfil icon" class="icon">
-                <span id="nome" class="nome">Vinícius Pajor</span>
-                <span id="email" class="email">vinicius.pajor@sptech.school</span>
-                <span id="cargo" class="cargo">Arquiteto de Solução</span>
-            </div>
-            <div class="campo">
-                <input type="checkbox" class="checkbox-class">
-                <img id="foto" src="./assets/Group 376.png" alt="perfil icon" class="icon">
-                <span id="nome" class="nome">Yasmim Conceição</span>
-                <span id="email" class="email">yasmim.conceicao@sptech.school</span>
-                <span id="cargo" class="cargo">Engenheira de Software</span>
-            </div>
-            <div class="campo">
-                <input type="checkbox" class="checkbox-class">
-                <img id="foto" src="./assets/Group 376.png" alt="perfil icon" class="icon">
-                <span id="nome" class="nome">Pedro Henrique</span>
-                <span id="email" class="email">pedro.henrique@sptech.school</span>
-                <span id="cargo" class="cargo">Product Owner</span>
-            </div>
-            <div class="campo">
-                <input type="checkbox" class="checkbox-class">
-                <img id="foto" src="./assets/Group 376.png" alt="perfil icon" class="icon">
-                <span id="nome" class="nome">Lais Campioto</span>
-                <span id="email" class="email">lais.campioto@sptech.school</span>
-                <span id="cargo" class="cargo">Desenvolvedor Front-End</span>
-            </div>
-            <div class="campo">
-                <input type="checkbox" class="checkbox-class">
-                <img id="foto" src="./assets/Group 376.png" alt="perfil icon" class="icon">
-                <span id="nome" class="nome">Miguel Ferreira</span>
-                <span id="email" class="email">miguel.ferreira@sptech.school</span>
-                <span id="cargo" class="cargo">Analista de Redes</span>
-            </div>
-            <div class="campo">
-                <input type="checkbox" class="checkbox-class">
-                <img id="foto" src="./assets/Group 376.png" alt="perfil icon" class="icon">
-                <span id="nome" class="nome">Bruno Lima</span>
-                <span id="email" class="email">bruno.lima@sptech.school</span>
-                <span id="cargo" class="cargo">Assistente Administrativo</span>
-            </div>
-        </section>
+        <section class="funcionarios"></section>
 
         <section class="janela-modal" id="janela-modal">
 
@@ -210,6 +141,18 @@
                 </div>
             </div>
 
+            <section class="popup adicionar">
+                <div class="content">
+                    <img src="assets/check.png" alt="Imagem check">
+                    <div class="texto-popup">
+                        <h3>Funcionário adicionado com sucesso!</h3>
+                        <p>Peça para que altere a senha provisória.</p>
+                        <div class="botao-popup">
+                            <button class="button-ok">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </section>
 
         <section class="janela-modal" id="janela-modal-remover">
@@ -228,8 +171,9 @@
                     </div>
                     <div class="checkbox_confirmacao">
                         <input type="checkbox" class="checkbox-class remover" id="checkbox">
-                        Ao marcar esta caixa, autorizo a exclusão deste membro da equipe e concordo que ele não terá
-                        mais acesso aos recursos da equipe. Esta ação é irreversível.
+                        <span id="spanCheckboxModal">Ao marcar esta caixa, autorizo a exclusão deste membro da equipe e
+                            concordo que ele não terá mais acesso aos recursos da equipe. Esta ação é
+                            irreversível.</span>
                     </div>
 
                     <div class="botao-modal">
@@ -238,6 +182,18 @@
                     </div>
                 </div>
             </div>
+
+            <section class="popup remover" id="popup-remover">
+                <div class="content">
+                    <img src="assets/check.png" alt="Imagem check">
+                    <div class="texto-popup">
+                        <h3>Funcionário removido com sucesso!</h3>
+                        <div class="botao-popup">
+                            <button class="button-ok">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
         </section>
 
