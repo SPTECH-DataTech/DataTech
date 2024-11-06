@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/logo_datatech_-_roxa_escuro.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/equipe.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script src="js/equipe.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <title>Equipe • DataTech</title>
+</head>
+
+<body>
+
+    <section class="menu-lateral">
+        <div class="identificacao-empresa">
+            <h1 id="name_equipe">Empresa</h1>
+        </div>
+
+        <div>
+            <b>
+                <p>Menu</p>
+            </b>
+            <a href="dashboard.html"><button class="btn-dashboard"><img src="./assets/Chart.png" alt="dashboard icon"
+                        class="dashboard icon"> Dashboard</button></a>
+            <a href="fazendas.html"><button class="btn-fazenda"> <img src="./assets/Vector.png" alt="fazenda icon"
+                        class="icon">Fazendas</button></a>
+            <a href="equipe.html"><button class="btn-equipe"><img src="./assets/Group.png" alt="equipe icon"
+                        class="icon">
+                    Equipe</button></a>
+            <a href="recomendacoes.html"><button class="btn-recomendacoes"><img src="./assets/Chat.png"
+                        alt="recomendacoes icon" class="icon"> Recomendações</button></a>
+
+            <b>
+                <p>Outros</p>
+            </b>
+            <a href="conta.html"><button class="btn-conta"><img src="./assets/Profile.png" alt="conta icon"
+                        class="icon">
+                    Conta</button></a>
+            <a href="suporte.html" target="_blank"><button class="btn-suporte"> <img src="./assets/Info Square.png"
+                        alt="suporte icon" class="icon">Suporte</button></a>
+            <a href="login.html"><button onclick="limparSessao()" class="btn-sair"><img
+                        src="./assets/icons8-exit-50.png" alt="exit icon" class="icon"> Sair</button></a>
+        </div>
+
+    </section>
+
+    <section class="main-section">
+
+        <div class="navbar">
+            <img src="./assets/Group 376.png" alt="perfil icon" class="icon">
+            <h3 id="b_usuario"></h3>
+        </div>
+
+        <div class="equipe">
+            Equipe:<span class="name-equipe">BIGCOFEE</span>
+        </div>
+
+        <section class="search-add-remove">
+            <div class="container">
+                <div class="input_busca">
+                    <input type="search" onkeyup="procurarFuncionario()" placeholder="Buscar..." id="input-search">
+                </div>
+                <div class="botoes-add-remove">
+                    <button id="adicionar-funcionario" onclick="modalAdicionarFuncionario()"
+                        class="add-button">➕</button>
+                    <button id="remover-funcionario" onclick="modalRemoverFuncionario()"
+                        class="remove-button">➖</button>
+                    <button id="editar-funcionario" onclick="modalEditarFuncionario()" class="edit-button"><i
+                            class="fas fa-pencil"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <div class="campos-lista">
+            <div class="descricao">
+                <span>Nome</span>
+                <span>E-mail</span>
+                <span>Cargo</span>
+            </div>
+        </div>
+
+
+        <section class="funcionarios"></section>
+
+        <section class="janela-modal" id="janela-modal">
+
+            <div class="modal">
+                <button class="fechar" id="fechar">&times;</button>
+                <div class="box-modal">
+                    <div class="titulo">
+                        <span>Adicionar novo funcionário na equipe</span>
+                        <h1 class="name-equipe">BIGCOFEE</h1>
+                    </div>
+                    <div class="formulario">
+                        <div class="inputs">
+                            <span id="spanNome">Nome:</span>
+                            <input class="inputs-modal" id="input_nome" type="text">
+                            <span class="erro" id="erro_nome"></span>
+                        </div>
+                        <div class="inputs">
+                            <span id="spanSobrenome">Sobrenome:</span>
+                            <input class="inputs-modal" id="input_sobrenome" type="text">
+                            <span class="erro" id="erro_sobrenome"></span>
+                        </div>
+                        <div class="inputs">
+                            <span id="spanCpf">CPF:</span>
+                            <input class="inputs-modal" id="input_cpf" type="text" maxlength="14"
+                                placeholder="XXX.XXX.XXX.XX" oninput="fomatarCpf(this)">
+                            <span class="erro" id="erro_cpf"></span>
+                        </div>
+                        <div class="inputs">
+                            <span id="spanEmail">E-mail:</span>
+                            <input class="inputs-modal" id="input_email" type="email">
+                            <span class="erro" id="erro_email"></span>
+                        </div>
+                        <div class="inputs">
+                            <span id="spanSenha">Senha provisória:</span>
+                            <input class="inputs-modal" id="input_senha" type="text">
+                            <span class="erro" id="erro_senha"></span>
+                        </div>
+                        <div class="inputs">
+                            <span id="spanCargo">Cargo:</span>
+                            <select class="inputs-modal" id="select_cargos">
+                                <option style="display: none;" value="#" id="vazio">Selecione um cargo</option>
+                                <option value="Gerente" id="gerente">Gerente</option>
+                                <option value="Scrum Master" id="scrum">Scrum Master</option>
+                                <option value="Dev Back-end" id="back-end">Dev Back-end</option>
+                                <option value="Dev Front-end" id="front-end">Dev Front-end</option>
+                                <option value="Analista de TI" id="analista-ti">Analista de TI</option>
+                            </select>
+                            <span class="erro" id="erro_cargo"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="botao-modal">
+                    <button class="button-modal" onclick="adicionarFuncionario()">Adicionar funcionário</button>
+                </div>
+            </div>
+
+            <section class="popup adicionar">
+                <div class="content">
+                    <img src="assets/check.png" alt="Imagem check">
+                    <div class="texto-popup">
+                        <h3>Funcionário adicionado com sucesso!</h3>
+                        <p>Peça para que altere a senha provisória.</p>
+                        <div class="botao-popup">
+                            <button class="button-ok">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section class="janela-modal" id="janela-modal-remover">
+
+            <div class="modal remover">
+                <button class="fechar" id="fechar">&times;</button>
+                <div class="box-modal remover">
+                    <div class="titulo">
+                        <h1 class="name-equipe">Remover funcionario</h1>
+                        <span>Você deseja remover os seguintes funcionários:</span>
+                    </div>
+                    <div class="nomes-funcionarios">
+                        <span id="funcionarios-para-remover">
+                            <p></p>
+                        </span>
+                    </div>
+                    <div class="checkbox_confirmacao">
+                        <input type="checkbox" class="checkbox-class remover" id="checkbox">
+                        <span id="spanCheckboxModal">Ao marcar esta caixa, autorizo a exclusão deste membro da equipe e
+                            concordo que ele não terá mais acesso aos recursos da equipe. Esta ação é
+                            irreversível.</span>
+                    </div>
+
+                    <div class="botao-modal">
+                        <button class="button-modal" id="button-modal" onclick="removerFuncionario()" disabled>Remover
+                            funcionário</button>
+                    </div>
+                </div>
+            </div>
+
+            <section class="popup remover" id="popup-remover">
+                <div class="content">
+                    <img src="assets/check.png" alt="Imagem check">
+                    <div class="texto-popup">
+                        <h3>Funcionário removido com sucesso!</h3>
+                        <div class="botao-popup">
+                            <button class="button-ok">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </section>
+
+    </section>
+    <script src="js/equipe.js"></script>
+</body>
+
+</html>
