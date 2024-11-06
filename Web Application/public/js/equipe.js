@@ -291,7 +291,6 @@ function removerFuncionario() {
 
     console.log("Funcionário removido")
     modal.classList.remove('abrir');
-    popup.style.display = "flex";
 
 }
 
@@ -345,16 +344,16 @@ function listarFuncionarios(idEmpresa) {
                     div.appendChild(cargoSpan);
 
                     container.appendChild(div);
+
+                    sessionStorage.setItem(`funcionario_${funcionario.id}`, funcionario.nome);
                 });
             });
         })
         .catch(error => console.error('Erro ao listar funcionários:', error));
 }
 
+
+
 window.onload = function () {
-    if (idEmpresa) {
-        listarFuncionarios(idEmpresa);
-    } else {
-        console.error("idEmpresa está undefined no window.onload");
-    }
+    listarFuncionarios(idEmpresa);
 }
