@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/logo_datatech_-_roxa_escuro.png" type="image/x-icon">
+    <link rel="stylesheet" href="./css/suporte.css">
+    <script src="./js/dashProximaTela.js"></script>
+
+    <title>Dashboard • DataTech </title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+</head>
+
+<body>
+
+    <section class="menu-lateral">
+        <div class="identificacao-empresa">
+            <h1>Empresa</h1>
+        </div>
+
+        <div>
+            <b>
+                <p>Menu</p>
+            </b>
+            <a href="dashboard.html"><button class="btn-dashboard"><img src="./assets/Chart.png" alt="dashboard icon"
+                        class="icon"> Dashboard</button></a>
+            <a href="fazenda.html"><button class="btn-fazenda"> <img src="./assets/Vector.png" alt="fazenda icon"
+                        class="icon">Fazendas</button></a>
+            <a href="equipe.html"><button class="btn-equipe"><img src="./assets/Group.png" alt="equipe icon"
+                        class="icon"> Equipe</button></a>
+            <a href="recomendacoes.html"><button class="btn-recomendacoes"><img src="./assets/Chat.png"
+                        alt="recomendacoes icon" class="icon"> Recomendações</button></a>
+            <b>
+                <p>Outros</p>
+            </b>
+            <a href="conta.html"><button class="btn-conta"><img src="./assets/Profile.png" alt="conta icon"
+                        class="icon">Conta</button></a>
+            <a href="suporte.html" target="_blank"><button class="btn-suporte"> <img src="./assets/Info Square.png"
+                        alt="suporte icon" class="icon">Suporte</button></a>
+            <a href="login.html"><button onclick="limparSessao()" class="btn-sair"><img
+                        src="./assets/icons8-exit-50.png" alt="exit icon" class="icon"> Sair</button></a>
+        </div>
+
+    </section>
+
+    <section class="main-section">
+
+        <img src="./img/icon-suporte.svg" alt="icone de suporte" class="imagemsuporte">
+
+        <img src="./img/fundoSuporte.png" class="imagemfundo">
+
+       
+        <div class="formulario">
+            <h2>Suporte</h2>
+            <hr class="linha-separadora">
+            <p>Estamos monitorando nosso sistema 24 horas por dia. Caso você esteja enfrentando algum problema relate
+                nesse formulário. </p>
+            <form id="suporteForm">
+                <label for="tipoProblema">Selecione o Tipo de Suporte:</label>
+                <select id="tipo" name="tipo">
+                    <option value="acesso">Acesso</option>
+                    <option value="tecnico">Técnico</option>
+                    <option value="outro">Outro</option>
+                </select>
+
+                <label for="email">E-mail para Contato:</label>
+                <input type="email" id="email" name="email" required placeholder="email@email.com">
+
+                <label for="description">Descreva o Problema:</label>
+                <textarea id="descricao" name="descricao" rows="4" required></textarea>
+
+                <button type="submit" class="botaoEnviar">Enviar</button>
+            </form>
+        </div>
+        </div>
+
+</body>
+
+</html>
