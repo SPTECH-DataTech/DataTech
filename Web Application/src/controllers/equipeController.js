@@ -11,6 +11,18 @@ function listarFuncionarios(req, res) {
     });
 }
 
+function excluirFuncionarios(req, res) {
+    var idEmpresa = req.params.idEmpresa;
+
+    equipeModel.excluirFuncionarios(idEmpresa, nomeUsuario).then((resposta) => {
+        res.status(200).json(resposta);
+    }).catch((erro) => {
+        console.error("Erro ao excluir funcionários: ", erro);
+        res.status(500).json({ erro: "Erro ao excluir funcionários" });
+    });
+}
+
 module.exports = {
     listarFuncionarios,
+    excluirFuncionarios,
 }
