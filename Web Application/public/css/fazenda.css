@@ -1,0 +1,422 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    font-family: "Poppins";
+}
+
+body {
+    display: flex;
+    margin: 0;
+    padding: 0;
+
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+
+    --roxoTexto: #7F00FF;
+    --roxoBotao: #7C00F8;
+    --roxoCards: #783fd9;
+    --roxoFooter: #210042;
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+}
+
+::selection {
+    background-color: var(--roxoBotao);
+    color: white;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: white;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #8A2BE2;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #210042;
+}
+
+
+
+/* -------------------------MENU LATERAL------------------------- */
+
+h1 {
+    color: #7F00FF;
+    margin: 2px;
+}
+
+.menu-lateral a {
+    text-decoration: none;
+    width: 90%;
+    display: flex;
+    margin-bottom: 3px;
+}
+
+.menu-lateral {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 16.3%;
+    background-color: #F1F2F7;
+
+    margin-right: 10px;
+    box-shadow: 5px 0px 15px rgba(7, 6, 6, 0.2);
+}
+
+.menu-lateral div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    padding: 3%;
+    width: 100%;
+}
+
+.btn-dashboard.active,
+.btn-fazenda.active,
+.btn-equipe.active,
+.btn-recomendacoes.active,
+.btn-conta.active,
+.btn-suporte.active {
+    background-color: #9ba8ff20;
+}
+
+.menu-lateral button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px;
+
+    border: none;
+    border-radius: 4px;
+    font-size: 0.8rem;
+
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
+}
+
+.menu-lateral button:hover {
+    background-color: #9ba8ff20;
+    color: #5A6ACF;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.14);
+}
+
+.menu-lateral img.icon {
+    width: 18px;
+    height: 18px;
+}
+
+.menu-lateral .icon {
+    filter: invert(50%) sepia(2%) saturate(10%) hue-rotate(19deg) brightness(2%) contrast(20%);
+}
+
+.menu-lateral button:hover .icon {
+    filter: invert(38%) sepia(64%) saturate(2382%) hue-rotate(211deg) brightness(97%) contrast(101%);
+}
+
+/* -------------------------MENU LATERAL------------------------- */
+
+h1 {
+    color: #7F00FF;
+    margin: 2px;
+}
+
+.menu-lateral a {
+    text-decoration: none;
+    width: 90%;
+    display: flex;
+    margin-bottom: 3px;
+}
+
+.menu-lateral {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 16.3%;
+    background-color: #F1F2F7;
+
+    margin-right: 10px;
+    box-shadow: 5px 0px 15px rgba(7, 6, 6, 0.2);
+}
+
+.menu-lateral div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    padding: 3%;
+    width: 100%;
+}
+
+.btn-dashboard.active,
+.btn-fazenda.active,
+.btn-equipe.active,
+.btn-recomendacoes.active,
+.btn-conta.active,
+.btn-suporte.active {
+    background-color: #9ba8ff20;
+}
+
+.menu-lateral button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px;
+
+    border: none;
+    border-radius: 4px;
+    font-size: 0.8rem;
+
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
+}
+
+.menu-lateral button:hover {
+    background-color: #9ba8ff20;
+    color: #5A6ACF;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.14);
+}
+
+.menu-lateral img.icon {
+    width: 18px;
+    height: 18px;
+}
+
+.menu-lateral .icon {
+    filter: invert(50%) sepia(2%) saturate(10%) hue-rotate(19deg) brightness(2%) contrast(20%);
+}
+
+.menu-lateral button:hover .icon {
+    filter: invert(38%) sepia(64%) saturate(2382%) hue-rotate(211deg) brightness(97%) contrast(101%);
+}
+
+/* ------------------ Main Class ---------------- */
+
+.container {
+    display: none;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inforFazendas {
+    width: 50%;
+    display: flex;
+    align-items: center;
+
+
+    & .image-elipse {
+        height: 600px;
+        z-index: -1;
+        user-select: none;
+        pointer-events: none;
+    }
+
+    & .informative-texts {
+        position: absolute;
+        width: 600px;
+        margin-left: 90px;
+        z-index: 2;
+        font-size: 32px;
+        font-weight: 700;
+    }
+}
+
+.adcionarFazenda {
+    display: none;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    & .image-button {
+        z-index: -1;
+        user-select: none;
+        pointer-events: none;
+    }
+
+    & .botton-add-farm {
+        background-color: transparent;
+        border: none;
+        position: absolute;
+        right: 280px;
+        cursor: pointer;
+    }
+}
+
+.modal-fazenda {
+    opacity: 0;
+    display: flex;
+    margin-left: 100px;
+    flex-direction: column;
+    z-index: -1;
+    margin: auto;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    bottom: 50%;
+    right: 0;
+    width: 400px;
+    height: 500px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 10px;
+
+}
+
+.content-modal {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+}
+
+.group-titles {
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+    color: rgba(39, 38, 38, 0.851);
+    margin-bottom: 10px;
+
+    & .title {
+        font-weight: 700;
+        color: #5A67BA;
+        font-size: 30px;
+    }
+}
+
+
+.group-fields {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-fazenda input {
+    width: 270px;
+    height: 30px;
+    background: transparent;
+    outline: none;
+    border: 0.5px solid rgb(132, 132, 132, 0.6);
+    border-radius: 5px;
+    padding: 5px 15px;
+}
+
+.modal-fazenda select {
+    width: 300px;
+    height: 40px;
+    background: transparent;
+    outline: none;
+    border: 0.5px solid rgb(132, 132, 132, 0.6);
+    border-radius: 5px;
+    padding: 5px 15px;
+}
+
+.modal-fazenda input:hover {
+    outline: #783fd9;
+}
+
+.modal-fazenda .label {
+    font-weight: 600;
+    font-size: 14px;
+    color: rgb(99, 99, 99);
+}
+
+.button {
+    width: 250px;
+    margin-top: 20px;
+    background-color: #7F00FF;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.modal-overlay {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.574);
+    position: absolute;
+    z-index: 1000;
+}
+
+#close-btn {
+    display: flex;
+    align-items: flex-end;
+}
+
+.farmList {
+    display: none;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+}
+
+.farmList{
+    padding: 20px;
+    display: none;
+    
+}
+.div-fazenda {
+    width: 445px;
+    height: 196px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.div-fazenda .image-buttonn {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+    user-select: none;
+    pointer-events: none;
+    
+}
+
+.div-fazenda .nomeFazenda {
+    position: absolute;
+    top: 15px;
+    left: 120px;
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    z-index: 1;
+}
+
+.tipoFazenda {
+    margin-top: 95px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    z-index: 1;
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fazendas • DataTech </title>
+    <link rel="shortcut icon" href="assets/logo_datatech_-_roxa_escuro.png" type="image/x-icon">
+    <link rel="stylesheet" href="./css/fazenda.css">
+
+</head>
+
+<body>
+    <!-- Menu Lateral -->
+    <section class="menu-lateral">
+        <div class="identificacao-empresa">
+            <h1>Empresa</h1>
+        </div>
+
+        <div>
+            <b>
+                <p>Menu</p>
+            </b>
+            <a href="dashboard.html"><button class="btn-dashboard"><img src="./assets/Chart.png" alt="dashboard icon"
+                        class="dashboard icon"> Dashboard</button></a>
+            <a href="fazendas.html"><button class="btn-fazenda"> <img src="./assets/Vector.png" alt="fazenda icon"
+                        class="icon">Fazendas</button></a>
+            <a href="equipe.html"><button class="btn-equipe"><img src="./assets/Group.png" alt="equipe icon"
+                        class="icon">
+                    Equipe</button></a>
+            <a href="recomendacoes.html"><button class="btn-recomendacoes"><img src="./assets/Chat.png"
+                        alt="recomendacoes icon" class="icon"> Recomendações</button></a>
+
+            <b>
+                <p>Outros</p>
+            </b>
+            <a href="conta.html"><button class="btn-conta"><img src="./assets/Profile.png" alt="conta icon"
+                        class="icon">
+                    Conta</button></a>
+            <a href="suporte.html" target="_blank"><button class="btn-suporte"> <img src="./assets/Info Square.png"
+                        alt="suporte icon" class="icon">Suporte</button></a>
+            <a href="login.html"><button onclick="limparSessao()" class="btn-sair"><img
+                        src="./assets/icons8-exit-50.png" alt="exit icon" class="icon"> Sair</button></a>
+        </div>
+
+    </section>
+
+    <div class="modal-overlay" id="modal-overlay"></div>
+
+
+    <div class="container" id="container">
+        <div class="inforFazendas" id="inforFazendas">
+            <img src="./assets/imgs/Ellipse 14.png" alt="" class="image-elipse">
+            <div class="informative-texts">
+                <span>Cadastre suas fazendas</span> <br>
+                <span>Receba notificações</span> <br>
+                <span>personalizadas!</span> <br>
+            </div>
+        </div>
+        <div class="adcionarFazenda" id="adcionarFazenda">
+            <img src="./assets/imgs/Group 413 (1).png" alt="" class="image-button">
+
+            <button class="botton-add-farm" onclick="openModal()"><img src="./assets/imgs/add (1).png" alt=""></button>
+        </div>
+    </div>
+
+
+    </div>
+
+    <div class="farmList" id="farmList">
+
+    </div>
+
+    <div class="modal-fazenda" id="modal-fazenda">
+        <span id="close-btn">&times;</span>
+        <div class="content-modal">
+
+            <div class="group-titles">
+                <span>Adcionar Nova Fazenda</span>
+                <br>
+                <span class="title">BIGCOFE</span>
+            </div>
+
+            <div class="group-fields">
+                <span class="label">Nome Fazenda:</span>
+                <input type="text" id="input_nome_fazenda">
+            </div>
+            <div class="group-fields">
+                <span class="label">Tipo Café:</span>
+                <select name="" id="select_tipo_cafe">
+                    <option value="#">-</option>
+                    <option value="Arábica">Arábica</option>
+                    <option value="Robusta">Robusta</option>
+                </select>
+            </div>
+            <div class="group-fields">
+                <span class="label">Estado da Fazenda:</span>
+                <select name="" id="select_estado_fazenda">
+                    <option value="#">-</option>
+                </select>
+            </div>
+
+            <button class="button" onclick="adicionarFazenda()">Adicionar Fazenda</button>
+
+            <span id="message"></span>
+        </div>
+
+        <script src="./js/fazenda.js"></script>
+</body>
+
+</html>
