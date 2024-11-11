@@ -19,6 +19,7 @@ var usuarioRouter = require("./src/routes/usuarios");
 var empresasRouter = require("./src/routes/empresas");
 // var recuperarSenhaRouter = require("./src/routes/recuperarSenha");
 var equipeRouter = require("./src/routes/equipe");
+var fazendaRouter = require("./src/routes/fazenda");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -31,6 +32,7 @@ app.use("/usuarios", usuarioRouter);
 app.use("/empresas", empresasRouter);
 // app.use("/recuperarSenha", recuperarSenhaRouter);
 app.use("/equipe", equipeRouter);
+app.use("/fazenda", fazendaRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`
