@@ -294,6 +294,113 @@ function removerFuncionario() {
 
 }
 
+function modalEditarFuncionario() {
+    const modal = document.getElementById('janela-modal-editar');
+    modal.classList.add('abrir');
+
+    modal.addEventListener('click', (e) => {
+        if (e.target.id == 'fechar' || e.target.id == 'janela-modal-editar') {
+            modal.classList.remove('abrir')
+        }
+    });
+}
+
+function editarFuncionario() {
+    const modal = document.getElementById('janela-modal-editar');
+
+    let nome = input_nome_editar.value.trim();
+    let sobrenome = input_sobrenome_editar.value.trim();
+    let email = input_email_editar.value.trim();
+    let cargos = select_cargos_editar.value;
+
+    let erroNome = nome.length <= 1;
+    let erroNomeComNumeros = false;
+    let erroSobrenome = sobrenome.length <= 1;
+    let erroSobrenomeComNumeros = false;
+    let erroEmail = email.indexOf("@") < 0 || email.lastIndexOf(".") < email.indexOf("@") || email.lastIndexOf(".") == email.length;
+    let erroCargos = cargos == "#";
+    let erroEncontrado = false;
+
+    input_nome_editar.addEventListener("input", function () {
+        removerErros(erro_nome_editar, input_nome_editar, spanNomeEditar);
+    });
+
+    input_sobrenome_editar.addEventListener("input", function () {
+        removerErros(erro_sobrenome_editar, input_sobrenome_editar, spanSobrenomeEditar);
+    });
+
+    input_email_editar.addEventListener("input", function () {
+        removerErros(erro_email_editar, input_email_editar, spanEmailEditar);
+    });
+
+    select_cargos_editar.addEventListener("change", function () {
+        removerErros(erro_cargo_editar, select_cargos_editar, spanCargoEditar);
+    });
+
+    if (nome == "" || sobrenome == "" || email == "" || cargos == "") {
+        alert("Preencha todos os campos para continuar!")
+        return;
+
+    } else if (erroNome) {
+
+        erro_nome_editar.innerHTML = "Nome inválido!";
+        erro_nome_editar.style.display = "block";
+        input_nome_editar.classList.add("input-erro");
+        spanNomeEditar.style.color = "red";
+        input_nome_editar.style.borderColor = "red";
+        erroEncontrado = true;
+
+    } else if (erroNomeComNumeros) {
+
+        erro_nome_editar.innerText = "Nome inválido!";
+        erro_nome_editar.style.display = "block";
+        input_nome_editar.classList.add("input-erro");
+        spanSobrenomeEditar.style.color = "red";
+        input_sobrenome_editar.style.borderColor = "red";
+        erroEncontrado = true;
+
+    } else if (erroSobrenome) {
+
+        erro_sobrenome_editar.innerText = "Sobrenome inválido!";
+        erro_sobrenome_editar.style.display = "block";
+        input_sobrenome_editar.classList.add("input-erro");
+        spanSobrenomeEditar.style.color = "red";
+        input_sobrenome_editar.style.borderColor = "red";
+        erroEncontrado = true;
+
+    } else if (erroSobrenomeComNumeros) {
+
+        erro_sobrenome_editar.innerText = "Sobrenome inválido!";
+        erro_sobrenome_editar.style.display = "block";
+        input_sobrenome_editar.classList.add("input-erro");
+        erroEncontrado = true;
+
+    } else if (erroEmail) {
+
+        erro_email_editar.innerText = "E-mail inválido!";
+        erro_email_editar.style.display = "block";
+        input_email_editar.classList.add("input-erro");
+        spanEmailEditar.style.color = "red";
+        input_email_editar.style.borderColor = "red";
+        erroEncontrado = true;
+
+    } else if (erroCargos) {
+
+        erro_cargo_editar.innerHTML = "Selecione algum cargo"
+        erro_cargo_editar.style.display = "block"
+        select_cargos_editar.classList.add("input-erro");
+        spanCargoEditar.style.color = "red";
+        select_cargos_editar.style.borderColor = "red";
+        erroEncontrado = true;
+    }
+
+    if (erroEncontrado) {
+        return;
+    }
+
+    modal.classList.remove('abrir');
+}
+
 // CONEXÃO COM WEB-DATA-VIZ
 
 function listarFuncionarios(idEmpresa) {

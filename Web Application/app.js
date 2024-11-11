@@ -17,7 +17,7 @@ var app = express();
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var empresasRouter = require("./src/routes/empresas");
-var recuperarSenhaRouter = require("./src/routes/recuperarSenha");
+// var recuperarSenhaRouter = require("./src/routes/recuperarSenha");
 var equipeRouter = require("./src/routes/equipe");
 
 app.use(express.json());
@@ -29,7 +29,7 @@ app.use(cors());
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/empresas", empresasRouter);
-app.use("/recuperarSenha", recuperarSenhaRouter);
+// app.use("/recuperarSenha", recuperarSenhaRouter);
 app.use("/equipe", equipeRouter);
 
 app.listen(PORTA_APP, function () {

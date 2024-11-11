@@ -55,8 +55,10 @@
             <h3 id="b_usuario"></h3>
         </div>
 
+        <h3 class="name-titulo">Lista de funcionários</h3>
+
         <div class="equipe">
-            Equipe:<span class="name-equipe">BIGCOFEE</span>
+            Fazenda:<span class="name-equipe">BIGCOFEE</span>
         </div>
 
         <section class="search-add-remove">
@@ -141,7 +143,7 @@
                 </div>
             </div>
 
-            <section class="popup adicionar">
+            <!-- <section class="popup adicionar">
                 <div class="content">
                     <img src="assets/check.png" alt="Imagem check">
                     <div class="texto-popup">
@@ -152,7 +154,7 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> -->
         </section>
 
         <section class="janela-modal" id="janela-modal-remover">
@@ -183,7 +185,7 @@
                 </div>
             </div>
 
-            <section class="popup remover" id="popup-remover">
+            <!-- <section class="popup remover" id="popup-remover">
                 <div class="content">
                     <img src="assets/check.png" alt="Imagem check">
                     <div class="texto-popup">
@@ -193,8 +195,65 @@
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> -->
 
+        </section>
+
+        <section class="janela-modal" id="janela-modal-editar">
+
+            <div class="modal editar">
+                <button class="fechar" id="fechar">&times;</button>
+                <div class="box-modal editar">
+                    <div class="titulo">
+                        <span>Editar funcionário</span>
+                        <h1 class="name-equipe">BIGCOFEE</h1>
+                    </div>
+                    <div class="formulario">
+                        <div class="inputs">
+                            <span id="spanNomeEditar">Nome:</span>
+                            <input class="inputs-modal" id="input_nome_editar" type="text">
+                            <span class="erro" id="erro_nome_editar"></span>
+                        </div>
+                        <div class="inputs">    
+                            <span id="spanSobrenomeEditar">Sobrenome:</span>
+                            <input class="inputs-modal" id="input_sobrenome_editar" type="text">
+                            <span class="erro" id="erro_sobrenome_editar"></span>
+                        </div>
+                        <div class="inputs">
+                            <span id="spanEmailEditar">E-mail:</span>
+                            <input class="inputs-modal" id="input_email_editar" type="email">
+                            <span class="erro" id="erro_email_editar"></span>
+                        </div>
+                        <div class="inputs">
+                            <span id="spanCargoEditar">Cargo:</span>
+                            <select class="inputs-modal" id="select_cargos_editar">
+                                <option style="display: none;" value="#" id="vazio">Selecione um cargo</option>
+                                <option value="Gerente" id="gerente">Gerente</option>
+                                <option value="Scrum Master" id="scrum">Scrum Master</option>
+                                <option value="Dev Back-end" id="back-end">Dev Back-end</option>
+                                <option value="Dev Front-end" id="front-end">Dev Front-end</option>
+                                <option value="Analista de TI" id="analista-ti">Analista de TI</option>
+                            </select>
+                            <span class="erro" id="erro_cargo_editar"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="botao-modal">
+                    <button class="button-modal" onclick="editarFuncionario()">Editar funcionário</button>
+                </div>
+            </div>
+            <!-- <section class="popup editar">
+                <div class="content">
+                    <img src="assets/check.png" alt="Imagem check">
+                    <div class="texto-popup">
+                        <h3>Funcionário editado com sucesso!</h3>
+                        <p>Avise o funcionário sobre as alterações.</p>
+                        <div class="botao-popup">
+                            <button class="button-ok">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </section> -->
         </section>
 
     </section>

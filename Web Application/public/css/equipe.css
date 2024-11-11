@@ -14,6 +14,10 @@
     font-weight: bold;
 }
 
+.name-titulo {
+    color: #7F00FF;
+}
+
 .search-add-remove {
     display: flex;
     align-items: center;
@@ -317,6 +321,10 @@ input[type="checkbox"] {
     margin-top: 10%;
 }
 
+.modal.editar {
+    height: 80%;
+}
+
 .erro {
     color: red;
     font-size: small;
@@ -380,12 +388,13 @@ input[type="checkbox"] {
     }
 }
 
-.abrir .popup.adicionar .popup.remover {
+.abrir .popup.adicionar .popup.remover .popup.editar {
     animation: abrirPopup 0.5s;
 }
 
 
-.popup.remover {
+.popup.remover,
+.popup.editar {
     display: none;
     align-items: center;
     justify-content: center;
