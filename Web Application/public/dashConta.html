@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/logo_datatech_-_roxa_escuro.png" type="image/x-icon">
+    <link rel="stylesheet" href="./css/dashConta.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <!-- <link rel="stylesheet" href="./css/equipe.css"> -->
+
+
+
+    <script src="./js/dashConta.js"></script>
+    <title>Conta • DataTech</title>
+</head>
+
+<body>
+
+    <body>
+
+        <section class="menu-lateral">
+            <div class="identificacao-empresa">
+                <h1 id="name_equipe">Empresa</h1>
+            </div>
+
+            <div>
+                <b>
+                    <p>Menu</p>
+                </b>
+                <a href="dashboard.html"><button class="btn-dashboard"><img src="./assets/Chart.png"
+                            alt="dashboard icon" class="dashboard icon"> Dashboard</button></a>
+                <a href="fazendas.html"><button class="btn-fazenda"> <img src="./assets/Vector.png" alt="fazenda icon"
+                            class="icon">Fazendas</button></a>
+                <a href="equipe.html"><button class="btn-equipe"><img src="./assets/Group.png" alt="equipe icon"
+                            class="icon">
+                        Equipe</button></a>
+                <a href="recomendacoes.html"><button class="btn-recomendacoes"><img src="./assets/Chat.png"
+                            alt="recomendacoes icon" class="icon"> Recomendações</button></a>
+
+                <b>
+                    <p>Outros</p>
+                </b>
+                <a href="dashConta.html"><button class="btn-conta"><img src="./assets/Profile.png" alt="conta icon"
+                            class="icon">
+                        Conta</button></a>
+                <a href="suporte.html" target="_blank"><button class="btn-suporte"> <img src="./assets/Info Square.png"
+                            alt="suporte icon" class="icon">Suporte</button></a>
+                <a href="login.html"><button onclick="limparSessao()" class="btn-sair"><img
+                            src="./assets/icons8-exit-50.png" alt="exit icon" class="icon"> Sair</button></a>
+            </div>
+
+        </section>
+
+        <section class="main-section">
+            <div class="navbar">
+                <img src="./assets/Group 376.png" alt="perfil icon" class="icon">
+                <h3 id="b_usuario">Cliente</h3>
+            </div>
+
+            <div class="titulo">
+                <h3> Conta </h3>
+            </div>
+
+            <div class="containerConta">
+
+                <div class="containerFormulario">
+
+                    <div class="perfil">
+                        <img src="./assets/Group 415.png" alt="">
+                    </div>
+                    <div class="formulario">
+
+                        Nome:
+                        <p>Tiago Pereira</p>
+                        <br>
+                        CPF:
+                        <p>393002023902</p>
+                        <br>
+                        Equipe:
+                        <p>IA - CLOUD</p>
+                        <br>
+                        Cargo:
+                        <p>Tech Lead</p>
+                    </div>
+                </div>
+
+                <div class="email-section">
+                    <div class="email-text">
+                        Email:
+                        <p>tiago.souza@hotmail.lucasgay</p>
+                    </div>
+                    <div class="email-button">
+                        <button onclick="modalAlterarSenha()">Alterar senha</button>
+                    </div>
+
+                    <section class="janela-modal" id="janela-modal">
+
+                        <div class="modal">
+                            <button class="fechar" id="fechar">&times;</button>
+                            <div class="tituloModal">
+                                <span>Alterar Senha</span>
+                            </div>
+                            <div class="box-modal">
+                                <div class="formularioModal">
+                                    <div class="inputs">
+                                        <span id="spanSenhaAtual">Senha Atual:</span>
+                                        <input class="inputs-modal" id="input_senha_atual" type="password">
+                                        <span class="erro" id="erro_senha_atual"></span>
+                                    </div>
+                                    <div class="inputs">
+                                        <span id="spanNovaSenha">Nova Senha:</span>
+                                        <input class="inputs-modal" id="input_nova_senha" type="password">
+                                        <span class="erro" id="erro_nova_senha"></span>
+                                    </div>
+                                    <div class="inputs">
+                                        <span id="spanConfirmarSenha">Confirmar Nova Senha:</span>
+                                        <input class="inputs-modal" id="input_confirmar_senha" type="password">
+                                        <span class="erro" id="erro_confirmar_senha"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="botao-modal">
+                                <button class="button-modal" onclick="modalAlterarSenha()">Alterar Senha</button>
+                            </div>
+                        </div>
+
+                        <section class="popup adicionar">
+                            <div class="content">
+                                <img src="assets/check.png" alt="Imagem check">
+                                <div class="texto-popup">
+                                    <h3>Senha alterada com sucesso!</h3>
+                                    <p>A senha foi atualizada corretamente.</p>
+                                </div>
+                            </div>
+                        </section>
+                    </section>
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </body>
+
+</body>
+
+</html>
