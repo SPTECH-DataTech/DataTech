@@ -373,7 +373,7 @@ h1 {
     align-items: center; */
 }
 
-button {
+.button-editar {
     width: 120px;
     height: 45px;
     border-radius: 10px;
