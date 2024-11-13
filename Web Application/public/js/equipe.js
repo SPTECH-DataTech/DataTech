@@ -1,6 +1,8 @@
 var idEmpresa = sessionStorage.getItem("ID_EMPRESA");
 var nomeUsuario = sessionStorage.getItem("NOME_USUARIO");
-b_usuario.innerHTML = `${nomeUsuario}`;
+var idCargo = sessionStorage.ID_CARGO;
+var idUsuario = sessionStorage.ID_USUARIO;
+var b_usuario = document.getElementById("b_usuario");
 
 function procurarFuncionario() {
     const input = document.getElementById('input-search');
@@ -17,6 +19,41 @@ function procurarFuncionario() {
     });
 
     document.getElementById('input-search').addEventListener('keyup', procurarFuncionario);
+}
+
+function carregarCargos() {
+
+    const select_cargos_editar = document.getElementById("select_cargos_editar");
+    const select_cargos = document.getElementById("select_cargos");
+
+    if (!select_cargos_editar || !select_cargos) {
+        console.error("Elementos <select> não encontrados no DOM.");
+        return;
+    }
+
+    select_cargos_editar.innerHTML = "";
+    select_cargos.innerHTML = "";
+
+    fetch("/equipe/carregarCargos", {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+        .then(function (resposta) {
+            resposta.json().then((equipe) => {
+                equipe.forEach((cargos) => {
+                    select_cargos_editar.innerHTML += `<option value='${cargos.id}'>${cargos.nomeCargo}</option>`;
+                    select_cargos.innerHTML += `<option value='${cargos.id}'>${cargos.nomeCargo}</option>`;
+
+                    sessionStorage.ID_CARGO = cargos.id;
+                    sessionStorage.NOME_CARGO = cargos.nomeCargo;
+                });
+            });
+        })
+        .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
 }
 
 function modalAdicionarFuncionario() {
@@ -36,22 +73,17 @@ function removerErros(erroElemento, inputElemento, spanElemento) {
     spanElemento.style.color = "";
 }
 
-function adicionarFuncionario() {
-
-    const modal = document.getElementById('janela-modal');
+function adicionar() {
 
     let nome = input_nome.value.trim();
-    let sobrenome = input_sobrenome.value.trim();
     let cpf = input_cpf.value.trim();
     let email = input_email.value.trim();
     let senha = input_senha.value.trim();
     let cargos = select_cargos.value;
-    let campos = [nome, sobrenome, cpf, email, senha, cargos];
+    let campos = [nome, cpf, email, senha, cargos];
 
     let erroNome = nome.length <= 1;
     let erroNomeComNumeros = false;
-    let erroSobrenome = sobrenome.length <= 1;
-    let erroSobrenomeComNumeros = false;
     let erroCPF = cpf.length < 14;
     let erroEmail = email.indexOf("@") < 0 || email.lastIndexOf(".") < email.indexOf("@") || email.lastIndexOf(".") == email.length;
     let erroSenhaNumero = true;
@@ -77,10 +109,6 @@ function adicionarFuncionario() {
 
     input_nome.addEventListener("input", function () {
         removerErros(erro_nome, input_nome, spanNome);
-    });
-
-    input_sobrenome.addEventListener("input", function () {
-        removerErros(erro_sobrenome, input_sobrenome, spanSobrenome);
     });
 
     input_cpf.addEventListener("input", function () {
@@ -117,24 +145,6 @@ function adicionarFuncionario() {
         erro_nome.innerText = "Nome inválido!";
         erro_nome.style.display = "block";
         input_nome.classList.add("input-erro");
-        spanSobrenome.style.color = "red";
-        input_sobrenome.style.borderColor = "red";
-        erroEncontrado = true;
-
-    } else if (erroSobrenome) {
-
-        erro_sobrenome.innerText = "Sobrenome inválido!";
-        erro_sobrenome.style.display = "block";
-        input_sobrenome.classList.add("input-erro");
-        spanSobrenome.style.color = "red";
-        input_sobrenome.style.borderColor = "red";
-        erroEncontrado = true;
-
-    } else if (erroSobrenomeComNumeros) {
-
-        erro_sobrenome.innerText = "Sobrenome inválido!";
-        erro_sobrenome.style.display = "block";
-        input_sobrenome.classList.add("input-erro");
         erroEncontrado = true;
 
     } else if (erroCPF) {
@@ -205,8 +215,43 @@ function adicionarFuncionario() {
         return;
     }
 
-    modal.classList.remove('abrir');
+    const idCargo = select_cargos.value;
 
+    fetch('equipe/adicionar', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            idCargoServer: idCargo,
+            nomeServer: nome,
+            cpfServer: cpf,
+            emailServer: email,
+            senhaServer: senha,
+        }),
+    })
+        .then(resposta => {
+            resposta.json().then(data => {
+                console.log("Resposta do servidor: ", data);
+
+                if (!resposta.ok) {
+                    throw new Error(data.erro);
+                }
+                else {
+                    document.getElementById('janela-modal').style.display = 'none';
+
+                    const popup = document.getElementById('popup-adicionar');
+                    popup.style.display = 'flex';
+                    
+                }
+            })
+        })
+        .catch(function (erro) {
+            console.log(`#ERRO: ${erro}`);
+            habilitarMensagem(erro.message);
+        });
+
+    return false;
 }
 
 function fomatarCpf(input) {
@@ -217,22 +262,16 @@ function fomatarCpf(input) {
     input.value = cpf;
 }
 
+var funcionariosParaRemover = [];
+
 function modalRemoverFuncionario() {
     const modal = document.getElementById('janela-modal-remover');
     const checkboxes = document.querySelectorAll('.campo .checkbox-class');
     const names = document.querySelectorAll('.campo .nome');
-
     const modalContent = document.getElementById('funcionarios-para-remover');
+
     modalContent.innerHTML = '';
-
     modal.classList.add('abrir');
-
-    modal.addEventListener('click', (e) => {
-        if (e.target.id == 'fechar' || e.target.id == 'janela-modal-remover') {
-            modal.classList.remove('abrir')
-        }
-    });
-
 
     checkboxes.forEach((checkbox, index) => {
         if (checkbox.checked) {
@@ -240,32 +279,18 @@ function modalRemoverFuncionario() {
             const nameElement = document.createElement('p');
             nameElement.textContent = name;
             modalContent.appendChild(nameElement);
+            funcionariosParaRemover.push(name);
         }
+    });
+    console.log("usuario para excluir:", funcionariosParaRemover)
 
+    modal.addEventListener('click', (e) => {
+        if (e.target.id == 'fechar' || e.target.id == 'janela-modal-remover') {
+            modal.classList.remove('abrir')
+        }
     });
 
 }
-
-// Função para abrir a modal apenas se tiver pelo menos um funcionário com o check ativo
-
-// document.addEventListener("DOMContentLoaded", function () {
-//     const botaoRemover = document.getElementById('remover-funcionario');
-//     const checkboxes = document.querySelectorAll('.checkbox-class');
-
-//     botaoRemover.disabled = true;
-
-//     function atualizarEstadoBotao() {
-//         const algumaCheckboxMarcada = Array.from(checkboxes).some(checkbox => checkbox.checked);x
-//         botaoRemover.disabled = !algumaCheckboxMarcada;
-//     }
-
-//     checkboxes.forEach(checkbox => {
-//         checkbox.addEventListener('change', atualizarEstadoBotao);
-//     });
-// });
-
-
-// Função para o botão de remover funcionário só estiver clicável se o checkbox da modal estiver ativo
 
 document.addEventListener("DOMContentLoaded", function () {
     const botaoRemover = document.getElementById('button-modal');
@@ -280,29 +305,123 @@ document.addEventListener("DOMContentLoaded", function () {
     atualizarEstadoBotao();
 });
 
-function removerFuncionario() {
-    const checkbox = document.querySelector('.checkbox_confirmacao .checkbox-class');
-    const modal = document.getElementById('janela-modal-remover');
-    const botaoRemover = document.getElementById('button-modal');
-    const popup = document.getElementById('popup-remover');
+function modalEditarFuncionario() {
+    const modal = document.getElementById('janela-modal-editar');
+    modal.classList.add('abrir');
 
-    checkbox.checked = false;
-    botaoRemover.disabled = true;
-
-    console.log("Funcionário removido")
-    modal.classList.remove('abrir');
-
+    modal.addEventListener('click', (e) => {
+        if (e.target.id == 'fechar' || e.target.id == 'janela-modal-editar') {
+            modal.classList.remove('abrir')
+        }
+    });
 }
 
-// CONEXÃO COM WEB-DATA-VIZ
+function editar() {
 
-function listarFuncionarios(idEmpresa) {
-    if (!idEmpresa) {
-        console.error('idEmpresa está undefined!');
-        return;
-    }
+    let nome = input_nome_editar.value.trim();
+    let email = input_email_editar.value.trim();
 
-    fetch(`/equipe/listarFuncionarios/${idEmpresa}`, {
+    // let erroNome = nome.length <= 1;
+    // let erroNomeComNumeros = false;
+    // let erroEmail = email.indexOf("@") < 0 || email.lastIndexOf(".") < email.indexOf("@") || email.lastIndexOf(".") == email.length;
+    // let erroCargos = cargos == "#";
+    // let erroEncontrado = false;
+
+    // input_nome_editar.addEventListener("input", function () {
+    //     removerErros(erro_nome_editar, input_nome_editar, spanNomeEditar);
+    // });
+
+    // input_email_editar.addEventListener("input", function () {
+    //     removerErros(erro_email_editar, input_email_editar, spanEmailEditar);
+    // });
+
+    // select_cargos_editar.addEventListener("change", function () {
+    //     removerErros(erro_cargo_editar, select_cargos_editar, spanCargoEditar);
+    // });
+
+    // if (nome == "" || email == "" || cargos == "") {
+    //     alert("Preencha todos os campos para continuar!")
+    //     return;
+
+    // } else if (erroNome) {
+
+    //     erro_nome_editar.innerHTML = "Nome inválido!";
+    //     erro_nome_editar.style.display = "block";
+    //     input_nome_editar.classList.add("input-erro");
+    //     spanNomeEditar.style.color = "red";
+    //     input_nome_editar.style.borderColor = "red";
+    //     erroEncontrado = true;
+
+    // } else if (erroNomeComNumeros) {
+
+    //     erro_nome_editar.innerText = "Nome inválido!";
+    //     erro_nome_editar.style.display = "block";
+    //     input_nome_editar.classList.add("input-erro");
+    //     erroEncontrado = true;
+
+    // } else if (erroEmail) {
+
+    //     erro_email_editar.innerText = "E-mail inválido!";
+    //     erro_email_editar.style.display = "block";
+    //     input_email_editar.classList.add("input-erro");
+    //     spanEmailEditar.style.color = "red";
+    //     input_email_editar.style.borderColor = "red";
+    //     erroEncontrado = true;
+
+    // } else if (erroCargos) {
+
+    //     erro_cargo_editar.innerHTML = "Selecione algum cargo"
+    //     erro_cargo_editar.style.display = "block"
+    //     select_cargos_editar.classList.add("input-erro");
+    //     spanCargoEditar.style.color = "red";
+    //     select_cargos_editar.style.borderColor = "red";
+    //     erroEncontrado = true;
+    // }
+
+    // if (erroEncontrado) {
+    //     return;
+    // }
+
+    const idCargo = select_cargos_editar.value;
+    
+    fetch(`equipe/editar/${idUsuario}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            nomeServer: nome,
+            emailServer: email,
+            idCargoServer: idCargo,
+        }),
+    })
+        .then(resposta => {
+            resposta.json().then(data => {
+                console.log("Resposta do servidor: ", data);
+
+                if (!resposta.ok) {
+                    throw new Error(data.erro);
+                }
+                else {
+                    document.getElementById('janela-modal-editar').style.display = 'none';
+
+                    const popup = document.getElementById('popup-editar');
+                    popup.style.display = 'flex';
+                    
+                }
+            })
+        })
+        .catch(function (erro) {
+            console.log(`#ERRO: ${erro}`);
+            habilitarMensagem(erro.message);
+        });
+
+    return false;
+}
+
+function listarFuncionarios() {
+
+    fetch(`/equipe/listarFuncionarios/1`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -335,7 +454,7 @@ function listarFuncionarios(idEmpresa) {
 
                     const cargoSpan = document.createElement('span');
                     cargoSpan.classList.add('cargo');
-                    cargoSpan.innerText = funcionario.cargo;
+                    cargoSpan.innerText = funcionario.nomeCargo;
 
                     div.appendChild(checkbox);
                     div.appendChild(img);
@@ -345,15 +464,45 @@ function listarFuncionarios(idEmpresa) {
 
                     container.appendChild(div);
 
-                    sessionStorage.setItem(`funcionario_${funcionario.id}`, funcionario.nome);
+                    sessionStorage.ID_USUARIO = funcionario.id;
                 });
             });
         })
         .catch(error => console.error('Erro ao listar funcionários:', error));
 }
 
+function excluir() {
+    const checkboxes = document.querySelectorAll('.campo .checkbox-class:checked');
+    const funcionariosSelecionados = Array.from(checkboxes).map(checkbox => {
+        const campo = checkbox.closest('.campo');
+        if (campo) {
+            const nameElement = campo.querySelector('.nome');
+            return nameElement ? nameElement.textContent.trim() : null;
+        }
+        return null;
+    }).filter(name => name !== null);
+    
+    funcionariosSelecionados.forEach(funcionario => {
+        fetch(`/equipe/excluir/${idUsuario}`, {
+            method: 'DELETE',
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log(`Funcionário ${nomeFuncionario} removido com sucesso`);
+                    document.getElementById('popup-remover').style.display = 'flex';
+                } else {
+                    console.error(`Erro ao remover o funcionário ${nomeFuncionario}:`, response.status);
+                }
+            })
+            .catch(error => console.error('Erro ao remover funcionário:', error));
+    });
 
+
+    document.getElementById('janela-modal-remover').classList.remove('abrir');
+}
 
 window.onload = function () {
-    listarFuncionarios(idEmpresa);
+    listarFuncionarios();
+    excluir();
+    carregarCargos();
 }
