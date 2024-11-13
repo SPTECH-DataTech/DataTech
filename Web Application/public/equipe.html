@@ -58,7 +58,7 @@
         <h3 class="name-titulo">Lista de funcionários</h3>
 
         <div class="equipe">
-            Fazenda:<span class="name-equipe">BIGCOFEE</span>
+            Fazenda:<span id="nome_fazenda" class="name-equipe"></span>
         </div>
 
         <section class="search-add-remove">
@@ -95,18 +95,13 @@
                 <div class="box-modal">
                     <div class="titulo">
                         <span>Adicionar novo funcionário na equipe</span>
-                        <h1 class="name-equipe">BIGCOFEE</h1>
+                        <h1 id="nome_fazenda" class="name-equipe">BIGCOFEE</h1>
                     </div>
                     <div class="formulario">
                         <div class="inputs">
                             <span id="spanNome">Nome:</span>
                             <input class="inputs-modal" id="input_nome" type="text">
                             <span class="erro" id="erro_nome"></span>
-                        </div>
-                        <div class="inputs">
-                            <span id="spanSobrenome">Sobrenome:</span>
-                            <input class="inputs-modal" id="input_sobrenome" type="text">
-                            <span class="erro" id="erro_sobrenome"></span>
                         </div>
                         <div class="inputs">
                             <span id="spanCpf">CPF:</span>
@@ -127,34 +122,29 @@
                         <div class="inputs">
                             <span id="spanCargo">Cargo:</span>
                             <select class="inputs-modal" id="select_cargos">
-                                <option style="display: none;" value="#" id="vazio">Selecione um cargo</option>
-                                <option value="Gerente" id="gerente">Gerente</option>
-                                <option value="Scrum Master" id="scrum">Scrum Master</option>
-                                <option value="Dev Back-end" id="back-end">Dev Back-end</option>
-                                <option value="Dev Front-end" id="front-end">Dev Front-end</option>
-                                <option value="Analista de TI" id="analista-ti">Analista de TI</option>
+
                             </select>
                             <span class="erro" id="erro_cargo"></span>
                         </div>
                     </div>
                 </div>
                 <div class="botao-modal">
-                    <button class="button-modal" onclick="adicionarFuncionario()">Adicionar funcionário</button>
+                    <button class="button-modal" onclick="adicionar()">Adicionar funcionário</button>
                 </div>
             </div>
 
-            <!-- <section class="popup adicionar">
+            <section class="popup adicionar" id="popup-adicionar">
                 <div class="content">
                     <img src="assets/check.png" alt="Imagem check">
                     <div class="texto-popup">
                         <h3>Funcionário adicionado com sucesso!</h3>
                         <p>Peça para que altere a senha provisória.</p>
                         <div class="botao-popup">
-                            <button class="button-ok">OK</button>
+                            <button onclick="fecharPopUp()" class="button-ok">OK</button>
                         </div>
                     </div>
                 </div>
-            </section> -->
+            </section>
         </section>
 
         <section class="janela-modal" id="janela-modal-remover">
@@ -179,23 +169,23 @@
                     </div>
 
                     <div class="botao-modal">
-                        <button class="button-modal" id="button-modal" onclick="removerFuncionario()" disabled>Remover
+                        <button class="button-modal" id="button-modal" onclick="excluir()">Remover
                             funcionário</button>
                     </div>
                 </div>
             </div>
 
-            <!-- <section class="popup remover" id="popup-remover">
+            <section class="popup remover" id="popup-remover">
                 <div class="content">
                     <img src="assets/check.png" alt="Imagem check">
                     <div class="texto-popup">
                         <h3>Funcionário removido com sucesso!</h3>
                         <div class="botao-popup">
-                            <button class="button-ok">OK</button>
+                            <button onclick="fecharPopUp()" class="button-ok">OK</button>
                         </div>
                     </div>
                 </div>
-            </section> -->
+            </section>
 
         </section>
 
@@ -205,19 +195,14 @@
                 <button class="fechar" id="fechar">&times;</button>
                 <div class="box-modal editar">
                     <div class="titulo">
-                        <span>Editar funcionário</span>
-                        <h1 class="name-equipe">BIGCOFEE</h1>
+                        <span>Editar funcionário:</span>
+                        <h1 id="nome_fazenda" class="name-equipe">BIGCOFEE</h1>
                     </div>
                     <div class="formulario">
                         <div class="inputs">
                             <span id="spanNomeEditar">Nome:</span>
                             <input class="inputs-modal" id="input_nome_editar" type="text">
                             <span class="erro" id="erro_nome_editar"></span>
-                        </div>
-                        <div class="inputs">    
-                            <span id="spanSobrenomeEditar">Sobrenome:</span>
-                            <input class="inputs-modal" id="input_sobrenome_editar" type="text">
-                            <span class="erro" id="erro_sobrenome_editar"></span>
                         </div>
                         <div class="inputs">
                             <span id="spanEmailEditar">E-mail:</span>
@@ -228,32 +213,27 @@
                             <span id="spanCargoEditar">Cargo:</span>
                             <select class="inputs-modal" id="select_cargos_editar">
                                 <option style="display: none;" value="#" id="vazio">Selecione um cargo</option>
-                                <option value="Gerente" id="gerente">Gerente</option>
-                                <option value="Scrum Master" id="scrum">Scrum Master</option>
-                                <option value="Dev Back-end" id="back-end">Dev Back-end</option>
-                                <option value="Dev Front-end" id="front-end">Dev Front-end</option>
-                                <option value="Analista de TI" id="analista-ti">Analista de TI</option>
                             </select>
                             <span class="erro" id="erro_cargo_editar"></span>
                         </div>
                     </div>
                 </div>
                 <div class="botao-modal">
-                    <button class="button-modal" onclick="editarFuncionario()">Editar funcionário</button>
+                    <button class="button-modal" onclick="editar()">Editar funcionário</button>
                 </div>
             </div>
-            <!-- <section class="popup editar">
+            <section class="popup editar" id="popup-editar">
                 <div class="content">
                     <img src="assets/check.png" alt="Imagem check">
                     <div class="texto-popup">
                         <h3>Funcionário editado com sucesso!</h3>
                         <p>Avise o funcionário sobre as alterações.</p>
                         <div class="botao-popup">
-                            <button class="button-ok">OK</button>
+                            <button onclick="fecharPopUp()" class="button-ok">OK</button>
                         </div>
                     </div>
                 </div>
-            </section> -->
+            </section>
         </section>
 
     </section>

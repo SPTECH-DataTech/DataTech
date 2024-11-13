@@ -322,7 +322,11 @@ input[type="checkbox"] {
 }
 
 .modal.editar {
-    height: 80%;
+    height: 70%;
+}
+
+.modal.editar input{
+    height: 50%;
 }
 
 .erro {
