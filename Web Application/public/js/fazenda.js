@@ -119,7 +119,9 @@ function listarFazendas() {
                 } else {
                     farmList.style.display = "block";
                     fazendas.forEach((fazenda) => {
-                        content += `<div class="div-fazenda" id="div-fazenda">
+                        content += `<div class="div-fazenda" id="div-fazenda"
+                        data-fazenda-id=${fazenda.id} data-fazenda-nome=${fazenda.nome}
+                        >
                         <span class="nomeFazenda">Fazenda ${fazenda.nome} - ${fazenda.estado}</span>
                          
                         <span class="tipoFazenda">Café ${fazenda.tipoCafe}</span>
@@ -132,11 +134,33 @@ function listarFazendas() {
                             <button class="botton-add-farm" onclick="openModal()"><img src="./assets/imgs/add (1).png" alt=""></button>
                         </div>`
                     document.getElementById('farmList').innerHTML = content;
+
+                    const fazendasDivs = document.querySelectorAll('.div-fazenda');
+
+                    fazendasDivs.forEach((div) => {
+                        div.addEventListener('click', function () {
+                            window.location.href = "fazendasProximaTela.html";
+                        });
+                    });
+
+                    fazendasDivs.forEach((div) => {
+                        div.addEventListener('click', function () {
+                            const idFazenda = div.getAttribute('data-fazenda-id');
+                            const nomeFazenda = div.getAttribute('data-fazenda-nome');
+                            sessionStorage.setItem('ID_FAZENDA', idFazenda);
+                            sessionStorage.setItem('NOME_FAZENDA', nomeFazenda);
+                            console.log(idFazenda, nomeFazenda);
+                        });
+                    });
+
                 }
             })
                 .catch(function (erro) {
                     console.log(`#ERRO: ${erro}`);
                 });
+
         }
         )
 }
+
+

@@ -57,12 +57,12 @@ CREATE TABLE IF NOT EXISTS medidaIdealFaseCafePorTipo (
 CREATE TABLE IF NOT EXISTS fazenda (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45),
+    tipoCafe VARCHAR(20),
     fkempresa INT,
     fkEstadosMunicipio INT,
     FOREIGN KEY (fkEmpresa) REFERENCES empresa(id),
     FOREIGN KEY (fkEstadosMunicipio) REFERENCES estadosMunicipio(id)
 );
-
 CREATE TABLE IF NOT EXISTS funcionario (
     id INT PRIMARY KEY AUTO_INCREMENT,
     fkFazenda INT,
