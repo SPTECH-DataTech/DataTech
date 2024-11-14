@@ -334,7 +334,7 @@ input[type="checkbox"] {
     font-size: small;
 }
 
-.popup.adicionar {
+#popup-adicionar {
     display: none;
     align-items: center;
     justify-content: center;
@@ -412,4 +412,12 @@ input[type="checkbox"] {
 .popup.remover img {
     width: 15%;
     height: 50%;
+}
+
+.popup.editar img {
+    width: 20%;
+}
+
+.popup.editar {
+    height: 40%; 
 }
