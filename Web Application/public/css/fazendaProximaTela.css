@@ -287,7 +287,7 @@ h1 {
     flex-direction: column;
 
     width: 400px;
-    height: 500px;
+    height: 450px;
     border: solid rgba(75, 75, 75, 0.259) 3px;
     border-radius: 15px;
     /* padding: 10px; */
@@ -374,8 +374,24 @@ h1 {
 }
 
 .button-editar {
+    margin-top: 30px;
+    width: 120px;
+    height: 45px;
+    border-radius: 10px;
+    border: solid rgba(83, 83, 83, 0.378) 2px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.button-remover {
+    margin-top: 30px;
     width: 120px;
     height: 45px;
     border-radius: 10px;
     border: none;
+    background-color: #EC5252;
+    border: solid rgba(83, 83, 83, 0.378) 2px;
+    font-weight: 400;
+    font-size: 16px;
+    color: white;
 }
