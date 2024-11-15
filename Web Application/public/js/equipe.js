@@ -1,9 +1,11 @@
 var idFazenda = sessionStorage.ID_FAZENDA;
 var nomeFazenda = sessionStorage.NOME_FAZENDA;
 var idFuncionario = sessionStorage.ID_FUNCIONARIO;
+var nomeUsuario = sessionStorage.NOME_USUARIO;
 
 nome_fazenda1.innerHTML = `${nomeFazenda}`;
 nome_fazenda2.innerHTML = `${nomeFazenda}`;
+b_usuario.innerHTML = `${nomeUsuario}`;
 
 function listarFuncionarios() {
 
@@ -480,6 +482,8 @@ function editar() {
     if (erroEncontrado) {
         return;
     }
+
+    const idFuncionario = sessionStorage.getItem("ID_FUNCIONARIO");
 
     const idCargo = select_cargos_editar.value;
 
