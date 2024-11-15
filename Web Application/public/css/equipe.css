@@ -73,7 +73,9 @@
     background-color: #A9ADB3;
 }
 
-.fa-pencil {
+.fa-pencil,
+.fa-trash,
+.fa-user-plus {
     color: #785DC8;
 }
 
