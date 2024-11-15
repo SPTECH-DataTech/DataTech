@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<!DOCTYPE html>
-<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="assets/logo_datatech_-_roxa_escuro.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/suporte.css">
-    <script src="./js/dashProximaTela.js"></script>
 
-    <title>Dashboard • DataTech </title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Suporte • DataTech</title>
 
 
 </head>
@@ -56,31 +50,86 @@
 
         <img src="./img/fundoSuporte.png" class="imagemfundo">
 
-       
+
+
         <div class="formulario">
             <h2>Suporte</h2>
             <hr class="linha-separadora">
             <p>Estamos monitorando nosso sistema 24 horas por dia. Caso você esteja enfrentando algum problema relate
                 nesse formulário. </p>
-            <form id="suporteForm">
-                <label for="tipoProblema">Selecione o Tipo de Suporte:</label>
-                <select id="tipo" name="tipo">
-                    <option value="acesso">Acesso</option>
-                    <option value="tecnico">Técnico</option>
-                    <option value="outro">Outro</option>
-                </select>
+
+            <form id="suporteForm" onsubmit="enviarEmail(event)" method="POST">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" required>
 
                 <label for="email">E-mail para Contato:</label>
                 <input type="email" id="email" name="email" required placeholder="email@email.com">
 
-                <label for="description">Descreva o Problema:</label>
-                <textarea id="descricao" name="descricao" rows="4" required></textarea>
+                <label for="phone">Telefone:</label>
+                <input type="text" id="phone" name="phone" onkeyup="mascaraTelefone()" maxlength="15"
+                    placeholder="(00) 00000-0000">
 
-                <button type="submit" class="botaoEnviar">Enviar</button>
+                <label for="tipoProblema">Selecione o Tipo de Suporte:</label>
+                <select id="tipo" name="tipo">
+                    <option value="Acesso">Suporte para Acesso</option>
+                    <option value="Técnico">Suporte Técnico</option>
+                    <option value="Outro tipo">Outro tipo de suporte</option>
+                </select>
+
+                <label for="descricao">Descreva o Problema:</label>
+                <textarea id="message" name="descricao" rows="4" required
+                    placeholder="Estou com problema em..."></textarea>
+
+                <button type="submit" id="botaoEnviar">Enviar</button>
             </form>
+
         </div>
         </div>
+
+
 
 </body>
+<script>
+    async function enviarEmail(event) {
+        event.preventDefault();
+
+        const nameInput = document.querySelector('#name').value;
+        const emailInput = document.querySelector('#email').value;
+        const phoneInput = document.querySelector('#phone').value;
+        const tipoProblemaInput = document.querySelector('#tipo').value;
+        const messageInput = document.querySelector('#message').value;
+
+        try {
+            const response = await fetch('/enviarEmailSuporte', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    toName: nameInput,
+                    toEmail: emailInput,
+                    toPhone: phoneInput,
+                    toTipo: tipoProblemaInput,
+                    toMessage: messageInput,
+                }),
+            });
+
+            const message = await response.text();
+            alert(message); // Exibe uma mensagem de sucesso ou erro
+        } catch (error) {
+            console.error('Erro ao enviar e-mail:', error);
+            alert('Erro ao enviar e-mail.');
+        }
+    }
+
+    function mascaraTelefone() {
+        var phone = document.querySelector("#phone");
+
+        phone.value = phone.value.replace(/\D+/g, '')
+            .replace(/(\d{2})(\d)/, '($1) $2')
+            .replace(/(\d{5})(\d)/, '$1-$2')
+            .replace(/(-\d{4})\d+?$/, '$1')
+    }
+</script>
 
 </html>
