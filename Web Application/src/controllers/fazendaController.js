@@ -9,10 +9,13 @@ function adicionarFazenda(req, res) {
         res.status(400).send("O tipo de café da fazenda está undefined!")
     } else if (!estadoFazenda) {
         res.status(400).send("O estado da fazenda está undefined!")
+    } else if (!idEmpresa) {
+        res.status(400).send("A empresa está undefined!")
     } else {
         fazendaModel.adicionarFazenda(nomeFazenda, tipoCafe, estadoFazenda, idEmpresa).then(function (resultado) {
             console.log(`Fazenda "${nomeFazenda}" registrada no banco de dados.`);
-            res.status(201).json({ message: 'Fazenda registrada com sucesso!', resultado });
+            res.status(201).json({ 
+                message: 'Fazenda registrada com sucesso!', resultado });
 
         }).catch(function (erro) {
             console.error(`Houve um erro ao registrar a Fazenda "${nomeFazenda}": `, erro.sqlMessage)
@@ -35,8 +38,8 @@ function listarEstados(req, res) {
 function listarFazendas(req, res) {
 
     fazendaModel.listarFazendas().then((resultado) => {
-        console.log("Fazendas encontradas:", resultado);
-        res.status(200).json(resultado);
+        console.log(`Resultados: ${JSON.stringify(resultado)}`);
+        res.status(200).json(resultado); 
     })
         .catch((erro) => {
             console.error("Houve um erro ao listar as fazendas!");

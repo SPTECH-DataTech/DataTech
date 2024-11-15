@@ -7,19 +7,19 @@ router.get("/carregarCargos", function (req, res) {
   equipeController.carregarCargos(req, res);
 });
 
-router.get("/listarFuncionarios/1", function (req, res) {
+router.get("/listarFuncionarios/:idFazenda", function (req, res) {
   equipeController.listarFuncionarios(req, res);
 });
 
-router.post("/adicionar", function (req, res) {
+router.post("/adicionar/:idFazenda", function (req, res) {
   equipeController.adicionar(req, res);
 });
 
-router.delete("/excluir/:idUsuario", function (req, res) {
+router.delete("/excluir/:idFuncionario", function (req, res) {
   equipeController.excluir(req, res);
 });
 
-router.put("/editar/:idUsuario", function (req, res) {
+router.put("/editar/:idFuncionario", function (req, res) {
   equipeController.editar(req, res);
 });
 

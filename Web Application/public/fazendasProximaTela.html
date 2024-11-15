@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/fazendaProximaTela.css">
+    
+</head>
+
+<body>
+    <!-- Menu Lateral -->
+    <section class="menu-lateral">
+        <div class="identificacao-empresa">
+            <h1>Empresa</h1>
+        </div>
+
+        <div>
+            <b>
+                <p>Menu</p>
+            </b>
+            <a href="dashboard.html"><button class="btn-dashboard"><img src="./assets/Chart.png" alt="dashboard icon"
+                        class="dashboard icon"> Dashboard</button></a>
+            <a href="fazendas.html"><button class="btn-fazenda"> <img src="./assets/Vector.png" alt="fazenda icon"
+                        class="icon">Fazendas</button></a>
+            <a href="equipe.html"><button class="btn-equipe"><img src="./assets/Group.png" alt="equipe icon"
+                        class="icon"> Equipe</button></a>
+            <a href="recomendacoes.html"><button class="btn-recomendacoes"><img src="./assets/Chat.png"
+                        alt="recomendacoes icon" class="icon"> Recomendações</button></a>
+
+            <b>
+                <p>Outros</p>
+            </b>
+            <a href="conta.html"><button class="btn-conta"><img src="./assets/Profile.png" alt="conta icon"
+                        class="icon"> Conta</button></a>
+            <a href="suporte.html" target="_blank"><button class="btn-suporte"> <img src="./assets/Info Square.png"
+                        alt="suporte icon" class="icon">Suporte</button></a>
+            <a href="login.html"><button onclick="limparSessao()" class="btn-sair"><img
+                        src="./assets/icons8-exit-50.png" alt="exit icon" class="icon"> Sair</button></a>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Navbar no topo -->
+        <div class="navbar">
+            <img src="./assets/Group 376.png" alt="perfil icon" class="icon">
+            <h3 id="b_usuario">Cliente</h3>
+        </div>
+
+        <!-- Conteúdo principal -->
+        <div class="container-group">
+            <div class="gerenciar-fazenda">
+                <div class="card-cargos">
+                    <div class="info-card">
+                        <h1>Equipe</h1>
+                        <span>Acesse os membros cadastrados na equipe dessa fazenda.</span>
+                    </div>
+                    <div>
+                        <img class="img-fundo" src="./assets/imgs/image 15.png" alt="">
+                    </div>
+                </div>
+                <div class="card-equipe">   
+                    <div class="info-card">
+                        <h1>Cargo</h1>
+                        Acesse os membros cadastrados na equipe dessa fazenda.
+                    </div>
+                    <div class="image-title">
+                        <img class="img-equipe" src="./assets/imgs/image 17.png" alt="">
+                    </div>
+                </div>
+                <img src="./assets/imgs/Ellipse 14.png" alt="" class="image-elipse">
+            </div>
+
+            <div class="editar-fazenda">
+                <div class="modal-fazenda" id="modal-fazenda">
+                    <div class="content-modal">
+                        <div class="group-titles"></div>
+
+                        <div class="group-fields">
+                            <span class="label">Nome Fazenda:</span>
+                            <input type="text" id="input_nome_fazenda_edit">
+                        </div>
+                        <div class="group-fields">
+                            <span class="label">Tipo Café:</span>
+                            <select name="" id="select_tipo_cafe_edit">
+                                <option value="#">-</option>
+                                <option value="Arábica">Arábica</option>
+                                <option value="Robusta">Robusta</option>
+                            </select>
+                        </div>
+                        <div class="group-fields">
+                            <span class="label">Estado da Fazenda:</span>
+                            <select name="" id="select_estado_fazenda_edit">
+                                <option value="#">-</option>
+                            </select>
+                        </div>
+
+                        <div class="group-buttons">
+                            <button class="button-editar" onclick="adicionarFazenda()">Editar</button>
+                            <button class="button-remover" onclick="adicionarFazenda()">Remover</button>
+                        </div>
+                        <span id="message"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    
+
+</body>
+
+</html>
+
+
+<script>
+   
+
+
+listarEstados();
+
+function listarEstados() {
+    fetch("/fazenda/listarEstados", {
+        method: "GET",
+    })
+        .then(function (resposta) {
+            resposta.json().then((fazenda) => {
+                fazenda.forEach((fazendaEstado) => {
+                    select_estado_fazenda_edit.innerHTML += `<option value='${fazendaEstado.id}'>${fazendaEstado.estado}</option>`;
+                });
+            });
+        })
+        .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+}
+document.addEventListener('DOMContentLoaded', function () {
+    const nomeFazenda = document.getElementById('input_nome_fazenda_edit');
+    const tipoCafe = document.getElementById('select_tipo_cafe_edit');
+    const estadoFazenda = document.getElementById('select_estado_fazenda_edit');
+
+    nomeFazenda.value = sessionStorage.getItem('NOME_FAZENDA');
+    tipoCafe.value = sessionStorage.getItem('TIPO_CAFE_FAZENDA');
+    estadoFazenda.value = sessionStorage.ESTADO_FAZENDA;
+
+
+    tipoCafe.disabled = true;
+    nomeFazenda.disabled = true;
+    estadoFazenda.disabled = true;
+});
+
+</script>

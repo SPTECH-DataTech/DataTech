@@ -112,31 +112,56 @@ function listarFazendas() {
     })
         .then(function (resposta) {
             resposta.json().then((fazendas) => {
-
                 if (fazendas.length == 0) {
                     container.style.display = "block";
                     container.style.display = "flex";
                 } else {
                     farmList.style.display = "block";
                     fazendas.forEach((fazenda) => {
-                        content += `<div class="div-fazenda" id="div-fazenda">
+                        
+                        content += `<div class="div-fazenda" id="div-fazenda"
+                        data-fazenda-id=${fazenda.id} data-fazenda-nome=${fazenda.nome} data-fazenda-tipo-cafe=${fazenda.tipoCafe} data-fazenda-estado=${fazenda.estado}>
                         <span class="nomeFazenda">Fazenda ${fazenda.nome} - ${fazenda.estado}</span>
-                         
                         <span class="tipoFazenda">Café ${fazenda.tipoCafe}</span>
                         <img src="./assets/imgs/Group 413 (1).png" alt="" class="image-buttonn"> </div>`;
                     });
 
                     content += `<div class="adcionarFazenda" id="adcionarFazenda">
-                            <img src="./assets/imgs/Group 413 (1).png" alt="" class="image-button">
+                                <img src="./assets/imgs/Group 413 (1).png" alt="" class="image-button">
+                                <button class="botton-add-farm" onclick="openModal()"><img src="./assets/imgs/add (1).png" alt=""></button>
+                                </div>`
 
-                            <button class="botton-add-farm" onclick="openModal()"><img src="./assets/imgs/add (1).png" alt=""></button>
-                        </div>`
                     document.getElementById('farmList').innerHTML = content;
+
+                    const fazendasDivs = document.querySelectorAll('.div-fazenda');
+
+                    fazendasDivs.forEach((div) => {
+                        div.addEventListener('click', function () {
+                            window.location.href = "fazendasProximaTela.html";
+                        });
+                    });
+
+                    fazendasDivs.forEach((div) => {
+                        div.addEventListener('click', function () {
+                            const idFazenda = div.getAttribute('data-fazenda-id');
+                            const nomeFazenda = div.getAttribute('data-fazenda-nome');
+                            const tipoCafeFazenda = div.getAttribute('data-fazenda-tipo-cafe');
+                            const estadoFazenda = div.getAttribute('data-fazenda-estado');
+
+                            sessionStorage.setItem('ID_FAZENDA', idFazenda);
+                            sessionStorage.setItem('NOME_FAZENDA', nomeFazenda);
+                            sessionStorage.setItem('TIPO_CAFE_FAZENDA', tipoCafeFazenda);
+                            sessionStorage.setItem('ESTADO_FAZENDA', estadoFazenda);
+                            
+                        });
+                    });
                 }
             })
                 .catch(function (erro) {
                     console.log(`#ERRO: ${erro}`);
                 });
-        }
-        )
-}
+        })}
+
+
+
+
