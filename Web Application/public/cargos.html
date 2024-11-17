@@ -10,13 +10,13 @@
 
     <title>Dashboard • DataTech </title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/cargo.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-
 </head>
 
-<body>
+<body onload="listarCargos()">
 
     <section class="menu-lateral">
         <div class="identificacao-empresa">
@@ -31,7 +31,8 @@
                         class="dashboard icon"> Dashboard</button></a>
             <a href="fazendas.html"><button class="btn-fazenda"> <img src="./assets/Vector.png" alt="fazenda icon"
                         class="icon">Fazendas</button></a>
-            <a href="equipe.html"><button class="btn-equipe"><img src="./assets/Group.png" alt="equipe icon" class="icon">
+            <a href="equipe.html"><button class="btn-equipe"><img src="./assets/Group.png" alt="equipe icon"
+                        class="icon">
                     Equipe</button></a>
             <a href="recomendacoes.html"><button class="btn-recomendacoes"><img src="./assets/Chat.png"
                         alt="recomendacoes icon" class="icon"> Recomendações</button></a>
@@ -39,7 +40,8 @@
             <b>
                 <p>Outros</p>
             </b>
-            <a href="conta.html"><button class="btn-conta"><img src="./assets/Profile.png" alt="conta icon" class="icon">
+            <a href="conta.html"><button class="btn-conta"><img src="./assets/Profile.png" alt="conta icon"
+                        class="icon">
                     Conta</button></a>
             <a href="suporte.html" target="_blank"><button class="btn-suporte"> <img src="./assets/Info Square.png"
                         alt="suporte icon" class="icon">Suporte</button></a>
@@ -58,18 +60,21 @@
         </div>
 
         <!-- -------------------------GRAFICO 1------------------------- -->
-        <section class="dashboard">
-
+        <section class="dashboard" id="dashboard">
             <div class="titulo_fazenda">
-                <h1 id="fazenda">Fazenda:</h1> <h1>BIGCOFFEE</h1>
+                <h1 id="fazenda">Fazenda:</h1>
+                <h1>BIGCOFFEE</h1>
             </div>
-            
+
             <div class="pesquisa">
                 <input type="text" class="input_pesquisa" id="input_pesquisa">
                 <div class="botoes_pesquisa">
-                    <button class="botao_pesquisa" id="botao_adicionar_cargo"><img src="./assets/adicionar.svg" alt=""></button>
-                    <button class="botao_pesquisa" id="botao_remover_cargo"><img src="./assets/remover.svg" alt=""></button>
-                    <button class="botao_pesquisa" id="botao_editar_cargo"><img src="./assets/editar.svg" alt=""></button>
+                    <button class="botao_pesquisa" id="botao_adicionar_cargo" onclick="abrirModalAdicionarCargo()"><img src="./assets/adicionar.svg"
+                            alt=""></button>
+                    <button class="botao_pesquisa" id="botao_remover_cargo"><img src="./assets/remover.svg"
+                            alt=""></button>
+                    <button class="botao_pesquisa" id="botao_editar_cargo"><img src="./assets/editar.svg"
+                            alt=""></button>
                 </div>
             </div>
 
@@ -77,33 +82,12 @@
                 <h1 id="titulo_permissoes_nome">Nome</h1>
                 <h1 id="titulo_permissoes_permissoes">Permissões</h1>
             </div>
-
-            <div class="cargo">
-                <input type="checkbox" id="check_cargo">
-                <div class="permissao">
-                    <h1 id="nome_cargo">Administração</h1>
-                </div>
-                <div class="permissao">
-                    <input type="checkbox" id="check_cargos">
-                    <h1>Cargos</h1>
-                </div>
-                <div class="permissao">
-                    <input type="checkbox" id="check_fazendas">
-                    <h1>Fazendas</h1>
-                </div>
-                <div class="permissao">
-                    <input type="checkbox" id="check_cuncionarios">
-                    <h1>Funcionários</h1>
-                </div>
-            </div>
-
         </section>
-
     </section>
 
-    <div class="modal_add_cargo"></div>
+    <div class="modal_add_cargo" id="modal_add_cargo" style="display: none;"></div>
 
-    <div class="formulario">
+    <div class="formulario" id="formulario_add_cargo" style="display: none;">
         <div class="header_formulario">
             <span id="add_novo_cargo">Adicionar novo cargo a fazenda</span>
             <h1>BIGCOFFEE</h1>
@@ -111,6 +95,10 @@
             <div class="inputs_cargo">
                 <span>Nome cargo</span>
                 <input type="text" name="" class="input_pesquisa" id="input_nome_cargo">
+                <input type="checkbox" id="check_permissao_cargos"><span>Permissão para fazer mudanças nos cargos</span>
+                <input type="checkbox" id="check_permissao_fazendas"><span>Permissão para fazer mudanças nas fazendas</span>
+                <input type="checkbox" id="check_permissao_funcionarios"><span>Permissão para fazer mudanças Nos funcionários</span>
+                <button id="botao_adicionar_cargo" onclick="lerCargosSelecionados()">Adiciona essa budega</button>
             </div>
         </div>
     </div>
@@ -118,9 +106,3 @@
 </body>
 
 </html>
-
-<script>
-
-
-
-</script>
