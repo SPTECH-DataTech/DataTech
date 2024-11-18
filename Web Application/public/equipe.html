@@ -7,8 +7,8 @@
     <link rel="shortcut icon" href="assets/logo_datatech_-_roxa_escuro.png" type="image/x-icon">
     <link rel="stylesheet" href="css/equipe.css">
     <link rel="stylesheet" href="css/dashboard.css">
-    <script src="js/equipe.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <title>Equipe • DataTech</title>
 </head>
@@ -132,19 +132,6 @@
                     <button class="button-modal" onclick="adicionar()">Adicionar funcionário</button>
                 </div>
             </div>
-
-            <section class="popup adicionar" id="popup-adicionar">
-                <div class="content">
-                    <img src="assets/check.png" alt="Imagem check">
-                    <div class="texto-popup">
-                        <h3>Funcionário adicionado com sucesso!</h3>
-                        <p>Peça para que altere a senha provisória.</p>
-                        <div class="botao-popup">
-                            <button onclick="fecharPopup()" class="button-ok">OK</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
         </section>
 
         <section class="janela-modal" id="janela-modal-remover">
@@ -174,18 +161,6 @@
                     </div>
                 </div>
             </div>
-
-            <section class="popup remover" id="popup-remover">
-                <div class="content">
-                    <img src="assets/check.png" alt="Imagem check">
-                    <div class="texto-popup">
-                        <h3>Funcionário removido com sucesso!</h3>
-                        <div class="botao-popup">
-                            <button onclick="fecharPopup()" class="button-ok">OK</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
         </section>
 
@@ -222,18 +197,7 @@
                     <button class="button-modal" onclick="editar()">Editar funcionário</button>
                 </div>
             </div>
-            <section class="popup editar" id="popup-editar">
-                <div class="content">
-                    <img src="assets/check.png" alt="Imagem check">
-                    <div class="texto-popup">
-                        <h3>Funcionário editado com sucesso!</h3>
-                        <p>Avise o funcionário sobre as alterações.</p>
-                        <div class="botao-popup">
-                            <button onclick="fecharPopup()" class="button-ok">OK</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
+
         </section>
 
     </section>
