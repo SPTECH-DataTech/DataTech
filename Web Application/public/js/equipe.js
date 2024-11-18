@@ -309,8 +309,25 @@ function adicionar() {
                 }
                 else {
 
-                    document.getElementById('modal-adicionar').style.display = 'none';
-                    document.getElementById('popup-adicionar').style.display = 'flex';
+                    document.getElementById('janela-modal').style.display = 'none';
+
+                    Swal.fire({
+                        title: 'Funcionário Adicionado',
+                        text: 'Avise para alterar a senha!',
+                        icon: 'success',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: "#20BF55",
+                        didOpen: () => {
+                            document.querySelector('.menu-lateral').classList.add('ajuste-modal');
+                        },
+                        willClose: () => {
+                            document.querySelector('.menu-lateral').classList.remove('ajuste-modal');
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                        }
+                    });
 
                 }
             })
@@ -331,40 +348,51 @@ function fomatarCpf(input) {
     input.value = cpf;
 }
 
-var funcionariosParaRemover = [];
 
 function modalRemoverFuncionario() {
     const modal = document.getElementById('janela-modal-remover');
     const checkboxes = document.querySelectorAll('.campo .checkbox-class');
     const names = document.querySelectorAll('.campo .nome');
     const modalContent = document.getElementById('funcionarios-para-remover');
+    const funcionariosParaRemover = [];
 
     const algumSelecionado = Array.from(checkboxes).some(checkbox => checkbox.checked);
     if (!algumSelecionado) {
-        alert('Selecione pelo menos um funcionário para remover.');
-        return;
+        Swal.fire({
+            icon: 'info',
+            title: 'Atenção!',
+            html: 'Selecione pelo menos <b>um</b> funcionário para remover',
+            confirmButtonText: 'OK',
+            confirmButtonColor: "#20BF55",
+            didOpen: () => {
+                document.querySelector('.menu-lateral').classList.add('ajuste-modal');
+            },
+            willClose: () => {
+                document.querySelector('.menu-lateral').classList.remove('ajuste-modal');
+            }
+        })
+    } else {
+
+        modalContent.innerHTML = '';
+        modal.classList.add('abrir');
+
+        checkboxes.forEach((checkbox, index) => {
+            if (checkbox.checked) {
+                const name = names[index].textContent;
+                const nameElement = document.createElement('p');
+                nameElement.textContent = name;
+                modalContent.appendChild(nameElement);
+                funcionariosParaRemover.push(name);
+            }
+        });
+        console.log("usuario para excluir:", funcionariosParaRemover)
+
+        modal.addEventListener('click', (e) => {
+            if (e.target.id == 'fechar' || e.target.id == 'janela-modal-remover') {
+                modal.classList.remove('abrir')
+            }
+        });
     }
-
-    modalContent.innerHTML = '';
-    modal.classList.add('abrir');
-
-    checkboxes.forEach((checkbox, index) => {
-        if (checkbox.checked) {
-            const name = names[index].textContent;
-            const nameElement = document.createElement('p');
-            nameElement.textContent = name;
-            modalContent.appendChild(nameElement);
-            funcionariosParaRemover.push(name);
-        }
-    });
-    console.log("usuario para excluir:", funcionariosParaRemover)
-
-    modal.addEventListener('click', (e) => {
-        if (e.target.id == 'fechar' || e.target.id == 'janela-modal-remover') {
-            modal.classList.remove('abrir')
-        }
-    });
-
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -387,10 +415,34 @@ function modalEditarFuncionario() {
     const checkboxesSelecionadas = Array.from(checkboxes).filter(checkbox => checkbox.checked);
 
     if (checkboxesSelecionadas.length === 0) {
-        alert('Selecione pelo menos um funcionário para editar.');
+        Swal.fire({
+            icon: 'info',
+            title: 'Atenção!',
+            text: 'Selecione um funcionário para editar',
+            confirmButtonText: 'OK',
+            confirmButtonColor: "#20BF55",
+            didOpen: () => {
+                document.querySelector('.menu-lateral').classList.add('ajuste-modal');
+            },
+            willClose: () => {
+                document.querySelector('.menu-lateral').classList.remove('ajuste-modal');
+            }
+        })
         return;
     } else if (checkboxesSelecionadas.length !== 1) {
-        alert('Selecione apenas um funcionário para editar.');
+        Swal.fire({
+            icon: 'info',
+            title: 'Atenção!',
+            html: 'Selecione apenas <b>um</b> funcionário para editar',
+            confirmButtonText: 'OK',
+            confirmButtonColor: "#20BF55",
+            didOpen: () => {
+                document.querySelector('.menu-lateral').classList.add('ajuste-modal');
+            },
+            willClose: () => {
+                document.querySelector('.menu-lateral').classList.remove('ajuste-modal');
+            }
+        })
         return;
     }
 
@@ -507,8 +559,25 @@ function editar() {
                 }
                 else {
 
-                    document.getElementById('modal-editar').style.display = 'none';
-                    document.getElementById('popup-editar').style.display = 'flex';
+                    document.getElementById('janela-modal-editar').style.display = 'none';
+
+                    Swal.fire({
+                        title: 'Funcionário Editado!',
+                        text: 'Avise sobre as alterações',
+                        icon: 'success',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: "#20BF55",
+                        didOpen: () => {
+                            document.querySelector('.menu-lateral').classList.add('ajuste-modal');
+                        },
+                        willClose: () => {
+                            document.querySelector('.menu-lateral').classList.remove('ajuste-modal');
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                        }
+                    });
 
                 }
             })
@@ -526,35 +595,59 @@ function excluir() {
     const checkboxes = document.querySelectorAll('.campo .checkbox-class:checked');
     const idsFuncionarios = Array.from(checkboxes).map(checkbox => checkbox.getAttribute('data-id'));
 
-    idsFuncionarios.forEach(idFuncionario => {
-        fetch(`/equipe/excluir/${idFuncionario}`, {
-            method: 'DELETE',
-        })
-            .then(response => {
-                if (response.ok) {
-                    console.log(`Funcionário ${idFuncionario} removido com sucesso`);
-                    document.getElementById('modal-remover').style.display = 'none';
-                    document.getElementById('popup-remover').style.display = 'flex';
-                } else {
-                    console.error(`Erro ao remover o funcionário ${idFuncionario}:`, response.status);
-                }
-            })
-            .catch(error => console.error('Erro ao remover funcionário:', error));
+    Swal.fire({
+        icon: "warning",
+        title: "Tem certeza?",
+        text: "Essa ação não poderá ser revertida",
+        showCancelButton: true,
+        confirmButtonColor: "#20BF55",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sim",
+        cancelButtonText: "Cancelar",
+        didOpen: () => {
+            document.querySelector('.menu-lateral').classList.add('ajuste-modal');
+        },
+        willClose: () => {
+            document.querySelector('.menu-lateral').classList.remove('ajuste-modal');
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            idsFuncionarios.forEach(idFuncionario => {
+                fetch(`/equipe/excluir/${idFuncionario}`, {
+                    method: 'DELETE',
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            Swal.fire({
+                                title: "Funcionário removido!",
+                                icon: "success",
+                                confirmButtonText: "Ok",
+                                didOpen: () => {
+                                    document.querySelector('.menu-lateral').classList.add('ajuste-modal');
+                                },
+                                willClose: () => {
+                                    document.querySelector('.menu-lateral').classList.remove('ajuste-modal');
+                                }
+                            }).then(() => {
+                                location.reload();
+                            });
+                            console.log(`Funcionário ${idFuncionario} removido com sucesso`);
+                        } else {
+                            console.error(`Erro ao remover o funcionário ${idFuncionario}:`, response.status);
+                        }
+                    })
+                    .catch(error => console.error('Erro ao remover funcionário:', error));
+            });
+        } else {
+            console.log("Ação de exclusão cancelada.");
+        }
     });
-
 }
 
-function fecharPopup() {
-    document.getElementById('janela-modal').style.display = 'none';
-    document.getElementById('janela-modal-remover').style.display = 'none';
-    document.getElementById('janela-modal-editar').style.display = 'none';
-    
-    location.reload();
-}
+
 
 window.onload = function () {
     listarFuncionarios();
-    excluir();
     carregarCargos();
 }
 
