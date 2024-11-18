@@ -120,7 +120,7 @@ function listarFazendas() {
                     fazendas.forEach((fazenda) => {
                         
                         content += `<div class="div-fazenda" id="div-fazenda"
-                        data-fazenda-id=${fazenda.id} data-fazenda-nome=${fazenda.nome} data-fazenda-tipo-cafe=${fazenda.tipoCafe} data-fazenda-estado=${fazenda.estado}>
+                        data-fazenda-id=${fazenda.id} data-fazenda-nome=${fazenda.nome} data-fazenda-tipo-cafe=${fazenda.tipoCafe} data-fazenda-estado=${fazenda.estado}> 
                         <span class="nomeFazenda">Fazenda ${fazenda.nome} - ${fazenda.estado}</span>
                         <span class="tipoFazenda">Café ${fazenda.tipoCafe}</span>
                         <img src="./assets/imgs/Group 413 (1).png" alt="" class="image-buttonn"> </div>`;

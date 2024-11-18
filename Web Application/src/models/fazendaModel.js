@@ -29,8 +29,30 @@ function listarFazendas() {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
+function removerFazenda(idFazenda) {
+    console.log("ACESSEI O FAZENDA MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", idFazenda);
+
+    var instrucaoSql = `DELETE FROM fazenda WHERE id = '${idFazenda}';`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function editarFazenda(nomeFazenda, tipoCafe, estadoFazenda, idFazenda) {
+    console.log("ACESSEI O FAZENDA MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", idFazenda, nomeFazenda, tipoCafe, estadoFazenda);
+
+    var instrucaoSql = `UPDATE fazenda SET nome = '${nomeFazenda}', tipoCafe = '${tipoCafe}', fkEstadosMunicipio = '${estadoFazenda}' WHERE id = '${idFazenda}';`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
 module.exports = {
     listarEstados,
     adicionarFazenda,
-    listarFazendas
+    listarFazendas,
+    removerFazenda,
+    editarFazenda
 }
