@@ -7,6 +7,15 @@ router.post("/adicionarFazenda", (req, res) => {
    fazendaController.adicionarFazenda(req, res);
 });
 
+router.post("/removerFazenda", (req, res) => {
+   fazendaController.removerFazenda(req, res);
+});
+
+router.put("/editarFazenda", (req, res) => {
+   fazendaController.editarFazenda(req, res);
+});
+
+
 router.get("/listarEstados", (req, res) => {
    fazendaController.listarEstados(req, res);
 });

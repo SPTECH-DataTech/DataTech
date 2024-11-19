@@ -7,8 +7,8 @@
     <link rel="shortcut icon" href="assets/logo_datatech_-_roxa_escuro.png" type="image/x-icon">
     <link rel="stylesheet" href="css/equipe.css">
     <link rel="stylesheet" href="css/dashboard.css">
-    <script src="js/equipe.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <title>Equipe • DataTech</title>
 </head>
@@ -40,7 +40,7 @@
             <a href="dashConta.html"><button class="btn-conta"><img src="./assets/Profile.png" alt="conta icon"
                         class="icon">
                     Conta</button></a>
-            <a href="suporte.html" target="_blank"><button class="btn-suporte"> <img src="./assets/Info Square.png"
+            <a href="suporte.html"><button class="btn-suporte"> <img src="./assets/Info Square.png"
                         alt="suporte icon" class="icon">Suporte</button></a>
             <a href="login.html"><button onclick="limparSessao()" class="btn-sair"><img
                         src="./assets/icons8-exit-50.png" alt="exit icon" class="icon"> Sair</button></a>
@@ -58,7 +58,7 @@
         <h3 class="name-titulo">Lista de funcionários</h3>
 
         <div class="equipe">
-            Fazenda:<span id="nome_fazenda" class="name-equipe"></span>
+            Fazenda:<span id="nome_fazenda1" class="name-equipe"></span>
         </div>
 
         <section class="search-add-remove">
@@ -68,9 +68,9 @@
                 </div>
                 <div class="botoes-add-remove">
                     <button id="adicionar-funcionario" onclick="modalAdicionarFuncionario()"
-                        class="add-button">➕</button>
+                        class="add-button"><i class="fa-solid fa-user-plus"></i></button>
                     <button id="remover-funcionario" onclick="modalRemoverFuncionario()"
-                        class="remove-button">➖</button>
+                        class="remove-button"><i class="fas fa-trash"></i></button>
                     <button id="editar-funcionario" onclick="modalEditarFuncionario()" class="edit-button"><i
                             class="fas fa-pencil"></i></button>
                 </div>
@@ -90,12 +90,12 @@
 
         <section class="janela-modal" id="janela-modal">
 
-            <div class="modal">
+            <div class="modal" id="modal-adicionar">
                 <button class="fechar" id="fechar">&times;</button>
                 <div class="box-modal">
                     <div class="titulo">
                         <span>Adicionar novo funcionário na equipe</span>
-                        <h1 id="nome_fazenda" class="name-equipe">BIGCOFEE</h1>
+                        <h1 id="nome_fazenda2" class="name-equipe"></h1>
                     </div>
                     <div class="formulario">
                         <div class="inputs">
@@ -132,24 +132,11 @@
                     <button class="button-modal" onclick="adicionar()">Adicionar funcionário</button>
                 </div>
             </div>
-
-            <section class="popup adicionar" id="popup-adicionar">
-                <div class="content">
-                    <img src="assets/check.png" alt="Imagem check">
-                    <div class="texto-popup">
-                        <h3>Funcionário adicionado com sucesso!</h3>
-                        <p>Peça para que altere a senha provisória.</p>
-                        <div class="botao-popup">
-                            <button onclick="fecharPopUp()" class="button-ok">OK</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
         </section>
 
         <section class="janela-modal" id="janela-modal-remover">
 
-            <div class="modal remover">
+            <div class="modal remover" id="modal-remover">
                 <button class="fechar" id="fechar">&times;</button>
                 <div class="box-modal remover">
                     <div class="titulo">
@@ -175,28 +162,16 @@
                 </div>
             </div>
 
-            <section class="popup remover" id="popup-remover">
-                <div class="content">
-                    <img src="assets/check.png" alt="Imagem check">
-                    <div class="texto-popup">
-                        <h3>Funcionário removido com sucesso!</h3>
-                        <div class="botao-popup">
-                            <button onclick="fecharPopUp()" class="button-ok">OK</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
         </section>
 
         <section class="janela-modal" id="janela-modal-editar">
 
-            <div class="modal editar">
+            <div class="modal editar" id="modal-editar">
                 <button class="fechar" id="fechar">&times;</button>
                 <div class="box-modal editar">
                     <div class="titulo">
                         <span>Editar funcionário:</span>
-                        <h1 id="nome_fazenda" class="name-equipe">BIGCOFEE</h1>
+                        <h1 id="nome_usuario_editar" class="name-equipe"></h1>
                     </div>
                     <div class="formulario">
                         <div class="inputs">
@@ -222,18 +197,7 @@
                     <button class="button-modal" onclick="editar()">Editar funcionário</button>
                 </div>
             </div>
-            <section class="popup editar" id="popup-editar">
-                <div class="content">
-                    <img src="assets/check.png" alt="Imagem check">
-                    <div class="texto-popup">
-                        <h3>Funcionário editado com sucesso!</h3>
-                        <p>Avise o funcionário sobre as alterações.</p>
-                        <div class="botao-popup">
-                            <button onclick="fecharPopUp()" class="button-ok">OK</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
+
         </section>
 
     </section>

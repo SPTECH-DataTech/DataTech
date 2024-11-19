@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./css/fazendaProximaTela.css">
+
 </head>
 
 <body>
@@ -33,8 +34,8 @@
             </b>
             <a href="conta.html"><button class="btn-conta"><img src="./assets/Profile.png" alt="conta icon"
                         class="icon"> Conta</button></a>
-            <a href="suporte.html" target="_blank"><button class="btn-suporte"> <img src="./assets/Info Square.png"
-                        alt="suporte icon" class="icon">Suporte</button></a>
+            <a href="suporte.html"><button class="btn-suporte"> <img src="./assets/Info Square.png" alt="suporte icon"
+                        class="icon">Suporte</button></a>
             <a href="login.html"><button onclick="limparSessao()" class="btn-sair"><img
                         src="./assets/icons8-exit-50.png" alt="exit icon" class="icon"> Sair</button></a>
         </div>
@@ -50,7 +51,7 @@
         <!-- Conteúdo principal -->
         <div class="container-group">
             <div class="gerenciar-fazenda">
-                <div class="card-cargos">
+                <div class="card-cargos" id="card-cargos">
                     <div class="info-card">
                         <h1>Equipe</h1>
                         <span>Acesse os membros cadastrados na equipe dessa fazenda.</span>
@@ -59,7 +60,7 @@
                         <img class="img-fundo" src="./assets/imgs/image 15.png" alt="">
                     </div>
                 </div>
-                <div class="card-equipe">   
+                <div class="card-equipe">
                     <div class="info-card">
                         <h1>Cargo</h1>
                         Acesse os membros cadastrados na equipe dessa fazenda.
@@ -78,11 +79,11 @@
 
                         <div class="group-fields">
                             <span class="label">Nome Fazenda:</span>
-                            <input type="text" id="input_nome_fazenda">
+                            <input type="text" id="input_nome_fazenda_edit">
                         </div>
                         <div class="group-fields">
                             <span class="label">Tipo Café:</span>
-                            <select name="" id="select_tipo_cafe">
+                            <select name="" id="select_tipo_cafe_edit">
                                 <option value="#">-</option>
                                 <option value="Arábica">Arábica</option>
                                 <option value="Robusta">Robusta</option>
@@ -90,21 +91,217 @@
                         </div>
                         <div class="group-fields">
                             <span class="label">Estado da Fazenda:</span>
-                            <select name="" id="select_estado_fazenda">
+                            <select name="" id="select_estado_fazenda_edit">
                                 <option value="#">-</option>
                             </select>
                         </div>
 
                         <div class="group-buttons">
-                            <button onclick="adicionarFazenda()">Editar</button>
-                            <button onclick="adicionarFazenda()">Remover</button>
+                            <button class="button-editar" id="button-editar">Editar</button>
+                            <button class="button-remover" onclick="removerFazenda()">Remover</button>
                         </div>
                         <span id="message"></span>
                     </div>
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
+
+
+
 </body>
 
 </html>
+
+
+<script>
+
+
+
+    listarEstados();
+
+    function listarEstados() {
+        fetch("/fazenda/listarEstados", { method: "GET" })
+            .then((resposta) => {
+                if (!resposta.ok) {
+                    throw new Error("Erro ao buscar estados");
+                }
+                return resposta.json();
+            })
+            .then((estados) => {
+                const estadoFazenda = document.getElementById("select_estado_fazenda_edit");
+                const estadoArmazenado = sessionStorage.getItem("ESTADO_FAZENDA");
+
+                estados.forEach((estado) => {
+                    estadoFazenda.innerHTML += `<option value='${estado.id}'>${estado.estado}</option>`;
+                    const idEstado = estado.id;
+                    sessionStorage.setItem('ID_ESTADO', idEstado);
+                });
+
+                const opcaoSelecionada = Array.from(estadoFazenda.options).find(
+                    (option) => option.text === estadoArmazenado
+                );
+
+                if (opcaoSelecionada) {
+                    estadoFazenda.value = opcaoSelecionada.value;
+                }
+
+            })
+            .catch((erro) => {
+                console.error(`#ERRO: ${erro.message}`);
+            });
+    }
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        console.log("Valor armazenado para estado:", sessionStorage.getItem('ID_FAZENDA'));
+
+        const nomeFazenda = document.getElementById('input_nome_fazenda_edit');
+        const tipoCafe = document.getElementById('select_tipo_cafe_edit');
+        const estadoFazenda = document.getElementById('select_estado_fazenda_edit');
+
+        nomeFazenda.value = sessionStorage.getItem('NOME_FAZENDA');
+        tipoCafe.value = sessionStorage.getItem('TIPO_CAFE_FAZENDA');
+        estadoFazenda.value = sessionStorage.getItem('ID_FAZENDA');
+
+        tipoCafe.disabled = true;
+        nomeFazenda.disabled = true;
+        estadoFazenda.disabled = true;
+    });
+
+    function habilitarMensagem(mensagem) {
+        const p = document.getElementById('message');
+        p.style.display = "block"
+        p.innerHTML = mensagem;
+    }
+
+    function ocultarMensagem() {
+        const p = document.getElementById('message');
+        p.style.display = "none"
+    }
+
+    function removerFazenda() {
+
+        const idFazenda = sessionStorage.ID_FAZENDA;
+
+        fetch('fazenda/removerFazenda', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idFazenda: idFazenda
+            }),
+        })
+            .then(function (resposta) {
+                return resposta.json().then(data => {
+                    console.log("Resposta do servidor: ", data);
+
+                    if (!resposta.ok) {
+                        throw new Error(data.erro);
+                    }
+                    else {
+                        habilitarMensagem(data.message);
+
+                        setTimeout(() => {
+                            window.location = "fazendas.html";
+                        }, 2000);
+                    }
+                });
+            })
+            .catch(function (erro) {
+                console.log(`#ERRO: ${erro}`);
+                habilitarMensagem(erro.message);
+            });
+
+        return false;
+    }
+
+    const equipe = document.getElementById('card-cargos');
+    equipe.addEventListener('click', function () {
+        window.location.href = "equipe.html";
+    });
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const buttonEditar = document.querySelector("#button-editar");
+        buttonEditar.addEventListener("click", habilitarEdicao);
+    });
+
+    function habilitarEdicao() {
+        const nomeFazenda = document.getElementById('input_nome_fazenda_edit');
+        const tipoCafe = document.getElementById('select_tipo_cafe_edit');
+        const estadoFazenda = document.getElementById('select_estado_fazenda_edit');
+
+        nomeFazenda.disabled = false;
+        tipoCafe.disabled = false;
+        estadoFazenda.disabled = false;
+
+        const buttonEditar = document.getElementById("button-editar");
+        buttonEditar.innerHTML = "Enviar";
+        buttonEditar.setAttribute("id", "button-enviar");
+
+        document.querySelector("#button-enviar").addEventListener("click", editarFazenda);
+    }
+
+
+    function editarFazenda() {
+        const nomeFazenda = document.getElementById('input_nome_fazenda_edit').value;
+        const tipoCafe = document.getElementById('select_tipo_cafe_edit').value;
+        const estadoFazenda = sessionStorage.ID_ESTADO;
+        const idFazenda = sessionStorage.ID_FAZENDA;
+
+        fetch('fazenda/editarFazenda', {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idFazenda: idFazenda,
+                tipoCafe: tipoCafe,
+                estadoFazenda: estadoFazenda,
+                nomeFazenda: nomeFazenda
+            }),
+        })
+            .then(function (resposta) {
+                return resposta.json().then(data => {
+                    console.log("Resposta do servidor: ", data);
+
+                    if (!resposta.ok) {
+                        throw new Error(data.erro);
+                    }
+                    else {
+                        habilitarMensagem(data.message);
+                        bloquearCampos();
+
+                        setTimeout(() => {
+                            ocultarMensagem()
+                        }, 2000);
+                    }
+                });
+            })
+            .catch(function (erro) {
+                console.log(`#ERRO: ${erro}`);
+                habilitarMensagem(erro.message);
+            });
+
+        return false;
+    }
+
+
+    function bloquearCampos() {
+        const nomeFazenda = document.getElementById('input_nome_fazenda_edit');
+        const tipoCafe = document.getElementById('select_tipo_cafe_edit');
+        const estadoFazenda = document.getElementById('select_estado_fazenda_edit');
+
+        nomeFazenda.disabled = true;
+        tipoCafe.disabled = true;
+        estadoFazenda.disabled = true;
+
+        const buttonEditar = document.getElementById("button-enviar");
+        buttonEditar.innerHTML = "Editar";
+        buttonEditar.setAttribute("id", "button-editar");
+
+        document.querySelector("#button-editar").addEventListener("click", habilitarEdicao);
+    }
+</script>
