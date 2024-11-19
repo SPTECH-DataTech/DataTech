@@ -12,3 +12,6 @@ function modalAlterarSenha() {
         modal.classList.remove('abrir');
     });
 }
+
+
+
