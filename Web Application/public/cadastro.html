@@ -8,6 +8,8 @@
   <link rel="shortcut icon" href="assets/logo_datatech_-_roxa_escuro.png" type="image/x-icon">
   <link rel="stylesheet" href="./css/cadastro.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <title>Cadastro • DataTech</title>
 
   <!-- <script src="./js/sessao.js"></script> -->
@@ -33,19 +35,19 @@
 
 
       <div class="card-inputs">
-        <span class="label"  id="spanNome">Nome:</span>
+        <span class="label" id="spanNome">Nome:</span>
         <input type="text" id="input_nome">
         <span class="erro" id="erro_nome"></span>
 
-        <span  class="label" id="spanCpf">CPF:</span>
+        <span class="label" id="spanCpf">CPF:</span>
         <input type="text" id="input_cpf" maxlength="14" placeholder="XXX.XXX.XXX.XX" oninput="fomatarCpf(this)">
         <span class="erro" id="erro_cpf"></span>
 
-        <span class="label"  id="spanEmail">E-mail:</span>
+        <span class="label" id="spanEmail">E-mail:</span>
         <input type="text" id="input_email">
         <span class="erro" id="erro_email"></span>
 
-        <span  class="label" id="spanSenha">Senha:</span>
+        <span class="label" id="spanSenha">Senha:</span>
         <input type="password" id="input_senha">
         <span class="erro" id="erro_senha"></span>
 
@@ -53,7 +55,7 @@
         <input type="password" id="input_confirmacaoSenha">
         <span class="erro" id="erro_confirmacaoSenha"></span>
 
-        <span class="label" >Digite seu Token: <span onmouseover="verModal()" onmouseout="ocultarModal()"><i
+        <span class="label">Digite seu Token: <span onmouseover="verModal()" onmouseout="ocultarModal()"><i
               class="bi bi-info-circle"></i></span></span>
         <input type="number" id="input_token">
         <span class="erro" id="erro_token"></span>
@@ -62,12 +64,6 @@
           <button class="botao" onclick="cadastrar()">Próximo Passo</button>
 
           <p>Já possuo uma conta! <a href="./login.html"><b style="color: #7F00FF;">Entrar</b></a></p>
-        </div>
-
-        <div class="container-mensagem">
-          <p id="message">
-
-          </p>
         </div>
 
       </div>
