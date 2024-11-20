@@ -16,7 +16,17 @@ function adicionarCargo(nomeCargo, permissaoCargos, permissaoFazendas, permissao
     return database.executar(instrucaoSql)
 }
 
+function removerCargos(listaIdsCargos) {
+    for (i = 0; i < listaIdsCargos.length; i++) {
+        let instrucaoSql = `
+            DELETE FROM cargos WHERE id = ${listaIdsCargos[i]}
+        `;
+        database.executar(instrucaoSql);
+    }
+}
+
 module.exports = {
     listarCargos,
-    adicionarCargo
+    adicionarCargo,
+    removerCargos
 };

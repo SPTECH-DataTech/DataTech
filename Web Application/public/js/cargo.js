@@ -1,5 +1,6 @@
 // let idFazenda = sessionStorage.ID_FAZENDA;
 let idFazenda = 1;
+let cargos;
 
 function listarCargos() {
 
@@ -20,6 +21,8 @@ function listarCargos() {
                 }
                 else {
                     console.log("Resposta do servidor: ", data);
+                    qtdCargos = data.length;
+                    cargos = data;
                     exibirCargosNaTela(data);
                 }
             })
@@ -31,9 +34,10 @@ function listarCargos() {
 }
 
 function exibirCargosNaTela(data) {
-    for(i = 0; i < data.length; i++) {
-        console.log(`Rodei ${i} vezes`);
-        document.getElementById("dashboard").innerHTML += `
+    document.getElementById("lista_cargos").innerHTML = "";
+
+    for (i = 0; i < cargos.length; i++) {
+        document.getElementById("lista_cargos").innerHTML += `
         <div class="cargo" id="${data[i].id}">
             <input type="checkbox" id="check_cargo_${data[i].id}">
             <div class="permissao">
@@ -61,7 +65,7 @@ function abrirModalAdicionarCargo() {
     document.getElementById("formulario_add_cargo").style.display = 'block';
 }
 
-function lerCargosSelecionados() {
+function lerPermissoesSelecionadas() {
     let cargo = false;
     let fazenda = false;
     let funcionario = false;
@@ -83,7 +87,6 @@ function lerCargosSelecionados() {
     }
     adicionarCargo(nomeCargo, cargo, fazenda, funcionario);
 }
-
 function adicionarCargo(nomeCargo, cargo, fazenda, funcionario) {
     fetch('/cargo/adicionar', {
         method: "POST",
@@ -97,22 +100,64 @@ function adicionarCargo(nomeCargo, cargo, fazenda, funcionario) {
             permissaoFuncionariosServer: funcionario,
             fazendaServer: 3
         }),
-    })
-        .then(resposta => {
-            resposta.json().then(data => {
+    }).then(resposta => {
+        resposta.json().then(data => {
 
+            if (!resposta.ok) {
+                throw new Error(data.erro);
+            }
+            else {
+                console.log("Resposta do servidor: ", data)
+                document.getElementById("modal_add_cargo").style.display = 'none';
+                document.getElementById("formulario_add_cargo").style.display = 'none';
+
+                setTimeout(listarCargos(), 500);
+            }
+        })
+    }).catch(function (erro) {
+        console.log(`#ERRO: ${erro}`);
+    })
+
+    return false;
+}
+
+function lerCargosSelecionados() {
+    let listaIds = [];
+    for (i = 0; i < cargos.length; i++) {
+        let checkAtual = cargos[i].id;
+        let idCheck = document.getElementById(`check_cargo_${checkAtual}`)
+        if (idCheck.checked) {
+            listaIds.push(checkAtual)
+        }
+    }
+    removerCargo(listaIds)
+}
+
+function removerCargo(listaIds) {
+    if (listaIds == null || listaIds == undefined || listaIds.length == 0) {
+        console.log("Não foram selecionados cargos para remover");
+    } else {
+        fetch('/cargo/remover', {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                listarIdsServer: listaIds
+            }),
+        }).then(resposta => {
+            resposta.json().then(data => {
                 if (!resposta.ok) {
                     throw new Error(data.erro);
                 }
                 else {
-                    console.log("Resposta do servidor: ", data);
-                    exibirCargosNaTela(data);
+                    console.log("Cargos removidos com sucesso");
                 }
             })
-        })
-        .catch(function (erro) {
+        }).catch(function (erro) {
             console.log(`#ERRO: ${erro}`);
         });
-    return false;
-}
 
+        return false;
+    }
+}

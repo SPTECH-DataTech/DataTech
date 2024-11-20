@@ -11,4 +11,8 @@ router.post("/adicionar", function(req, res) {
     cargoController.adicionarCargo(req, res);
 });
 
+router.delete("/remover", function(req, res) {
+    cargoController.removerCargo(req, res);
+});
+
 module.exports = router;

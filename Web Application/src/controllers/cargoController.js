@@ -41,7 +41,20 @@ function adicionarCargo(req, res) {
     }
 }
 
+function removerCargo(req, res) {
+    const listaIdsCargos = req.body.listarIdsServer;
+
+    try {
+        cargoModel.removerCargos(listaIdsCargos);
+        console.log(`Cargos removidos com sucesso: ${listaIdsCargos}`);
+    } catch {
+        console.log(`Falha ao remover os cargos com os IDs: ${listaIdsCargos}`);
+        res.status(400).json({ mensagem: `Falha ao remover os cargos ${listaIdsCargos}` })
+    }
+}
+
 module.exports = {
     listarCargos,
-    adicionarCargo
+    adicionarCargo,
+    removerCargo
 };
