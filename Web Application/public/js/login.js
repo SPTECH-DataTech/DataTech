@@ -6,7 +6,7 @@ function verificarEmail() {
 
     const email = input_email.value.trim();
 
-    
+
 
     if (email == "") {
 
@@ -63,21 +63,21 @@ function verificarSenha() {
         mensagemErroSenha.innerHTML = "Campo obrigatório!";
 
     }
-    else if (senha.length < 5){
+    else if (senha.length < 5) {
 
         spanSenha.style.color = "red";
         input_senha.style.borderColor = "red";
         tudoCertoSenha = false;
         mensagemErroSenha.innerHTML = "A senha deve ter pelo menos 5 dígitos.";
 
-    } 
+    }
     else if (erroSenhaEspecial) {
 
         spanSenha.style.color = "red";
         input_senha.style.borderColor = "red";
         tudoCertoSenha = false;
         mensagemErroSenha.innerHTML = "A senha deve conter um caractere especial (ex:!@#$.?)";
-        
+
     }
     else if (erroSenhaMaiusculo) {
 
@@ -85,7 +85,7 @@ function verificarSenha() {
         input_senha.style.borderColor = "red";
         tudoCertoSenha = false;
         mensagemErroSenha.innerHTML = "A senha deve incluir uma letra maiúscula.";
-       
+
     }
     else if (erroSenhaNumero) {
 
@@ -93,7 +93,7 @@ function verificarSenha() {
         input_senha.style.borderColor = "red";
         tudoCertoSenha = false;
         mensagemErroSenha.innerHTML = "A senha deve conter um número.";
-      
+
     }
     else {
 
@@ -112,7 +112,7 @@ function login() {
 
     verificarEmail();
     verificarSenha();
-    
+
     if (!tudoCertoEmail && !tudoCertoSenha) {
         return;
     }
@@ -135,15 +135,33 @@ function login() {
                     throw new Error(data.erro)
                 }
                 else {
-                    habilitarMensagem(data.message);
                     sessionStorage.EMAIL_USUARIO = data.email;
                     sessionStorage.NOME_USUARIO = data.nome;
                     sessionStorage.ID_USUARIO = data.id;
                     sessionStorage.ID_EMPRESA = data.idEmpresa;
 
                     setTimeout(() => {
-                        window.location.href = "./dashboard.html"
-                    },3000)
+                        Swal.fire({
+                            icon: "success",
+                            title: "Login feito com sucesso!",
+                            text: "Redirecionando para sua dashboard...",
+                            timer: 2000,
+                            timerProgressBar: true,
+                            confirmButtonText: '',
+                            confirmButtonColor: '#fff',
+                            didOpen: () => {
+                                Swal.showLoading();
+                            },
+                            willClose: () => {
+                                window.location = "dashboard.html";
+                            }
+                        }).then((result) => {
+                            if (result.dismiss === Swal.DismissReason.timer) {
+                                console.log("I was closed by the timer");
+                            }
+                        });
+                    },
+                    );
                 }
             });
         })
@@ -153,15 +171,4 @@ function login() {
         });
 
     return false;
-}
-
-function habilitarMensagem(mensagem) {
-    const p = document.getElementById('message');
-    p.style.display = "block"
-    p.innerHTML = mensagem;
-}
-
-function ocultarMensagem() {
-    const p = document.getElementById('message');
-    p.style.display = "none"
 }
