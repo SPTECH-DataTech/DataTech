@@ -21,9 +21,8 @@ function listarCargos() {
                 }
                 else {
                     console.log("Resposta do servidor: ", data);
-                    qtdCargos = data.length;
                     cargos = data;
-                    exibirCargosNaTela(data);
+                    setTimeout(exibirCargosNaTela(data), 3000);
                 }
             })
         })
@@ -36,7 +35,36 @@ function listarCargos() {
 function exibirCargosNaTela(data) {
     document.getElementById("lista_cargos").innerHTML = "";
 
+    console.log(cargos.length);
+
     for (i = 0; i < cargos.length; i++) {
+
+        const checkCargoDaVez = document.querySelector(`#check_permissao_cargos_${data[i].id}`);
+        const checkFazendaDaVez = document.querySelector(`#check_permissao_fazendas_${data[i].id}`);
+        const checkFuncionarioDaVez = document.querySelector(`#check_permissao_funcionarios_${data[i].id}`);
+
+        let checkadoCargo = "";
+        let checkadoFazenda = "";
+        let checkadoFuncionario = "";
+
+        if (cargos[i].permissaoCargos == 1) {
+            console.log("Esse funcionário ta podendo editar cargo");
+            checkadoCargo = "checked";
+            // checkCargoDaVez.checked = true;
+        }
+        if (cargos[i].permissaoFazenda == 1) {
+            console.log("Esse funcionário ta podendo editar fazenda");
+            checkadoFazenda = "checked";
+            // checkFazendaDaVez.checked = true;
+        }
+        if (cargos[i].permissaoFuncionarios == 1) {
+            console.log("Esse funcionário ta podendo editar funcionario");
+            checkadoFuncionario = "checked";
+            // checkFuncionarioDaVez.checked = true;
+        }
+
+
+
         document.getElementById("lista_cargos").innerHTML += `
         <div class="cargo" id="${data[i].id}">
             <input type="checkbox" id="check_cargo_${data[i].id}">
@@ -44,19 +72,32 @@ function exibirCargosNaTela(data) {
                 <h1 id="nome_cargo">${data[i].nomeCargo}</h1>
             </div>
             <div class="permissao">
-                <input type="checkbox" id="check_cargos">
+                <input type="checkbox" id="check_permissao_cargos_${data[i].id} ${checkadoCargo}">
                 <h1>Cargos</h1>
             </div>
             <div class="permissao">
-                <input type="checkbox" id="check_fazendas">
+                <input type="checkbox" id="check_permissao_fazendas_${data[i].id} ${checkadoFazenda}">
                 <h1>Fazendas</h1>
             </div>
             <div class="permissao">
-                <input type="checkbox" id="check_funcionarios">
+                <input type="checkbox" id="check_permissao_funcionarios_${data[i].id} ${checkadoFuncionario}">
                 <h1>Funcionários</h1>
             </div>
         </div>
         `
+
+       
+
+        console.log(cargos[i].permissaoCargos);
+        console.log(cargos[i].permissaoFazenda);
+        console.log(cargos[i].permissaoFuncionario);
+
+        console.log("--------------------");
+        
+        console.log(checkCargoDaVez);
+        console.log(checkFazendaDaVez);
+        console.log(checkFuncionarioDaVez);
+
     }
 }
 
@@ -108,16 +149,16 @@ function adicionarCargo(nomeCargo, cargo, fazenda, funcionario) {
             }
             else {
                 console.log("Resposta do servidor: ", data)
-                document.getElementById("modal_add_cargo").style.display = 'none';
-                document.getElementById("formulario_add_cargo").style.display = 'none';
-
-                setTimeout(listarCargos(), 500);
             }
         })
     }).catch(function (erro) {
         console.log(`#ERRO: ${erro}`);
     })
 
+    document.getElementById("modal_add_cargo").style.display = 'none';
+    document.getElementById("formulario_add_cargo").style.display = 'none';
+
+    listarCargos();
     return false;
 }
 
