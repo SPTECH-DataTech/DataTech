@@ -20,6 +20,7 @@ var empresasRouter = require("./src/routes/empresas");
 var recuperarSenhaRouter = require("./src/routes/recuperarSenha");
 var equipeRouter = require("./src/routes/equipe");
 var fazendaRouter = require("./src/routes/fazenda");
+var cargoRouter = require("./src/routes/cargo")
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -33,6 +34,7 @@ app.use("/empresas", empresasRouter);
 app.use("/recuperarSenha", recuperarSenhaRouter);
 app.use("/equipe", equipeRouter);
 app.use("/fazenda", fazendaRouter);
+app.use("/cargo", cargoRouter);
 
 
 
@@ -50,13 +52,22 @@ app.post('/enviarEmailSuporte', async (req, res) => {
 
 app.listen(PORTA_APP, function () {
     console.log(`
-    ##   ##  ######   #####             ####       ##     ######     ##              ##  ##    ####    ######  
-    ##   ##  ##       ##  ##            ## ##     ####      ##      ####             ##  ##     ##         ##  
-    ##   ##  ##       ##  ##            ##  ##   ##  ##     ##     ##  ##            ##  ##     ##        ##   
-    ## # ##  ####     #####    ######   ##  ##   ######     ##     ######   ######   ##  ##     ##       ##    
-    #######  ##       ##  ##            ##  ##   ##  ##     ##     ##  ##            ##  ##     ##      ##     
-    ### ###  ##       ##  ##            ## ##    ##  ##     ##     ##  ##             ####      ##     ##      
-    ##   ##  ######   #####             ####     ##  ##     ##     ##  ##              ##      ####    ######  
+    DDDDDDDDDDDDD                                 tttt                         TTTTTTTTTTTTTTTTTTTTTTT                                   hhhhhhh             
+    D::::::::::::DDD                           ttt:::t                         T:::::::::::::::::::::T                                   h:::::h             
+    D:::::::::::::::DD                         t:::::t                         T:::::::::::::::::::::T                                   h:::::h             
+    DDD:::::DDDDD:::::D                        t:::::t                         T:::::TT:::::::TT:::::T                                   h:::::h             
+    D:::::D    D:::::D  aaaaaaaaaaaaa  ttttttt:::::ttttttt      aaaaaaaaaaaaaTTTTTT  T:::::T  TTTTTTeeeeeeeeeeee        cccccccccccccccch::::h hhhhh       
+    D:::::D     D:::::D a::::::::::::a t:::::::::::::::::t      a::::::::::::a       T:::::T      ee::::::::::::ee    cc:::::::::::::::ch::::hh:::::hhh    
+    D:::::D     D:::::D aaaaaaaaa:::::at:::::::::::::::::t      aaaaaaaaa:::::a      T:::::T     e::::::eeeee:::::ee c:::::::::::::::::ch::::::::::::::hh  
+    D:::::D     D:::::D          a::::atttttt:::::::tttttt               a::::a      T:::::T    e::::::e     e:::::ec:::::::cccccc:::::ch:::::::hhh::::::h 
+    D:::::D     D:::::D   aaaaaaa:::::a      t:::::t              aaaaaaa:::::a      T:::::T    e:::::::eeeee::::::ec::::::c     ccccccch::::::h   h::::::h
+    D:::::D     D:::::D aa::::::::::::a      t:::::t            aa::::::::::::a      T:::::T    e:::::::::::::::::e c:::::c             h:::::h     h:::::h
+    D:::::D     D:::::Da::::aaaa::::::a      t:::::t           a::::aaaa::::::a      T:::::T    e::::::eeeeeeeeeee  c:::::c             h:::::h     h:::::h
+    D:::::D    D:::::Da::::a    a:::::a      t:::::t    tttttta::::a    a:::::a      T:::::T    e:::::::e           c::::::c     ccccccch:::::h     h:::::h
+    DDD:::::DDDDD:::::D a::::a    a:::::a      t::::::tttt:::::ta::::a    a:::::a    TT:::::::TT  e::::::::e          c:::::::cccccc:::::ch:::::h     h:::::h
+    D:::::::::::::::DD  a:::::aaaa::::::a      tt::::::::::::::ta:::::aaaa::::::a    T:::::::::T   e::::::::eeeeeeee   c:::::::::::::::::ch:::::h     h:::::h
+    D::::::::::::DDD     a::::::::::aa:::a       tt:::::::::::tt a::::::::::aa:::a   T:::::::::T    ee:::::::::::::e    cc:::::::::::::::ch:::::h     h:::::h
+    DDDDDDDDDDDDD         aaaaaaaaaa  aaaa         ttttttttttt    aaaaaaaaaa  aaaa   TTTTTTTTTTT      eeeeeeeeeeeeee      cccccccccccccccchhhhhhh     hhhhhhh  
     \n\n\n                                                                                                 
     Servidor do seu site já está rodando! Acesse o caminho a seguir para visualizar .: http://${HOST_APP}:${PORTA_APP} :. \n\n
     Você está rodando sua aplicação em ambiente de .:${process.env.AMBIENTE_PROCESSO}:. \n\n

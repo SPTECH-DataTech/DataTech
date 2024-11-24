@@ -1,18 +1,18 @@
 const fazendaModel = require('../models/fazendaModel');
 
 function adicionarFazenda(req, res) {
-    var { nomeFazenda, tipoCafe, estadoFazenda, idEmpresa } = req.body;
+    var { nomeFazenda, tipoCafe, estadoMunicipio, idEmpresa } = req.body;
 
     if (!nomeFazenda) {
         res.status(400).send("Nome da fazenda está undefined!")
     } else if (!tipoCafe) {
         res.status(400).send("O tipo de café da fazenda está undefined!")
-    } else if (!estadoFazenda) {
+    } else if (!estadoMunicipio) {
         res.status(400).send("O estado da fazenda está undefined!")
     } else if (!idEmpresa) {
         res.status(400).send("A empresa está undefined!")
     } else {
-        fazendaModel.adicionarFazenda(nomeFazenda, tipoCafe, estadoFazenda, idEmpresa).then(function (resultado) {
+        fazendaModel.adicionarFazenda(nomeFazenda, tipoCafe, estadoMunicipio, idEmpresa).then(function (resultado) {
             console.log(`Fazenda "${nomeFazenda}" registrada no banco de dados.`);
             res.status(201).json({
                 message: 'Fazenda registrada com sucesso!', resultado
@@ -32,6 +32,16 @@ function listarEstados(req, res) {
     })
         .catch((erro) => {
             console.error("Houve um erro ao listar os estados!");
+            res.status(500).json(erro);
+        })
+}
+function definirLocalidade(req, res) {
+
+    fazendaModel.definirLocalidade().then((resultado) => {
+        res.status(200).json(resultado)
+    })
+        .catch((erro) => {
+            console.error("Houve um erro ao listar a tabela EstadoMunicipio");
             res.status(500).json(erro);
         })
 }
@@ -70,7 +80,7 @@ function removerFazenda(req, res) {
 
 
 function editarFazenda(req, res) {
-    var { idFazenda, nomeFazenda, tipoCafe, estadoFazenda } = req.body;
+    var { idFazenda, nomeFazenda, tipoCafe, estadoMunicipio } = req.body;
 
     if (!idFazenda) {
         res.status(400).send("O ID da fazenda está undefined");
@@ -78,10 +88,10 @@ function editarFazenda(req, res) {
         res.status(400).send("Nome da fazenda está undefined!")
     } else if (!tipoCafe) {
         res.status(400).send("O tipo de café da fazenda está undefined!")
-    } else if (!estadoFazenda) {
+    } else if (!estadoMunicipio) {
         res.status(400).send("O estado da fazenda está undefined!")
     } else {
-        fazendaModel.editarFazenda(nomeFazenda, tipoCafe, estadoFazenda, idFazenda).then(function (resultado) {
+        fazendaModel.editarFazenda(nomeFazenda, tipoCafe, estadoMunicipio, idFazenda).then(function (resultado) {
             console.log(`Fazenda "${nomeFazenda}" foi editada no banco de dados.`);
             res.status(200).json({
                 message: 'Fazenda editada com sucesso!', resultado
@@ -101,5 +111,6 @@ module.exports = {
     adicionarFazenda,
     listarFazendas,
     removerFazenda,
-    editarFazenda
+    editarFazenda,
+    definirLocalidade
 }

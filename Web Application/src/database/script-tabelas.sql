@@ -24,8 +24,6 @@ CREATE TABLE IF NOT EXISTS datatech.estadoMunicipio (
   estado CHAR(2) NULL,
   municipio VARCHAR(45) NULL,
   PRIMARY KEY (id),
-  CONSTRAINT id_uf_UX UNIQUE INDEX (idUf),
-  CONSTRAINT id_municipio_UX UNIQUE INDEX (idMunicipio)
 );
 
 -- -----------------------------------------------------
@@ -38,9 +36,6 @@ CREATE TABLE IF NOT EXISTS datatech.fazenda (
   fkEstadoMunicipio INT NOT NULL,
   nome VARCHAR(45) NULL,
   PRIMARY KEY (id, fkEmpresa, fkEstadoMunicipio),
-  CONSTRAINT fkEstadoMunicipio_UX UNIQUE INDEX (fkEstadoMunicipio),
-  CONSTRAINT fkEmpresa_UX UNIQUE INDEX (fkEmpresa),
-  CONSTRAINT id_UX UNIQUE INDEX (id),
   CONSTRAINT fk_empresa_fazenda FOREIGN KEY (fkEmpresa) REFERENCES datatech.empresa (id),
   CONSTRAINT fk_estado_municipio_fazenda FOREIGN KEY (fkEstadoMunicipio) REFERENCES datatech.estadoMunicipio (id)
 );
@@ -227,7 +222,7 @@ CREATE TABLE IF NOT EXISTS datatech.tipoCafePlantacao (
 CREATE TABLE IF NOT EXISTS datatech.token (
   id INT NOT NULL AUTO_INCREMENT,
   token VARCHAR(45) NOT NULL,
-  dataCriacao DATETIME NULL,
+  dataCriacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   CONSTRAINT token_UX UNIQUE INDEX (token)
 );
@@ -338,3 +333,27 @@ CREATE TABLE IF NOT EXISTS datatech.historicoStatusPergunta (
   CONSTRAINT fk_status_historicopergunta FOREIGN KEY (fkStatus) REFERENCES datatech.statusPergunta (id),
   CONSTRAINT fk_pergunta_historicopergunta FOREIGN KEY (fkPergunta) REFERENCES datatech.perguntaIA (id)
 );
+
+
+---------- INSERTS ---------------
+
+INSERT INTO datatech.empresa (nomeEmpresa, cnpj, emailRepresentante)
+VALUES ('DataTech LTDA.', '12345678000100', 'datatech@gmail.com');
+ 
+SELECT * FROM empresa;
+
+INSERT INTO datatech.estadoMunicipio (idUf, idMunicipio, estado, municipio)
+VALUES 
+    (1, 101, 'SP', 'São Paulo'),
+    (1, 102, 'SP', 'Guarulhos'),
+    (3, 103, 'MG', 'Belo Horizonte'),
+    (3, 104, 'MG', 'Extrema'),
+    (5, 105, 'RS', 'Porto Alegre');
+
+SELECT * FROM estadoMunicipio;
+
+INSERT INTO token (token)
+VALUES ('1234');
+
+INSERT INTO HistoricoTokenEmpresa(fkEmpresa, fkToken, data, descricao)
+VALUES (1, 1, '2024-11-23 23:55:19', 'Token de acesso ao sistema');

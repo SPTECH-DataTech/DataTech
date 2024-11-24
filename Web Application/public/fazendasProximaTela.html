@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./css/fazendaProximaTela.css">
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -79,11 +79,11 @@
 
                         <div class="group-fields">
                             <span class="label">Nome Fazenda:</span>
-                            <input type="text" id="input_nome_fazenda_edit">
+                            <input disabled type="text" id="input_nome_fazenda_edit">
                         </div>
                         <div class="group-fields">
                             <span class="label">Tipo Café:</span>
-                            <select name="" id="select_tipo_cafe_edit">
+                            <select disabled name="" id="select_tipo_cafe_edit">
                                 <option value="#">-</option>
                                 <option value="Arábica">Arábica</option>
                                 <option value="Robusta">Robusta</option>
@@ -91,11 +91,16 @@
                         </div>
                         <div class="group-fields">
                             <span class="label">Estado da Fazenda:</span>
-                            <select name="" id="select_estado_fazenda_edit">
+                            <select disabled name="" id="select_estado_fazenda_edit">
                                 <option value="#">-</option>
                             </select>
                         </div>
-
+                        <div class="group-fields">
+                            <span class="label">Município da Fazenda:</span>
+                            <select disabled name="" id="select_municipio_fazenda_edit">
+                                <option value="#">-</option>
+                            </select>
+                        </div>
                         <div class="group-buttons">
                             <button class="button-editar" id="button-editar">Editar</button>
                             <button class="button-remover" onclick="removerFazenda()">Remover</button>
@@ -116,57 +121,80 @@
 
 <script>
 
-
-
+    let listaEstadoMunicipio = [];
     listarEstados();
-
     function listarEstados() {
-        fetch("/fazenda/listarEstados", { method: "GET" })
-            .then((resposta) => {
-                if (!resposta.ok) {
-                    throw new Error("Erro ao buscar estados");
-                }
-                return resposta.json();
-            })
-            .then((estados) => {
-                const estadoFazenda = document.getElementById("select_estado_fazenda_edit");
-                const estadoArmazenado = sessionStorage.getItem("ESTADO_FAZENDA");
+        fetch("/fazenda/listarEstados", {
+            method: "GET",
+        })
+            .then(function (resposta) {
+                resposta.json().then((fazenda) => {
+                    const estadosUnicos = new Set();
 
-                estados.forEach((estado) => {
-                    estadoFazenda.innerHTML += `<option value='${estado.id}'>${estado.estado}</option>`;
-                    const idEstado = estado.id;
-                    sessionStorage.setItem('ID_ESTADO', idEstado);
+                    fazenda.forEach((fazendaEstado) => {
+                        estadosUnicos.add(fazendaEstado.estado);
+                    });
+
+                    estadosUnicos.forEach((estadosUnico) => {
+                        const estado = fazenda.find(item => item.estado == estadosUnico);
+                        select_estado_fazenda_edit.innerHTML += `<option value='${estado.idUf}'>${estado.estado}</option>`;
+
+
+                    });
+
+                    fazenda.forEach((fazendaEstado) => {
+                        select_municipio_fazenda_edit.innerHTML += `<option value='${fazendaEstado.idMunicipio}'>${fazendaEstado.municipio}</option>`;
+                    });
+
+                    listaEstadoMunicipio = fazenda;
+                    console.log('Lista de Estados e Municípios:\n', listaEstadoMunicipio);
+
+                    select_estado_fazenda_edit.value = sessionStorage.ESTADO_FAZENDA;
+                    select_municipio_fazenda_edit.value = sessionStorage.MUNICIPIO_FAZENDA;
+                    input_nome_fazenda_edit.value = sessionStorage.NOME_FAZENDA;
+
+
+
                 });
 
-                const opcaoSelecionada = Array.from(estadoFazenda.options).find(
-                    (option) => option.text === estadoArmazenado
-                );
-
-                if (opcaoSelecionada) {
-                    estadoFazenda.value = opcaoSelecionada.value;
-                }
-
             })
-            .catch((erro) => {
-                console.error(`#ERRO: ${erro.message}`);
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
             });
     }
 
 
-    document.addEventListener('DOMContentLoaded', function () {
-        console.log("Valor armazenado para estado:", sessionStorage.getItem('ID_FAZENDA'));
+    select_estado_fazenda_edit.addEventListener('change', function (e) {
+        const estadoSelecionado = e.target.value;
+        const select_municipio = document.getElementById('select_municipio_fazenda_edit');
 
-        const nomeFazenda = document.getElementById('input_nome_fazenda_edit');
-        const tipoCafe = document.getElementById('select_tipo_cafe_edit');
-        const estadoFazenda = document.getElementById('select_estado_fazenda_edit');
+        select_municipio.innerHTML = "<option value='#'>Selecione o município</option>";
 
-        nomeFazenda.value = sessionStorage.getItem('NOME_FAZENDA');
-        tipoCafe.value = sessionStorage.getItem('TIPO_CAFE_FAZENDA');
-        estadoFazenda.value = sessionStorage.getItem('ID_FAZENDA');
+        if (estadoSelecionado !== "#") {
+            select_municipio.disabled = false;
+            const municipiosFiltrados = listaEstadoMunicipio.filter(item => item.idUf == estadoSelecionado);
 
-        tipoCafe.disabled = true;
-        nomeFazenda.disabled = true;
-        estadoFazenda.disabled = true;
+
+            municipiosFiltrados.forEach(item => {
+                select_municipio.innerHTML += `<option value='${item.idMunicipio}'>${item.municipio}</option>`;
+            });
+        } else {
+
+            select_municipio.innerHTML = "<option value='#'>Selecione o município</option>";
+        }
+    });
+
+    document.getElementById('button-editar').addEventListener('click', function () {
+        select_estado_fazenda_edit.disabled = false;
+        select_municipio_fazenda_edit.disabled = false;
+        input_nome_fazenda_edit.disabled = false;
+
+        const button = document.getElementById('button-editar');
+        button.textContent = 'Enviar';
+
+        button.addEventListener('click', function () {
+            editarFazenda();
+        });
     });
 
     function habilitarMensagem(mensagem) {
@@ -177,7 +205,7 @@
 
     function ocultarMensagem() {
         const p = document.getElementById('message');
-        p.style.display = "none"
+        p.style.display = "none";
     }
 
     function removerFazenda() {
@@ -223,33 +251,19 @@
     });
 
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const buttonEditar = document.querySelector("#button-editar");
-        buttonEditar.addEventListener("click", habilitarEdicao);
-    });
-
-    function habilitarEdicao() {
-        const nomeFazenda = document.getElementById('input_nome_fazenda_edit');
-        const tipoCafe = document.getElementById('select_tipo_cafe_edit');
-        const estadoFazenda = document.getElementById('select_estado_fazenda_edit');
-
-        nomeFazenda.disabled = false;
-        tipoCafe.disabled = false;
-        estadoFazenda.disabled = false;
-
-        const buttonEditar = document.getElementById("button-editar");
-        buttonEditar.innerHTML = "Enviar";
-        buttonEditar.setAttribute("id", "button-enviar");
-
-        document.querySelector("#button-enviar").addEventListener("click", editarFazenda);
-    }
-
-
     function editarFazenda() {
         const nomeFazenda = document.getElementById('input_nome_fazenda_edit').value;
         const tipoCafe = document.getElementById('select_tipo_cafe_edit').value;
         const estadoFazenda = sessionStorage.ID_ESTADO;
         const idFazenda = sessionStorage.ID_FAZENDA;
+        const idEstado = select_estado_fazenda_edit.value;
+        const idMunicipio = select_municipio_fazenda_edit.value;
+
+        const estadoMunicipio = buscarIdPorEstadoMunicipio(idEstado, idMunicipio);
+
+        if (!estadoMunicipio) {
+            return false;
+        }
 
         fetch('fazenda/editarFazenda', {
             method: "PUT",
@@ -259,7 +273,7 @@
             body: JSON.stringify({
                 idFazenda: idFazenda,
                 tipoCafe: tipoCafe,
-                estadoFazenda: estadoFazenda,
+                estadoMunicipio: estadoMunicipio,
                 nomeFazenda: nomeFazenda
             }),
         })
@@ -272,36 +286,50 @@
                     }
                     else {
                         habilitarMensagem(data.message);
+                        // listarEstados();
                         bloquearCampos();
-
-                        setTimeout(() => {
-                            ocultarMensagem()
-                        }, 2000);
                     }
+                    setTimeout(() => {
+                        ocultarMensagem();
+                    }, 2000)
                 });
+
             })
             .catch(function (erro) {
                 console.log(`#ERRO: ${erro}`);
-                habilitarMensagem(erro.message);
             });
 
         return false;
     }
+    function buscarIdPorEstadoMunicipio(estado, municipio) {
+        const resultado = listaEstadoMunicipio.find(item =>
+            item.idUf == estado && item.idMunicipio == municipio
+        );
 
+        if (resultado) {
+            console.log("ID encontrado:", resultado.id);
+            return resultado.id;
+        } else {
+            console.log("Estado e município não encontrados.");
+            return null;
+        }
+    }
 
     function bloquearCampos() {
         const nomeFazenda = document.getElementById('input_nome_fazenda_edit');
         const tipoCafe = document.getElementById('select_tipo_cafe_edit');
         const estadoFazenda = document.getElementById('select_estado_fazenda_edit');
+        const municipioFazenda = document.getElementById('select_municipio_fazenda_edit');
 
         nomeFazenda.disabled = true;
         tipoCafe.disabled = true;
         estadoFazenda.disabled = true;
+        municipioFazenda.disabled = true;
 
         const buttonEditar = document.getElementById("button-enviar");
         buttonEditar.innerHTML = "Editar";
-        buttonEditar.setAttribute("id", "button-editar");
+      
 
-        document.querySelector("#button-editar").addEventListener("click", habilitarEdicao);
+     
     }
 </script>
