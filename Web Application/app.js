@@ -36,6 +36,20 @@ app.use("/equipe", equipeRouter);
 app.use("/fazenda", fazendaRouter);
 app.use("/cargo", cargoRouter);
 
+
+
+var emailService = require('./src/services/emailService');
+app.post('/enviarEmailSuporte', async (req, res) => {
+    const { toName, toEmail, toPhone, toTipo, toMessage } = req.body;
+    try {
+        await emailService.enviarEmailSuporte(toName, toEmail, toPhone, toTipo, toMessage);
+        res.status(200).send('Solicitação de suporte enviado com sucesso! Verifique sua caixa de e-mail.');
+    } catch (error) {
+        console.error('Erro ao enviar solicitação de suporte :', error);
+        res.status(500).send('Erro ao enviar Solicitação de suporte.');
+    }
+});
+
 app.listen(PORTA_APP, function () {
     console.log(`
     DDDDDDDDDDDDD                                 tttt                         TTTTTTTTTTTTTTTTTTTTTTT                                   hhhhhhh             

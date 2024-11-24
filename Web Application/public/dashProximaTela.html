@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="assets/logo_datatech_-_roxa_escuro.png" type="image/x-icon">
-    <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="stylesheet" href="./css/dashboard2.css">
     <script src="./js/dashProximaTela.js"></script>
 
     <title>Dashboard • DataTech </title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./js/dashProximaTela.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -31,7 +32,8 @@
                         class="icon"> Dashboard</button></a>
             <a href="fazenda.html"><button class="btn-fazenda"> <img src="./assets/Vector.png" alt="fazenda icon"
                         class="icon">Fazendas</button></a>
-            <a href="equipe.html"><button class="btn-equipe"><img src="./assets/Group.png" alt="equipe icon" class="icon">
+            <a href="equipe.html"><button class="btn-equipe"><img src="./assets/Group.png" alt="equipe icon"
+                        class="icon">
                     Equipe</button></a>
             <a href="recomendacoes.html"><button class="btn-recomendacoes"><img src="./assets/Chat.png"
                         alt="recomendacoes icon" class="icon"> Recomendações</button></a>
@@ -39,9 +41,10 @@
             <b>
                 <p>Outros</p>
             </b>
-            <a href="dashConta.html"><button class="btn-conta"><img src="./assets/Profile.png" alt="conta icon" class="icon">
+            <a href="dashConta.html"><button class="btn-conta"><img src="./assets/Profile.png" alt="conta icon"
+                        class="icon">
                     Conta</button></a>
-            <a href="suporte" target="_blank"><button class="btn-suporte"> <img src="./assets/Info Square.png"
+            <a href="suporte"><button class="btn-suporte"> <img src="./assets/Info Square.png"
                         alt="suporte icon" class="icon">Suporte</button></a>
             <a href="login.html"><button onclick="limparSessao()" class="btn-sair"><img
                         src="./assets/icons8-exit-50.png" alt="exit icon" class="icon"> Sair</button></a>
@@ -64,130 +67,99 @@
             </div>
 
 
-            <div class="grafico-1">
-                <div class="titulo-grafico">
-                    <h1>Comparação Café Arábica x Café Robusta nos Estados em 2017</h1>
-                </div>
-               
-
-                <div class="escolher-info">
-                    <div class="container">
-                        <select class="select-ano">
-                            <option value="2017">2017</option>
-                            <option value=""></option>
-                            <option value=""></option>
-                        </select>
-                        <button class="btn-atualizar">Atualizar</button>
+            <div class="grafico-kpi">
+                <div class="graficoProducao">
+                    <div class="titulo-grafico">
+                        <h1>Comparação Café Arábica x Café Robusta nos Estados em 2017</h1>
                     </div>
-                </div>
 
-                <div class="grafico-plantacao">
+                    <div class="escolher-info">
+                        <div class="container">
+                            <select class="select-ano">
+                                <option value="2017">2017</option>
+                                <option value=""></option>
+                                <option value=""></option>
+                            </select>
+                            <button class="btn-atualizar">Atualizar</button>
+                        </div>
+                    </div>
+
                     <canvas id="graficoCafe"></canvas>
 
-                    <div class="kpis">
-                        <div class="kpi-tela2">
-                            <div class="titulo-kpi">
-                                <h2 style="color: #10BB00;">Tipo mais Produzido</h2>
-                            </div>
-                            <div class="infos-kpi">
-                                <h3>Café Arábica</h3>
-                                <h3> 42 / 78 (t)</h3>
-                            </div>
-                            <div class="percentagem">
-                                <h4 style="color: #10BB00; font-size: 20px;">53.85% Produzida</h4>
-                            </div>
-                        </div>
+                </div>
 
-                        <div class="kpi-tela2">
-                            <div class="titulo-kpi">
-                                <h2 style="color: #ff0000;">Tipo menos Produzido</h2>
-                            </div>
-                            <div class="infos-kpi">
-                                <h3>Café Robusta</h3>
-                                <h3> 36 / 78 (t)</h3>
-                            </div>
-                            <div class="percentagem">
-                                <h4 style="color: #ff0000; font-size: 20px;">46.15% Produzida</h4>
-                            </div>
+                <div class="kpis">
+                    <div class="kpi">
+                        <div class="titulo-kpi">
+                            <h4 style="color: #10BB00;">Tipo mais Produzido</h2>
+                        </div>
+                        <div class="infos-kpi">
+                            <p>Café <span>Arábica</span></p>
+                            <p> <span>42</span>/ <span>78</span> (t)</p>
+                        </div>
+                        <div class="percentagem">
+                            <h3 style="color: #10BB00;"><span>53.85</span>% Produzida</h3>
                         </div>
                     </div>
 
+                    <div class="kpi">
+                        <div class="titulo-kpi">
+                            <h4 style="color: #ff0000;">Tipo menos Produzido</h2>
+                        </div>
+                        <div class="infos-kpi">
+                            <p>Café Robusta</p>
+                            <p> <span>36</span> / <span>78</span> (t)</p>
+                        </div>
+                        <div class="percentagem">
+                            <h3 style="color: #ff0000;"><span>46.15</span>% Produzida</h3>
+                        </div>
+                    </div>
                 </div>
+
             </div>
 
             <div class="container-Regioes-Indicador">
+
                 <div class="containerTopRegioes">
-
-                    <div class="titulo-kpi">
-                        <center>
-                            <h2 style="color: #5400BB;">Top 5 regiões Produção</h2>
-                        </center>
-                    </div>
-                    <div class="infos-kpi2">
-                        <h3 style="color: black;"> MG</h3>
-                        <h3> 50% Produzido </h3>
-                        <h3 style="color: #492576;"> 1,55 milhão (t) </h3>  
-                    </div>
-
-                    <div class="infos-kpi2">
-                        <h3 style="color: black;"> ES</h3>
-                        <h3> 27% Produzido </h3>
-                        <h3 style="color: #492576;"> 840 mil(t) </h3>
-                    </div>
-
-                    <div class="infos-kpi2">
-                        <h3 style="color: black;"> SP</h3>
-                        <h3> 8% Produzido </h3>
-                        <h3 style="color: #492576;">  240 mil(t) </h3>
-                    </div>
-
-                    <div class="infos-kpi2">
-                        <h3 style="color: black;"> BA </h3>
-                        <h3> 6% Produzido </h3>
-                        <h3 style="color: #492576;"> 190 mil(t) </h3>
-                    </div>
-
-                    <div class="infos-kpi2">
-                        <h3 style="color: black;"> PR </h3>
-                        <h3> 4% Produzido </h3>
-                        <h3 style="color: #492576;"> 120 mil(t) </h3>
-                    </div>
-
+                    <h2 style="color: #5400BB;">Recomendação</h2>
+                    <p>De acordo com sua plantação do estado de %ESTADO% que produziu um total de %DOUBLE% toneladas
+                        de café, podemos notar que se comparada com a produção do estado %ESTADO%, há uma diferença
+                        de %X_POR_CENTO% de produção, o que indica que o estado %ESTADO% está mais apto para o
+                        plantio de café!</p>
                 </div>
 
+                <br>
                 <div class="containerIndicadorSaca">
 
                     <div class="titulo-kpi">
-                        <h2 style="color: black;">Indicador da Saca</h2>
-                        <p style="color: rgb(0, 0, 0);">Análise de preço da Safra dos Cafés (2017)</p>
+                        <h2 class="tituloIndicadorSaca">Indicador da Saca</h2>
+                        <p>Análise de preço da Safra dos Cafés (2017)</p>
                     </div>
-                    
-                    <div class="infos-kpi2">
-                        <img src="./assets/imgs/cafe-icon.jpg" alt="Café Arábica" class="icon-cafe">
-                        <h3 style="color: #492576;">Arábica</h3>
-                        <h3>R$ 40,00 - 60,00 (kg)</h3>
-                    </div>
-                    
-                    <div class="infos-kpi2">
-                        <img src="./assets/imgs/cafe-icon.jpg" alt="Café Robusta" class="icon-cafe">
-                        <h3 style="color: #492576;">Robusta</h3>
-                        <h3>R$ 20,00 - 35,00 (kg)</h3>
-                    </div>
-                    
-                    <div class="infos-kpi2">
-                        <img src="./assets/imgs/cafe-icon.jpg" alt="Café Conilon" class="icon-cafe">
-                        <h3 style="color: #492576;">Conilon</h3>
-                        <h3>R$ 25,00 - 40,00 (kg)</h3>
-                    </div>
-                    
-                    <div class="infos-kpi2">
-                        <img src="./assets/imgs/cafe-icon.jpg" alt="Café Bourbon" class="icon-cafe">
-                        <h3 style="color: #492576;">Bourbon</h3>
-                        <h3>R$ 50,00 - 70,00 (kg)</h3>
-                    </div>
-                    
-                    
-                
+
+                    <table>
+                        <tr>
+                            <th>Março/17</th>
+                            <th class="coluna2">(R$/saca(60 Kg))</th>
+                        </tr>
+                        <tr>
+                            <td class="colunaTabela">
+                                <img src="./assets/imgs/cafe-icon.jpg" alt="Café Arábica" class="icon-cafe">
+                                <p class="nomeCafeIndicador">Arábica</p>
+                            </td>
+                            <td class="coluna2">R$ 40,00 - 60,00</td>
+                        </tr>
+                        <tr>
+                            <td class="colunaTabela">
+                                <img src="./assets/imgs/cafe-icon.jpg" alt="Café Arábica" class="icon-cafe">
+                                <p class="nomeCafeIndicador">Arábica</p>
+                            </td>
+                            <td class="coluna2">R$ 40,00 - 60,00</td>
+                        </tr>
+                    </table>
+
+                </div>
+
+            </div>
 
         </section>
 

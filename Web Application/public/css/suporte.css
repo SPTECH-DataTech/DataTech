@@ -202,7 +202,7 @@ textarea{
     border-radius: 3px;
 }
 
-.botaoEnviar{
+#botaoEnviar{
     margin-top: 10px;
     height: 40px;
     border: #7F00FF;
