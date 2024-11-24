@@ -57,6 +57,16 @@ function listarFazendas(req, res) {
             res.status(500).json(erro);
         });
 }
+function listarTipoCafe(req, res) {
+    fazendaModel.listarTipoCafe().then((resultado) => {
+        console.log(`Resultados: ${JSON.stringify(resultado)}`);
+        res.status(200).json(resultado);
+    })
+        .catch((erro) => {
+            console.error("Houve um erro ao listar os tipos de café!");
+            res.status(500).json(erro);
+        });
+}
 
 
 function removerFazenda(req, res) {
@@ -112,5 +122,5 @@ module.exports = {
     listarFazendas,
     removerFazenda,
     editarFazenda,
-    definirLocalidade
+    listarTipoCafe
 }

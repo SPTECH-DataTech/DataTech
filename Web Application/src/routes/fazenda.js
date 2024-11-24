@@ -15,9 +15,11 @@ router.put("/editarFazenda", (req, res) => {
    fazendaController.editarFazenda(req, res);
 });
 
-
 router.get("/listarEstados", (req, res) => {
    fazendaController.listarEstados(req, res);
+});
+router.get("/listarTipoCafe", (req, res) => {
+   fazendaController.listarTipoCafe(req, res);
 });
 
 router.get("/listarFazendas", (req, res) => {

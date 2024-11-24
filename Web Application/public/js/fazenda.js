@@ -119,6 +119,23 @@ function listarEstados() {
             console.log(`#ERRO: ${resposta}`);
         });
 }
+listarTipoCafe();
+function listarTipoCafe() {
+    fetch("/fazenda/listarTipoCafe", {
+        method: "GET",
+    })
+        .then(function (resposta) {
+            resposta.json().then((fazenda) => {
+                fazenda.forEach((fazendaTipoCafe) => {
+                    select_tipo_cafe.innerHTML += `<option value='${fazendaTipoCafe.id}'>${fazendaTipoCafe.nome}</option>`
+                });
+            });
+
+        })
+        .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+}
 
 
 function buscarIdPorEstadoMunicipio(estado, municipio) {
@@ -156,10 +173,11 @@ function listarFazendas() {
                         data-fazenda-id=${fazenda.id} data-fazenda-nome=${fazenda.nome} data-fazenda-estado=${fazenda.estado}
                         data-fazenda-municipio=${fazenda.municipio}
                         data-fazenda-estado-id=${fazenda.id_uf}
+                        data-fazenda-tipo-cafe=${fazenda.fkTipoCafe}
                         data-fazenda-municipio-id=${fazenda.id_municipio}
                         > 
                         <span class="nomeFazenda">Fazenda ${fazenda.nome} - ${fazenda.estado}</span>
-                        <span class="tipoFazenda">Café ${fazenda.tipoCafe}</span>
+                        <span class="tipoFazenda">Café ${fazenda.tipo_cafe}</span>
                         <img src="./assets/imgs/Group 413 (1).png" alt="" class="image-buttonn"> </div>`;
                     });
 
@@ -184,14 +202,13 @@ function listarFazendas() {
                             const nomeFazenda = div.getAttribute('data-fazenda-nome');
                             const nomeEstadoFazenda = div.getAttribute('data-fazenda-estado');
                             const nomeMucipioFazenda = div.getAttribute('data-fazenda-municipio');
-                            // const tipoCafeFazenda = div.getAttribute('data-fazenda-tipo-cafe');
+                            const tipoCafeFazenda = div.getAttribute('data-fazenda-tipo-cafe');
                             const estadoFazenda = div.getAttribute('data-fazenda-estado-id');
                             const municipioFazenda = div.getAttribute('data-fazenda-municipio-id');
                           
-
                             sessionStorage.setItem('ID_FAZENDA', idFazenda);
                             sessionStorage.setItem('NOME_FAZENDA', nomeFazenda);
-                            // sessionStorage.setItem('TIPO_CAFE_FAZENDA', tipoCafeFazenda);
+                            sessionStorage.setItem('TIPO_CAFE_FAZENDA', tipoCafeFazenda);
                             sessionStorage.setItem('ESTADO_FAZENDA', estadoFazenda);
                             sessionStorage.setItem('MUNICIPIO_FAZENDA', municipioFazenda);
 

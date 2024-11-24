@@ -85,8 +85,6 @@
                             <span class="label">Tipo Café:</span>
                             <select disabled name="" id="select_tipo_cafe_edit">
                                 <option value="#">-</option>
-                                <option value="Arábica">Arábica</option>
-                                <option value="Robusta">Robusta</option>
                             </select>
                         </div>
                         <div class="group-fields">
@@ -187,6 +185,7 @@
     document.getElementById('button-editar').addEventListener('click', function () {
         select_estado_fazenda_edit.disabled = false;
         select_municipio_fazenda_edit.disabled = false;
+        select_tipo_cafe_edit.disabled = false;
         input_nome_fazenda_edit.disabled = false;
 
         const button = document.getElementById('button-editar');
@@ -288,6 +287,11 @@
                         habilitarMensagem(data.message);
                         // listarEstados();
                         bloquearCampos();
+                        sessionStorage.setItem('TIPO_CAFE_FAZENDA', tipoCafe);
+                        sessionStorage.setItem('ESTADO_FAZENDA', idEstado);
+                        sessionStorage.setItem('MUNICIPIO_FAZENDA', idMunicipio);
+                        sessionStorage.setItem('NOME_FAZENDA', nomeFazenda);
+
                     }
                     setTimeout(() => {
                         ocultarMensagem();
@@ -297,6 +301,11 @@
             })
             .catch(function (erro) {
                 console.log(`#ERRO: ${erro}`);
+            }).finally(() => {
+                select_tipo_cafe_edit.value = sessionStorage.TIPO_CAFE_FAZENDA;
+                select_estado_fazenda_edit.value = sessionStorage.ESTADO_FAZENDA;
+                select_municipio_fazenda_edit.value = sessionStorage.MUNICIPIO_FAZENDA;
+                input_nome_fazenda_edit.value = sessionStorage.NOME_FAZENDA;
             });
 
         return false;
@@ -326,10 +335,27 @@
         estadoFazenda.disabled = true;
         municipioFazenda.disabled = true;
 
-        const buttonEditar = document.getElementById("button-enviar");
+        const buttonEditar = document.getElementById("button-editar");
         buttonEditar.innerHTML = "Editar";
-      
-
-     
     }
+
+    listarTipoCafe();
+    function listarTipoCafe() {
+        fetch("/fazenda/listarTipoCafe", {
+            method: "GET",
+        })
+            .then(function (resposta) {
+                resposta.json().then((fazenda) => {
+                    fazenda.forEach((fazendaTipoCafe) => {
+                        select_tipo_cafe_edit.innerHTML += `<option value='${fazendaTipoCafe.id}'>${fazendaTipoCafe.nome}</option>`
+                    });
+                    select_tipo_cafe_edit.value = sessionStorage.TIPO_CAFE_FAZENDA;
+                });
+
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+    }
+
 </script>
