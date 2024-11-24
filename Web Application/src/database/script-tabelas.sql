@@ -205,16 +205,15 @@ CREATE TABLE IF NOT EXISTS datatech.MedidaFaseCafePorTipo (
 -- -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS datatech.tipoCafePlantacao (
-  fkFazenda INT NOT NULL AUTO_INCREMENT,
+  fkFazenda INT NOT NULL,
   Fazenda_fkEmpresa INT NOT NULL,
   fkTipoCafe INT NOT NULL,
-  PRIMARY KEY (fkFazenda, Fazenda_fkEmpresa, fkTipoCafe),
+  id INT PRIMARY KEY AUTO_INCREMENT,
   CONSTRAINT fk_fazenda_empresa_tipocafeplantacao FOREIGN KEY (fkFazenda, Fazenda_fkEmpresa)
-		REFERENCES datatech.fazenda (id , fkEmpresa),
+    REFERENCES datatech.fazenda (id , fkEmpresa),
   CONSTRAINT fk_tipocafe_tipocafeplantacao FOREIGN KEY (fkTipoCafe)
     REFERENCES datatech.tipoCafe (id)
 );
-
 -- -----------------------------------------------------
 --                   TABELA TOKEN                     --
 -- -----------------------------------------------------
