@@ -24,7 +24,7 @@ function validarToken(token_informado) {
     for (let i = 0; i < listarEmpresasCadastradas.length; i++) {
         if (listarEmpresasCadastradas[i].token == token_informado) {
             console.log("Token validado com sucesso!");
-            id = listarEmpresasCadastradas[i].id;
+            id = listarEmpresasCadastradas[i].empresa_id;
             break;
         } else {
             Swal.fire({
@@ -225,6 +225,7 @@ function cadastrar() {
 
     const empresa = validarToken(token_informado);
     if (!empresa) {
+        alert("aqui")
         return;
     }
 
