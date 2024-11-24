@@ -19,14 +19,35 @@ function adicionarCargo(nomeCargo, permissaoCargos, permissaoFazendas, permissao
 function removerCargos(listaIdsCargos) {
     for (i = 0; i < listaIdsCargos.length; i++) {
         let instrucaoSql = `
-            DELETE FROM cargos WHERE id = ${listaIdsCargos[i]}
+            DELETE FROM cargos WHERE id = ${listaIdsCargos[i]};
         `;
         database.executar(instrucaoSql);
     }
 }
 
+function editarCargo(id, nome, permissaoCargos, permissaoFazendas, permissaoFuncionarios, fazenda) {
+    let instrucaoSql = `
+        UPDATE cargos 
+        SET nomeCargo = "${nome}",
+        permissaoCargos  = ${permissaoCargos},
+        permissaoFazenda = ${permissaoFazendas},
+        permissaoFuncionarios = ${permissaoFuncionarios}
+        WHERE id = ${id} and fkFazenda = ${fazenda}
+    `;
+    database.executar(instrucaoSql);
+}
+
+function consultarFazenda(idFazenda) {
+    let instrucaoSql = `
+        SELECT nome FROM fazenda WHERE idFazenda = ${idFazenda};
+    `;
+
+    return database.executar(instrucaoSql)
+}
+
 module.exports = {
     listarCargos,
     adicionarCargo,
-    removerCargos
+    removerCargos,
+    editarCargo
 };

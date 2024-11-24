@@ -1,6 +1,35 @@
-// let idFazenda = sessionStorage.ID_FAZENDA;
-let idFazenda = 1;
+let idFazenda = 3;
 let cargos;
+
+
+
+function conultarNomeFazenda() {
+    fetch('cargo/consultarFazenda', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify( {
+            idServer: idFazenda
+        })
+    })
+    .then(resposta => {
+        resposta.json.then(data => {
+            if (!resposta.ok) {
+                throw new Error(data.erro);
+            }
+            else {
+                console.log("Nome da fazenda: ", data);
+                document.getElementById("nome_fazenda1") = data;
+            }
+        })
+    })
+    .catch(function (erro) {
+        console.log(`#ERRO: ${erro}`);
+    });
+
+    return false;
+}
 
 function listarCargos() {
 
@@ -10,7 +39,7 @@ function listarCargos() {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            fazendaServer: 3
+            fazendaServer: idFazenda
         }),
     })
         .then(resposta => {
@@ -33,84 +62,132 @@ function listarCargos() {
 }
 
 function exibirCargosNaTela(data) {
-    document.getElementById("lista_cargos").innerHTML = "";
-
-    console.log(cargos.length);
 
     for (i = 0; i < cargos.length; i++) {
+        const container = document.querySelector('.lista_cargos');
+        container.innerHTML = '';
 
-        const checkCargoDaVez = document.querySelector(`#check_permissao_cargos_${data[i].id}`);
-        const checkFazendaDaVez = document.querySelector(`#check_permissao_fazendas_${data[i].id}`);
-        const checkFuncionarioDaVez = document.querySelector(`#check_permissao_funcionarios_${data[i].id}`);
+        data.forEach(cargo => {
+            const div = document.createElement('div');
+            div.classList.add('campo');
 
-        let checkadoCargo = "";
-        let checkadoFazenda = "";
-        let checkadoFuncionario = "";
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.classList.add('checkbox-class');
+            checkbox.id = `check_cargo_${cargo.id}`
+            checkbox.setAttribute('data-nome', cargo.nomeCargo);
+            checkbox.setAttribute('data-permissao-cargos', cargo.permissaoCargos)
+            checkbox.setAttribute('data-permissao-fazenda', cargo.permissaoFazenda)
+            checkbox.setAttribute('data-permissao-funcionarios', cargo.permissaoFuncionarios)
 
-        if (cargos[i].permissaoCargos == 1) {
-            console.log("Esse funcionário ta podendo editar cargo");
-            checkadoCargo = "checked";
-            // checkCargoDaVez.checked = true;
-        }
-        if (cargos[i].permissaoFazenda == 1) {
-            console.log("Esse funcionário ta podendo editar fazenda");
-            checkadoFazenda = "checked";
-            // checkFazendaDaVez.checked = true;
-        }
-        if (cargos[i].permissaoFuncionarios == 1) {
-            console.log("Esse funcionário ta podendo editar funcionario");
-            checkadoFuncionario = "checked";
-            // checkFuncionarioDaVez.checked = true;
-        }
+            const nomeSpan = document.createElement('span');
+            nomeSpan.classList.add('nome');
+            nomeSpan.innerText = cargo.nomeCargo;
 
+            const temPermissaoCargos = document.createElement('img');
+            temPermissaoCargos.src = './assets/check-cargos.svg';
+            temPermissaoCargos.alt = 'check icon';
+            temPermissaoCargos.classList.add('check-permissao');
 
+            const naoTemPermissaoCargos = document.createElement('img');
+            naoTemPermissaoCargos.src = './assets/X-cargos.svg';
+            naoTemPermissaoCargos.alt = 'check icon';
+            naoTemPermissaoCargos.classList.add('check-permissao');
 
-        document.getElementById("lista_cargos").innerHTML += `
-        <div class="cargo" id="${data[i].id}">
-            <input type="checkbox" id="check_cargo_${data[i].id}">
-            <div class="permissao">
-                <h1 id="nome_cargo">${data[i].nomeCargo}</h1>
-            </div>
-            <div class="permissao">
-                <input type="checkbox" id="check_permissao_cargos_${data[i].id} ${checkadoCargo}">
-                <h1>Cargos</h1>
-            </div>
-            <div class="permissao">
-                <input type="checkbox" id="check_permissao_fazendas_${data[i].id} ${checkadoFazenda}">
-                <h1>Fazendas</h1>
-            </div>
-            <div class="permissao">
-                <input type="checkbox" id="check_permissao_funcionarios_${data[i].id} ${checkadoFuncionario}">
-                <h1>Funcionários</h1>
-            </div>
-        </div>
-        `
+            const temPermissaoFazendas = document.createElement('img');
+            temPermissaoFazendas.src = './assets/check-cargos.svg';
+            temPermissaoFazendas.alt = 'check icon';
+            temPermissaoFazendas.classList.add('check-permissao');
 
-       
+            const naoTemPermissaoFazendas = document.createElement('img');
+            naoTemPermissaoFazendas.src = './assets/X-cargos.svg';
+            naoTemPermissaoFazendas.alt = 'check icon';
+            naoTemPermissaoFazendas.classList.add('check-permissao');
 
-        console.log(cargos[i].permissaoCargos);
-        console.log(cargos[i].permissaoFazenda);
-        console.log(cargos[i].permissaoFuncionario);
+            const temPermissaoFuncionarios = document.createElement('img');
+            temPermissaoFuncionarios.src = './assets/check-cargos.svg';
+            temPermissaoFuncionarios.alt = 'check icon';
+            temPermissaoFuncionarios.classList.add('check-permissao');
 
-        console.log("--------------------");
-        
-        console.log(checkCargoDaVez);
-        console.log(checkFazendaDaVez);
-        console.log(checkFuncionarioDaVez);
+            const naoTemPermissaoFuncionarios = document.createElement('img');
+            naoTemPermissaoFuncionarios.src = './assets/X-cargos.svg';
+            naoTemPermissaoFuncionarios.alt = 'check icon';
+            naoTemPermissaoFuncionarios .classList.add('check-permissao');
 
+            div.appendChild(checkbox);
+            div.appendChild(nomeSpan);
+
+            if (cargo.permissaoCargos == 1) {
+                div.appendChild(temPermissaoCargos);
+            } else {
+                div.appendChild(naoTemPermissaoCargos);
+            }
+            if(cargo.permissaoFazenda == 1) {
+                div.appendChild(temPermissaoFazendas);
+            } else {
+                div.appendChild(naoTemPermissaoFazendas);
+
+            }
+            if (cargo.permissaoFuncionarios == 1) {
+                div.appendChild(temPermissaoFuncionarios);
+            } else {
+                div.appendChild(naoTemPermissaoFuncionarios);
+            }
+
+            container.appendChild(div);
+
+            checkbox.addEventListener('change', () => {
+                var idCargo = checkbox.getAttribute('data-id');
+                const nomeCargo = checkbox.getAttribute('data-nome');
+
+                sessionStorage.setItem('ID_CARGO', idCargo);
+
+                if (checkbox.checked) {
+                    sessionStorage.setItem(`cargo_${idCargo}`, JSON.stringify({ id: idCargo, nome: nomeCargo }));
+                } else {
+                    sessionStorage.removeItem(`cargo_${idCargo}`);
+                }
+
+                console.log('Cargo atualizado no sessionStorage:', idCargo, nomeCargo);
+            });
+
+        });
     }
 }
 
-function abrirModalAdicionarCargo() {
-    document.getElementById("modal_add_cargo").style.display = 'block';
-    document.getElementById("formulario_add_cargo").style.display = 'block';
+function procurarCargo() {
+    const input = document.getElementById('input-search');
+    const filter = input.value.toLowerCase();
+    const funcionarios = document.querySelectorAll('.campo');
+
+    funcionarios.forEach(cargo => {
+        const nome = cargo.querySelector('.nome').innerText.toLowerCase();
+        if (nome.startsWith(filter)) {
+            cargo.style.display = '';
+        } else {
+            cargo.style.display = 'none';
+        }
+    });
+
+    document.getElementById('input-search').addEventListener('keyup', procurarCargo);
+}
+
+function modalAdicionarCargo() {
+    const modal = document.getElementById('janela-modal');
+    modal.classList.add('abrir');
+
+    modal.addEventListener('click', (e) => {
+        if (e.target.id == 'fechar' || e.target.id == 'janela-modal') {
+            modal.classList.remove('abrir')
+        }
+    });
 }
 
 function lerPermissoesSelecionadas() {
     let cargo = false;
     let fazenda = false;
     let funcionario = false;
-    const nomeCargo = document.getElementById("input_nome_cargo").value;
+    const nomeCargo = document.getElementById("input_nome_cargo").value.trim();
     const checkCargos = document.getElementById("check_permissao_cargos");
     const checkFazendas = document.getElementById("check_permissao_fazendas");
     const checkFuncionarios = document.getElementById("check_permissao_funcionarios");
@@ -139,7 +216,7 @@ function adicionarCargo(nomeCargo, cargo, fazenda, funcionario) {
             permissaoCargosServer: cargo,
             permissaoFazendasServer: fazenda,
             permissaoFuncionariosServer: funcionario,
-            fazendaServer: 3
+            fazendaServer: idFazenda
         }),
     }).then(resposta => {
         resposta.json().then(data => {
@@ -155,11 +232,55 @@ function adicionarCargo(nomeCargo, cargo, fazenda, funcionario) {
         console.log(`#ERRO: ${erro}`);
     })
 
-    document.getElementById("modal_add_cargo").style.display = 'none';
-    document.getElementById("formulario_add_cargo").style.display = 'none';
-
-    listarCargos();
+    document.getElementById("janela-modal").style.display = 'none';
+    location.reload();
     return false;
+}
+
+function modalRemoverCargo() {
+    const modal = document.getElementById('janela-modal-remover');
+    const checkboxes = document.querySelectorAll('.campo .checkbox-class');
+    const names = document.querySelectorAll('.campo .nome');
+    const modalContent = document.getElementById('funcionarios-para-remover');
+    const funcionariosParaRemover = [];
+
+    const algumSelecionado = Array.from(checkboxes).some(checkbox => checkbox.checked);
+    if (!algumSelecionado) {
+        Swal.fire({
+            icon: 'info',
+            title: 'Atenção!',
+            html: 'Selecione pelo menos <b>um</b> funcionário para remover',
+            confirmButtonText: 'OK',
+            confirmButtonColor: "#20BF55",
+            didOpen: () => {
+                document.querySelector('.menu-lateral').classList.add('ajuste-modal');
+            },
+            willClose: () => {
+                document.querySelector('.menu-lateral').classList.remove('ajuste-modal');
+            }
+        })
+    } else {
+
+        modalContent.innerHTML = '';
+        modal.classList.add('abrir');
+
+        checkboxes.forEach((checkbox, index) => {
+            if (checkbox.checked) {
+                const name = names[index].textContent;
+                const nameElement = document.createElement('p');
+                nameElement.textContent = name;
+                modalContent.appendChild(nameElement);
+                funcionariosParaRemover.push(name);
+            }
+        });
+        console.log("usuario para excluir:", funcionariosParaRemover)
+
+        modal.addEventListener('click', (e) => {
+            if (e.target.id == 'fechar' || e.target.id == 'janela-modal-remover') {
+                modal.classList.remove('abrir')
+            }
+        });
+    }
 }
 
 function lerCargosSelecionados() {
@@ -199,6 +320,124 @@ function removerCargo(listaIds) {
             console.log(`#ERRO: ${erro}`);
         });
 
+        document.getElementById("janela-modal-remover").style.display = 'none';
+        document.getElementById("modal-remover").style.display = 'none';
+        location.reload();
+
         return false;
     }
+}
+
+function modalEditarCargo() {
+    const modal = document.getElementById('janela-modal-editar');
+    const checkboxes = document.querySelectorAll('.campo .checkbox-class');
+
+    const checkboxesSelecionadas = Array.from(checkboxes).filter(checkbox => checkbox.checked);
+
+    if (checkboxesSelecionadas.length === 0) {
+        Swal.fire({
+            icon: 'info',
+            title: 'Atenção!',
+            text: 'Selecione um cargo para editar',
+            confirmButtonText: 'OK',
+            confirmButtonColor: "#20BF55",
+            didOpen: () => {
+                document.querySelector('.menu-lateral').classList.add('ajuste-modal');
+            },
+            willClose: () => {
+                document.querySelector('.menu-lateral').classList.remove('ajuste-modal');
+            }
+        })
+        return;
+    } else if (checkboxesSelecionadas.length !== 1) {
+        Swal.fire({
+            icon: 'info',
+            title: 'Atenção!',
+            html: 'Selecione apenas <b>um</b> funcionário para editar',
+            confirmButtonText: 'OK',
+            confirmButtonColor: "#20BF55",
+            didOpen: () => {
+                document.querySelector('.menu-lateral').classList.add('ajuste-modal');
+            },
+            willClose: () => {
+                document.querySelector('.menu-lateral').classList.remove('ajuste-modal');
+            }
+        })
+        return;
+    }
+
+    const checkboxSelecionado = checkboxesSelecionadas[0];
+
+    const nomeCargo = checkboxSelecionado.getAttribute('data-nome');
+
+    document.getElementById('nome_cargo_editar').textContent = nomeCargo;
+
+    modal.classList.add('abrir');
+
+    modal.addEventListener('click', (e) => {
+        if (e.target.id == 'fechar' || e.target.id == 'janela-modal-editar') {
+            modal.classList.remove('abrir')
+        }
+    });
+}
+
+function editarCargo() {
+    let cargoParaEditar;
+
+    for (i = 0; i < cargos.length; i++) {
+        let cargoAtual = document.getElementById(`check_cargo_${cargos[i].id}`);
+        
+        if (cargoAtual.checked) {
+            cargoParaEditar = cargos[i];
+        }
+    }
+
+    const checkPermissaoCargos = document.getElementById("check_permissao_cargos_editar");
+    const checkPermissaoFazendas = document.getElementById("check_permissao_fazendas_editar");
+    const checkPermissaoFuncionarios = document.getElementById("check_permissao_funcionarios_editar");
+
+    let permissaoCargos = 0;
+    let permissaoFazendas = 0;
+    let permissaoFuncionarios = 0;
+
+    if(checkPermissaoCargos.checked) {
+        permissaoCargos = 1;
+    }
+    if(checkPermissaoFazendas.checked) {
+        permissaoFazendas = 1;
+    }
+    if(checkPermissaoFuncionarios.checked) {
+        permissaoFuncionarios = 1;
+    }
+
+    fetch('/cargo/editar', {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            idServer: cargoParaEditar.id,
+            nomeServer: document.getElementById("input_nome_cargo_editar").value.trim(),
+            permissaoCargosServer: permissaoCargos,
+            permissaoFazendasServer: permissaoFazendas,
+            permissaoFuncionariosServer: permissaoFuncionarios,
+            fazendaServer: idFazenda
+        }),
+    }).then(resposta => {
+        resposta.json().then(data => {
+
+            if (!resposta.ok) {
+                throw new Error(data.erro);
+            }
+            else {
+                console.log("cargo editado com sucesso" + cargoParaEditar)
+            }
+        })
+    }).catch(function (erro) {
+        console.log(`#ERRO: ${erro}`);
+    })
+
+    document.getElementById("janela-modal").style.display = 'none';
+    location.reload();
+    return false;
 }

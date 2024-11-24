@@ -15,4 +15,12 @@ router.delete("/remover", function(req, res) {
     cargoController.removerCargo(req, res);
 });
 
+router.put("/editar", function(req, res) {
+    cargoController.editarCargo(req, res);
+});
+
+router.post("/consultarFazenda", function (req, res) {
+    cargoController.consultarFazenda(req, res);
+});
+
 module.exports = router;

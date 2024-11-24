@@ -5,21 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="assets/logo_datatech_-_roxa_escuro.png" type="image/x-icon">
-    <link rel="stylesheet" href="./css/cargos.css">
-    <script src="./js/dashboard.js"></script>
-
-    <title>Dashboard • DataTech </title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="./js/cargo.js"></script>
-
+    <link rel="stylesheet" href="css/cargos.css">
+    <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/cargo.js"></script>
+
+    <title>Cargos • DataTech</title>
 </head>
 
-<body onload="listarCargos()">
+<body onload="conultarNomeFazenda(), listarCargos()">
 
     <section class="menu-lateral">
         <div class="identificacao-empresa">
-            <h1>Empresa</h1>
+            <h1 id="name_equipe">Empresa</h1>
         </div>
 
         <div>
@@ -39,11 +38,11 @@
             <b>
                 <p>Outros</p>
             </b>
-            <a href="conta.html"><button class="btn-conta"><img src="./assets/Profile.png" alt="conta icon"
+            <a href="dashConta.html"><button class="btn-conta"><img src="./assets/Profile.png" alt="conta icon"
                         class="icon">
                     Conta</button></a>
-            <a href="suporte.html" target="_blank"><button class="btn-suporte"> <img src="./assets/Info Square.png"
-                        alt="suporte icon" class="icon">Suporte</button></a>
+            <a href="suporte.html"><button class="btn-suporte"> <img src="./assets/Info Square.png" alt="suporte icon"
+                        class="icon">Suporte</button></a>
             <a href="login.html"><button onclick="limparSessao()" class="btn-sair"><img
                         src="./assets/icons8-exit-50.png" alt="exit icon" class="icon"> Sair</button></a>
         </div>
@@ -54,59 +53,163 @@
 
         <div class="navbar">
             <img src="./assets/Group 376.png" alt="perfil icon" class="icon">
-            <h3 id="b_usuario">Cliente</h3>
-            <img src="./assets/sino-notificacao-sem-notificacoes.svg" alt="icone-notificacao" id="notificacao">
+            <h3 id="b_usuario"></h3>
         </div>
 
-        <!-- -------------------------GRAFICO 1------------------------- -->
-        <section class="dashboard" id="dashboard">
-            <div class="titulo_fazenda">
-                <h1 id="fazenda">Fazenda:</h1>
-                <h1>BIGCOFFEE</h1>
-            </div>
+        <h3 class="name-titulo">Lista de funcionários</h3>
 
-            <div class="pesquisa">
-                <input type="text" class="input_pesquisa" id="input_pesquisa">
-                <div class="botoes_pesquisa">
-                    <button class="botao_pesquisa" id="botao_adicionar_cargo" onclick="abrirModalAdicionarCargo()"><img src="./assets/adicionar.svg"
-                            alt=""></button>
-                    <button class="botao_pesquisa" id="botao_remover_cargo" onclick="lerCargosSelecionados()"><img src="./assets/remover.svg"
-                            alt=""></button>
-                    <button class="botao_pesquisa" id="botao_editar_cargo"><img src="./assets/editar.svg"
-                            alt=""></button>
+        <div class="equipe">
+            Fazenda:<span id="nome_fazenda1" class="name-equipe"></span>
+        </div>
+
+        <section class="search-add-remove">
+            <div class="container">
+                <div class="input_busca">
+                    <input type="search" onkeyup="procurarCargo()" placeholder="Buscar..." id="input-search">
+                </div>
+                <div class="botoes-add-remove">
+                    <button id="adicionar-funcionario" onclick="modalAdicionarCargo()" class="add-button"><i
+                            class="fa-solid fa-user-plus"></i></button>
+                    <button id="remover-funcionario" onclick="modalRemoverCargo()" class="remove-button"><i
+                            class="fas fa-trash"></i></button>
+                    <button id="editar-funcionario" onclick="modalEditarCargo()" class="edit-button"><i
+                            class="fas fa-pencil"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <div class="campos-lista">
+            <div class="descricao">
+                <span>Nome</span>
+                <span>Permissão Cargos</span>
+                <span>Permissão Fazendas</span>
+                <span>Permissão Funcionários</span>
+            </div>
+        </div>
+
+
+        <section class="lista_cargos"></section>
+
+        <section class="janela-modal" id="janela-modal">
+
+            <div class="modal" id="modal-adicionar">
+                <button class="fechar" id="fechar">&times;</button>
+                <div class="box-modal">
+                    <div class="titulo">
+                        <span>Adicionar novo cargo à equipe</span>
+                        <h1 id="nome_fazenda2" class="name-equipe"></h1>
+                    </div>
+                    <div class="formulario">
+                        <div class="inputs">
+                            <span id="spanNome">Nome:</span>
+                            <input class="inputs-modal" id="input_nome_cargo" type="text">
+                            <span class="erro" id="erro_nome"></span>
+                        </div>
+                        <div class="check">
+                            <div>
+                                <input class="inputs-modal" id="check_permissao_cargos" type="checkbox">
+                                <span id="spanCpf">Permissão para fazer mudanças nos cargos</span>
+                            </div>
+                            <span class="erro" id="erro_cpf"></span>
+                        </div>
+                        <div class="check">
+                            <div>
+                                <input class="inputs-modal" id="check_permissao_fazendas" type="checkbox">
+                                <span id="spanEmail">Permissão para fazer mudanças nas fazendas</span>
+                            </div>
+                            <span class="erro" id="erro_email"></span>
+                        </div>
+                        <div class="check">
+                            <div>
+                                <input class="inputs-modal" id="check_permissao_funcionarios" type="checkbox">
+                                <span id="spanSenha">Permissão para fazer mudanças nos funcionários</span>
+                            </div>
+                            <span class="erro" id="erro_senha"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="botao-modal">
+                    <button class="button-modal" onclick="lerPermissoesSelecionadas()">Adicionar cargo</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="janela-modal" id="janela-modal-remover">
+
+            <div class="modal remover" id="modal-remover">
+                <button class="fechar" id="fechar">&times;</button>
+                <div class="box-modal remover">
+                    <div class="titulo">
+                        <h1 class="name-equipe">Remover cargo</h1>
+                        <span>Você deseja remover os seguintes cargos:</span>
+                    </div>
+                    <div class="nomes-funcionarios">
+                        <span id="funcionarios-para-remover">
+                            <p></p>
+                        </span>
+                    </div>
+                    <div class="checkbox_confirmacao">
+                        <input type="checkbox" class="checkbox-class remover" id="checkbox">
+                        <span id="spanCheckboxModal">Ao marcar esta caixa, autorizo a exclusão deste cargo da equipe e
+                            concordo que não terei mais acesso ao cargo. Esta ação é
+                            irreversível.</span>
+                    </div>
+
+                    <div class="botao-modal">
+                        <button class="button-modal" id="button-modal" onclick="lerCargosSelecionados()">Remover cargo</button>
+                    </div>
                 </div>
             </div>
 
-            <div class="header_cargos">
-                <h1 id="titulo_permissoes_nome">Nome</h1>
-                <h1 id="titulo_permissoes_permissoes">Permissões</h1>
-            </div>
+        </section>
 
-            <div class="lista_cargos" id="lista_cargos">
+        <section class="janela-modal" id="janela-modal-editar">
 
+            <div class="modal editar" id="modal-editar">
+                <button class="fechar" id="fechar">&times;</button>
+                <div class="box-modal editar">
+                    <div class="titulo">
+                        <span>Editar cargo:</span>
+                        <h1 id="nome_cargo_editar" class="name-equipe"></h1>
+                    </div>
+                    <div class="formulario">
+                        <div class="inputs">
+                            <span id="spanNomeEditar">Novo nome:</span>
+                            <input class="inputs-modal" id="input_nome_cargo_editar" type="text">
+                            <span class="erro" id="erro_nome_editar"></span>
+                        </div>
+                        <span id="texto-editar">Desejo que o usuário tenha as seguintes permissões:</span>
+                        <div class="check">
+                            <div class="checks_editar">
+                                <input class="inputs-modal" id="check_permissao_cargos_editar" type="checkbox">
+                                <span id="span_permissao_cargos_editar">Permissão para fazer mudanças nos cargos</span>
+                            </div>
+                            <span class="erro" id="erro_cpf"></span>
+                        </div>
+                        <div class="check">
+                            <div class="checks_editar">
+                                <input class="inputs-modal" id="check_permissao_fazendas_editar" type="checkbox">
+                                <span id="span_permissao_fazendas_editar">Permissão para fazer mudanças nas fazendas</span>
+                            </div>
+                            <span class="erro" id="erro_email"></span>
+                        </div>
+                        <div class="check">
+                            <div class="checks_editar">
+                                <input class="inputs-modal" id="check_permissao_funcionarios_editar" type="checkbox">
+                                <span id="span_permissao_funcionarios_editar">Permissão para fazer mudanças nos funcionários</span>
+                            </div>
+                            <span class="erro" id="erro_senha"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="botao-modal">
+                    <button class="button-modal" onclick="editarCargo()">Editar cargo</button>
+                </div>
             </div>
 
         </section>
+
     </section>
-
-    <div class="modal_add_cargo" id="modal_add_cargo" style="display: none;"></div>
-
-    <div class="formulario" id="formulario_add_cargo" style="display: none;">
-        <div class="header_formulario">
-            <span id="add_novo_cargo">Adicionar novo cargo a fazenda</span>
-            <h1>BIGCOFFEE</h1>
-
-            <div class="inputs_cargo">
-                <span>Nome cargo</span>
-                <input type="text" name="" class="input_pesquisa" id="input_nome_cargo">
-                <input type="checkbox" id="check_permissao_cargos"><span>Permissão para fazer mudanças nos cargos</span>
-                <input type="checkbox" id="check_permissao_fazendas"><span>Permissão para fazer mudanças nas fazendas</span>
-                <input type="checkbox" id="check_permissao_funcionarios"><span>Permissão para fazer mudanças Nos funcionários</span>
-                <button id="botao_adicionar_cargo" onclick="lerPermissoesSelecionadas()">Adiciona essa budega</button>
-            </div>
-        </div>
-    </div>
-
 </body>
 
 </html>

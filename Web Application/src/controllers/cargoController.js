@@ -53,8 +53,66 @@ function removerCargo(req, res) {
     }
 }
 
+function editarCargo(req, res) {
+    const id = req.body.idServer;
+    const nome = req.body.nomeServer;
+    const permissaoCargos = req.body.permissaoCargosServer;
+    const permissaoFazendas = req.body.permissaoFazendasServer;
+    const permissaoFuncionarios = req.body.permissaoFuncionariosServer;
+    const fazenda = req.body.fazendaServer;
+
+    if(id == undefined) {
+        console.log("id está undefined");
+        res.status(400);
+    }
+    if(nome == undefined) {
+        console.log("nome está undefined");
+        res.status(400);
+    }
+    if(permissaoCargos == undefined) {
+        console.log("permissaoCargos está undefined");
+        res.status(400);
+    }
+    if(permissaoFazendas == undefined) {
+        console.log("permissaoFazendas está undefined");
+        res.status(400);
+    }
+    if(permissaoFuncionarios == undefined) {
+        console.log("permissaoFuncionarios está undefined");
+        res.status(400);
+    }
+    if(fazenda == undefined) {
+        console.log("fazenda está undefined");
+        res.status(400);
+    }
+
+    try {
+        cargoModel.editarCargo(id, nome, permissaoCargos, permissaoFazendas, permissaoFuncionarios, fazenda);
+        res.status(200);
+        console.log("cargo editado com sucesso;")
+    } catch {
+        res.status(500);
+        console.log("Houve um erro ao tentar atualizar o cargo");
+    }
+}
+
+function consultarFazenda(req, res) {
+    const idFazenda = req.body.idServer;
+
+    try {
+        cargoModel.consultarFazenda(idFazenda);
+        res.status(200);
+        console.log("Fazenda consultada com sucesso");
+    } catch {
+        res.status(400);
+        console.log("Falha ao consultar fazenda");
+    }
+}
+
 module.exports = {
     listarCargos,
     adicionarCargo,
-    removerCargo
+    removerCargo,
+    editarCargo,
+    consultarFazenda
 };
