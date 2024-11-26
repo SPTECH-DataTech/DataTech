@@ -13,8 +13,6 @@ FROM
     funcionario
 LEFT JOIN fazenda 
     ON funcionario.fkFazenda = fazenda.id 
-    AND funcionario.Fazenda_fkEmpresa = fazenda.fkEmpresa
-    AND funcionario.Fazenda_fkEstadoMunicipio = fazenda.fkEstadoMunicipio
 LEFT JOIN cargo 
     ON funcionario.fkCargo = cargo.id
 WHERE 
