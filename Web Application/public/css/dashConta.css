@@ -140,7 +140,7 @@
     background-color: #7F00FF;
 }
 
-#input_senha_atual,
+#input_senha,
 #input_nova_senha,
 #input_confirmar_senha {
     padding: 10px;
@@ -158,6 +158,14 @@
 
 .janela-modal.abrir {
     display: flex;
+}
+
+.mensagemErroCampo {
+
+    color: red;
+    margin: 0;
+    font-size: 0.8vw;
+
 }
 
 @keyframes abrirModal {

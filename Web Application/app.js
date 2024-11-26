@@ -21,6 +21,9 @@ var recuperarSenhaRouter = require("./src/routes/recuperarSenha");
 var equipeRouter = require("./src/routes/equipe");
 var fazendaRouter = require("./src/routes/fazenda");
 var cargoRouter = require("./src/routes/cargo")
+var dashContaRouter = require("./src/routes/dashConta");
+
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -35,6 +38,10 @@ app.use("/recuperarSenha", recuperarSenhaRouter);
 app.use("/equipe", equipeRouter);
 app.use("/fazenda", fazendaRouter);
 app.use("/cargo", cargoRouter);
+app.use("/dashConta", dashContaRouter);
+
+
+
 
 
 

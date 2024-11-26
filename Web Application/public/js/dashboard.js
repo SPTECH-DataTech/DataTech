@@ -1,3 +1,7 @@
+window.onload = function() {
+  document.getElementById("b_usuario").innerHTML = `${sessionStorage.NOME_USUARIO}`;
+};
+
 const currentPath = window.location.pathname;
 
 // Seleciona os botões do menu lateral
