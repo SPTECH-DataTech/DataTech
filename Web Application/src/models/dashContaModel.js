@@ -4,14 +4,19 @@ function mostrarInformacoesConta(idUsuario) {
   console.log("ACESSEI O DASHCONTA MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function mostrarInformacoesConta():", idUsuario);
 
   var instrucaoSql = `SELECT 
+    funcionario.nome,
     funcionario.cpf,
     funcionario.email,
-    fazenda.nome,
+    fazenda.nome AS nomeFazenda,
     cargo.nomeCargo
 FROM 
     funcionario
-LEFT JOIN fazenda ON funcionario.fkFazenda = fazenda.id
-LEFT JOIN cargo ON funcionario.fkCargo = cargo.id
+LEFT JOIN fazenda 
+    ON funcionario.fkFazenda = fazenda.id 
+    AND funcionario.Fazenda_fkEmpresa = fazenda.fkEmpresa
+    AND funcionario.Fazenda_fkEstadoMunicipio = fazenda.fkEstadoMunicipio
+LEFT JOIN cargo 
+    ON funcionario.fkCargo = cargo.id
 WHERE 
     funcionario.id = ${idUsuario};`;
 

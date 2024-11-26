@@ -7,7 +7,7 @@
 var nomeUsuario = sessionStorage.NOME_USUARIO;
 document.getElementById("b_usuario").innerHTML = `${nomeUsuario}`;
 
-var idUsuario = 1;
+var idUsuario = sessionStorage.ID_USUARIO;
 
 function modalAlterarSenha() {
     const modal = document.getElementById('janela-modal');
@@ -71,14 +71,6 @@ function alterarSenha() {
         input_confirmacaoSenha.style.borderColor = "#7F00FF";
     }
 
-    // Verificar se tudo está correto
-    if (tudoCerto) {
-        alert("Senha alterada com sucesso!");
-        // Aqui você pode adicionar o código para enviar as informações ao servidor.
-    }
-
-    
-
     fetch(`dashConta/alterarSenha/${idUsuario}/${novaSenha}`, {
         method: "PUT",
         headers: {
@@ -132,12 +124,12 @@ function mostrarInformacoesConta() {
                 throw new Error('Erro na resposta da API');
             }
             resposta.json().then((dashConta) => {
-                dashConta.forEach((usuario) => {
-                    nome_usuario.innerHTML = usuario.nome || 'Não informado';
-                    cpf_usuario.innerHTML = usuario.cpf || 'Não informado';
-                    equipe_usuario.innerHTML = usuario.nome || 'Não informado';
-                    cargo_usuario.innerHTML = usuario.nomeCargo || 'Não informado';
-                    email_usuario.innerHTML = usuario.email || 'Não informado';
+                dashConta.forEach((funcionario) => {
+                    nome_funcionario.innerHTML = funcionario.nome || 'Não informado';
+                    cpf_funcionario.innerHTML = funcionario.cpf || 'Não informado';
+                    equipe_funcionario.innerHTML = funcionario.nomeFazenda || 'Não informado';
+                    cargo_funcionario.innerHTML = funcionario.nomeCargo || 'Não informado';
+                    email_funcionario.innerHTML = funcionario.email || 'Não informado';
                 });
             });
         })
