@@ -23,11 +23,11 @@ function carregarCargos() {
   return database.executar(instrucaoSql); 
 }
 
-function adicionar(idFazenda, idCargo, nome, cpf, email, senha) {
-  console.log("ACESSEI O EQUIPE MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function adicionar():", idFazenda, idCargo, nome, cpf, email, senha );
+function adicionar(idEmpresa, nome, cpf, email, senha, idCargo, idFazenda) {
+  console.log("ACESSEI O EQUIPE MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function adicionar():", idEmpresa, nome, cpf, email, senha, idCargo, idFazenda);
 
-  var instrucaoSql = `INSERT INTO funcionario (fkFazenda, fkCargo, nome, cpf, email, senha) 
-  VALUES (${idFazenda}, ${idCargo}, '${nome}', '${cpf}', '${email}', '${senha}');`;
+  var instrucaoSql = `INSERT INTO funcionario (fkEmpresa, nome, cpf, email, senha, fkCargo, fkFazenda) 
+  VALUES (${idEmpresa}, '${nome}', '${cpf}', '${email}', '${senha}', ${idCargo}, ${idFazenda});`;
 
   return database.executar(instrucaoSql);
 }

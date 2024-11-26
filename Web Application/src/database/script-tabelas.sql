@@ -47,8 +47,8 @@ CREATE TABLE IF NOT EXISTS datatech.fazenda (
 CREATE TABLE IF NOT EXISTS datatech.cargo (
   id INT NOT NULL AUTO_INCREMENT,
   fkFazenda INT NOT NULL,
-  Fazenda_fkEmpresa INT NOT NULL,
-  Fazenda_fkEstadoMunicipio INT NOT NULL,
+  Fazenda_fkEmpresa INT NULL,
+  Fazenda_fkEstadoMunicipio INT NULL,
   nomeCargo VARCHAR(45) NULL,
   permissaoCargos TINYINT NULL,
   permissaoFazendas TINYINT NULL,
