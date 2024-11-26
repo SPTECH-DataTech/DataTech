@@ -24,10 +24,26 @@ function validarToken(token_informado) {
     for (let i = 0; i < listarEmpresasCadastradas.length; i++) {
         if (listarEmpresasCadastradas[i].token == token_informado) {
             console.log("Token validado com sucesso!");
-            id = listarEmpresasCadastradas[i].id;
+            id = listarEmpresasCadastradas[i].empresa_id;
             break;
         } else {
-            alert("Token inválido!");
+            Swal.fire({
+                icon: "warning",
+                title: "Token Inválido",
+                timer: 2000,
+                timerProgressBar: true,
+                confirmButtonText: '',
+                confirmButtonColor: '#fff',
+                didOpen: () => {
+                    timerInterval = setInterval(() => {
+                        timer.textContent = `${Swal.getTimerLeft()}`;
+                    }, 100);
+                },
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log("I was closed by the timer");
+                }
+            });
             return null;
         }
 
@@ -108,7 +124,18 @@ function cadastrar() {
 
 
     if (campos.some(campo => campo == "")) {
-        alert("Preencha todos os campos para continuar!")
+        Swal.fire({
+            icon: "warning",
+            title: "Preencha todos os campos para continuar",
+            timer: 2000,
+            timerProgressBar: true,
+            confirmButtonText: '',
+            confirmButtonColor: '#fff',
+        }).then((result) => {
+            if (result.dismiss === Swal.DismissReason.timer) {
+                console.log("I was closed by the timer");
+            }
+        });
         return;
     }
     else if (erroNome) {
@@ -198,6 +225,7 @@ function cadastrar() {
 
     const empresa = validarToken(token_informado);
     if (!empresa) {
+        alert("aqui")
         return;
     }
 
@@ -222,12 +250,28 @@ function cadastrar() {
                     throw new Error(data.erro);
                 }
                 else {
-                    habilitarMensagem(data.message);
-
                     setTimeout(() => {
-                        ocultarMensagem();
-                        window.location = "login.html";
-                    }, 3000);
+                        Swal.fire({
+                            icon: "success",
+                            title: "Cadastro realizado com sucesso!",
+                            text: "Redirecionando para o login...",
+                            timer: 2000,
+                            timerProgressBar: true,
+                            confirmButtonText: '',
+                            confirmButtonColor: '#fff',
+                            didOpen: () => {
+                                Swal.showLoading();
+                            },
+                            willClose: () => {
+                                window.location = "login.html";
+                            }
+                        }).then((result) => {
+                            if (result.dismiss === Swal.DismissReason.timer) {
+                                console.log("I was closed by the timer");
+                            }
+                        });
+                    },
+                    );
                 }
             })
         })
@@ -237,17 +281,6 @@ function cadastrar() {
         });
 
     return false;
-}
-
-function habilitarMensagem(mensagem) {
-    const p = document.getElementById('message');
-    p.style.display = "block"
-    p.innerHTML = mensagem;
-}
-
-function ocultarMensagem() {
-    const p = document.getElementById('message');
-    p.style.display = "none"
 }
 
 function verModal() {
