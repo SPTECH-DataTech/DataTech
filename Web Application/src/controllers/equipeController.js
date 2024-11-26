@@ -30,25 +30,30 @@ function listarFuncionarios(req, res) {
 
 function adicionar(req, res) {
     var idFazenda = req.params.idFazenda;
+    var idEmpresa = req.body.idEmpresaServer;
     var idCargo = req.body.idCargoServer;
     var nome = req.body.nomeServer;
     var cpf = req.body.cpfServer;
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
 
-    if (idFazenda == undefined) {
-        res.status(400).send("idFazenda está undefined!");
+    console.log("Corpo da requisição:", req.body);
+
+    if (idEmpresa == undefined) {
+        res.status(400).send({ erro: "idEmpresa está undefined!" });
+    } else if (idFazenda == undefined) {
+        res.status(400).send({ erro: "idfazenda está undefined!" });
     } else if (idCargo == undefined) {
-        res.status(400).send("idCargo está undefined!");
+        res.status(400).send({ erro: "idCargo está undefined!" });
     } else if (nome == undefined) {
-        res.status(400).send("Seu nome está undefined!");
+        res.status(400).send({ erro: "nome está undefined!" });
     } else if (email == undefined) {
-        res.status(400).send("Seu email está undefined!");
+        res.status(400).send({ erro: "email está undefined!" });
     } else if (senha == undefined) {
-        res.status(400).send("Sua senha está undefined!");
+        res.status(400).send({ erro: "senha está undefined!" });
     } else {
 
-        equipeModel.adicionar(idFazenda, idCargo, nome, cpf, email, senha)
+        equipeModel.adicionar(idEmpresa, nome, cpf, email, senha, idCargo, idFazenda)
             .then(
                 function (resultado) {
                     if (resultado.length > 0) {

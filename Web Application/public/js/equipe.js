@@ -2,6 +2,7 @@ var idFazenda = sessionStorage.ID_FAZENDA;
 var nomeFazenda = sessionStorage.NOME_FAZENDA;
 var idFuncionario = sessionStorage.ID_FUNCIONARIO;
 var nomeUsuario = sessionStorage.NOME_USUARIO;
+var idEmpresa = sessionStorage.ID_EMPRESA;
 
 nome_fazenda1.innerHTML = `${nomeFazenda}`;
 nome_fazenda2.innerHTML = `${nomeFazenda}`;
@@ -198,7 +199,18 @@ function adicionar() {
     });
 
     if (campos.some(campo => campo == "")) {
-        alert("Preencha todos os campos para continuar!")
+        Swal.fire({
+            icon: "warning",
+            title: "Preencha todos os campos para continuar",
+            timer: 2000,
+            timerProgressBar: true,
+            confirmButtonText: '',
+            confirmButtonColor: '#fff',
+        }).then((result) => {
+            if (result.dismiss === Swal.DismissReason.timer) {
+                console.log("I was closed by the timer");
+            }
+        });
         return;
 
     } else if (erroNome) {
@@ -294,14 +306,15 @@ function adicionar() {
         },
         body: JSON.stringify({
             idCargoServer: idCargo,
+            idEmpresaServer: idEmpresa,
             nomeServer: nome,
             cpfServer: cpf,
             emailServer: email,
             senhaServer: senha,
         }),
     })
-        .then(resposta => {
-            resposta.json().then(data => {
+    .then(resposta => {
+        resposta.json().then(data => {
                 console.log("Resposta do servidor: ", data);
 
                 if (!resposta.ok) {
