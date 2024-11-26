@@ -7,16 +7,14 @@
     <link rel="shortcut icon" href="assets/logo_datatech_-_roxa_escuro.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/dashConta.css">
     <link rel="stylesheet" href="css/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- <link rel="stylesheet" href="./css/equipe.css"> -->
 
 
 
-    <script src="./js/dashConta.js"></script>
     <title>Conta • DataTech</title>
 </head>
-
-<body>
-
     <body>
 
         <section class="menu-lateral">
@@ -72,7 +70,7 @@
                     <div class="formulario">
 
                         Nome:
-                        <p id="b_usuario"></p>
+                        <p id="nome_usuario"></p>
                         <br>
                         CPF:
                         <p id="cpf_usuario">    </p>
@@ -88,7 +86,7 @@
                 <div class="email-section">
                     <div class="email-text">
                         Email:
-                        <p>tiago.souza@hotmail.lucasgay</p>
+                        <p id="email_usuario"></p>
                     </div>
                     <div class="email-button">
                         <button onclick="modalAlterarSenha()">Alterar senha</button>
@@ -104,36 +102,26 @@
                             <div class="box-modal">
                                 <div class="formularioModal">
                                     <div class="inputs">
-                                        <span id="spanSenhaAtual">Senha Atual:</span>
-                                        <input class="inputs-modal" id="input_senha_atual" type="password">
-                                        <span class="erro" id="erro_senha_atual"></span>
+                                        <span id="spanSenha">Senha Atual:</span>
+                                        <input class="inputs-modal" id="input_senha" type="password">
+                                        <p class="mensagemErroCampo" id="mensagemErroSenha"></p>
                                     </div>
                                     <div class="inputs">
                                         <span id="spanNovaSenha">Nova Senha:</span>
                                         <input class="inputs-modal" id="input_nova_senha" type="password">
-                                        <span class="erro" id="erro_nova_senha"></span>
+                                        <p class="mensagemErroCampo" id="mensagemErroNovaSenha"></p>
                                     </div>
                                     <div class="inputs">
                                         <span id="spanConfirmarSenha">Confirmar Nova Senha:</span>
-                                        <input class="inputs-modal" id="input_confirmar_senha" type="password">
-                                        <span class="erro" id="erro_confirmar_senha"></span>
+                                        <input class="inputs-modal" id="input_confirmacaoSenha" type="password">
+                                        <p id="erro_confirmacaoSenha" class="mensagemErroCampo"></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="botao-modal">
-                                <button class="button-modal" onclick="modalAlterarSenha()">Alterar Senha</button>
+                                <button class="button-modal" onclick="alterarSenha()">Alterar Senha</button>
                             </div>
-                        </div>
-
-                        <section class="popup adicionar">
-                            <div class="content">
-                                <img src="assets/check.png" alt="Imagem check">
-                                <div class="texto-popup">
-                                    <h3>Senha alterada com sucesso!</h3>
-                                    <p>A senha foi atualizada corretamente.</p>
-                                </div>
-                            </div>
-                        </section>
+                        </div>   
                     </section>
                 </div>
 
@@ -144,6 +132,6 @@
 
     </body>
 
-</body>
+    <script src="./js/dashConta.js"></script>
 
 </html>

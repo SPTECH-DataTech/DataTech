@@ -1,7 +1,7 @@
 
 setInterval(() => {
     verificarToken()
-    console.log('Veficicando acesso...');
+    console.log('Verificando acesso...');
 }, 60000);
 
 function getToken() {

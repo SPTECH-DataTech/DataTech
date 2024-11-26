@@ -1,11 +1,15 @@
 var express = require("express");
 var router = express.Router();
 
-var contaController = require("../controllers/contaController");
+var dashContaController = require("../controllers/dashContaController");
 
 
-router.get("/listarFuncionarios/1", function (req, res) {
-    contaController.listarFuncionarios(req, res);
+router.get("/mostrarInformacoesConta/:idUsuario", function (req, res) {
+    dashContaController.mostrarInformacoesConta(req, res);
+  });
+
+  router.put("/alterarSenha/:idUsuario/:novaSenha", function (req, res) {
+    dashContaController.alterarSenha(req, res);
   });
 
 module.exports = router;
