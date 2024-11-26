@@ -22,7 +22,7 @@ function alterarSenha(idUsuario, novaSenha){
   console.log("ACESSEI O DASHCONTA MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function mostrarInformacoesConta():", idUsuario);
 
   var instrucaoSql = `
-    UPDATE usuario
+    UPDATE funcionario
   SET senha = '${novaSenha}'
   WHERE id = ${idUsuario};
   `
