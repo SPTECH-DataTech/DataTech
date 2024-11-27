@@ -250,6 +250,9 @@ function cadastrar() {
                     throw new Error(data.erro);
                 }
                 else {
+
+                    sessionStorage.CPF_USUARIO = cpf;
+
                     setTimeout(() => {
                         Swal.fire({
                             icon: "success",
