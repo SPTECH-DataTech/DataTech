@@ -17,7 +17,7 @@
 
 </head>
 
-<body>
+<body onload="obterDadosGrafico()">
 
     <section class="menu-lateral">
         <div class="identificacao-empresa">
@@ -30,7 +30,7 @@
             </b>
             <a href="dashboard.html"><button class="btn-dashboard"><img src="./assets/Chart.png" alt="dashboard icon"
                         class="icon"> Dashboard</button></a>
-            <a href="fazenda.html"><button class="btn-fazenda"> <img src="./assets/Vector.png" alt="fazenda icon"
+            <a href="fazendas.html"><button class="btn-fazenda"> <img src="./assets/Vector.png" alt="fazenda icon"
                         class="icon">Fazendas</button></a>
             <a href="equipe.html"><button class="btn-equipe"><img src="./assets/Group.png" alt="equipe icon"
                         class="icon">
@@ -44,7 +44,7 @@
             <a href="dashConta.html"><button class="btn-conta"><img src="./assets/Profile.png" alt="conta icon"
                         class="icon">
                     Conta</button></a>
-            <a href="suporte"><button class="btn-suporte"> <img src="./assets/Info Square.png"
+            <a href="suporte.html"><button class="btn-suporte"> <img src="./assets/Info Square.png"
                         alt="suporte icon" class="icon">Suporte</button></a>
             <a href="login.html"><button onclick="limparSessao()" class="btn-sair"><img
                         src="./assets/icons8-exit-50.png" alt="exit icon" class="icon"> Sair</button></a>
@@ -168,51 +168,51 @@
 </body>
 
 <script>
-    const ctx = document.getElementById('graficoCafe').getContext('2d');
-    const graficoCafe = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['SP', 'MG', 'RJ', 'MS', 'MT'], // Estados
-            datasets: [
-                {
-                    label: 'Café Arábica',
-                    data: [8, 10, 5, 8, 11], // Dados de toneladas de café plantado por estado
-                    backgroundColor: '#46351e', // Cor para o plantio
-                    borderWidth: 1,
-                    barThickness: 20 // Define a espessura da barra (ajuste conforme necessário)
-                },
-                {
-                    label: 'Café Robusta',
-                    data: [7, 5, 7, 9, 8], // Dados de toneladas de café colhido por estado
-                    backgroundColor: '#E0D5BA', // Cor para a colheita
-                    borderWidth: 1,
-                    barThickness: 20 // Define a espessura da barra (ajuste conforme necessário)
-                }
-            ]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true, // Inicia o eixo Y em 0
-                    title: {
-                        display: true,
-                        text: 'Toneladas'
-                    }
-                },
-                x: {
-                    stacked: false, // Configura para não empilhar as barras
-                    categoryPercentage: 100, // Ajuste para controlar o espaço das categorias
-                    barPercentage: 0.5 // Ajuste para controlar o espaço das barras
-                }
-            },
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Produção de Café por Estado (Toneladas)'
-                }
-            }
-        }
-    });
+    // const ctx = document.getElementById('graficoCafe').getContext('2d');
+    // const graficoCafe = new Chart(ctx, {
+    //     type: 'bar',
+    //     data: {
+    //         labels: ['SP', 'MG', 'RJ', 'MS', 'MT'], // Estados
+    //         datasets: [
+    //             {
+    //                 label: 'Café Arábica',
+    //                 data: [8, 10, 5, 8, 11], // Dados de toneladas de café plantado por estado
+    //                 backgroundColor: '#46351e', // Cor para o plantio
+    //                 borderWidth: 1,
+    //                 barThickness: 20 // Define a espessura da barra (ajuste conforme necessário)
+    //             },
+    //             {
+    //                 label: 'Café Robusta',
+    //                 data: [7, 5, 7, 9, 8], // Dados de toneladas de café colhido por estado
+    //                 backgroundColor: '#E0D5BA', // Cor para a colheita
+    //                 borderWidth: 1,
+    //                 barThickness: 20 // Define a espessura da barra (ajuste conforme necessário)
+    //             }
+    //         ]
+    //     },
+    //     options: {
+    //         scales: {
+    //             y: {
+    //                 beginAtZero: true, // Inicia o eixo Y em 0
+    //                 title: {
+    //                     display: true,
+    //                     text: 'Toneladas'
+    //                 }
+    //             },
+    //             x: {
+    //                 stacked: false, // Configura para não empilhar as barras
+    //                 categoryPercentage: 100, // Ajuste para controlar o espaço das categorias
+    //                 barPercentage: 0.5 // Ajuste para controlar o espaço das barras
+    //             }
+    //         },
+    //         plugins: {
+    //             title: {
+    //                 display: true,
+    //                 text: 'Produção de Café por Estado (Toneladas)'
+    //             }
+    //         }
+    //     }
+    // });
 </script>
 
 </html>
