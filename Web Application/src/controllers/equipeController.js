@@ -114,7 +114,44 @@ function editar(req, res) {
                     }
                     res.status(200).json({
                         resultado,
-                        message: "Cadastro realizado com sucesso!"
+                        message: "Edição feita com sucesso!"
+                    });
+                })
+            .catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar a edição! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json({ erro: erro.sqlMessage });
+                }
+            )
+    }
+}
+
+function editarExistente(req, res) {
+    var idUsuario = req.params.idUsuario;
+    var idCargo = req.body.idCargoServer;
+    var idFazenda = req.body.idFazendaServer;
+
+    if (idUsuario == undefined) {
+        res.status(400).send("idUsuario está undefined!");
+    } else if (idCargo == undefined) {
+        res.status(400).send("idCargo está undefined!");
+    } else if (idFazenda == undefined) {
+        res.status(400).send("idFazenda está undefined!");
+    } else {
+
+        equipeModel.editarExistente(idCargo, idFazenda, idUsuario)
+            .then(
+                function (resultado) {
+                    if (resultado.length > 0) {
+                        res.status(409).json({ erro: "Usuário já cadastrado!" });
+                    }
+                    res.status(200).json({
+                        resultado,
+                        message: "Edição feita com sucesso!"
                     });
                 })
             .catch(
@@ -129,11 +166,11 @@ function editar(req, res) {
             )
     }
 }
-
 module.exports = {
     carregarCargos,
     listarFuncionarios,
     adicionar,
     excluir,
     editar,
+    editarExistente,
 }

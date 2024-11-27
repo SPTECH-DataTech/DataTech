@@ -2,7 +2,9 @@ var idFazenda = sessionStorage.ID_FAZENDA;
 var nomeFazenda = sessionStorage.NOME_FAZENDA;
 var idFuncionario = sessionStorage.ID_FUNCIONARIO;
 var nomeUsuario = sessionStorage.NOME_USUARIO;
+var idUsuario = sessionStorage.ID_USUARIO;
 var idEmpresa = sessionStorage.ID_EMPRESA;
+var cpfSessionStorage = sessionStorage.CPF_USUARIO;
 
 nome_fazenda1.innerHTML = `${nomeFazenda}`;
 nome_fazenda2.innerHTML = `${nomeFazenda}`;
@@ -299,22 +301,75 @@ function adicionar() {
 
     const idCargo = select_cargos.value;
 
-    fetch(`equipe/adicionar/${idFazenda}`, {
-        method: "POST",
+    if (cpf != cpfSessionStorage) {
+
+        fetch(`equipe/adicionar/${idFazenda}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idCargoServer: idCargo,
+                idEmpresaServer: idEmpresa,
+                nomeServer: nome,
+                cpfServer: cpf,
+                emailServer: email,
+                senhaServer: senha,
+            }),
+        })
+        .then(resposta => {
+            resposta.json().then(data => {
+                    console.log("Resposta do servidor: ", data);
+    
+                    if (!resposta.ok) {
+                        throw new Error(data.erro);
+                    }
+                    else {
+    
+                        document.getElementById('janela-modal').style.display = 'none';
+    
+                        Swal.fire({
+                            title: 'Funcionário Adicionado',
+                            text: 'Avise para alterar a senha!',
+                            icon: 'success',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: "#20BF55",
+                            didOpen: () => {
+                                document.querySelector('.menu-lateral').classList.add('ajuste-modal');
+                            },
+                            willClose: () => {
+                                document.querySelector('.menu-lateral').classList.remove('ajuste-modal');
+                            }
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+    
+                    }
+                })
+            })
+            .catch(function (erro) {
+                console.log(`#ERRO: ${erro}`);
+                habilitarMensagem(erro.message);
+            });
+    
+        return false;
+
+    } else {
+
+    fetch(`equipe/editarExistente/${idUsuario}`, {
+        method: "PUT",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
             idCargoServer: idCargo,
-            idEmpresaServer: idEmpresa,
-            nomeServer: nome,
-            cpfServer: cpf,
-            emailServer: email,
-            senhaServer: senha,
+            idFazendaServer: idFazenda,
         }),
     })
-    .then(resposta => {
-        resposta.json().then(data => {
+        .then(resposta => {
+            resposta.json().then(data => {
                 console.log("Resposta do servidor: ", data);
 
                 if (!resposta.ok) {
@@ -322,12 +377,12 @@ function adicionar() {
                 }
                 else {
 
-                    document.getElementById('janela-modal').style.display = 'none';
+                    document.getElementById('janela-modal-editar').style.display = 'none';
 
                     Swal.fire({
-                        title: 'Funcionário Adicionado',
-                        text: 'Avise para alterar a senha!',
-                        icon: 'success',
+                        icon: 'info',
+                        title: 'Funcionário Editado!',
+                        text: 'Fucionário já existente, editamos seu cargo e sua fazenda!',
                         confirmButtonText: 'OK',
                         confirmButtonColor: "#20BF55",
                         didOpen: () => {
@@ -351,6 +406,9 @@ function adicionar() {
         });
 
     return false;
+    }
+
+    
 }
 
 function fomatarCpf(input) {
