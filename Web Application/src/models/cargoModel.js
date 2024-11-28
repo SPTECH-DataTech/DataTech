@@ -10,7 +10,7 @@ function listarCargos(fkEmpresa) {
 
 function adicionarCargo(nomeCargo, permissaoCargos, permissaoFazendas, permissaoFuncionarios, fkFazenda) {
     let instrucaoSql = `
-        INSERT INTO cargos (nomeCargo, permissaoCargos, permissaoFazenda, permissaoFuncionarios, fkFazenda) VALUES ("${nomeCargo}", ${permissaoCargos} ,${permissaoFazendas} ,${permissaoFuncionarios}, ${fkFazenda});
+        INSERT INTO cargo (nomeCargo, permissaoCargos, permissaoFazendas, permissaoFuncionarios, fkFazenda) VALUES ("${nomeCargo}", ${permissaoCargos} ,${permissaoFazendas} ,${permissaoFuncionarios}, ${fkFazenda});
     `;
 
     return database.executar(instrucaoSql)
