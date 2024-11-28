@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS datatech.fazenda (
   nome VARCHAR(45) NULL,
   PRIMARY KEY (id, fkEmpresa, fkEstadoMunicipio),
   CONSTRAINT fk_empresa_fazenda FOREIGN KEY (fkEmpresa) REFERENCES datatech.empresa (id),
-  CONSTRAINT fk_estado_municipio_fazenda FOREIGN KEY (fkEstadoMunicipio) REFERENCES datatech.estadoMunicipio (id)
+  CONSTRAINT fk_estado_municipio_fazenda FOREIGN KEY (fkEstadoMunicipio) REFERENCES datatech.estadoMunicipio (id) ON DELETE CASCADE
 );
 
 -- -----------------------------------------------------
@@ -360,3 +360,4 @@ VALUES (1, 1, '2024-11-23 23:55:19', 'Token de acesso ao sistema');
 INSERT INTO tipoCafe (nome)
 VALUES ('arabica'),
 		    ('robusta');
+
