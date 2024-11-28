@@ -114,6 +114,19 @@ function editarFazenda(req, res) {
     }
 }
 
+function listarPermissoes(req, res) {
+    const idFuncionario = req.params.idFuncionario;
+
+    fazendaModel.listarPermissoes(idFuncionario).then((resultado) => {
+        console.log(`Resultados: ${JSON.stringify(resultado)}`);
+        res.status(200).json(resultado);
+    })
+        .catch((erro) => {
+            console.error("Houve um erro ao listar as permissões do funcionário!");
+            res.status(500).json(erro);
+        });
+}
+
 
 
 module.exports = {
@@ -122,5 +135,6 @@ module.exports = {
     listarFazendas,
     removerFazenda,
     editarFazenda,
-    listarTipoCafe
+    listarTipoCafe,
+    listarPermissoes
 }
