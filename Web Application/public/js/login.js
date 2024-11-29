@@ -107,7 +107,7 @@ function verificarSenha() {
 }
 
 function habilitarMensagem(mensagem) {
-    const mensagemErro = document.getElementById('mensagemErroIvalidos');
+    const mensagemErro = document.getElementById('message');
  
     mensagemErro.innerHTML = mensagem;
  }
