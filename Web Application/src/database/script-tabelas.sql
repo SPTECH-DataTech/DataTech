@@ -6,7 +6,7 @@ USE datatech;
 -- -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS datatech.empresa (
-  id INT NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT UNIQUE,
   nomeEmpresa VARCHAR(45) NULL,
   cnpj VARCHAR(14) NULL,
   emailRepresentante VARCHAR(45) NULL,
@@ -17,13 +17,47 @@ CREATE TABLE IF NOT EXISTS datatech.empresa (
 --               TABELA ESTADO MUNICIPIO              --
 -- -----------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS datatech.estadoMunicipio (
-  id INT NOT NULL AUTO_INCREMENT,
-  idUf INT NOT NULL,
-  idMunicipio INT NOT NULL,
-  estado CHAR(2) NULL,
-  municipio VARCHAR(45) NULL,
-  PRIMARY KEY (id),
+-- CREATE TABLE IF NOT EXISTS datatech.estadoMunicipio (
+--   id INT NOT NULL AUTO_INCREMENT UNIQUE,
+--   idUf INT NOT NULL,
+--   idMunicipio INT NOT NULL,
+--   estado CHAR(2) NULL,
+--   municipio VARCHAR(45) NULL,
+--   PRIMARY KEY (id)
+-- );
+
+-- -----------------------------------------------------
+--                 TABELA FASE CAFE                   --
+-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS datatech.faseCafe (
+  id INT NOT NULL AUTO_INCREMENT UNIQUE,
+  fase VARCHAR(45) NULL,
+  medida VARCHAR(45) NULL,
+  PRIMARY KEY (id)
+);
+
+-- -----------------------------------------------------
+--                 TABELA TIPO CAFE                   --
+-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS datatech.tipoCafe (
+  id INT NOT NULL AUTO_INCREMENT UNIQUE,
+  nome VARCHAR(45),
+  PRIMARY KEY (id)
+);
+
+-- -----------------------------------------------------
+--          TABELA MEDIDA FASE CAFE POR TIPO          --
+-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS datatech.MedidaFaseCafePorTipo (
+  fkFaseCafe INT NOT NULL,
+  fkTipoCafe INT NOT NULL,
+  valor DECIMAL(5,2) NULL,
+  PRIMARY KEY (fkFaseCafe, fkTipoCafe),
+  CONSTRAINT fk_fasescafe_medidafasecafe FOREIGN KEY (fkFaseCafe) REFERENCES datatech.faseCafe (id),
+  CONSTRAINT fk_tipocafe_medidafasecafe FOREIGN KEY (fkTipoCafe) REFERENCES datatech.tipoCafe (id)
 );
 
 -- -----------------------------------------------------
@@ -31,13 +65,15 @@ CREATE TABLE IF NOT EXISTS datatech.estadoMunicipio (
 -- -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS datatech.fazenda (
-  id INT NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT UNIQUE,
   fkEmpresa INT NOT NULL,
   fkEstadoMunicipio INT NOT NULL,
   nome VARCHAR(45) NULL,
+  fkTipoCafe INT NOT NULL,
   PRIMARY KEY (id, fkEmpresa, fkEstadoMunicipio),
   CONSTRAINT fk_empresa_fazenda FOREIGN KEY (fkEmpresa) REFERENCES datatech.empresa (id),
   CONSTRAINT fk_estado_municipio_fazenda FOREIGN KEY (fkEstadoMunicipio) REFERENCES datatech.estadoMunicipio (id)
+  CONSTRAINT fk_tipo_cafe_fazenda FOREIGN KEY (fkTipoCafe) REFERENCES datatech.empresa (id),
 );
 
 -- -----------------------------------------------------
@@ -45,16 +81,16 @@ CREATE TABLE IF NOT EXISTS datatech.fazenda (
 -- -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS datatech.cargo (
-  id INT NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT UNIQUE,
   fkFazenda INT NOT NULL,
-  Fazenda_fkEmpresa INT NOT NULL,
-  Fazenda_fkEstadoMunicipio INT NOT NULL,
+  fazenda_fkEmpresa INT NOT NULL,
+  fazenda_fkEstadoMunicipio INT NOT NULL,
   nomeCargo VARCHAR(45) NULL,
   permissaoCargos TINYINT NULL,
   permissaoFazendas TINYINT NULL,
   permissaoFuncionarios TINYINT NULL,
-  PRIMARY KEY (id, fkFazenda, Fazenda_fkEmpresa, Fazenda_fkEstadoMunicipio),
-  CONSTRAINT fk_fazenda_empresa_estado_cargo FOREIGN KEY (fkFazenda, Fazenda_fkEmpresa, Fazenda_fkEstadoMunicipio) 
+  PRIMARY KEY (id, fkFazenda, fazenda_fkEmpresa, fazenda_fkEstadoMunicipio),
+  CONSTRAINT fk_fazenda_empresa_estado_cargo FOREIGN KEY (fkFazenda, fazenda_fkEmpresa, fazenda_fkEstadoMunicipio) 
 		REFERENCES datatech.fazenda (id , fkEmpresa , fkEstadoMunicipio)
 );
 
@@ -63,7 +99,7 @@ CREATE TABLE IF NOT EXISTS datatech.cargo (
 -- -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS datatech.funcionario (
-  id INT NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT UNIQUE,
   fkEmpresa INT NOT NULL,
   nome VARCHAR(45) NULL,
   cpf VARCHAR(14) NULL,
@@ -71,12 +107,12 @@ CREATE TABLE IF NOT EXISTS datatech.funcionario (
   senha VARCHAR(45) NULL,
   fkCargo INT NULL,
   fkFazenda INT NULL,
-  Fazenda_fkEmpresa INT NULL,
-  Fazenda_fkEstadoMunicipio INT NULL,
+  fazenda_fkEmpresa INT NULL,
+  fazenda_fkEstadoMunicipio INT NULL,
   PRIMARY KEY (id, fkEmpresa),
   CONSTRAINT id_UX UNIQUE INDEX (id),
   CONSTRAINT fk_cargo_funcionario FOREIGN KEY (fkCargo) REFERENCES datatech.cargo (id),
-  CONSTRAINT fk_empresa_funcionario FOREIGN KEY (fkEmpresa) REFERENCES datatech.Empresa (id),
+  CONSTRAINT fk_empresa_funcionario FOREIGN KEY (fkEmpresa) REFERENCES datatech.empresa (id),
   CONSTRAINT fk_fazenda_empresa_estado_funcionario FOREIGN KEY (fkFazenda, Fazenda_fkEmpresa, Fazenda_fkEstadoMunicipio)
 		REFERENCES datatech.fazenda (id , fkEmpresa , fkEstadoMunicipio)
 );
@@ -86,7 +122,7 @@ CREATE TABLE IF NOT EXISTS datatech.funcionario (
 -- -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS datatech.statusLog (
-  id INT NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT UNIQUE,
   nomeStatus VARCHAR(45) NULL,
   PRIMARY KEY (id)
 );
@@ -96,7 +132,7 @@ CREATE TABLE IF NOT EXISTS datatech.statusLog (
 -- -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS datatech.logJava (
-  id INT NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT UNIQUE,
   fkFazenda INT NOT NULL,
   fkEmpresa INT NOT NULL,
   fkEstadoMunicipio INT NOT NULL,
@@ -109,15 +145,7 @@ CREATE TABLE IF NOT EXISTS datatech.logJava (
 		REFERENCES datatech.fazenda (id , fkEmpresa , fkEstadoMunicipio)
 );
 
--- -----------------------------------------------------
---                 TABELA TIPO CAFE                   --
--- -----------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS datatech.tipoCafe (
-  id INT NOT NULL AUTO_INCREMENT,
-  nome VARCHAR(45) NULL,
-  PRIMARY KEY (id)
-);
 
 -- -----------------------------------------------------
 --             TABELA PLANTACAO FAZENDA               --
@@ -126,7 +154,7 @@ CREATE TABLE IF NOT EXISTS datatech.tipoCafe (
 -- CREATE DE ACORDO COM O DER, PROVAVELMENTE VAI PRECISAR DE ALTERAÇÕES....
 
 CREATE TABLE IF NOT EXISTS datatech.plantacaoFazenda (
-  id INT NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT UNIQUE,
   fkMunicipio INT NOT NULL,
   fkTipoCafe INT NOT NULL,
   ano INT NOT NULL,
@@ -153,73 +181,24 @@ CREATE TABLE IF NOT EXISTS datatech.plantacaoFazenda (
 -- -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS datatech.climaMunicipioDash (
-  id INT NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT UNIQUE,
   fkMunicipio INT NOT NULL,
-  data DATETIME NOT NULL,
+  dataCaptura DATETIME NOT NULL,
   temperaturaMax DECIMAL(2,2) NULL,
   temperaturaMin DECIMAL(2,2) NULL,
   umidadeMax DECIMAL(2,2) NULL,
   umidadeMin DECIMAL(2,2) NULL,
   PRIMARY KEY (id, fkMunicipio),
-  CONSTRAINT fk_municipio_UX UNIQUE INDEX (fkMunicipio),
-  CONSTRAINT data_UX UNIQUE INDEX (data),
+  CONSTRAINT municipio_data_UX UNIQUE INDEX (fkMunicipio, dataCaptura),
   CONSTRAINT fk_municipio_climamunicipiodash FOREIGN KEY (fkMunicipio) REFERENCES datatech.estadoMunicipio (id)
 );
 
--- -----------------------------------------------------
---                 TABELA FASE CAFE                   --
--- -----------------------------------------------------
-
-CREATE TABLE IF NOT EXISTS datatech.faseCafe (
-  id INT NOT NULL AUTO_INCREMENT,
-  fase VARCHAR(45) NULL,
-  medida VARCHAR(45) NULL,
-  PRIMARY KEY (id)
-);
-
--- -----------------------------------------------------
---                 TABELA TIPO CAFE                   --
--- -----------------------------------------------------
-
-CREATE TABLE IF NOT EXISTS datatech.tipoCafe (
-  id INT NOT NULL AUTO_INCREMENT,
-  nome VARCHAR(45),
-  PRIMARY KEY (id)
-);
-
--- -----------------------------------------------------
---          TABELA MEDIDA FASE CAFE POR TIPO          --
--- -----------------------------------------------------
-
-CREATE TABLE IF NOT EXISTS datatech.MedidaFaseCafePorTipo (
-  fkFaseCafe INT NOT NULL,
-  fkTipoCafe INT NOT NULL,
-  valor DECIMAL(5,2) NULL,
-  PRIMARY KEY (fkFaseCafe, fkTipoCafe),
-  CONSTRAINT fk_fasescafe_medidafasecafe FOREIGN KEY (fkFaseCafe) REFERENCES datatech.faseCafe (id),
-  CONSTRAINT fk_tipocafe_medidafasecafe FOREIGN KEY (fkTipoCafe) REFERENCES datatech.tipoCafe (id)
-);
-
--- -----------------------------------------------------
---            TABELA TIPO CAFE PLANTACAO              --
--- -----------------------------------------------------
-
-CREATE TABLE IF NOT EXISTS datatech.tipoCafePlantacao (
-  fkFazenda INT NOT NULL,
-  Fazenda_fkEmpresa INT NOT NULL,
-  fkTipoCafe INT NOT NULL,
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  CONSTRAINT fk_fazenda_empresa_tipocafeplantacao FOREIGN KEY (fkFazenda, Fazenda_fkEmpresa)
-    REFERENCES datatech.fazenda (id , fkEmpresa),
-  CONSTRAINT fk_tipocafe_tipocafeplantacao FOREIGN KEY (fkTipoCafe)
-    REFERENCES datatech.tipoCafe (id)
-);
 -- -----------------------------------------------------
 --                   TABELA TOKEN                     --
 -- -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS datatech.token (
-  id INT NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT UNIQUE,
   token VARCHAR(45) NOT NULL,
   dataCriacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
@@ -231,7 +210,7 @@ CREATE TABLE IF NOT EXISTS datatech.token (
 -- -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS datatech.HistoricoTokenEmpresa (
-  id INT NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT UNIQUE,
   fkEmpresa INT NOT NULL,
   fkToken INT NOT NULL,
   data DATETIME NULL,
@@ -239,55 +218,6 @@ CREATE TABLE IF NOT EXISTS datatech.HistoricoTokenEmpresa (
   PRIMARY KEY (id, fkEmpresa, fkToken),
   CONSTRAINT fk_empresa_historicotoken FOREIGN KEY (fkEmpresa) REFERENCES datatech.empresa (id),
   CONSTRAINT fk_token_historicotoken FOREIGN KEY (fkToken) REFERENCES datatech.token (id)
-);
-
--- -----------------------------------------------------
---                 TABELA PERGUNTA IA                 --
--- -----------------------------------------------------
-
-CREATE TABLE IF NOT EXISTS datatech.perguntaIA (
-  id INT NOT NULL AUTO_INCREMENT,
-  perguntaIA VARCHAR(150) NULL,
-  PRIMARY KEY (id)
-);
-
--- -----------------------------------------------------
---                 TABELA RESPOSTA IA                 --
--- -----------------------------------------------------
-
-CREATE TABLE IF NOT EXISTS datatech.respostaIA (
-  id INT NOT NULL,
-  fkPergunta INT NOT NULL,
-  respostaIA VARCHAR(200) NULL,
-  PRIMARY KEY (id, fkPergunta),
-  CONSTRAINT fk_pergunta_respostaIA FOREIGN KEY (fkPergunta) REFERENCES datatech.perguntaIA (id)
-);
-
--- -----------------------------------------------------
---           TABELA PERGUNTAIA_HAS_FAZENDA            --
--- -----------------------------------------------------
-
-CREATE TABLE IF NOT EXISTS datatech.perguntaIA_has_Fazenda (
-  fkPerguntaIA INT NOT NULL,
-  fkFazenda INT NOT NULL,
-  Fazenda_fkEmpresa INT NOT NULL,
-  Fazenda_fkEstadoMunicipio INT NOT NULL,
-  PRIMARY KEY (fkPerguntaIA, fkFazenda, Fazenda_fkEmpresa, Fazenda_fkEstadoMunicipio),
-  CONSTRAINT fk_perguntaIA_has FOREIGN KEY (fkPerguntaIA)
-		REFERENCES datatech.perguntaIA (id),
-  CONSTRAINT fk_fazenda_empre_estado_has FOREIGN KEY (fkFazenda, Fazenda_fkEmpresa, Fazenda_fkEstadoMunicipio)
-    REFERENCES datatech.fazenda (id, fkEmpresa , fkEstadoMunicipio)
-);
-
--- -----------------------------------------------------
---            TABELA STATUS FUNCIONARIO               --
--- -----------------------------------------------------
-
-CREATE TABLE IF NOT EXISTS datatech.statusFuncionario (
-  id INT NOT NULL AUTO_INCREMENT,
-  nomeStatus VARCHAR(45) NULL,
-  descricao VARCHAR(145) NULL,
-  PRIMARY KEY (id)
 );
 
 -- -----------------------------------------------------
@@ -306,33 +236,6 @@ CREATE TABLE IF NOT EXISTS datatech.historicoStatusFuncionario (
   CONSTRAINT fk_status_funcionario_historicostatus FOREIGN KEY (fkStatusFuncionario)
 		REFERENCES datatech.StatusFuncionario (id)
 );
-
--- -----------------------------------------------------
---               TABELA STATUS PERGUNTA               --
--- -----------------------------------------------------
-
-CREATE TABLE IF NOT EXISTS datatech.statusPergunta (
-  id INT NOT NULL AUTO_INCREMENT,
-  nomeStatus VARCHAR(45) NULL,
-  descricao VARCHAR(145) NULL,
-  PRIMARY KEY (id)
-);
-
--- -----------------------------------------------------
---           TABELA HISTORICO STATUS PERGUNTA         --
--- -----------------------------------------------------
-
-CREATE TABLE IF NOT EXISTS datatech.historicoStatusPergunta (
-  id INT NOT NULL AUTO_INCREMENT,
-  fkStatus INT NOT NULL,
-  fkPergunta INT NOT NULL,
-  descricao VARCHAR(145) NULL,
-  data DATETIME NULL,
-  PRIMARY KEY (id, fkStatus, fkPergunta),
-  CONSTRAINT fk_status_historicopergunta FOREIGN KEY (fkStatus) REFERENCES datatech.statusPergunta (id),
-  CONSTRAINT fk_pergunta_historicopergunta FOREIGN KEY (fkPergunta) REFERENCES datatech.perguntaIA (id)
-);
-
 
 ---------- INSERTS ---------------
 
