@@ -30,25 +30,30 @@ function listarFuncionarios(req, res) {
 
 function adicionar(req, res) {
     var idFazenda = req.params.idFazenda;
+    var idEmpresa = req.body.idEmpresaServer;
     var idCargo = req.body.idCargoServer;
     var nome = req.body.nomeServer;
     var cpf = req.body.cpfServer;
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
 
-    if (idFazenda == undefined) {
-        res.status(400).send("idFazenda está undefined!");
+    console.log("Corpo da requisição:", req.body);
+
+    if (idEmpresa == undefined) {
+        res.status(400).send({ erro: "idEmpresa está undefined!" });
+    } else if (idFazenda == undefined) {
+        res.status(400).send({ erro: "idfazenda está undefined!" });
     } else if (idCargo == undefined) {
-        res.status(400).send("idCargo está undefined!");
+        res.status(400).send({ erro: "idCargo está undefined!" });
     } else if (nome == undefined) {
-        res.status(400).send("Seu nome está undefined!");
+        res.status(400).send({ erro: "nome está undefined!" });
     } else if (email == undefined) {
-        res.status(400).send("Seu email está undefined!");
+        res.status(400).send({ erro: "email está undefined!" });
     } else if (senha == undefined) {
-        res.status(400).send("Sua senha está undefined!");
+        res.status(400).send({ erro: "senha está undefined!" });
     } else {
 
-        equipeModel.adicionar(idFazenda, idCargo, nome, cpf, email, senha)
+        equipeModel.adicionar(idEmpresa, nome, cpf, email, senha, idCargo, idFazenda)
             .then(
                 function (resultado) {
                     if (resultado.length > 0) {
@@ -109,7 +114,44 @@ function editar(req, res) {
                     }
                     res.status(200).json({
                         resultado,
-                        message: "Cadastro realizado com sucesso!"
+                        message: "Edição feita com sucesso!"
+                    });
+                })
+            .catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar a edição! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json({ erro: erro.sqlMessage });
+                }
+            )
+    }
+}
+
+function editarExistente(req, res) {
+    var idUsuario = req.params.idUsuario;
+    var idCargo = req.body.idCargoServer;
+    var idFazenda = req.body.idFazendaServer;
+
+    if (idUsuario == undefined) {
+        res.status(400).send("idUsuario está undefined!");
+    } else if (idCargo == undefined) {
+        res.status(400).send("idCargo está undefined!");
+    } else if (idFazenda == undefined) {
+        res.status(400).send("idFazenda está undefined!");
+    } else {
+
+        equipeModel.editarExistente(idCargo, idFazenda, idUsuario)
+            .then(
+                function (resultado) {
+                    if (resultado.length > 0) {
+                        res.status(409).json({ erro: "Usuário já cadastrado!" });
+                    }
+                    res.status(200).json({
+                        resultado,
+                        message: "Edição feita com sucesso!"
                     });
                 })
             .catch(
@@ -124,11 +166,11 @@ function editar(req, res) {
             )
     }
 }
-
 module.exports = {
     carregarCargos,
     listarFuncionarios,
     adicionar,
     excluir,
     editar,
+    editarExistente,
 }

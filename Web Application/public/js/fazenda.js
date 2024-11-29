@@ -243,6 +243,25 @@ select_estado_fazenda.addEventListener('change', function (e) {
     }
 });
 
+listarPermissoes()
+function listarPermissoes() {
+    const id = sessionStorage.ID_USUARIO;
 
-
+    fetch(`/fazenda/listarPermissoes/${id}`, {
+        method: "GET",
+    })
+        .then(function (resposta) {
+            resposta.json().then((fazenda) => {
+                console.log('Lista de permissões: ', fazenda);
+               fazenda.forEach((funcionario) => {
+               sessionStorage.setItem('permissaoCargos', funcionario.permissaoCargos);
+               sessionStorage.setItem('permissaoFazendas', funcionario.permissaoFazendas);
+               sessionStorage.setItem('permissaoFuncionarios', funcionario.permissaoFuncionarios);
+               })
+            });
+        })
+        .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+}
 

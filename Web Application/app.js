@@ -37,8 +37,7 @@ app.use("/equipe", equipeRouter);
 app.use("/fazenda", fazendaRouter);
 app.use("/cargo", cargoRouter);
 app.use("/dash2", dash2Router);
-
-
+app.use("/dashConta", dashContaRouter);
 
 var emailService = require('./src/services/emailService');
 app.post('/enviarEmailSuporte', async (req, res) => {
