@@ -17,14 +17,13 @@ CREATE TABLE IF NOT EXISTS datatech.empresa (
 --               TABELA ESTADO MUNICIPIO              --
 -- -----------------------------------------------------
 
--- CREATE TABLE IF NOT EXISTS datatech.estadoMunicipio (
---   id INT NOT NULL AUTO_INCREMENT UNIQUE,
---   idUf INT NOT NULL,
---   idMunicipio INT NOT NULL,
---   estado CHAR(2) NULL,
---   municipio VARCHAR(45) NULL,
---   PRIMARY KEY (id)
--- );
+CREATE TABLE IF NOT EXISTS datatech.estadoMunicipio (
+  id INT NOT NULL AUTO_INCREMENT UNIQUE, -- INSERIR O ID DO MUNICIPIO AQUI <-
+  idUf INT NOT NULL,
+  estado CHAR(2) NULL,
+  municipio VARCHAR(45) NULL,
+  PRIMARY KEY (id)
+);
 
 -- -----------------------------------------------------
 --                 TABELA FASE CAFE                   --
@@ -72,8 +71,8 @@ CREATE TABLE IF NOT EXISTS datatech.fazenda (
   fkTipoCafe INT NOT NULL,
   PRIMARY KEY (id, fkEmpresa, fkEstadoMunicipio),
   CONSTRAINT fk_empresa_fazenda FOREIGN KEY (fkEmpresa) REFERENCES datatech.empresa (id),
-  CONSTRAINT fk_estado_municipio_fazenda FOREIGN KEY (fkEstadoMunicipio) REFERENCES datatech.estadoMunicipio (id)
-  CONSTRAINT fk_tipo_cafe_fazenda FOREIGN KEY (fkTipoCafe) REFERENCES datatech.empresa (id),
+  CONSTRAINT fk_estado_municipio_fazenda FOREIGN KEY (fkEstadoMunicipio) REFERENCES datatech.estadoMunicipio (id),
+  CONSTRAINT fk_tipo_cafe_fazenda FOREIGN KEY (fkTipoCafe) REFERENCES datatech.empresa (id)
 );
 
 -- -----------------------------------------------------
@@ -110,37 +109,25 @@ CREATE TABLE IF NOT EXISTS datatech.funcionario (
   fazenda_fkEmpresa INT NULL,
   fazenda_fkEstadoMunicipio INT NULL,
   PRIMARY KEY (id, fkEmpresa),
-  CONSTRAINT id_UX UNIQUE INDEX (id),
   CONSTRAINT fk_cargo_funcionario FOREIGN KEY (fkCargo) REFERENCES datatech.cargo (id),
   CONSTRAINT fk_empresa_funcionario FOREIGN KEY (fkEmpresa) REFERENCES datatech.empresa (id),
-  CONSTRAINT fk_fazenda_empresa_estado_funcionario FOREIGN KEY (fkFazenda, Fazenda_fkEmpresa, Fazenda_fkEstadoMunicipio)
+  CONSTRAINT fk_fazenda_empresa_estado_funcionario FOREIGN KEY (fkFazenda, fazenda_fkEmpresa, fazenda_fkEstadoMunicipio)
 		REFERENCES datatech.fazenda (id , fkEmpresa , fkEstadoMunicipio)
-);
-
--- -----------------------------------------------------
---                 TABELA STATUS LOG                  --
--- -----------------------------------------------------
-
-CREATE TABLE IF NOT EXISTS datatech.statusLog (
-  id INT NOT NULL AUTO_INCREMENT UNIQUE,
-  nomeStatus VARCHAR(45) NULL,
-  PRIMARY KEY (id)
 );
 
 -- -----------------------------------------------------
 --                 TABELA LOG JAVA                    --
 -- -----------------------------------------------------
-
+-- -----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS datatech.logJava (
   id INT NOT NULL AUTO_INCREMENT UNIQUE,
   fkFazenda INT NOT NULL,
   fkEmpresa INT NOT NULL,
   fkEstadoMunicipio INT NOT NULL,
+  statusLog varchar(45),
   descricao VARCHAR(200) NULL,
-  data DATETIME NULL,
-  fkStatus INT NOT NULL,
-  PRIMARY KEY (id, fkFazenda, fkEmpresa, fkEstadoMunicipio, fkStatus),
-  CONSTRAINT fk_status_logjava FOREIGN KEY (fkStatus) REFERENCES datatech.StatusLog (id),
+  dataLog DATETIME NULL,
+  PRIMARY KEY (id, fkFazenda, fkEmpresa, fkEstadoMunicipio),
   CONSTRAINT fk_fazenda_empresa_estado_logjava FOREIGN KEY (fkFazenda , fkEmpresa , fkEstadoMunicipio) 
 		REFERENCES datatech.fazenda (id , fkEmpresa , fkEstadoMunicipio)
 );
@@ -155,24 +142,22 @@ CREATE TABLE IF NOT EXISTS datatech.logJava (
 
 CREATE TABLE IF NOT EXISTS datatech.plantacaoFazenda (
   id INT NOT NULL AUTO_INCREMENT UNIQUE,
-  fkMunicipio INT NOT NULL,
-  fkTipoCafe INT NOT NULL,
+  fkEstadoMunicipio INT NOT NULL,
   ano INT NOT NULL,
   areaPlantada DECIMAL(5,2) NULL,
   quantidadeColhida DECIMAL(5,2) NULL,
   valorTotalReais DECIMAL(5,2) NULL,
-  fkFazenda INT NOT NULL,
-  Fazenda_fkEmpresa INT NOT NULL,
-  Fazenda_fkEstadoMunicipio INT NOT NULL,
-  PRIMARY KEY (id, fkMunicipio, fkTipoCafe),
-  CONSTRAINT fk_municipio_UX UNIQUE INDEX (fkMunicipio),
-  CONSTRAINT fk_tipocafe_UX UNIQUE INDEX (fkTipoCafe),
-  CONSTRAINT ano_UX UNIQUE INDEX (ano),
-  CONSTRAINT fk_municipio_plantacaofazenda FOREIGN KEY (fkMunicipio) 
+  fkFazenda INT NOT NULL, -- ---------------
+  fazenda_fkEmpresa INT NOT NULL, -- ---------------
+  fazenda_fkEstadoMunicipio INT NOT NULL, -- ---------------
+  fkTipoCafe INT NOT NULL,
+  PRIMARY KEY (id, fkEstadoMunicipio),
+  CONSTRAINT fk_municipio_UX UNIQUE INDEX (fkEstadoMunicipio),
+  CONSTRAINT fk_municipio_plantacaofazenda FOREIGN KEY (fkEstadoMunicipio) 
 		REFERENCES datatech.estadoMunicipio (id),
   CONSTRAINT fk_tipocafe_plantacaofazenda FOREIGN KEY (fkTipoCafe)
 		REFERENCES datatech.tipoCafe (id),
-  CONSTRAINT fk_fazenda_empresa_estado_plantacaofazenda FOREIGN KEY (fkFazenda, Fazenda_fkEmpresa, Fazenda_fkEstadoMunicipio)
+  CONSTRAINT fk_fazenda_empresa_estado_plantacaofazenda FOREIGN KEY (fkFazenda, fazenda_fkEmpresa, fazenda_fkEstadoMunicipio)
 		REFERENCES datatech.fazenda (id, fkEmpresa, fkEstadoMunicipio)
 );
 
@@ -203,6 +188,7 @@ CREATE TABLE IF NOT EXISTS datatech.token (
   dataCriacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   CONSTRAINT token_UX UNIQUE INDEX (token)
+
 );
 
 -- -----------------------------------------------------
@@ -213,11 +199,12 @@ CREATE TABLE IF NOT EXISTS datatech.HistoricoTokenEmpresa (
   id INT NOT NULL AUTO_INCREMENT UNIQUE,
   fkEmpresa INT NOT NULL,
   fkToken INT NOT NULL,
-  data DATETIME NULL,
+  dataHistoricoToken DATETIME NULL,
   descricao VARCHAR(145) NULL,
   PRIMARY KEY (id, fkEmpresa, fkToken),
   CONSTRAINT fk_empresa_historicotoken FOREIGN KEY (fkEmpresa) REFERENCES datatech.empresa (id),
   CONSTRAINT fk_token_historicotoken FOREIGN KEY (fkToken) REFERENCES datatech.token (id)
+
 );
 
 -- -----------------------------------------------------
@@ -225,37 +212,36 @@ CREATE TABLE IF NOT EXISTS datatech.HistoricoTokenEmpresa (
 -- -----------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS datatech.historicoStatusFuncionario (
+  id INT NOT NULL AUTO_INCREMENT UNIQUE,
   fkFuncionario INT NOT NULL,
-  fkStatusFuncionario INT NOT NULL,
-  Funcionario_fkFazenda INT NOT NULL,
-  Funcionario_Fazenda_fkEmpresa INT NOT NULL,
-  descricaoMotivoMudancaStatus VARCHAR(45) NULL,
+  statusFuncionario varchar(45),
+  descricaoMudancaStatus VARCHAR(45) NULL,
   dataMudancaStatus DATETIME NULL,
-  PRIMARY KEY (fkFuncionario, fkStatusFuncionario, Funcionario_fkFazenda, Funcionario_Fazenda_fkEmpresa),
-  CONSTRAINT fk_funcionario_historicostatus FOREIGN KEY (fkFuncionario) REFERENCES datatech.Funcionario (id),
-  CONSTRAINT fk_status_funcionario_historicostatus FOREIGN KEY (fkStatusFuncionario)
-		REFERENCES datatech.StatusFuncionario (id)
+  funcionario_fkFazenda INT NOT NULL,
+  PRIMARY KEY (id, fkFuncionario),
+  CONSTRAINT fk_funcionario_historicostatus FOREIGN KEY (fkFuncionario) REFERENCES datatech.funcionario (id)
+
 );
 
 ---------- INSERTS ---------------
 
-INSERT INTO datatech.empresa (nomeEmpresa, cnpj, emailRepresentante)
-VALUES ('DataTech LTDA.', '12345678000100', 'datatech@gmail.com');
+-- INSERT INTO datatech.empresa (nomeEmpresa, cnpj, emailRepresentante)
+-- VALUES ('DataTech LTDA.', '12345678000100', 'datatech@gmail.com');
  
-SELECT * FROM empresa;
+-- SELECT * FROM empresa;
 
-INSERT INTO datatech.estadoMunicipio (idUf, idMunicipio, estado, municipio)
-VALUES 
-    (1, 101, 'SP', 'São Paulo'),
-    (1, 102, 'SP', 'Guarulhos'),
-    (3, 103, 'MG', 'Belo Horizonte'),
-    (3, 104, 'MG', 'Extrema'),
-    (5, 105, 'RS', 'Porto Alegre');
+-- INSERT INTO datatech.estadoMunicipio (idUf, idMunicipio, estado, municipio)
+-- VALUES 
+--     (1, 101, 'SP', 'São Paulo'),
+--     (1, 102, 'SP', 'Guarulhos'),
+--     (3, 103, 'MG', 'Belo Horizonte'),
+--     (3, 104, 'MG', 'Extrema'),
+--     (5, 105, 'RS', 'Porto Alegre');
 
-SELECT * FROM estadoMunicipio;
+-- SELECT * FROM estadoMunicipio;
 
-INSERT INTO token (token)
-VALUES ('1234');
+-- INSERT INTO token (token)
+-- VALUES ('1234');
 
-INSERT INTO HistoricoTokenEmpresa(fkEmpresa, fkToken, data, descricao)
-VALUES (1, 1, '2024-11-23 23:55:19', 'Token de acesso ao sistema');
+-- INSERT INTO HistoricoTokenEmpresa(fkEmpresa, fkToken, data, descricao)
+-- VALUES (1, 1, '2024-11-23 23:55:19', 'Token de acesso ao sistema');
