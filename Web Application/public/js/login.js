@@ -106,6 +106,12 @@ function verificarSenha() {
 
 }
 
+function habilitarMensagem(mensagem) {
+    const mensagemErro = document.getElementById('mensagemErroIvalidos');
+ 
+    mensagemErro.innerHTML = mensagem;
+ }
+
 function login() {
     const email = input_email.value.trim();
     const senha = input_senha.value.trim();
