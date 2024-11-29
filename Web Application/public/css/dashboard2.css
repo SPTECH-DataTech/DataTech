@@ -172,6 +172,7 @@ h1 {
 .dashboard {
   display: flex;
   flex-direction: column;
+  width: 90%;
 }
 
 .titulo-dash {
@@ -214,7 +215,7 @@ h1 {
   align-items: center;
   justify-content: space-around;  
 
-  padding-right: 8%;
+  /* padding-right: 8%; */
 
 }
 
@@ -335,10 +336,13 @@ h1 {
 
 /*--------------------------- tela 2 --------------------------------------*/
 
+/* ---------- Top 5 Regiões ---------- */
+
 .container-Regioes-Indicador {
   display: flex;
   justify-content: space-around;
-  padding: 5%;
+  padding: 4%;
+  padding-bottom: 0;
 
 }
 
@@ -346,7 +350,7 @@ h1 {
 
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   align-items: center;
 
   width: 50%;
@@ -356,20 +360,46 @@ h1 {
   /* box-shadow: 10px 15px 10px rgba(124, 0, 248, 0.3); */
 
   padding: 2%;
+  padding-bottom: 0;
 
 }
 
-.containerTopRegioes h2, p {
+.containerTopRegioes h2 {
 
   margin: 0;
 
 }
 
-.containerTopRegioes p {
+#topCinco {
 
-  font-weight: 500;
+  width: 85%;
+  padding-top: 4%;
+
+  border-spacing: 0;
 
 }
+
+#topCinco .colunaTabela {
+
+  padding-top: 2.8%;
+  padding-bottom: 2.8%;
+
+}
+
+#topCinco .coluna2 {
+
+  text-align: center;
+
+}
+
+#topCinco .coluna3 {
+
+  text-align: right;
+  color: #492576;
+
+}
+
+/* ---------- Indicador da Saca ---------- */
 
 .containerIndicadorSaca {
 
@@ -392,7 +422,7 @@ h1 {
 
 }
 
-table {
+#tabelaSaca {
 
   width: 80%;
   padding-top: 4%;
@@ -401,13 +431,13 @@ table {
 
 }
 
-table h3 {
+#tabelaSaca h3 {
 
   margin: 0;
 
 }
 
-th {
+#tabelaSaca th {
 
   text-align: left;
 
@@ -417,14 +447,14 @@ th {
 
 }
 
-table td {
+#tabelaSaca  td {
 
   border-bottom: 1px solid #DBE5EB;
   border-collapse: collapse;
 
 }
 
-.colunaTabela {
+#tabelaSaca .colunaTabela {
 
   display: flex;
   align-items: center;
@@ -443,7 +473,7 @@ table td {
 
 }
 
-.coluna2 {
+#tabelaSaca .coluna2 {
 
   text-align: right;
 
