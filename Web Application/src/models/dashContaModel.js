@@ -15,7 +15,7 @@ LEFT JOIN fazenda
     ON funcionario.fkFazenda = fazenda.id 
 LEFT JOIN cargo 
     ON funcionario.fkCargo = cargo.id
-WHERE 
+WHERE   
     funcionario.id = ${idUsuario};`;
 
   return database.executar(instrucaoSql);
