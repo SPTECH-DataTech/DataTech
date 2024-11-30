@@ -51,7 +51,7 @@
         <!-- Conteúdo principal -->
         <div class="container-group">
             <div class="gerenciar-fazenda">
-                <div class="card-cargos" id="card-cargos">
+                <div class="card-cargos" id="card-equipe">
                     <div class="info-card">
                         <h1>Equipe</h1>
                         <span>Acesse os membros cadastrados na equipe dessa fazenda.</span>
@@ -60,7 +60,7 @@
                         <img class="img-fundo" src="./assets/imgs/image 15.png" alt="">
                     </div>
                 </div>
-                <div class="card-equipe">
+                <div class="card-equipe" id="card-cargos" onclick="irParaTelaCargos()">
                     <div class="info-card">
                         <h1>Cargo</h1>
                         Acesse os membros cadastrados na equipe dessa fazenda.
@@ -244,11 +244,10 @@
         return false;
     }
 
-    const equipe = document.getElementById('card-cargos');
+    const equipe = document.getElementById('card-equipe');
     equipe.addEventListener('click', function () {
-        window.location.href = "equipe.html";
+        window.location = "equipe.html";
     });
-
 
     function editarFazenda() {
         const nomeFazenda = document.getElementById('input_nome_fazenda_edit').value;
@@ -356,6 +355,12 @@
             .catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);
             });
+    }
+
+    function irParaTelaCargos() {
+       document.getElementById("card-cargos").addEventListener('click', function() {
+            window.location = "cargos.html";
+       })
     }
 
 </script>

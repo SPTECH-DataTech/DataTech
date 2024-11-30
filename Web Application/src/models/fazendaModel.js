@@ -22,34 +22,19 @@ function listarTipoCafe() {
 function adicionarFazenda(nomeFazenda, tipoCafe, estadoMunicipio, idEmpresa) {
     console.log("ACESSEI O FAZENDA MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", nomeFazenda, tipoCafe, estadoMunicipio, idEmpresa);
 
-  
-    var instrucaoSql = `INSERT INTO fazenda (nome, fkEmpresa, fkEstadoMunicipio) 
-                        VALUES ('${nomeFazenda}', '${idEmpresa}', '${estadoMunicipio}');`;
+
+    var instrucaoSql = `INSERT INTO fazenda (nome, fkTipoCafe, fkEmpresa, fkEstadoMunicipio) 
+                        VALUES ('${nomeFazenda}', ${tipoCafe}, '${idEmpresa}', '${estadoMunicipio}');`;
 
     console.log("Executando a instrução SQL para inserir a fazenda: \n" + instrucaoSql);
     return database.executar(instrucaoSql)
         .then(() => {
-           
+
             var instrucaoSql = `SELECT id FROM fazenda WHERE nome = '${nomeFazenda}' AND fkEmpresa = '${idEmpresa}'`;
 
             console.log("Executando a instrução SQL para verificar a fazenda: \n" + instrucaoSql);
             return database.executar(instrucaoSql);
-        })
-        .then(resultado => {
-            if (resultado.length > 0) {
-            
-                var idFazenda = resultado[0].id;
-                
-                var instrucaoSql = `INSERT INTO tipoCafePlantacao (fkFazenda, Fazenda_fkEmpresa, fkTipoCafe) 
-                                            VALUES ('${idFazenda}', '${idEmpresa}', '${tipoCafe}');`;
-
-                console.log("Executando a instrução SQL para inserir no tipoCafePlantacao: \n" + instrucaoSql);
-                return database.executar(instrucaoSql);
-            } else {
-                throw new Error("Fazenda não encontrada após inserção.");
-            }
-        })
-        .catch(error => {
+        }).catch(error => {
             console.error("Erro ao adicionar fazenda ou tipoCafePlantacao:", error.message);
             throw error;
         });
@@ -65,22 +50,20 @@ function listarFazendas() {
 
 
     var instrucaoSql = `
-   SELECT 
+ SELECT 
     f.*,  
     em.estado, 
     em.municipio,
     em.idUf AS id_uf, 
-    em.idMunicipio AS id_municipio,
-    tcp.fkTipoCafe,
+    em.id AS id_municipio,
+    tc.id,
     tc.nome AS tipo_cafe
 FROM 
     datatech.fazenda f
-LEFT JOIN 
+INNER JOIN 
     datatech.estadoMunicipio em ON f.fkEstadoMunicipio = em.id
-LEFT JOIN 
-    datatech.tipoCafePlantacao tcp ON f.id = tcp.fkFazenda AND f.fkEmpresa = tcp.Fazenda_fkEmpresa
-LEFT JOIN 
-    datatech.tipoCafe tc ON tcp.fkTipoCafe = tc.id;`;
+INNER JOIN 
+    datatech.tipoCafe tc ON f.fkTipoCafe = tc.id;`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

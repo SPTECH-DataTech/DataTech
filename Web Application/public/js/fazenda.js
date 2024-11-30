@@ -29,15 +29,21 @@ function ocultarMensagem() {
 
 function adicionarFazenda() {
     const nomeFazenda = input_nome_fazenda.value;
-    const tipoCafe = select_tipo_cafe.value;
+    const inputTipoCafe = select_tipo_cafe.value;
     const idEmpresa = sessionStorage.ID_EMPRESA;
     const idEstado = select_estado_fazenda.value;
     const idMunicipio = select_municipio_fazenda.value;
-  
+    let tipoCafe;
     const estadoMunicipio = buscarIdPorEstadoMunicipio(idEstado, idMunicipio);
     
     if (!estadoMunicipio) {
         return false;
+    }
+
+    if (inputTipoCafe) {
+        tipoCafe = 1;
+    } else {
+        tipoCafe = 2;
     }
 
     fetch('fazenda/adicionarFazenda', {
@@ -140,7 +146,7 @@ function listarTipoCafe() {
 
 function buscarIdPorEstadoMunicipio(estado, municipio) {
     const resultado = listaEstadoMunicipio.find(item =>
-        item.idUf == estado && item.idMunicipio == municipio
+        item.idUf == estado || item.idMunicipio == municipio
     );
 
     if (resultado) {

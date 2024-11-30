@@ -31,7 +31,7 @@ function listarFuncionarios() {
                     checkbox.classList.add('checkbox-class');
                     checkbox.setAttribute('data-id', funcionario.id);
                     checkbox.setAttribute('data-nome', funcionario.nome);
-                    checkbox.setAttribute('data-email', funcionario.email)
+                    checkbox.setAttribute('data-email', funcionario.email);
                     checkbox.setAttribute('data-cargo', funcionario.nomeCargo);
 
                     const img = document.createElement('img');
@@ -49,7 +49,11 @@ function listarFuncionarios() {
 
                     const cargoSpan = document.createElement('span');
                     cargoSpan.classList.add('cargo');
-                    cargoSpan.innerText = funcionario.nomeCargo;
+                    if (funcionario.nomeCargo == undefined) {
+                        cargoSpan.innerText = funcionario.nomeCargo;   
+                    } else {
+                        cargoSpan.innerText = "";
+                    }
 
                     div.appendChild(checkbox);
                     div.appendChild(img);

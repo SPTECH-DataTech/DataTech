@@ -1,7 +1,7 @@
-let idFazenda = 3;
+let idFazenda = sessionStorage.ID_FAZENDA;
+let idEmpresa = sessionStorage.ID_EMPRESA;
+let idMunicipio = sessionStorage.MUNICIPIO_FAZENDA;
 let cargos;
-
-
 
 function conultarNomeFazenda() {
     fetch('cargo/consultarFazenda', {
@@ -10,7 +10,7 @@ function conultarNomeFazenda() {
             "Content-Type": "application/json",
         },
         body: JSON.stringify( {
-            idServer: idFazenda
+            idServer: idFazenda,
         })
     })
     .then(resposta => {
@@ -39,7 +39,7 @@ function listarCargos() {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            fazendaServer: idFazenda
+            fazendaServer: idFazenda,
         }),
     })
         .then(resposta => {
@@ -77,7 +77,7 @@ function exibirCargosNaTela(data) {
             checkbox.id = `check_cargo_${cargo.id}`
             checkbox.setAttribute('data-nome', cargo.nomeCargo);
             checkbox.setAttribute('data-permissao-cargos', cargo.permissaoCargos)
-            checkbox.setAttribute('data-permissao-fazenda', cargo.permissaoFazenda)
+            checkbox.setAttribute('data-permissao-fazenda', cargo.permissaoFazendas)
             checkbox.setAttribute('data-permissao-funcionarios', cargo.permissaoFuncionarios)
 
             const nomeSpan = document.createElement('span');
@@ -122,7 +122,7 @@ function exibirCargosNaTela(data) {
             } else {
                 div.appendChild(naoTemPermissaoCargos);
             }
-            if(cargo.permissaoFazenda == 1) {
+            if(cargo.permissaoFazendas == 1) {
                 div.appendChild(temPermissaoFazendas);
             } else {
                 div.appendChild(naoTemPermissaoFazendas);
@@ -184,7 +184,7 @@ function modalAdicionarCargo() {
 }
 
 function lerPermissoesSelecionadas() {
-    let cargo = false;
+    let check_cargo = false;
     let fazenda = false;
     let funcionario = false;
     const nomeCargo = document.getElementById("input_nome_cargo").value.trim();
@@ -193,19 +193,19 @@ function lerPermissoesSelecionadas() {
     const checkFuncionarios = document.getElementById("check_permissao_funcionarios");
 
     if (checkCargos.checked) {
-        cargo = true;
+        check_cargo = true;
     }
 
     if (checkFazendas.checked) {
-        fazenda = true;
+        check_fazenda = true;
     }
 
     if (checkFuncionarios.checked) {
-        funcionario = true;
+        check_funcionario = true;
     }
-    adicionarCargo(nomeCargo, cargo, fazenda, funcionario);
+    adicionarCargo(nomeCargo, check_cargo, check_fazenda, check_funcionario);
 }
-function adicionarCargo(nomeCargo, cargo, fazenda, funcionario) {
+function adicionarCargo(nomeCargo, check_cargo, check_fazenda, check_funcionario) {
     fetch('/cargo/adicionar', {
         method: "POST",
         headers: {
@@ -213,10 +213,12 @@ function adicionarCargo(nomeCargo, cargo, fazenda, funcionario) {
         },
         body: JSON.stringify({
             nomeCargoServer: nomeCargo,
-            permissaoCargosServer: cargo,
-            permissaoFazendasServer: fazenda,
-            permissaoFuncionariosServer: funcionario,
-            fazendaServer: idFazenda
+            permissaoCargosServer: check_cargo,
+            permissaoFazendasServer: check_fazenda,
+            permissaoFuncionariosServer: check_funcionario,
+            fazendaServer: idFazenda,
+            empresaServer: idEmpresa,
+            municipioServer: idMunicipio
         }),
     }).then(resposta => {
         resposta.json().then(data => {
@@ -440,4 +442,20 @@ function editarCargo() {
     document.getElementById("janela-modal").style.display = 'none';
     location.reload();
     return false;
+}
+
+function verificarPermissoes() {
+    if (sessionStorage.getItem("PERMISSAO_CARGOS") == 1) {
+        document.querySelector("botoes-add-remove").innerHTML = `
+            <button id="adicionar-funcionario" onclick="modalAdicionarCargo()" class="add-button">
+                <i class="fa-solid fa-user-plus"></i>
+            </button>
+            <button id="remover-funcionario" onclick="modalRemoverCargo()" class="remove-button">
+                <i class="fas fa-trash"></i>
+            </button>
+            <button id="editar-funcionario" onclick="modalEditarCargo()" class="edit-button">
+                <i class="fas fa-pencil"></i>
+            </button>
+        `;
+    }
 }

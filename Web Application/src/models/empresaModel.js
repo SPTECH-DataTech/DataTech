@@ -6,7 +6,7 @@ function listar() {
     t.token,
     e.id AS empresa_id,
     e.nomeEmpresa AS empresa_nome,
-    hte.data AS data_associacao,
+    hte.dataHistoricoToken AS data_associacao,
     hte.descricao
 FROM 
     datatech.token AS t
@@ -17,7 +17,6 @@ INNER JOIN
 
   return database.executar(instrucaoSql);
 }
-
 
 function cadastrar(razaoSocial, cnpj) {
   var instrucaoSql = `INSERT INTO empresa (razao_social, cnpj) VALUES ('${razaoSocial}', '${cnpj}')`;

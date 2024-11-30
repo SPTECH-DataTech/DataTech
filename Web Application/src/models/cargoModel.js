@@ -2,24 +2,23 @@ var database = require("../database/config")
 
 function listarCargos(fkEmpresa) {
     let instrucaoSql = `
-        SELECT * FROM cargos WHERE fkFazenda = ${fkEmpresa};
+        SELECT * FROM cargo WHERE fkFazenda = ${fkEmpresa};
     `;
 
     return database.executar(instrucaoSql)
 }
 
-function adicionarCargo(nomeCargo, permissaoCargos, permissaoFazendas, permissaoFuncionarios, fkFazenda) {
+function adicionarCargo(nomeCargo, permissaoCargos, permissaoFazendas, permissaoFuncionarios, fkFazenda, empresa, municipio) {
     let instrucaoSql = `
-        INSERT INTO cargos (nomeCargo, permissaoCargos, permissaoFazenda, permissaoFuncionarios, fkFazenda) VALUES ("${nomeCargo}", ${permissaoCargos} ,${permissaoFazendas} ,${permissaoFuncionarios}, ${fkFazenda});
-    `;
-
+        INSERT INTO cargo (nomeCargo, permissaoCargos, permissaoFazendas, permissaoFuncionarios, fkFazenda, fazenda_fkEmpresa, fazenda_fkEstadoMunicipio) VALUES ("${nomeCargo}", ${permissaoCargos} ,${permissaoFazendas} ,${permissaoFuncionarios}, ${fkFazenda}, ${empresa}, ${municipio});
+        `;
     return database.executar(instrucaoSql)
 }
 
 function removerCargos(listaIdsCargos) {
     for (i = 0; i < listaIdsCargos.length; i++) {
         let instrucaoSql = `
-            DELETE FROM cargos WHERE id = ${listaIdsCargos[i]};
+            DELETE FROM cargo WHERE id = ${listaIdsCargos[i]};
         `;
         database.executar(instrucaoSql);
     }
@@ -27,10 +26,10 @@ function removerCargos(listaIdsCargos) {
 
 function editarCargo(id, nome, permissaoCargos, permissaoFazendas, permissaoFuncionarios, fazenda) {
     let instrucaoSql = `
-        UPDATE cargos 
+        UPDATE cargo
         SET nomeCargo = "${nome}",
         permissaoCargos  = ${permissaoCargos},
-        permissaoFazenda = ${permissaoFazendas},
+        permissaoFazendas = ${permissaoFazendas},
         permissaoFuncionarios = ${permissaoFuncionarios}
         WHERE id = ${id} and fkFazenda = ${fazenda}
     `;

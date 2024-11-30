@@ -225,6 +225,7 @@ h1 {
     background-color: rgb(255, 255, 255);
     border: solid #7F00FF 3px;
     margin-bottom: 40px;
+    cursor: pointer;
 }
 
 .img-equipe {
