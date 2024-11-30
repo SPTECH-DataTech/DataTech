@@ -2,14 +2,29 @@ var idFazenda = sessionStorage.ID_FAZENDA;
 var nomeFazenda = sessionStorage.NOME_FAZENDA;
 var idFuncionario = sessionStorage.ID_FUNCIONARIO;
 var nomeUsuario = sessionStorage.NOME_USUARIO;
+var idUsuario = sessionStorage.ID_USUARIO;
 var idEmpresa = sessionStorage.ID_EMPRESA;
+var cpfSessionStorage = sessionStorage.CPF_USUARIO;
 
 nome_fazenda1.innerHTML = `${nomeFazenda}`;
 nome_fazenda2.innerHTML = `${nomeFazenda}`;
 b_usuario.innerHTML = `${nomeUsuario}`;
 
-function listarFuncionarios() {
+gerenciarPermissoes()
+function gerenciarPermissoes(){
+    if (sessionStorage.permissaoFuncionarios == 0){
+        document.getElementById("botoes").style.display = 'none';
+        document.getElementById("input-search").style.height = '40px';
 
+        const checkboxes = document.querySelectorAll('.checkbox-class');
+
+        checkboxes.forEach(checkbox => {
+            checkbox.style.display = 'none';
+        })
+    }
+}
+
+function listarFuncionarios() {
     fetch(`/equipe/listarFuncionarios/${idFazenda}`, {
         method: 'GET',
         headers: {
@@ -19,23 +34,38 @@ function listarFuncionarios() {
         .then(function (resposta) {
             resposta.json().then((dados) => {
                 const container = document.querySelector('.funcionarios');
-                container.innerHTML = '';
+                container.innerHTML = ''; 
+
                 dados.forEach(funcionario => {
                     const div = document.createElement('div');
                     div.classList.add('campo');
 
-                    const checkbox = document.createElement('input');
-                    checkbox.type = 'checkbox';
-                    checkbox.classList.add('checkbox-class');
-                    checkbox.setAttribute('data-id', funcionario.id);
-                    checkbox.setAttribute('data-nome', funcionario.nome);
-                    checkbox.setAttribute('data-email', funcionario.email)
-                    checkbox.setAttribute('data-cargo', funcionario.nomeCargo);
+                    if (sessionStorage.permissaoFuncionarios != 0) {
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.classList.add('checkbox-class');
+                        checkbox.setAttribute('data-id', funcionario.id);
+                        checkbox.setAttribute('data-nome', funcionario.nome);
+                        checkbox.setAttribute('data-email', funcionario.email);
+                        checkbox.setAttribute('data-cargo', funcionario.nomeCargo);
 
-                    const img = document.createElement('img');
-                    img.src = './assets/Group 376.png';
-                    img.alt = 'perfil icon';
-                    img.classList.add('icon');
+                        checkbox.addEventListener('change', () => {
+                            const idFuncionario = checkbox.getAttribute('data-id');
+                            const nomeFuncionario = checkbox.getAttribute('data-nome');
+
+                            sessionStorage.setItem('ID_FUNCIONARIO', idFuncionario);
+
+                            if (checkbox.checked) {
+                                sessionStorage.setItem(`funcionario_${idFuncionario}`, JSON.stringify({ id: idFuncionario, nome: nomeFuncionario }));
+                            } else {
+                                sessionStorage.removeItem(`funcionario_${idFuncionario}`);
+                            }
+
+                            console.log('Funcionário atualizado no sessionStorage:', idFuncionario, nomeFuncionario);
+                        });
+
+                        div.appendChild(checkbox);
+                    }
 
                     const nomeSpan = document.createElement('span');
                     nomeSpan.classList.add('nome');
@@ -48,35 +78,18 @@ function listarFuncionarios() {
                     const cargoSpan = document.createElement('span');
                     cargoSpan.classList.add('cargo');
                     cargoSpan.innerText = funcionario.nomeCargo;
-
-                    div.appendChild(checkbox);
-                    div.appendChild(img);
+                    
                     div.appendChild(nomeSpan);
                     div.appendChild(emailSpan);
                     div.appendChild(cargoSpan);
 
                     container.appendChild(div);
-
-                    checkbox.addEventListener('change', () => {
-                        var idFuncionario = checkbox.getAttribute('data-id');
-                        const nomeFuncionario = checkbox.getAttribute('data-nome');
-
-                        sessionStorage.setItem('ID_FUNCIONARIO', idFuncionario);
-
-                        if (checkbox.checked) {
-                            sessionStorage.setItem(`funcionario_${idFuncionario}`, JSON.stringify({ id: idFuncionario, nome: nomeFuncionario }));
-                        } else {
-                            sessionStorage.removeItem(`funcionario_${idFuncionario}`);
-                        }
-
-                        console.log('Funcionário atualizado no sessionStorage:', idFuncionario, nomeFuncionario);
-                    });
-
                 });
             });
         })
         .catch(error => console.error('Erro ao listar funcionários:', error));
 }
+
 
 function procurarFuncionario() {
     const input = document.getElementById('input-search');
@@ -299,22 +312,75 @@ function adicionar() {
 
     const idCargo = select_cargos.value;
 
-    fetch(`equipe/adicionar/${idFazenda}`, {
-        method: "POST",
+    if (cpf != cpfSessionStorage) {
+
+        fetch(`equipe/adicionar/${idFazenda}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idCargoServer: idCargo,
+                idEmpresaServer: idEmpresa,
+                nomeServer: nome,
+                cpfServer: cpf,
+                emailServer: email,
+                senhaServer: senha,
+            }),
+        })
+        .then(resposta => {
+            resposta.json().then(data => {
+                    console.log("Resposta do servidor: ", data);
+    
+                    if (!resposta.ok) {
+                        throw new Error(data.erro);
+                    }
+                    else {
+    
+                        document.getElementById('janela-modal').style.display = 'none';
+    
+                        Swal.fire({
+                            title: 'Funcionário Adicionado',
+                            text: 'Avise para alterar a senha!',
+                            icon: 'success',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: "#20BF55",
+                            didOpen: () => {
+                                document.querySelector('.menu-lateral').classList.add('ajuste-modal');
+                            },
+                            willClose: () => {
+                                document.querySelector('.menu-lateral').classList.remove('ajuste-modal');
+                            }
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+    
+                    }
+                })
+            })
+            .catch(function (erro) {
+                console.log(`#ERRO: ${erro}`);
+                habilitarMensagem(erro.message);
+            });
+    
+        return false;
+
+    } else {
+
+    fetch(`equipe/editarExistente/${idUsuario}`, {
+        method: "PUT",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
             idCargoServer: idCargo,
-            idEmpresaServer: idEmpresa,
-            nomeServer: nome,
-            cpfServer: cpf,
-            emailServer: email,
-            senhaServer: senha,
+            idFazendaServer: idFazenda,
         }),
     })
-    .then(resposta => {
-        resposta.json().then(data => {
+        .then(resposta => {
+            resposta.json().then(data => {
                 console.log("Resposta do servidor: ", data);
 
                 if (!resposta.ok) {
@@ -322,12 +388,12 @@ function adicionar() {
                 }
                 else {
 
-                    document.getElementById('janela-modal').style.display = 'none';
+                    document.getElementById('janela-modal-editar').style.display = 'none';
 
                     Swal.fire({
-                        title: 'Funcionário Adicionado',
-                        text: 'Avise para alterar a senha!',
-                        icon: 'success',
+                        icon: 'info',
+                        title: 'Funcionário Editado!',
+                        text: 'Fucionário já existente, editamos seu cargo e sua fazenda!',
                         confirmButtonText: 'OK',
                         confirmButtonColor: "#20BF55",
                         didOpen: () => {
@@ -351,6 +417,9 @@ function adicionar() {
         });
 
     return false;
+    }
+
+    
 }
 
 function fomatarCpf(input) {

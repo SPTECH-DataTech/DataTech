@@ -24,15 +24,15 @@
                         class="dashboard icon"> Dashboard</button></a>
             <a href="fazendas.html"><button class="btn-fazenda"> <img src="./assets/Vector.png" alt="fazenda icon"
                         class="icon">Fazendas</button></a>
-            <a href="equipe.html"><button class="btn-equipe"><img src="./assets/Group.png" alt="equipe icon"
+            <!-- <a href="equipe.html"><button class="btn-equipe"><img src="./assets/Group.png" alt="equipe icon"
                         class="icon"> Equipe</button></a>
             <a href="recomendacoes.html"><button class="btn-recomendacoes"><img src="./assets/Chat.png"
-                        alt="recomendacoes icon" class="icon"> Recomendações</button></a>
+                        alt="recomendacoes icon" class="icon"> Recomendações</button></a> -->
 
             <b>
                 <p>Outros</p>
             </b>
-            <a href="conta.html"><button class="btn-conta"><img src="./assets/Profile.png" alt="conta icon"
+            <a href="dashConta.html"><button class="btn-conta"><img src="./assets/Profile.png" alt="conta icon"
                         class="icon"> Conta</button></a>
             <a href="suporte.html"><button class="btn-suporte"> <img src="./assets/Info Square.png" alt="suporte icon"
                         class="icon">Suporte</button></a>
@@ -60,7 +60,7 @@
                         <img class="img-fundo" src="./assets/imgs/image 15.png" alt="">
                     </div>
                 </div>
-                <div class="card-equipe">
+                <div class="card-equipe" id="card-equipe">
                     <div class="info-card">
                         <h1>Cargo</h1>
                         Acesse os membros cadastrados na equipe dessa fazenda.
@@ -101,7 +101,7 @@
                         </div>
                         <div class="group-buttons">
                             <button class="button-editar" id="button-editar">Editar</button>
-                            <button class="button-remover" onclick="removerFazenda()">Remover</button>
+                            <button class="button-remover" id="button-remover"  onclick="removerFazenda()">Remover</button>
                         </div>
                         <span id="message"></span>
                     </div>
@@ -248,6 +248,10 @@
     equipe.addEventListener('click', function () {
         window.location.href = "equipe.html";
     });
+    const cargos = document.getElementById('card-equipe');
+    cargos.addEventListener('click', function () {
+        window.location.href = "cargos.html";
+    });
 
 
     function editarFazenda() {
@@ -356,6 +360,14 @@
             .catch(function (resposta) {
                 console.log(`#ERRO: ${resposta}`);
             });
+    }
+
+    gerenciarPermissoes()
+    function gerenciarPermissoes(){
+        if (sessionStorage.permissaoFazendas == 1){
+            document.getElementById("button-editar").style.display = 'block';
+            document.getElementById("button-remover").style.display = 'block';
+        }
     }
 
 </script>

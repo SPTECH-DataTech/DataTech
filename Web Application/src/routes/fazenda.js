@@ -26,5 +26,9 @@ router.get("/listarFazendas", (req, res) => {
    fazendaController.listarFazendas(req, res);
 });
 
+router.get("/listarPermissoes/:idFuncionario", (req, res) => {
+   fazendaController.listarPermissoes(req, res);
+});
+
 
 module.exports = router;

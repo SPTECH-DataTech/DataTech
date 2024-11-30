@@ -51,6 +51,17 @@ function editar(idFuncionario, nome, email, idCargo) {
   return database.executar(instrucaoSql);
 }
 
+function editarExistente(idCargo, idFazenda, idUsuario) {
+  console.log("ACESSEI O EQUIPE MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function editarExistente():", idCargo, idFazenda, idUsuario);
+
+  var instrucaoSql = `UPDATE funcionario 
+SET fkCargo = ${idCargo},
+fkFazenda = ${idFazenda}
+WHERE id = '${idUsuario}';`;
+
+  return database.executar(instrucaoSql);
+}
+
 
 module.exports = {
   listarFuncionarios,
@@ -58,4 +69,5 @@ module.exports = {
   adicionar,
   excluir,
   editar,
+  editarExistente,
 }

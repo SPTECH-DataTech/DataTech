@@ -68,6 +68,7 @@ h1 {
   justify-content: flex-start;
   align-items: flex-start;
   width: 16.3%;
+  height: 100vh;
   background-color: #F1F2F7;
 
   margin-right: 10px;
