@@ -1,3 +1,11 @@
+window.onload = function() {
+    select_estado_fazenda.value = sessionStorage.NOME_ESTADO_FAZENDA;
+    select_municipio_fazenda.value = sessionStorage.MUNICIPIO_FAZENDA;
+    input_nome_fazenda.value = sessionStorage.NOME_FAZENDA;
+    select_tipo_cafe.value = sessionStorage.TIPO_CAFE_FAZENDA;
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    };
+
 let listaEstadoMunicipio = [];
 listarEstados(); 
 function listarEstados() {
@@ -15,8 +23,6 @@ function listarEstados() {
                 select_estado_fazenda.value = sessionStorage.ESTADO_FAZENDA;
                 var estado = sessionStorage.ESTADO_FAZENDA;
                 listarMunicipios(estado);
-                // select_municipio_fazenda.value = sessionStorage.MUNICIPIO_FAZENDA;
-                // input_nome_fazenda_edit.value = sessionStorage.NOME_FAZENDA;
             });
 
         })
@@ -25,38 +31,12 @@ function listarEstados() {
         });
 }
 
-
-window.onload = function() {
-select_estado_fazenda.value = sessionStorage.NOME_ESTADO_FAZENDA;
-select_municipio_fazenda.value = sessionStorage.MUNICIPIO_FAZENDA;
-input_nome_fazenda_edit.value = sessionStorage.NOME_FAZENDA;
-};
-
-// select_estado_fazenda.addEventListener('change', function (e) {
-//     const estadoSelecionado = e.target.value;
-//     const select_municipio = document.getElementById('select_municipio_fazenda');
-
-//     select_municipio.innerHTML = "<option value='#'>Selecione o município</option>";
-
-//     if (estadoSelecionado !== "#") {
-//         select_municipio.disabled = false;
-//         const municipiosFiltrados = listaEstadoMunicipio.filter(item => item.idUf == estadoSelecionado);
-
-
-//         municipiosFiltrados.forEach(item => {
-//             select_municipio.innerHTML += `<option value='${item.idMunicipio}'>${item.municipio}</option>`;
-//         });
-//     } else {
-
-//         select_municipio.innerHTML = "<option value='#'>Selecione o município</option>";
-//     }
-// });
-
-document.getElementById('button-editar').addEventListener('click', function () {
+const botton = document.getElementById('button-editar');
+botton.addEventListener('click', function () {
     select_estado_fazenda.disabled = false;
     select_municipio_fazenda.disabled = false;
-    select_tipo_cafe_edit.disabled = false;
-    input_nome_fazenda_edit.disabled = false;
+    select_tipo_cafe.disabled = false;
+    input_nome_fazenda.disabled = false;
 
     const button = document.getElementById('button-editar');
     button.textContent = 'Enviar';
@@ -78,7 +58,6 @@ function ocultarMensagem() {
 }
 
 function removerFazenda() {
-
     const idFazenda = sessionStorage.ID_FAZENDA;
 
     fetch('fazenda/removerFazenda', {
@@ -120,25 +99,19 @@ const equipe = document.getElementById('card-cargos');
 equipe.addEventListener('click', function () {
     window.location.href = "equipe.html";
 });
+
 const cargos = document.getElementById('card-equipe');
 cargos.addEventListener('click', function () {
     window.location.href = "cargos.html";
 });
 
-
 function editarFazenda() {
-    const nomeFazenda = document.getElementById('input_nome_fazenda_edit').value;
-    const tipoCafe = document.getElementById('select_tipo_cafe_edit').value;
+    const nomeFazenda = document.getElementById('input_nome_fazenda').value;
+    const tipoCafe = document.getElementById('select_tipo_cafe').value;
     const estadoFazenda = sessionStorage.ID_ESTADO;
     const idFazenda = sessionStorage.ID_FAZENDA;
     const idEstado = select_estado_fazenda.value;
     const idMunicipio = select_municipio_fazenda.value;
-
-    // const estadoMunicipio = buscarIdPorEstadoMunicipio(idEstado, idMunicipio);
-
-    // if (!estadoMunicipio) {
-    //     return false;
-    // }
 
     fetch('fazenda/editarFazenda', {
         method: "PUT",
@@ -161,7 +134,6 @@ function editarFazenda() {
                 }
                 else {
                     habilitarMensagem(data.message);
-                    // listarEstados();
                     bloquearCampos();
                     sessionStorage.setItem('TIPO_CAFE_FAZENDA', tipoCafe);
                     sessionStorage.setItem('ESTADO_FAZENDA', idEstado);
@@ -178,10 +150,10 @@ function editarFazenda() {
         .catch(function (erro) {
             console.log(`#ERRO: ${erro}`);
         }).finally(() => {
-            select_tipo_cafe_edit.value = sessionStorage.TIPO_CAFE_FAZENDA;
+            select_tipo_cafe.value = sessionStorage.TIPO_CAFE_FAZENDA;
             select_estado_fazenda.value = sessionStorage.ESTADO_FAZENDA;
             select_municipio_fazenda.value = sessionStorage.MUNICIPIO_FAZENDA;
-            input_nome_fazenda_edit.value = sessionStorage.NOME_FAZENDA;
+            input_nome_fazenda.value = sessionStorage.NOME_FAZENDA;
         });
 
     return false;
@@ -201,8 +173,8 @@ function buscarIdPorEstadoMunicipio(estado, municipio) {
 }
 
 function bloquearCampos() {
-    const nomeFazenda = document.getElementById('input_nome_fazenda_edit');
-    const tipoCafe = document.getElementById('select_tipo_cafe_edit');
+    const nomeFazenda = document.getElementById('input_nome_fazenda');
+    const tipoCafe = document.getElementById('select_tipo_cafe');
     const estadoFazenda = document.getElementById('select_estado_fazenda');
     const municipioFazenda = document.getElementById('select_municipio_fazenda');
 
@@ -222,10 +194,11 @@ function listarTipoCafe() {
     })
         .then(function (resposta) {
             resposta.json().then((fazenda) => {
+                console.log('Tipo Cafe:', fazenda)
                 fazenda.forEach((fazendaTipoCafe) => {
-                    select_tipo_cafe_edit.innerHTML += `<option value='${fazendaTipoCafe.id}'>${fazendaTipoCafe.nome}</option>`
+                    select_tipo_cafe.innerHTML += `<option value='${fazendaTipoCafe.id}'>${fazendaTipoCafe.nome}</option>`
                 });
-                select_tipo_cafe_edit.value = sessionStorage.TIPO_CAFE_FAZENDA;
+                select_tipo_cafe.value = sessionStorage.TIPO_CAFE_FAZENDA;
             });
 
         })
@@ -233,14 +206,6 @@ function listarTipoCafe() {
             console.log(`#ERRO: ${resposta}`);
         });
 }
-
-// gerenciarPermissoes()
-// function gerenciarPermissoes(){
-//     if (sessionStorage.permissaoFazendas == 1){
-//         document.getElementById("button-editar").style.display = 'block';
-//         document.getElementById("button-remover").style.display = 'block';
-//     }
-// }
 
 select_estado_fazenda.addEventListener('change', function (e) {
     const estadoSelecionado = e.target.value;
