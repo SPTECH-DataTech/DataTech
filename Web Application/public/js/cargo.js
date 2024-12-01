@@ -1,7 +1,7 @@
-let idFazenda = 3;
+let idFazenda = sessionStorage.FAZENDA;
+let idEmpresa = sessionStorage.ID_EMPRESA;
+let idMunicipio = sessionStorage.MUNICIPIO_FAZENDA;
 let cargos;
-
-
 
 function conultarNomeFazenda() {
     fetch('cargo/consultarFazenda', {
@@ -9,24 +9,24 @@ function conultarNomeFazenda() {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify( {
-            idServer: idFazenda
+        body: JSON.stringify({
+            idServer: idFazenda,
         })
     })
-    .then(resposta => {
-        resposta.json.then(data => {
-            if (!resposta.ok) {
-                throw new Error(data.erro);
-            }
-            else {
-                console.log("Nome da fazenda: ", data);
-                document.getElementById("nome_fazenda1") = data;
-            }
+        .then(resposta => {
+            resposta.json.then(data => {
+                if (!resposta.ok) {
+                    throw new Error(data.erro);
+                }
+                else {
+                    console.log("Nome da fazenda: ", data);
+                    document.getElementById("nome_fazenda1") = data;
+                }
+            })
         })
-    })
-    .catch(function (erro) {
-        console.log(`#ERRO: ${erro}`);
-    });
+        .catch(function (erro) {
+            console.log(`#ERRO: ${erro}`);
+        });
 
     return false;
 }
@@ -39,7 +39,7 @@ function listarCargos() {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            fazendaServer: idFazenda
+            fazendaServer: idFazenda,
         }),
     })
         .then(resposta => {
@@ -77,7 +77,7 @@ function exibirCargosNaTela(data) {
             checkbox.id = `check_cargo_${cargo.id}`
             checkbox.setAttribute('data-nome', cargo.nomeCargo);
             checkbox.setAttribute('data-permissao-cargos', cargo.permissaoCargos)
-            checkbox.setAttribute('data-permissao-fazenda', cargo.permissaoFazenda)
+            checkbox.setAttribute('data-permissao-fazenda', cargo.permissaoFazendas)
             checkbox.setAttribute('data-permissao-funcionarios', cargo.permissaoFuncionarios)
 
             const nomeSpan = document.createElement('span');
@@ -112,7 +112,7 @@ function exibirCargosNaTela(data) {
             const naoTemPermissaoFuncionarios = document.createElement('img');
             naoTemPermissaoFuncionarios.src = './assets/X-cargos.svg';
             naoTemPermissaoFuncionarios.alt = 'check icon';
-            naoTemPermissaoFuncionarios .classList.add('check-permissao');
+            naoTemPermissaoFuncionarios.classList.add('check-permissao');
 
             div.appendChild(checkbox);
             div.appendChild(nomeSpan);
@@ -122,7 +122,7 @@ function exibirCargosNaTela(data) {
             } else {
                 div.appendChild(naoTemPermissaoCargos);
             }
-            if(cargo.permissaoFazenda == 1) {
+            if (cargo.permissaoFazendas == 1) {
                 div.appendChild(temPermissaoFazendas);
             } else {
                 div.appendChild(naoTemPermissaoFazendas);
@@ -184,7 +184,7 @@ function modalAdicionarCargo() {
 }
 
 function lerPermissoesSelecionadas() {
-    let cargo = false;
+    let check_cargo = false;
     let fazenda = false;
     let funcionario = false;
     const nomeCargo = document.getElementById("input_nome_cargo").value.trim();
@@ -193,19 +193,19 @@ function lerPermissoesSelecionadas() {
     const checkFuncionarios = document.getElementById("check_permissao_funcionarios");
 
     if (checkCargos.checked) {
-        cargo = true;
+        check_cargo = true;
     }
 
     if (checkFazendas.checked) {
-        fazenda = true;
+        check_fazenda = true;
     }
 
     if (checkFuncionarios.checked) {
-        funcionario = true;
+        check_funcionario = true;
     }
-    adicionarCargo(nomeCargo, cargo, fazenda, funcionario);
+    adicionarCargo(nomeCargo, check_cargo, check_fazenda, check_funcionario);
 }
-function adicionarCargo(nomeCargo, cargo, fazenda, funcionario) {
+function adicionarCargo(nomeCargo, check_cargo, check_fazenda, check_funcionario) {
     fetch('/cargo/adicionar', {
         method: "POST",
         headers: {
@@ -213,10 +213,12 @@ function adicionarCargo(nomeCargo, cargo, fazenda, funcionario) {
         },
         body: JSON.stringify({
             nomeCargoServer: nomeCargo,
-            permissaoCargosServer: cargo,
-            permissaoFazendasServer: fazenda,
-            permissaoFuncionariosServer: funcionario,
-            fazendaServer: idFazenda
+            permissaoCargosServer: check_cargo,
+            permissaoFazendasServer: check_fazenda,
+            permissaoFuncionariosServer: check_funcionario,
+            fazendaServer: idFazenda,
+            empresaServer: idEmpresa,
+            municipioServer: idMunicipio
         }),
     }).then(resposta => {
         resposta.json().then(data => {
@@ -386,7 +388,7 @@ function editarCargo() {
 
     for (i = 0; i < cargos.length; i++) {
         let cargoAtual = document.getElementById(`check_cargo_${cargos[i].id}`);
-        
+
         if (cargoAtual.checked) {
             cargoParaEditar = cargos[i];
         }
@@ -400,13 +402,13 @@ function editarCargo() {
     let permissaoFazendas = 0;
     let permissaoFuncionarios = 0;
 
-    if(checkPermissaoCargos.checked) {
+    if (checkPermissaoCargos.checked) {
         permissaoCargos = 1;
     }
-    if(checkPermissaoFazendas.checked) {
+    if (checkPermissaoFazendas.checked) {
         permissaoFazendas = 1;
     }
-    if(checkPermissaoFuncionarios.checked) {
+    if (checkPermissaoFuncionarios.checked) {
         permissaoFuncionarios = 1;
     }
 
@@ -440,4 +442,12 @@ function editarCargo() {
     document.getElementById("janela-modal").style.display = 'none';
     location.reload();
     return false;
+}
+
+function verificarPermissoes() {
+    let botoesEdicao = document.getElementById("botoes-add-remove");
+    const permissaoCargos = parseInt(sessionStorage.PERMISSAO_CARGOS);
+    if (permissaoCargos != 1) {
+        botoesEdicao.style.display = 'none';
+    }
 }

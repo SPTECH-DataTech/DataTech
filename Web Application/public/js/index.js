@@ -118,3 +118,48 @@ document.addEventListener('DOMContentLoaded', function () {
     hamburgerMenu.classList.toggle('menu_open');
   });
 });
+
+
+
+async function enviarEmailContratar(event) {
+  event.preventDefault(); 
+  const nome = document.querySelector('#name').value.trim();
+  const empresa = document.querySelector('#empresa').value.trim();
+  const email = document.querySelector('#email').value.trim();
+  const assunto = document.querySelector('#tipo').value.trim();
+  const mensagem = document.querySelector('#message').value.trim();
+
+  if (!nome || !empresa || !email || !assunto || !mensagem) {
+      alert('Por favor, preencha todos os campos.');
+      return;
+  }
+
+  try {
+      const response = await fetch('/enviarEmailContratar', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              nome,
+              empresa,
+              email,
+              assunto,
+              mensagem,
+          }),
+      });
+
+      const message = await response.text();
+
+      if (response.ok) {
+          alert('Mensagem enviada com sucesso! Verifique seu e-mail.');
+      } else {
+          alert(`Erro ao enviar a mensagem: ${message}`);
+      }
+  } catch (error) {
+      console.error('Erro ao enviar e-mail:', error);
+      alert('Erro ao enviar a mensagem. Tente novamente mais tarde.');
+  }
+}
+
+

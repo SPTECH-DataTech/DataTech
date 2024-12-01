@@ -126,26 +126,18 @@ CREATE TABLE IF NOT EXISTS datatech.tipoCafe (
 -- CREATE DE ACORDO COM O DER, PROVAVELMENTE VAI PRECISAR DE ALTERAÇÕES....
 
 CREATE TABLE IF NOT EXISTS datatech.plantacaoFazenda (
-  id INT NOT NULL AUTO_INCREMENT,
-  fkMunicipio INT NOT NULL,
-  fkTipoCafe INT NOT NULL,
+  id INT NOT NULL AUTO_INCREMENT UNIQUE,
+  fkFazenda INT NOT NULL,
+  fazenda_fkEmpresa INT NOT NULL,
+  fazenda_fkEstadoMunicipio INT NOT NULL,
   ano INT NOT NULL,
   areaPlantada DECIMAL(10,2) NULL,
   quantidadeColhida DECIMAL(10,2) NULL,
   valorTotalReais DECIMAL(10,2) NULL,
-  fkFazenda INT NOT NULL,
-  Fazenda_fkEmpresa INT NOT NULL,
-  Fazenda_fkEstadoMunicipio INT NOT NULL,
-  PRIMARY KEY (id, fkMunicipio, fkTipoCafe),
-  CONSTRAINT fk_municipio_UX UNIQUE INDEX (fkMunicipio),
-  CONSTRAINT fk_tipocafe_UX UNIQUE INDEX (fkTipoCafe),
-  CONSTRAINT ano_UX UNIQUE INDEX (ano),
-  CONSTRAINT fk_municipio_plantacaofazenda FOREIGN KEY (fkMunicipio) 
-		REFERENCES datatech.estadoMunicipio (id),
-  CONSTRAINT fk_tipocafe_plantacaofazenda FOREIGN KEY (fkTipoCafe)
-		REFERENCES datatech.tipoCafe (id),
-  CONSTRAINT fk_fazenda_empresa_estado_plantacaofazenda FOREIGN KEY (fkFazenda, Fazenda_fkEmpresa, Fazenda_fkEstadoMunicipio)
-		REFERENCES datatech.fazenda (id, fkEmpresa, fkEstadoMunicipio) ON DELETE CASCADE
+  PRIMARY KEY (id, fkFazenda, fazenda_fkEmpresa, fazenda_fkEstadoMunicipio),
+  CONSTRAINT ano_municipio_UX UNIQUE INDEX (fazenda_fkEstadoMunicipio, ano),
+  CONSTRAINT fk_fazenda_empresa_estado_plantacaofazenda FOREIGN KEY (fkFazenda, fazenda_fkEmpresa, fazenda_fkEstadoMunicipio)
+		REFERENCES datatech.fazenda (id, fkEmpresa, fkEstadoMunicipio)
 );
 
 -- -----------------------------------------------------

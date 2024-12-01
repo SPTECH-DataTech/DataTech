@@ -20,55 +20,118 @@ function modalAlterarSenha() {
 
 }
 
+function habilitarMensagem(mensagem) {
+    const mensagemErro = document.getElementById('message');
+
+    mensagemErro.innerHTML = mensagem;
+}
+
+function removerErros(erroElemento, inputElemento, spanElemento) {
+    erroElemento.style.display = "none";
+    inputElemento.style.borderColor = "";
+    spanElemento.style.color = "";
+}
+
 function alterarSenha() {
-    const senhaAtual = input_senha.value.trim();
     const novaSenha = input_nova_senha.value.trim();
-    const confirmacaoSenha = input_confirmacaoSenha.value.trim();
+    const confirmacaoSenha = input_confirmacao_senha.value.trim();
 
-    let tudoCerto = true;
+    let campos = [novaSenha, confirmacaoSenha];
+    
+    let erroSenhaQtd = novaSenha.length < 5;
+    let erroSenhaEspecial = true;
+    let erroSenhaMaiusculo = true;
+    let erroSenhaNumero = true;
+    let erroEncontrado = false;
 
-    // Resetando mensagens de erro
-    mensagemErroSenha.innerHTML = "";
-    mensagemErroNovaSenha.innerHTML = "";
-    erro_confirmacaoSenha.innerText = "";
+    for (let i = 0; i < novaSenha.length; i++) {
 
-    // Validação de senha atual
-    if (senhaAtual === "") {
-        mensagemErroSenha.innerHTML = "Campo obrigatório!";
-        input_senha.style.borderColor = "red";
-        tudoCerto = false;
-    } else {
-        input_senha.style.borderColor = "#7F00FF";
+        if (/[0-9]/.test(novaSenha[i])) {
+            erroSenhaNumero = false;
+        }
+        if (/[A-Z]/.test(novaSenha[i])) {
+            erroSenhaMaiusculo = false;
+        }
+        if (/[!@#$.?]/.test(novaSenha[i])) {
+            erroSenhaEspecial = false;
+        }
+
     }
 
-    // Validação de nova senha
-    if (novaSenha.length < 5) {
-        mensagemErroNovaSenha.innerHTML = "A senha deve ter pelo menos 5 dígitos.";
+    input_nova_senha.addEventListener("input", function () {
+        removerErros(mensagemErroNovaSenha, input_nova_senha, spanNovaSenha);
+    });
+
+    input_confirmacao_senha.addEventListener("input", function () {
+        removerErros(erroConfirmacaoSenha, input_confirmacao_senha, spanConfirmarSenha);
+    });
+
+    if (campos.some(campo => campo == "")) {
+        Swal.fire({
+            icon: "warning",
+            title: "Preencha todos os campos para continuar",
+            timer: 2000,
+            timerProgressBar: true,
+            confirmButtonText: '',
+            confirmButtonColor: '#fff',
+        }).then((result) => {
+            if (result.dismiss === Swal.DismissReason.timer) {
+                console.log("I was closed by the timer");
+            }
+        });
+        return;
+
+    } else if (erroSenhaQtd) {
+
+        mensagemErroNovaSenha.innerText = "A senha deve ter pelo menos 5 dígitos.";
+        mensagemErroNovaSenha.style.display = "block";
+        input_nova_senha.classList.add("input-erro");
+        spanNovaSenha.style.color = "red";
         input_nova_senha.style.borderColor = "red";
-        tudoCerto = false;
-    } else if (!/[0-9]/.test(novaSenha)) {
-        mensagemErroNovaSenha.innerHTML = "A senha deve conter um número.";
+        erroEncontrado = true;
+
+    } else if (erroSenhaEspecial) {
+
+        mensagemErroNovaSenha.innerText = "A senha deve conter um caractere especial (ex:!@$.?)";
+        mensagemErroNovaSenha.style.display = "block";
+        input_nova_senha.classList.add("input-erro");
+        spanNovaSenha.style.color = "red";
         input_nova_senha.style.borderColor = "red";
-        tudoCerto = false;
-    } else if (!/[A-Z]/.test(novaSenha)) {
-        mensagemErroNovaSenha.innerHTML = "A senha deve incluir uma letra maiúscula.";
+        erroEncontrado = true;
+
+    } else if (erroSenhaMaiusculo) {
+
+        mensagemErroNovaSenha.innerText = "A senha deve incluir uma letra maiúscula.";
+        mensagemErroNovaSenha.style.display = "block";
+        input_nova_senha.classList.add("input-erro");
+        spanNovaSenha.style.color = "red";
         input_nova_senha.style.borderColor = "red";
-        tudoCerto = false;
-    } else if (!/[!@#$.?]/.test(novaSenha)) {
-        mensagemErroNovaSenha.innerHTML = "A senha deve conter um caractere especial (ex: !@#$.?)";
+        erroEncontrado = true;
+
+    } else if (erroSenhaNumero) {
+
+        mensagemErroNovaSenha.innerText = "A senha deve conter um número.";
+        mensagemErroNovaSenha.style.display = "block";
+        input_nova_senha.classList.add("input-erro");
+        spanNovaSenha.style.color = "red";
         input_nova_senha.style.borderColor = "red";
-        tudoCerto = false;
-    } else {
-        input_nova_senha.style.borderColor = "#7F00FF";
+        erroEncontrado = true;
+
+    } 
+    
+    else if (novaSenha != confirmacaoSenha) {
+
+        erroConfirmacaoSenha.innerText = "As senhas devem ser iguais.";
+        erroConfirmacaoSenha.style.display = "block";
+        input_confirmacao_senha.classList.add("input-erro");
+        spanConfirmarSenha.style.color = "red";
+        input_confirmacao_senha.style.borderColor = "red";
+        erroEncontrado = true;
+
     }
 
-    // Validação de confirmação de senha
-    if (novaSenha !== confirmacaoSenha) {
-        erro_confirmacaoSenha.innerText = "A confirmação de senha deve ser a mesma que a nova senha.";
-        input_confirmacaoSenha.style.borderColor = "red";
-        tudoCerto = false;
-    } else {
-        input_confirmacaoSenha.style.borderColor = "#7F00FF";
+    if (erroEncontrado) {
+        return;
     }
 
     fetch(`dashConta/alterarSenha/${idUsuario}/${novaSenha}`, {
@@ -76,40 +139,42 @@ function alterarSenha() {
         headers: {
             "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+            novaSenhaServer: novaSenha
+        }),
     })
 
+        .then(resposta => {
+            resposta.json().then(data => {
+                console.log("Resposta do servidor: ", data);
 
-    .then(resposta => {
-        resposta.json().then(data => {
-            console.log("Resposta do servidor: ", data);
+                if (!resposta.ok) {
+                    throw new Error(data.erro);
+                }
+                else {
 
-            if (!resposta.ok) {
-                throw new Error(data.erro);
-            }
-            else {
+                    document.getElementById('janela-modal').style.display = 'none';
 
-                document.getElementById('janela-modal').style.display = 'none';
+                    Swal.fire({
+                        title: 'Senha alterada com sucesso!',
+                        icon: 'success',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: "#20BF55",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                        }
+                    });
 
-                Swal.fire({
-                    title: 'Senha alterada com sucesso!',
-                    icon: 'success',
-                    confirmButtonText: 'OK',
-                    confirmButtonColor: "#20BF55",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        location.reload();
-                    }
-                });
-
-            }
+                }
+            })
         })
-    })
-    .catch(function (erro) {
-        console.log(`#ERRO: ${erro}`);
-        habilitarMensagem(erro.message);
-    });
+        .catch(function (erro) {
+            console.log(`#ERRO: ${erro}`);
+            habilitarMensagem(erro.message);
+        });
 
-return false;
+    return false;
 }
 
 function mostrarInformacoesConta() {

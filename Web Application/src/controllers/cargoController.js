@@ -31,9 +31,11 @@ function adicionarCargo(req, res) {
     const permissaoFazendas = req.body.permissaoFazendasServer;
     const permissaoFuncionarios = req.body.permissaoFuncionariosServer;
     const fazenda = req.body.fazendaServer;
+    const empresa = req.body.empresaServer;
+    const municipio = req.body.municipioServer;
 
     try {
-        cargoModel.adicionarCargo(nomeCargo, permissaoCargos, permissaoFazendas, permissaoFuncionarios, fazenda);
+        cargoModel.adicionarCargo(nomeCargo, permissaoCargos, permissaoFazendas, permissaoFuncionarios, fazenda, empresa, municipio);
         console.log(`Cargo inserido no banco de dados[Nome: ${nomeCargo}, Cargos: ${permissaoCargos}, Fazendas: ${permissaoFazendas}, Funcionarios: ${permissaoFuncionarios}`);
     } catch {
         console.log("Houve um erro ao inserir o cargo", erro.sqlMessage);
@@ -61,27 +63,27 @@ function editarCargo(req, res) {
     const permissaoFuncionarios = req.body.permissaoFuncionariosServer;
     const fazenda = req.body.fazendaServer;
 
-    if(id == undefined) {
+    if (id == undefined) {
         console.log("id está undefined");
         res.status(400);
     }
-    if(nome == undefined) {
+    if (nome == undefined) {
         console.log("nome está undefined");
         res.status(400);
     }
-    if(permissaoCargos == undefined) {
+    if (permissaoCargos == undefined) {
         console.log("permissaoCargos está undefined");
         res.status(400);
     }
-    if(permissaoFazendas == undefined) {
+    if (permissaoFazendas == undefined) {
         console.log("permissaoFazendas está undefined");
         res.status(400);
     }
-    if(permissaoFuncionarios == undefined) {
+    if (permissaoFuncionarios == undefined) {
         console.log("permissaoFuncionarios está undefined");
         res.status(400);
     }
-    if(fazenda == undefined) {
+    if (fazenda == undefined) {
         console.log("fazenda está undefined");
         res.status(400);
     }

@@ -57,6 +57,20 @@ app.post('/enviarEmailSuporte', async (req, res) => {
     }
 });
 
+
+app.post('/enviarEmailContratar', async (req, res) => {
+    const { nome, empresa, email, assunto, mensagem } = req.body;
+    try {
+        await emailService.enviarEmailContratar(nome, empresa, email, assunto, mensagem);
+        res.status(200).send('Mensagem enviada com sucesso! Verifique seu e-mail.');
+    } catch (error) {
+        console.error('Erro ao enviar mensagem de contato:', error);
+        res.status(500).send('Erro ao enviar a mensagem.');
+    }
+});
+
+
+
 app.listen(PORTA_APP, function () {
     console.log(`
     DDDDDDDDDDDDD                                 tttt                         TTTTTTTTTTTTTTTTTTTTTTT                                   hhhhhhh             

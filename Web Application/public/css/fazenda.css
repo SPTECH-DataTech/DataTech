@@ -373,7 +373,7 @@ h1 {
 
 .farmList {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* Ajuste a largura mínima para se adaptar ao container */
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
     gap: 15px;
     padding: 20px;
     overflow: auto;
@@ -389,9 +389,8 @@ h1 {
     position: relative;
     margin-bottom: 15px;
     cursor: pointer;
-    /* Ajuste a largura para não ultrapassar a largura do container */
-    width: 100%; /* Torna a largura responsiva */
-    max-width: 480px; /* Largura máxima */
+    width: 100%; 
+    max-width: 480px; 
     height: 210px;
 }
 
