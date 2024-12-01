@@ -15,15 +15,15 @@ router.post("/adicionar/:idFazenda", function (req, res) {
   equipeController.adicionar(req, res);
 });
 
-router.delete("/excluir/:idUsuario", function (req, res) {
+router.delete("/excluir/:idFuncionario", function (req, res) {
   equipeController.excluir(req, res);
 });
 
-router.put("/editar/:idUsuario", function (req, res) {
+router.put("/editar/:idFuncionario", function (req, res) {
   equipeController.editar(req, res);
 });
 
-router.put("/editarExistente/:idUsuario", function (req, res) {
+router.put("/editarExistente/:idFuncionario", function (req, res) {
   equipeController.editarExistente(req, res);
 });
 

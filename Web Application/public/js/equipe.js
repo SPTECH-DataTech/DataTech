@@ -10,8 +10,21 @@ nome_fazenda1.innerHTML = `${nomeFazenda}`;
 nome_fazenda2.innerHTML = `${nomeFazenda}`;
 b_usuario.innerHTML = `${nomeUsuario}`;
 
-function listarFuncionarios() {
+gerenciarPermissoes()
+function gerenciarPermissoes(){
+    if (sessionStorage.permissaoFuncionarios == 0){
+        document.getElementById("botoes").style.display = 'none';
+        document.getElementById("input-search").style.height = '40px';
 
+        const checkboxes = document.querySelectorAll('.checkbox-class');
+
+        checkboxes.forEach(checkbox => {
+            checkbox.style.display = 'none';
+        })
+    }
+}
+
+function listarFuncionarios() {
     fetch(`/equipe/listarFuncionarios/${idFazenda}`, {
         method: 'GET',
         headers: {
@@ -21,23 +34,39 @@ function listarFuncionarios() {
         .then(function (resposta) {
             resposta.json().then((dados) => {
                 const container = document.querySelector('.funcionarios');
-                container.innerHTML = '';
+                container.innerHTML = ''; 
+
                 dados.forEach(funcionario => {
                     const div = document.createElement('div');
                     div.classList.add('campo');
 
-                    const checkbox = document.createElement('input');
-                    checkbox.type = 'checkbox';
-                    checkbox.classList.add('checkbox-class');
-                    checkbox.setAttribute('data-id', funcionario.id);
-                    checkbox.setAttribute('data-nome', funcionario.nome);
-                    checkbox.setAttribute('data-email', funcionario.email);
-                    checkbox.setAttribute('data-cargo', funcionario.nomeCargo);
 
-                    const img = document.createElement('img');
-                    img.src = './assets/Group 376.png';
-                    img.alt = 'perfil icon';
-                    img.classList.add('icon');
+                    if (sessionStorage.permissaoFuncionarios != 0) {
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.classList.add('checkbox-class');
+                        checkbox.setAttribute('data-id', funcionario.id);
+                        checkbox.setAttribute('data-nome', funcionario.nome);
+                        checkbox.setAttribute('data-email', funcionario.email);
+                        checkbox.setAttribute('data-cargo', funcionario.nomeCargo);
+
+                        checkbox.addEventListener('change', () => {
+                            const idFuncionario = checkbox.getAttribute('data-id');
+                            const nomeFuncionario = checkbox.getAttribute('data-nome');
+
+                            sessionStorage.setItem('ID_FUNCIONARIO', idFuncionario);
+
+                            if (checkbox.checked) {
+                                sessionStorage.setItem(`funcionario_${idFuncionario}`, JSON.stringify({ id: idFuncionario, nome: nomeFuncionario }));
+                            } else {
+                                sessionStorage.removeItem(`funcionario_${idFuncionario}`);
+                            }
+
+                            console.log('Funcionário atualizado no sessionStorage:', idFuncionario, nomeFuncionario);
+                        });
+
+                        div.appendChild(checkbox);
+                    }
 
                     const nomeSpan = document.createElement('span');
                     nomeSpan.classList.add('nome');
@@ -49,6 +78,7 @@ function listarFuncionarios() {
 
                     const cargoSpan = document.createElement('span');
                     cargoSpan.classList.add('cargo');
+
                     if (funcionario.nomeCargo == undefined) {
                         cargoSpan.innerText = funcionario.nomeCargo;   
                     } else {
@@ -57,6 +87,7 @@ function listarFuncionarios() {
 
                     div.appendChild(checkbox);
                     div.appendChild(img);
+
                     div.appendChild(nomeSpan);
                     div.appendChild(emailSpan);
                     div.appendChild(cargoSpan);
@@ -77,12 +108,14 @@ function listarFuncionarios() {
 
                         console.log('Funcionário atualizado no sessionStorage:', idFuncionario, nomeFuncionario);
                     });
+
                 });
                 verificarPermissoes();
             });
         })
         .catch(error => console.error('Erro ao listar funcionários:', error));
 }
+
 
 function procurarFuncionario() {
     const input = document.getElementById('input-search');

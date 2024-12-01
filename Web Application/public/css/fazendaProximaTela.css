@@ -383,6 +383,8 @@ h1 {
     border: solid rgba(83, 83, 83, 0.378) 2px;
     font-weight: 500;
     font-size: 16px;
+    cursor: pointer;
+    /* display: none; */
 }
 
 .button-remover {
@@ -396,4 +398,6 @@ h1 {
     font-weight: 400;
     font-size: 16px;
     color: white;
+    cursor: pointer;
+    /* display: none; */
 }

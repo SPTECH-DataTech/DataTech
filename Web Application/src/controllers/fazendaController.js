@@ -71,12 +71,12 @@ function listarTipoCafe(req, res) {
 
 
 function removerFazenda(req, res) {
-    var { idFazenda } = req.body;
+    var { idFazenda, idEmpresa, idEstadoMunicipio} = req.body;
 
     if (!idFazenda) {
         res.status(400).send("O ID da fazenda está undefined");
     } else {
-        fazendaModel.removerFazenda(idFazenda).then(function (resultado) {
+        fazendaModel.removerFazenda(idFazenda, idEmpresa, idEstadoMunicipio).then(function (resultado) {
             console.log(`Fazenda "${idFazenda}" foi remvodida no banco de dados.`);
             res.status(200).json({
                 message: 'Fazenda removida com sucesso!', resultado
@@ -115,6 +115,19 @@ function editarFazenda(req, res) {
     }
 }
 
+function listarPermissoes(req, res) {
+    const idFuncionario = req.params.idFuncionario;
+
+    fazendaModel.listarPermissoes(idFuncionario).then((resultado) => {
+        console.log(`Resultados: ${JSON.stringify(resultado)}`);
+        res.status(200).json(resultado);
+    })
+        .catch((erro) => {
+            console.error("Houve um erro ao listar as permissões do funcionário!");
+            res.status(500).json(erro);
+        });
+}
+
 
 
 module.exports = {
@@ -123,5 +136,6 @@ module.exports = {
     listarFazendas,
     removerFazenda,
     editarFazenda,
-    listarTipoCafe
+    listarTipoCafe,
+    listarPermissoes
 }

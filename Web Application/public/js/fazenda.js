@@ -36,6 +36,8 @@ function adicionarFazenda() {
     let tipoCafe;
     const estadoMunicipio = buscarIdPorEstadoMunicipio(idEstado, idMunicipio);
 
+    console.log(idEstado, idMunicipio);
+
     if (!estadoMunicipio) {
         return false;
     }
@@ -96,7 +98,7 @@ function limparCampos() {
     select_estado_fazenda.value = '';
     message.innerHTML = '';
 }
-let listaEstadoMunicipio = [];
+window.listaEstadoMunicipio = [];
 listarEstados();
 function listarEstados() {
     fetch("/fazenda/listarEstados", {
@@ -147,7 +149,9 @@ function listarTipoCafe() {
 
 function buscarIdPorEstadoMunicipio(estado, municipio) {
     const resultado = listaEstadoMunicipio.find(item =>
+                                                
         item.idUf == estado || item.idMunicipio == municipio
+
     );
 
     if (resultado) {
@@ -180,17 +184,19 @@ function listarFazendas() {
                     container.style.display = "flex";
                 } else {
                     farmList.style.display = "block";
+                    console.log('Lista de fazendas: ', fazendas);
+                    
                     fazendas.forEach((fazenda) => {
 
                         content += `<div class="div-fazenda" id="div-fazenda"
                         data-fazenda-id=${fazenda.id} data-fazenda-nome=${fazenda.nome} data-fazenda-estado=${fazenda.estado}
                         data-fazenda-municipio=${fazenda.municipio}
-                        data-fazenda-estado-id=${fazenda.id_uf}
+                        data-fazenda-estado-id=${fazenda.estado_id}
                         data-fazenda-tipo-cafe=${fazenda.fkTipoCafe}
-                        data-fazenda-municipio-id=${fazenda.id_municipio}
+                        data-fazenda-municipio-id=${fazenda.estado_municipio_id}
                         > 
                         <span class="nomeFazenda">Fazenda ${fazenda.nome} - ${fazenda.estado}</span>
-                        <span class="tipoFazenda">Café ${fazenda.tipo_cafe}</span>
+                        <span class="tipoFazenda">Café ${fazenda.tipo_cafe_nome}</span>
                         <img src="./assets/imgs/Group 413 (1).png" alt="" class="image-buttonn"> </div>`;
                     });
 
@@ -249,7 +255,7 @@ select_estado_fazenda.addEventListener('change', function (e) {
         const municipiosFiltrados = listaEstadoMunicipio.filter(item => item.idUf == estadoSelecionado);
 
         municipiosFiltrados.forEach(item => {
-            select_municipio.innerHTML += `<option value='${item.idMunicipio}'>${item.municipio}</option>`;
+            select_municipio.innerHTML += `<option value='${item.id}'>${item.municipio}</option>`;
         });
     } else {
 
@@ -266,3 +272,4 @@ function verificarPermissoes() {
     }
     botoesEdicao.style.display = 'flex';
 }
+

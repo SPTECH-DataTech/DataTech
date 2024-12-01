@@ -127,8 +127,8 @@ function mostrarInformacoesConta() {
                 dashConta.forEach((funcionario) => {
                     nome_funcionario.innerHTML = funcionario.nome || 'Não informado';
                     cpf_funcionario.innerHTML = funcionario.cpf || 'Não informado';
-                    equipe_funcionario.innerHTML = funcionario.nomeFazenda || 'Não informado';
-                    cargo_funcionario.innerHTML = funcionario.nomeCargo || 'Não informado';
+                    equipe_funcionario.innerHTML = funcionario.nomeFazenda || 'Ainda não está em nenhuma equipe';
+                    cargo_funcionario.innerHTML = funcionario.nomeCargo || 'Ainda não tem cargo';
                     email_funcionario.innerHTML = funcionario.email || 'Não informado';
                 });
             });

@@ -22,7 +22,6 @@ function listarTipoCafe() {
 function adicionarFazenda(nomeFazenda, tipoCafe, estadoMunicipio, idEmpresa) {
     console.log("ACESSEI O FAZENDA MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", nomeFazenda, tipoCafe, estadoMunicipio, idEmpresa);
 
-
     var instrucaoSql = `INSERT INTO fazenda (nome, fkTipoCafe, fkEmpresa, fkEstadoMunicipio) 
                         VALUES ('${nomeFazenda}', ${tipoCafe}, '${idEmpresa}', '${estadoMunicipio}');`;
 
@@ -35,6 +34,7 @@ function adicionarFazenda(nomeFazenda, tipoCafe, estadoMunicipio, idEmpresa) {
             console.log("Executando a instrução SQL para verificar a fazenda: \n" + instrucaoSql);
             return database.executar(instrucaoSql);
         }).catch(error => {
+
             console.error("Erro ao adicionar fazenda ou tipoCafePlantacao:", error.message);
             throw error;
         });
@@ -70,26 +70,59 @@ WHERE
     return database.executar(instrucaoSql);
 }
 
-function removerFazenda(idFazenda) {
-    console.log("ACESSEI O FAZENDA MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", idFazenda);
+function removerFazenda(idFazenda, idEmpresa, idEstadoMunicipio) {
+    console.log("Removendo a fazenda com ID:", idFazenda, idEmpresa, idEstadoMunicipio);
 
-    var instrucaoSql = `DELETE FROM tipocafeplantacao WHERE fkFazenda = '${idFazenda}';`;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql)
+    const instrucoesSql = [
+        // Apenas a exclusão da fazenda
+        `DELETE FROM datatech.fazenda WHERE id = '${idFazenda}';`
+    ];
+
+    let promiseSQL = Promise.resolve();
+
+    instrucoesSql.forEach((instrucaoSql) => {
+        promiseSQL = promiseSQL
+            .then(() => {
+                console.log("Executando a instrução SQL: \n" + instrucaoSql);
+                return database.executar(instrucaoSql);
+            })
+            .catch((erro) => {
+                console.error('Erro ao executar SQL:', erro);
+            });
+    });
+
+    return promiseSQL
         .then(() => {
-            console.log("Executando a instrução SQL: \n" + instrucaoSql);
-            var instrucaoSql = `DELETE FROM fazenda WHERE id = '${idFazenda}';`;
-            return database.executar(instrucaoSql)
-        }).catch((erro) => {
-            console.error('Houve um erro ao excluir a fazenda!', erro);
-
+            console.log(`Fazenda com ID ${idFazenda} foi removida com sucesso.`);
         })
+        .catch((erro) => {
+            console.error('Houve um erro ao remover a fazenda:', erro);
+        });
 }
+
 
 function editarFazenda(nomeFazenda, tipoCafe, estadoMunicipio, idFazenda) {
     console.log("ACESSEI O FAZENDA MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", idFazenda, nomeFazenda, tipoCafe, estadoMunicipio);
 
     var instrucaoSql = `UPDATE fazenda SET nome = '${nomeFazenda}', fkEstadoMunicipio = '${estadoMunicipio}' WHERE id = '${idFazenda}';`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+function listarPermissoes(idFuncionario) {
+    console.log("ACESSEI O FAZENDA MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", idFuncionario);
+
+    var instrucaoSql = `SELECT 
+            f.id AS funcionario_id,
+            c.permissaoCargos,
+            c.permissaoFazendas,
+            c.permissaoFuncionarios
+        FROM 
+            datatech.funcionario f
+        JOIN 
+            datatech.cargo c ON f.fkCargo = c.id
+        WHERE 
+            f.id = '${idFuncionario}';`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -102,5 +135,6 @@ module.exports = {
     listarFazendas,
     removerFazenda,
     editarFazenda,
-    listarTipoCafe
+    listarTipoCafe,
+    listarPermissoes
 }
