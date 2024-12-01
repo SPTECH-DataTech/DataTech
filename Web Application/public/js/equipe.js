@@ -77,8 +77,8 @@ function listarFuncionarios() {
 
                         console.log('Funcionário atualizado no sessionStorage:', idFuncionario, nomeFuncionario);
                     });
-
                 });
+                verificarPermissoes();
             });
         })
         .catch(error => console.error('Erro ao listar funcionários:', error));
@@ -735,3 +735,13 @@ window.addEventListener("load", function () {
         }
     }
 });
+
+function verificarPermissoes() {
+    let botoesEdicao = document.getElementById("botoes-add-remove");
+    const permissaoFazendas = parseInt(sessionStorage.PERMISSAO_FUNCIONARIOS);
+    if (permissaoFazendas != 1) {
+        botoesEdicao.style.display = "none";
+        return;
+    }
+    botoesEdicao.style.display = 'flex';
+}

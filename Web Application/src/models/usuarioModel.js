@@ -5,7 +5,7 @@ function autenticar(email, senha) {
     var instrucaoSql = `
         SELECT fun.id, fun.nome, fun.email, fun.fkCargo, fun.fkFazenda, fun.fkEmpresa, car.permissaoCargos, car.permissaoFazendas, car.permissaoFuncionarios
         FROM funcionario fun
-        LEFT JOIN cargo car ON car.id = fun.id
+        LEFT JOIN cargo car ON car.id = fun.fkCargo
         WHERE fun.email = '${email}' AND fun.senha = '${senha}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);

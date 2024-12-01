@@ -1,4 +1,4 @@
-let idFazenda = sessionStorage.ID_FAZENDA;
+let idFazenda = sessionStorage.FAZENDA;
 let idEmpresa = sessionStorage.ID_EMPRESA;
 let idMunicipio = sessionStorage.MUNICIPIO_FAZENDA;
 let cargos;
@@ -9,24 +9,24 @@ function conultarNomeFazenda() {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify( {
+        body: JSON.stringify({
             idServer: idFazenda,
         })
     })
-    .then(resposta => {
-        resposta.json.then(data => {
-            if (!resposta.ok) {
-                throw new Error(data.erro);
-            }
-            else {
-                console.log("Nome da fazenda: ", data);
-                document.getElementById("nome_fazenda1") = data;
-            }
+        .then(resposta => {
+            resposta.json.then(data => {
+                if (!resposta.ok) {
+                    throw new Error(data.erro);
+                }
+                else {
+                    console.log("Nome da fazenda: ", data);
+                    document.getElementById("nome_fazenda1") = data;
+                }
+            })
         })
-    })
-    .catch(function (erro) {
-        console.log(`#ERRO: ${erro}`);
-    });
+        .catch(function (erro) {
+            console.log(`#ERRO: ${erro}`);
+        });
 
     return false;
 }
@@ -112,7 +112,7 @@ function exibirCargosNaTela(data) {
             const naoTemPermissaoFuncionarios = document.createElement('img');
             naoTemPermissaoFuncionarios.src = './assets/X-cargos.svg';
             naoTemPermissaoFuncionarios.alt = 'check icon';
-            naoTemPermissaoFuncionarios .classList.add('check-permissao');
+            naoTemPermissaoFuncionarios.classList.add('check-permissao');
 
             div.appendChild(checkbox);
             div.appendChild(nomeSpan);
@@ -122,7 +122,7 @@ function exibirCargosNaTela(data) {
             } else {
                 div.appendChild(naoTemPermissaoCargos);
             }
-            if(cargo.permissaoFazendas == 1) {
+            if (cargo.permissaoFazendas == 1) {
                 div.appendChild(temPermissaoFazendas);
             } else {
                 div.appendChild(naoTemPermissaoFazendas);
@@ -388,7 +388,7 @@ function editarCargo() {
 
     for (i = 0; i < cargos.length; i++) {
         let cargoAtual = document.getElementById(`check_cargo_${cargos[i].id}`);
-        
+
         if (cargoAtual.checked) {
             cargoParaEditar = cargos[i];
         }
@@ -402,13 +402,13 @@ function editarCargo() {
     let permissaoFazendas = 0;
     let permissaoFuncionarios = 0;
 
-    if(checkPermissaoCargos.checked) {
+    if (checkPermissaoCargos.checked) {
         permissaoCargos = 1;
     }
-    if(checkPermissaoFazendas.checked) {
+    if (checkPermissaoFazendas.checked) {
         permissaoFazendas = 1;
     }
-    if(checkPermissaoFuncionarios.checked) {
+    if (checkPermissaoFuncionarios.checked) {
         permissaoFuncionarios = 1;
     }
 
@@ -445,17 +445,9 @@ function editarCargo() {
 }
 
 function verificarPermissoes() {
-    if (sessionStorage.getItem("PERMISSAO_CARGOS") == 1) {
-        document.querySelector("botoes-add-remove").innerHTML = `
-            <button id="adicionar-funcionario" onclick="modalAdicionarCargo()" class="add-button">
-                <i class="fa-solid fa-user-plus"></i>
-            </button>
-            <button id="remover-funcionario" onclick="modalRemoverCargo()" class="remove-button">
-                <i class="fas fa-trash"></i>
-            </button>
-            <button id="editar-funcionario" onclick="modalEditarCargo()" class="edit-button">
-                <i class="fas fa-pencil"></i>
-            </button>
-        `;
+    let botoesEdicao = document.getElementById("botoes-add-remove");
+    const permissaoCargos = parseInt(sessionStorage.PERMISSAO_CARGOS);
+    if (permissaoCargos != 1) {
+        botoesEdicao.style.display = 'none';
     }
 }

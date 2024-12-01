@@ -41,16 +41,15 @@ function adicionarFazenda(nomeFazenda, tipoCafe, estadoMunicipio, idEmpresa) {
 }
 
 
-function listarFazendas() {
+function listarFazendas(empresa) {
     console.log("ACESSEI O FAZENDA MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ");
 
     // var instrucaoSql = ` SELECT faz.*, em.estado AS estado
     // FROM fazenda faz
     // JOIN EstadoMunicipio em ON faz.fkEstadosMunicipio = em.id;`;
 
-
     var instrucaoSql = `
- SELECT 
+SELECT 
     f.*,  
     em.estado, 
     em.municipio,
@@ -60,10 +59,12 @@ function listarFazendas() {
     tc.nome AS tipo_cafe
 FROM 
     datatech.fazenda f
-INNER JOIN 
+LEFT JOIN 
     datatech.estadoMunicipio em ON f.fkEstadoMunicipio = em.id
-INNER JOIN 
-    datatech.tipoCafe tc ON f.fkTipoCafe = tc.id;`;
+LEFT JOIN 
+    datatech.tipoCafe tc ON f.fkTipoCafe = tc.id
+WHERE
+    f.fkEmpresa = ${empresa};`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

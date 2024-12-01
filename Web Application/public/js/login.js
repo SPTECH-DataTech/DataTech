@@ -133,6 +133,8 @@ function login() {
                     throw new Error(data.erro)
                 }
                 else {
+                    console.log(data)
+
                     sessionStorage.EMAIL_USUARIO = data.email;
                     sessionStorage.NOME_USUARIO = data.nome;
                     sessionStorage.ID_USUARIO = data.id;

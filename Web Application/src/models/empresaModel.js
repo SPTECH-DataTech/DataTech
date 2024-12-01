@@ -11,7 +11,7 @@ function listar() {
 FROM 
     datatech.token AS t
 INNER JOIN 
-    datatech.HistoricoTokenEmpresa AS hte ON t.id = hte.fkToken
+    datatech.historicoTokenEmpresa AS hte ON t.id = hte.fkToken
 INNER JOIN 
     datatech.empresa AS e ON hte.fkEmpresa = e.id;`;
 
