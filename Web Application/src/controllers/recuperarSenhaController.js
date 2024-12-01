@@ -40,7 +40,7 @@ function enviarSenhaTemporaria(req, res) {
 }
 
 function gerarToken(id, email) {
-    const token = jwt.sign({ id: id, email: email }, process.env.JWT_SECRET, { expiresIn: '1m' });
+    const token = jwt.sign({ id: id, email: email }, process.env.JWT_SECRET, { expiresIn: '10m' });
     return token;
 }
 
