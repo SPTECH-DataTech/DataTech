@@ -238,6 +238,9 @@ spam {
   font-weight: 400;
 }
 
+.titulo-kpi{
+text-align: center;
+}
 .grafico-kpi {
   display: flex;
   flex-direction: row;
@@ -278,6 +281,13 @@ canvas {
 }
 
 .select-ano {
+  margin: 0;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.select-ano2 {
   margin: 0;
   padding: 6px;
   border: 1px solid #ccc;
@@ -483,7 +493,7 @@ h1 {
 }
 
 .select-cafe,
-.select-ano,
+.select-ano, .select-ano2,
 .select-estado {
   padding: 6px;
   font-size: 12px;
@@ -498,7 +508,7 @@ h1 {
   margin: 0 4%;
 }
 
-.select-ano,
+.select-ano, .select-ano2,
 .select-cafe,
 .btn-atualizar {
   padding: 6px;
