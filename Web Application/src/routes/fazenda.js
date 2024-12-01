@@ -18,12 +18,21 @@ router.put("/editarFazenda", (req, res) => {
 router.get("/listarEstados", (req, res) => {
    fazendaController.listarEstados(req, res);
 });
+
+router.get("/listarEstadosUnicos", (req, res) => {
+   fazendaController.listarEstadosUnicos(req, res);
+});
+
 router.get("/listarTipoCafe", (req, res) => {
    fazendaController.listarTipoCafe(req, res);
 });
 
 router.get("/listarFazendas", (req, res) => {
    fazendaController.listarFazendas(req, res);
+});
+
+router.post("/listarMunicipios", (req, res) => {
+   fazendaController.listarMunicipios(req, res);
 });
 
 router.get("/listarPermissoes/:idFuncionario", (req, res) => {

@@ -1,36 +1,22 @@
 let listaEstadoMunicipio = [];
-// listarEstados(); 
+listarEstados(); 
 function listarEstados() {
-    fetch("/fazenda/listarEstados", {
+    fetch("/fazenda/listarEstadosUnicos", {
         method: "GET",
     })
         .then(function (resposta) {
             resposta.json().then((fazenda) => {
-                console.log('Lista de Estados e Municipios', fazenda);
-                
-                const estadosUnicos = new Set();
-
-                fazenda.forEach((fazendaEstado) => {
-                    estadosUnicos.add(fazendaEstado.estado);
+                console.log('Lista de Estados: ', fazenda);
+        
+                fazenda.forEach((estadosUnico) => {
+                    select_estado_fazenda.innerHTML += `<option value='${estadosUnico.idUf}'>${estadosUnico.estado}</option>`;
                 });
-
-                estadosUnicos.forEach((estadosUnico) => {
-                    const estado = fazenda.find(item => item.estado == estadosUnico);
-                    select_estado_fazenda.innerHTML += `<option value='${estado.idUf}'>${estado.estado}</option>`;
-
-
-                });
-
-                fazenda.forEach((fazendaEstado) => {
-                    select_municipio_fazenda.innerHTML += `<option value='${fazendaEstado.id}'>${fazendaEstado.municipio}</option>`;
-                });
-
-                listaEstadoMunicipio = fazenda;
-                console.log('Lista de Estados e Municípios:\n', listaEstadoMunicipio);
 
                 select_estado_fazenda.value = sessionStorage.ESTADO_FAZENDA;
-                select_municipio_fazenda.value = sessionStorage.MUNICIPIO_FAZENDA;
-                input_nome_fazenda_edit.value = sessionStorage.NOME_FAZENDA;
+                var estado = sessionStorage.ESTADO_FAZENDA;
+                listarMunicipios(estado);
+                // select_municipio_fazenda.value = sessionStorage.MUNICIPIO_FAZENDA;
+                // input_nome_fazenda_edit.value = sessionStorage.NOME_FAZENDA;
             });
 
         })
@@ -41,30 +27,30 @@ function listarEstados() {
 
 
 window.onload = function() {
-select_estado_fazenda.value = sessionStorage.ESTADO_FAZENDA;
+select_estado_fazenda.value = sessionStorage.NOME_ESTADO_FAZENDA;
 select_municipio_fazenda.value = sessionStorage.MUNICIPIO_FAZENDA;
 input_nome_fazenda_edit.value = sessionStorage.NOME_FAZENDA;
 };
 
-select_estado_fazenda.addEventListener('change', function (e) {
-    const estadoSelecionado = e.target.value;
-    const select_municipio = document.getElementById('select_municipio_fazenda');
+// select_estado_fazenda.addEventListener('change', function (e) {
+//     const estadoSelecionado = e.target.value;
+//     const select_municipio = document.getElementById('select_municipio_fazenda');
 
-    select_municipio.innerHTML = "<option value='#'>Selecione o município</option>";
+//     select_municipio.innerHTML = "<option value='#'>Selecione o município</option>";
 
-    if (estadoSelecionado !== "#") {
-        select_municipio.disabled = false;
-        const municipiosFiltrados = listaEstadoMunicipio.filter(item => item.idUf == estadoSelecionado);
+//     if (estadoSelecionado !== "#") {
+//         select_municipio.disabled = false;
+//         const municipiosFiltrados = listaEstadoMunicipio.filter(item => item.idUf == estadoSelecionado);
 
 
-        municipiosFiltrados.forEach(item => {
-            select_municipio.innerHTML += `<option value='${item.idMunicipio}'>${item.municipio}</option>`;
-        });
-    } else {
+//         municipiosFiltrados.forEach(item => {
+//             select_municipio.innerHTML += `<option value='${item.idMunicipio}'>${item.municipio}</option>`;
+//         });
+//     } else {
 
-        select_municipio.innerHTML = "<option value='#'>Selecione o município</option>";
-    }
-});
+//         select_municipio.innerHTML = "<option value='#'>Selecione o município</option>";
+//     }
+// });
 
 document.getElementById('button-editar').addEventListener('click', function () {
     select_estado_fazenda.disabled = false;
@@ -162,7 +148,7 @@ function editarFazenda() {
         body: JSON.stringify({
             idFazenda: idFazenda,
             tipoCafe: tipoCafe,
-            estadoMunicipio: sessionStorage.MUNICIPIO_FAZENDA,
+            estadoMunicipio: idMunicipio,
             nomeFazenda: nomeFazenda
         }),
     })
@@ -255,3 +241,36 @@ function listarTipoCafe() {
 //         document.getElementById("button-remover").style.display = 'block';
 //     }
 // }
+
+select_estado_fazenda.addEventListener('change', function (e) {
+    const estadoSelecionado = e.target.value;
+
+    listarMunicipios(estadoSelecionado)
+});
+
+function listarMunicipios(estadoSelecionado) {
+    select_municipio_fazenda.innerHTML = "<option value='#'>Selecione o município</option>";
+
+    fetch(`/fazenda/listarMunicipios`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body:JSON.stringify({
+            estado: estadoSelecionado
+        })
+    })
+        .then(function (resposta) {
+            resposta.json().then((fazenda) => {
+                console.log('Lista de Municipios: ', fazenda)
+                fazenda.forEach((fazendaMunicipio) => {
+                    select_municipio_fazenda.innerHTML += `<option value='${fazendaMunicipio.id}'>${fazendaMunicipio.municipio}</option>`
+                });
+                select_municipio_fazenda.value = sessionStorage.MUNICIPIO_FAZENDA;
+            });
+           
+        })
+        .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+}
