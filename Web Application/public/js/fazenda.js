@@ -1,5 +1,3 @@
-
-
 function openModal() {
     document.getElementById('modal-fazenda').style.display = 'block';
     document.getElementById('modal-overlay').style.display = 'block';
@@ -81,7 +79,7 @@ function adicionarFazenda() {
 
 function mudarTela() {
     document.getElementById('container').style.display = "none";
-    document.getElementById('farmList').style.display = "block";
+    // document.getElementById('farmList').style.display = "block";
 }
 
 function limparCampos() {
@@ -166,29 +164,33 @@ function listarFazendas() {
                     container.style.display = "block";
                     container.style.display = "flex";
                 } else {
-                    farmList.style.display = "block";
+                    farmList.style.display = "grid";
                     console.log('Lista de fazendas: ', fazendas);
                     
                     fazendas.forEach((fazenda) => {
-
-                        content += `<div class="div-fazenda" id="div-fazenda"
-                        data-fazenda-id=${fazenda.id} data-fazenda-nome=${fazenda.nome} data-fazenda-estado=${fazenda.estado}
-                        data-fazenda-municipio=${fazenda.municipio}
-                        data-fazenda-estado-id=${fazenda.estado_id}
-                        data-fazenda-tipo-cafe=${fazenda.fkTipoCafe}
-                        data-fazenda-municipio-id=${fazenda.estado_municipio_id}
-                        > 
-                        <span class="nomeFazenda">Fazenda ${fazenda.nome} - ${fazenda.estado}</span>
-                        <span class="tipoFazenda">Café ${fazenda.tipo_cafe_nome}</span>
-                        <img src="./assets/imgs/Group 413 (1).png" alt="" class="image-buttonn"> </div>`;
+                        content += `
+                            <div class="div-fazenda" id="div-fazenda"
+                                data-fazenda-id="${fazenda.id}"
+                                data-fazenda-nome="${fazenda.nome}"
+                                data-fazenda-estado="${fazenda.estado}"
+                                data-fazenda-municipio="${fazenda.municipio}"
+                                data-fazenda-estado-id="${fazenda.estado_id}"
+                                data-fazenda-tipo-cafe="${fazenda.fkTipoCafe}"
+                                data-fazenda-municipio-id="${fazenda.estado_municipio_id}">
+                                <span class="nomeFazenda">${fazenda.nome} - ${fazenda.estado}</span>
+                                <span class="tipoFazenda">Café ${fazenda.tipo_cafe_nome}</span>
+                                <img src="./assets/imgs/Group 413 (1).png" alt="" class="image-buttonn">
+                            </div>`;
                     });
+
+                   
 
                     content += `<div class="adcionarFazenda" id="adcionarFazenda">
                                 <img src="./assets/imgs/Group 413 (1).png" alt="" class="image-button">
                                 <button class="botton-add-farm" onclick="openModal()"><img src="./assets/imgs/add (1).png" alt=""></button>
                                 </div>`
 
-                    document.getElementById('farmList').innerHTML = content;
+                    document.getElementById('farmList').insertAdjacentHTML('beforeend', content);
 
                     const fazendasDivs = document.querySelectorAll('.div-fazenda');
 
@@ -207,7 +209,7 @@ function listarFazendas() {
                             const tipoCafeFazenda = div.getAttribute('data-fazenda-tipo-cafe');
                             const estadoFazenda = div.getAttribute('data-fazenda-estado-id');
                             const municipioFazenda = div.getAttribute('data-fazenda-municipio-id');
-                          
+                            console.log(nomeFazenda);
                             sessionStorage.setItem('ID_FAZENDA', idFazenda);
                             sessionStorage.setItem('NOME_FAZENDA', nomeFazenda);
                             sessionStorage.setItem('TIPO_CAFE_FAZENDA', tipoCafeFazenda);
@@ -215,7 +217,8 @@ function listarFazendas() {
                             sessionStorage.setItem('MUNICIPIO_FAZENDA', municipioFazenda);
                             sessionStorage.setItem('NOME_ESTADO_FAZENDA', nomeEstadoFazenda);
                             sessionStorage.setItem('NOME_MUNICIPIO_FAZENDA', nomeMucipioFazenda);
-
+                           
+                            
                         });
                     });
                 }

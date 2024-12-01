@@ -26,7 +26,6 @@ function adicionarFazenda(req, res) {
 }
 
 function listarEstados(req, res) {
-
     fazendaModel.listarEstados().then((resultado) => {
         res.status(200).json(resultado)
     })
@@ -43,19 +42,7 @@ function listarEstadosUnicos(req, res) {
         .catch((erro) => {
             console.error("Houve um erro ao listar os estados unicos!");
             res.status(500).json(erro);
-        })
-}
-
-
-function definirLocalidade(req, res) {
-
-    fazendaModel.definirLocalidade().then((resultado) => {
-        res.status(200).json(resultado)
-    })
-        .catch((erro) => {
-            console.error("Houve um erro ao listar a tabela EstadoMunicipio");
-            res.status(500).json(erro);
-        })
+        });
 }
 
 function listarFazendas(req, res) {
@@ -131,8 +118,6 @@ function editarFazenda(req, res) {
             res.status(200).json({
                 message: 'Fazenda editada com sucesso!', resultado
             });
-         
-
         }).catch(function (erro) {
             console.error(`Houve um erro ao editar a Fazenda "${nomeFazenda}": `, erro.sqlMessage)
             res.status(500).json({ erro: 'Houve um erro ao editar a fazenda.' });
@@ -152,8 +137,6 @@ function listarPermissoes(req, res) {
             res.status(500).json(erro);
         });
 }
-
-
 
 module.exports = {
     listarEstados,
