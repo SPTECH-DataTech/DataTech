@@ -10,10 +10,7 @@
 
     <title>Dashboard • DataTech </title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-
 </head>
 
 <body>
@@ -39,10 +36,11 @@
             <b>
                 <p>Outros</p>
             </b>
-            <a href="dashConta.html"><button class="btn-conta"><img src="./assets/Profile.png" alt="conta icon" class="icon">
+            <a href="dashConta.html"><button class="btn-conta"><img src="./assets/Profile.png" alt="conta icon"
+                        class="icon">
                     Conta</button></a>
-            <a href="suporte.html"><button class="btn-suporte"> <img src="./assets/Info Square.png"
-                        alt="suporte icon" class="icon">Suporte</button></a>
+            <a href="suporte.html"><button class="btn-suporte"> <img src="./assets/Info Square.png" alt="suporte icon"
+                        class="icon">Suporte</button></a>
             <a href="login.html"><button onclick="limparSessao()" class="btn-sair"><img
                         src="./assets/icons8-exit-50.png" alt="exit icon" class="icon"> Sair</button></a>
         </div>
@@ -66,132 +64,157 @@
 
             <div class="grafico-1">
                 <div class="titulo-grafico">
-                    <h1>Plantio e Colheita do Café Arábica</h1>
+                    <h1>Plantio e Colheita de Café</h1>
                 </div>
 
                 <div class="escolher-info">
-    <div class="container">
-        <select class="select-ano">
-            <option value="2017">2017</option>
-            <option value="2018">2016</option>
-            <option value="2019">2015</option>
-        </select>
-        
-        <select class="select-cafe">
-            <option>Café Arábica</option>
-            <option>Café Robusta</option>
-        </select>
+                    <div class="container">
+                        <form id="filtroForm">
+                            <select id="select-ano" class="select-ano">
+                                <option value="1985">1985</option>
+                                <option value="1995">1995</option>
+                                <option value="2006">2006</option>
+                                <option value="2017">2017</option>
+                            </select>
 
-        <button class="btn-atualizar">Atualizar</button>
-    </div>
-</div>
+                            <select id="select-cafe" class="select-cafe">
+                                <option value="1">Café Arábica</option>
+                                <option value="2">Café Robusta</option>
+                            </select>
 
-
-
-
-
-                <div class="grafico-plantacao">
-                    <canvas id="graficoCafe"></canvas>
-
-                    <div class="kpis">
-                        <div class="kpi">
-                            <div class="titulo-kpi">
-                                <h2 style="color: #10BB00;">Maior eficiência de Produção</h2>
-                            </div>
-                            <div class="infos-kpi">
-                                <h3> São Paulo </h3>
-                                <h3> 10 / 300 (t)</h3>
-                            </div>
-                            <div class="percentagem">
-                                <h4 style="color: #10BB00; font-size: 20px;"> 3,3% Perdido<d/h4>
-                            </div>
-                        </div>
-
-                        <div class="kpi">
-                            <div class="titulo-kpi">
-                                <h2 style="color: #ff0000;"> Menor eficiência de Produção</h2>
-                            </div>
-                            <div class="infos-kpi">
-                                <h3>Mato Grosso
-                                </h3>
-                                <h3> 150 / 400 (t)</h3>
-                            </div>
-                            <div class="percentagem">
-                                <h4 style="color: #ff0000; font-size: 20px;">37% Perdido </h4>
-                            </div>
-                        </div>
+                            <button type="submit" class="btn-atualizar">Atualizar</button>
+                        </form>
                     </div>
 
+
+                    <div class="grafico-plantacao">
+                        <canvas id="graficoCafe"></canvas>
+
+                        <div class="kpis">
+                            <div class="kpi">
+                                <div class="titulo-kpi">
+                                    <h2 style="color: #10BB00;">Maior eficiência de Produção</h2>
+                                </div>
+                                <div class="infos-kpi">
+                                    <h3 id="estado_maior_eficiencia"></h3>
+                                    <h3 id="quantidade_perdida_plantada_maior"></h3>
+                                </div>
+                                <div class="percentagem">
+                                    <h4 style="color: #10BB00; font-size: 20px;"
+                                        id="maior_eficiencia_porcentagem_perdida"></h4>
+                                </div>
+                            </div>
+
+                            <div class="kpi">
+                                <div class="titulo-kpi">
+                                    <h2 style="color: #ff0000;"> Menor eficiência de Produção</h2>
+                                </div>
+                                <div class="infos-kpi">
+                                    <h3 id="estado_menor_eficiencia"></h3>
+                                    <h3 id="quantidade_perdida_plantada_menor"></h3>
+                                </div>
+                                <div class="percentagem">
+                                    <h4 style="color: #ff0000; font-size: 20px;"
+                                        id="menor_eficiencia_porcentagem_perdida"></h4>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
                 </div>
 
 
-            </div>
 
-
-
-            <div class="grafico-1">
-                <div class="titulo-grafico2">
-                    <h1>Climograma por Estado</h1>
-                </div>
+                <div class="grafico-1">
+                    <div class="titulo-grafico2">
+                        <h1>Climograma por Estado</h1>
+                    </div>
 
                     <div class="container">
-                        <select class="select-ano">
-                            <option value="2017">2017</option>
-                            <option value="2018">2016</option>
-                            <option value="2019">2015</option>
+                        <select class="select-ano2">
+                            <option value="1985">1985</option>
+                            <option value="1995">1995</option>
+                            <option value="2006">2006</option>
+                            <option value="2016">2016</option>
                         </select>
 
                         <select class="select-estado">
-                            <option value="SP">São Paulo</option>
                             <option value=""></option>
-                            <option value=""></option>
+                            <option value="">Acre</option>
+                            <option value="">Alagoas</option>
+                            <option value="">Amazonas</option>
+                            <option value="">Bahia</option>
+                            <option value="">Ceará</option>
+                            <option value="">Distrito Federal</option>
+                            <option value="">Espírito Santo</option>
+                            <option value="">Goiás</option>
+                            <option value="">Maranhão</option>
+                            <option value="">Mato Grosso</option>
+                            <option value="">Mato Grosso do Sul</option>
+                            <option value="">Minas Gerais</option>
+                            <option value="">Pará</option>
+                            <option value="">Paraíba</option>
+                            <option value="">Paraná</option>
+                            <option value="">Pernambuco</option>
+                            <option value="">Piauí</option>
+                            <option value="">Rio de Janeiro</option>
+                            <option value="">Rio Grande do Norte</option>
+                            <option value="">Rio Grande do Sul</option>
+                            <option value="">Rondônia</option>
+                            <option value="">Roraima</option>
+                            <option value="">Santa Catarina</option>
+                            <option value="">São Paulo</option>
+                            <option value="">Sergipe</option>
+                            <option value="">Tocantins</option>
                         </select>
 
 
-                        <button class="btn-atualizar">Atualizar</button>
+                        <button type="submit" class="btn-atualizar">Atualizar</button>
                     </div>
 
-                
 
 
 
-                <div class="grafico-plantacao">
-                    <canvas id="climograma"></canvas>
 
-                    <div class="kpis">
-                        <div class="kpi2">
-                            <div class="titulo-kpi">
-                                <center>
-                                    <h3 style="color: #ff0000;">Meses Inadequados Produção</h2>
-                                </center>
+                    <div class="grafico-plantacao">
+                        <canvas id="climograma"></canvas>
+
+                        <div class="kpis">
+                            <div class="kpi2">
+                                <div class="titulo-kpi">
+                                    <center>
+                                        <h3 style="color: #ff0000;">Meses Inadequados Produção</h2>
+                                    </center>
+                                </div>
+
+                                <div class="infos-kpi2">
+                                    <h3 style="color: black;"> Mês </h3>
+                                    <h3 style="color: black;"> Umid. </h3>
+                                    <h3 style="color: black;"> Temp. </h3>
+                                </div>
+
+                                <div class="infos-kpi2">
+                                    <h3> Junho </h3>
+                                    <h3> 60% </h3>
+                                    <h3> 30ºC </h3>
+                                </div>
+
+                                <div class="infos-kpi2">
+                                    <h3> Julho </h3>
+                                    <h3> 55% </h3>
+                                    <h3> 31ºC </h3>
+                                </div>
+
+
                             </div>
-                            
-                            <div class="infos-kpi2">
-                                <h3 style="color: black;"> Mês </h3>
-                                <h3 style="color: black;"> Umid. </h3>
-                                <h3 style="color: black;"> Temp. </h3>
-                            </div>
-                           
-                            <div class="infos-kpi2">
-                                <h3> Junho </h3>
-                                <h3> 60% </h3>
-                                <h3> 30ºC </h3>
-                            </div>
-
-                            <div class="infos-kpi2">
-                                <h3> Julho </h3>
-                                <h3> 55% </h3>
-                                <h3> 31ºC </h3>
-                            </div>
-                            
-                            
                         </div>
+
                     </div>
+
 
                 </div>
-
-
-            </div>
         </section>
 
     </section>
@@ -199,51 +222,174 @@
 </body>
 
 <script>
-    const ctx = document.getElementById('graficoCafe').getContext('2d');
-    const graficoCafe = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['SP', 'MG', 'RJ', 'RS', 'MT'], // Estados
-            datasets: [
-                {
-                    label: 'Café Plantado (Toneladas)',
-                    data: [300, 400, 250, 370, 400], // Dados de toneladas de café plantado por estado
-                    backgroundColor: '#a56aec',
-                    borderWidth: 1,
-                    barThickness: 20
-                },
-                {
-                    label: 'Café Colhido (Toneladas)',
-                    data: [290, 370, 230, 200, 250], // Dados de toneladas de café colhido por estado
-                    backgroundColor: '#6c81dd',
-                    borderWidth: 1,
-                    barThickness: 20
+    function carregarGrafico() {
+        const ano = document.getElementById("select-ano").value;
+        const tipoCafe = document.getElementById("select-cafe").value;
+
+        fetch("/dashboard/listarProducaoCafe", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                anoServer: ano,
+                tipoCafeServer: tipoCafe
+            })
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar dados.");
                 }
-            ]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Toneladas'
+            })
+            .then(data => {
+                console.log("Dados recebidos:", data);
+                if (data.length > 0) {
+                    const estados = data.map(item => item.estado);
+                    const cafePlantado = data.map(item => parseFloat(item.toneladasPlantadas));
+                    const cafeColhido = data.map(item => parseFloat(item.toneladasColhidas));
+
+                    console.log(estados, cafePlantado, cafeColhido);
+                    criarGrafico(estados, cafePlantado, cafeColhido);
+                } else {
+                    alert("Não há dados para o ano e tipo de café selecionados.");
+                }
+            })
+            .catch(error => {
+                console.error("Erro:", error);
+                alert("Erro ao buscar os dados da produção de café. O banco de dados não possui esse dado! Ano: " + ano + " ou o tipo de café: " + tipoCafe);
+            });
+    }
+
+    function criarGrafico(estados, cafePlantado, cafeColhido) {
+        const ctx = document.getElementById("graficoCafe").getContext("2d");
+
+        new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: estados,
+                datasets: [
+                    {
+                        label: "Café Plantado (Toneladas)",
+                        data: cafePlantado,
+                        backgroundColor: '#a56aec',
+                        borderWidth: 1,
+                        barThickness: 20
+                    },
+                    {
+                        label: "Café Colhido (Toneladas)",
+                        data: cafeColhido,
+                        backgroundColor: '#6c81dd',
+                        borderWidth: 1,
+                        barThickness: 20
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: "top"
                     }
                 },
-                x: {
-                    stacked: false,
-                    categoryPercentage: 100,
-                    barPercentage: 0.5
-                }
-            },
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Produção de Café por Estado (Toneladas)'
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: "Toneladas"
+                        }
+                    },
+                    x: {
+                        stacked: false,
+                        categoryPercentage: 100,
+                        barPercentage: 0.5
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Produção de Café por Estado (Toneladas)'
+                    }
                 }
             }
-        }
-    });
+        });
+    }
+
+    function carregarMaiorEficiencia() {
+        const ano = document.getElementById("select-ano").value;
+        const tipoCafe = document.getElementById("select-cafe").value;
+
+        fetch("/dashboard/obterMaiorEficiencia", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                anoServer: ano,
+                tipoCafeServer: tipoCafe
+            })
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar dados.");
+                }
+            })
+            .then(data => {
+                document.getElementById("estado_maior_eficiencia").textContent = data.estado;
+                document.getElementById("quantidade_perdida_plantada_maior").textContent = data.quantidadePerdida + " / " + data.quantidadePlantada + " (t)";
+                document.getElementById("maior_eficiencia_porcentagem_perdida").textContent = data.porcentagemPerda + "%";
+            })
+            .catch(error => {
+                console.error("Erro:", error);
+                alert("Erro ao buscar os dados da maior eficiência. O banco de dados não possui esse dado! Ano: " + ano + " ou o tipo de café: " + tipoCafe);
+            });
+    }
+
+    function carregarMenorEficiencia() {
+        const ano = document.getElementById("select-ano").value;
+        const tipoCafe = document.getElementById("select-cafe").value;
+
+        fetch("/dashboard/obterMenorEficiencia", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                anoServer: ano,
+                tipoCafeServer: tipoCafe
+            })
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Erro ao buscar dados.");
+                }
+            })
+            .then(data => {
+                document.getElementById("estado_menor_eficiencia").textContent = data.estado;
+                document.getElementById("quantidade_perdida_plantada_menor").textContent = data.quantidadePerdida + " / " + data.quantidadePlantada + " (t)";
+                document.getElementById("menor_eficiencia_porcentagem_perdida").textContent = data.porcentagemPerda + "%";
+
+            })
+            .catch(error => {
+                console.error("Erro:", error);
+                alert("Erro ao buscar os dados da menor eficiência. O banco de dados não possui esse dado! Ano: " + ano + " ou o tipo de café: " + tipoCafe);
+            });
+    }
+
+
+
+    document.getElementById("select-ano").addEventListener("change", carregarGrafico);
+    document.getElementById("select-cafe").addEventListener("change", carregarGrafico);
+
+    carregarGrafico();
+    carregarMaiorEficiencia();
+    carregarMenorEficiencia();
 </script>
 <script>
     const ctx1 = document.getElementById('climograma').getContext('2d');
@@ -252,7 +398,7 @@
         data: {
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
             datasets: [
-            {
+                {
                     label: 'Temperatura Média (°C)',
                     data: [22, 23, 24, 26, 28, 30, 31, 30, 28, 25, 23, 21],
                     type: 'line',
@@ -270,7 +416,7 @@
                     yAxisID: 'y moisture',
                     barThickness: 20
                 },
-               
+
             ]
         },
         options: {
@@ -280,7 +426,7 @@
                 },
                 'y moisture': {
                     type: 'linear',
-                    position: 'left',   
+                    position: 'left',
                     beginAtZero: true,
                     title: {
                         display: true,
@@ -309,6 +455,5 @@
         }
     });
 </script>
-
 
 </html>
