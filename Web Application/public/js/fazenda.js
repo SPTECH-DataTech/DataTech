@@ -29,15 +29,23 @@ function ocultarMensagem() {
 
 function adicionarFazenda() {
     const nomeFazenda = input_nome_fazenda.value;
-    const tipoCafe = select_tipo_cafe.value;
+    const inputTipoCafe = select_tipo_cafe.value;
     const idEmpresa = sessionStorage.ID_EMPRESA;
     const idEstado = select_estado_fazenda.value;
     const idMunicipio = select_municipio_fazenda.value;
-  
+    let tipoCafe;
     const estadoMunicipio = buscarIdPorEstadoMunicipio(idEstado, idMunicipio);
+
     console.log(idEstado, idMunicipio);
+
     if (!estadoMunicipio) {
         return false;
+    }
+
+    if (inputTipoCafe) {
+        tipoCafe = 1;
+    } else {
+        tipoCafe = 2;
     }
 
     fetch('fazenda/adicionarFazenda', {
@@ -101,12 +109,12 @@ function listarEstados() {
                 const estadosUnicos = new Set();
 
                 fazenda.forEach((fazendaEstado) => {
-                   estadosUnicos.add(fazendaEstado.estado);
+                    estadosUnicos.add(fazendaEstado.estado);
                 });
 
                 estadosUnicos.forEach((estadosUnico) => {
                     const estado = fazenda.find(item => item.estado == estadosUnico);
-                   select_estado_fazenda.innerHTML += `<option value='${estado.idUf}'>${estado.estado}</option>`;
+                    select_estado_fazenda.innerHTML += `<option value='${estado.idUf}'>${estado.estado}</option>`;
                 });
 
                 listaEstadoMunicipio = fazenda;
@@ -119,7 +127,8 @@ function listarEstados() {
             console.log(`#ERRO: ${resposta}`);
         });
 }
-listarTipoCafe();
+
+listarTipoCafe()
 function listarTipoCafe() {
     fetch("/fazenda/listarTipoCafe", {
         method: "GET",
@@ -140,7 +149,9 @@ function listarTipoCafe() {
 
 function buscarIdPorEstadoMunicipio(estado, municipio) {
     const resultado = listaEstadoMunicipio.find(item =>
-        item.idUf == estado && item.id == municipio
+                                                
+        item.idUf == estado || item.idMunicipio == municipio
+
     );
 
     if (resultado) {
@@ -152,13 +163,19 @@ function buscarIdPorEstadoMunicipio(estado, municipio) {
     }
 }
 
-
-listarFazendas()
 function listarFazendas() {
     let content = '';
     const container = document.getElementById('container');
+
+    let empresa = sessionStorage.ID_EMPRESA;
     fetch("/fazenda/listarFazendas", {
-        method: "GET",
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            empresaServer: empresa
+        }),
     })
         .then(function (resposta) {
             resposta.json().then((fazendas) => {
@@ -207,15 +224,17 @@ function listarFazendas() {
                             const tipoCafeFazenda = div.getAttribute('data-fazenda-tipo-cafe');
                             const estadoFazenda = div.getAttribute('data-fazenda-estado-id');
                             const municipioFazenda = div.getAttribute('data-fazenda-municipio-id');
-                          
+
                             sessionStorage.setItem('ID_FAZENDA', idFazenda);
                             sessionStorage.setItem('NOME_FAZENDA', nomeFazenda);
                             sessionStorage.setItem('TIPO_CAFE_FAZENDA', tipoCafeFazenda);
                             sessionStorage.setItem('ESTADO_FAZENDA', estadoFazenda);
                             sessionStorage.setItem('MUNICIPIO_FAZENDA', municipioFazenda);
 
+
                         });
                     });
+                    verificarPermissoes();
                 }
             })
                 .catch(function (erro) {
@@ -232,38 +251,25 @@ select_estado_fazenda.addEventListener('change', function (e) {
     select_municipio.innerHTML = "<option value='#'>Selecione o município</option>";
 
     if (estadoSelecionado !== "#") {
-       select_municipio.disabled = false;
+        select_municipio.disabled = false;
         const municipiosFiltrados = listaEstadoMunicipio.filter(item => item.idUf == estadoSelecionado);
 
-  
         municipiosFiltrados.forEach(item => {
             select_municipio.innerHTML += `<option value='${item.id}'>${item.municipio}</option>`;
         });
     } else {
-        
+
         select_municipio.innerHTML = "<option value='#'>Selecione o município</option>";
     }
 });
 
-listarPermissoes()
-function listarPermissoes() {
-    const id = sessionStorage.ID_USUARIO;
-
-    fetch(`/fazenda/listarPermissoes/${id}`, {
-        method: "GET",
-    })
-        .then(function (resposta) {
-            resposta.json().then((fazenda) => {
-                console.log('Lista de permissões: ', fazenda);
-               fazenda.forEach((funcionario) => {
-               sessionStorage.setItem('permissaoCargos', funcionario.permissaoCargos);
-               sessionStorage.setItem('permissaoFazendas', funcionario.permissaoFazendas);
-               sessionStorage.setItem('permissaoFuncionarios', funcionario.permissaoFuncionarios);
-               })
-            });
-        })
-        .catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-        });
+function verificarPermissoes() {
+    let botoesEdicao = document.getElementById("adcionarFazenda");
+    const permissaoFazendas = parseInt(sessionStorage.PERMISSAO_FAZENDAS);
+    if (permissaoFazendas != 1) {
+        botoesEdicao.style.display = "none";
+        return;
+    }
+    botoesEdicao.style.display = 'flex';
 }
 

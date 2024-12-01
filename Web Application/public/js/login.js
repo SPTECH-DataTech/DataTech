@@ -6,8 +6,6 @@ function verificarEmail() {
 
     const email = input_email.value.trim();
 
-
-
     if (email == "") {
 
         spanEmail.style.color = "red";
@@ -141,10 +139,17 @@ function login() {
                     throw new Error(data.erro)
                 }
                 else {
+                    console.log(data)
+
                     sessionStorage.EMAIL_USUARIO = data.email;
                     sessionStorage.NOME_USUARIO = data.nome;
                     sessionStorage.ID_USUARIO = data.id;
                     sessionStorage.ID_EMPRESA = data.idEmpresa;
+                    sessionStorage.CARGO = data.idCargo;
+                    sessionStorage.FAZENDA = data.idFazenda;
+                    sessionStorage.PERMISSAO_CARGOS = data.permissaoCargos;
+                    sessionStorage.PERMISSAO_FAZENDAS = data.permissaoFazendas;
+                    sessionStorage.PERMISSAO_FUNCIONARIOS = data.permissaoFuncionarios;
 
                     setTimeout(() => {
                         Swal.fire({

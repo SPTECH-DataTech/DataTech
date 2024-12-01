@@ -47,8 +47,9 @@ function definirLocalidade(req, res) {
 }
 
 function listarFazendas(req, res) {
+    const empresa = req.body.empresaServer;
 
-    fazendaModel.listarFazendas().then((resultado) => {
+    fazendaModel.listarFazendas(empresa).then((resultado) => {
         console.log(`Resultados: ${JSON.stringify(resultado)}`);
         res.status(200).json(resultado);
     })

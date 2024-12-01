@@ -24,7 +24,13 @@ function autenticar(req, res) {
                             id: resultadoAutenticar[0].id,
                             nome: resultadoAutenticar[0].nome,
                             email: resultadoAutenticar[0].email,
-                            idEmpresa: resultadoAutenticar[0].fkEmpresa
+                            idEmpresa: resultadoAutenticar[0].fkEmpresa,
+                            idCargo: resultadoAutenticar[0].fkCargo,
+                            idFazenda: resultadoAutenticar[0].fkFazenda,
+                            permissaoCargos: resultadoAutenticar[0].permissaoCargos,
+                            permissaoFazendas: resultadoAutenticar[0].permissaoFazendas,
+                            permissaoFuncionarios: resultadoAutenticar[0].permissaoFuncionarios
+
                         });
 
                     } else if (resultadoAutenticar.length == 0) {

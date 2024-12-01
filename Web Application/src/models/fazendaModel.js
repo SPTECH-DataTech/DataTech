@@ -22,64 +22,49 @@ function listarTipoCafe() {
 function adicionarFazenda(nomeFazenda, tipoCafe, estadoMunicipio, idEmpresa) {
     console.log("ACESSEI O FAZENDA MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", nomeFazenda, tipoCafe, estadoMunicipio, idEmpresa);
 
-
-    var instrucaoSql = `INSERT INTO fazenda (nome, fkEmpresa, fkEstadoMunicipio, fkTipoCafe) 
-                        VALUES ('${nomeFazenda}', '${idEmpresa}', '${estadoMunicipio}', '${tipoCafe}');`;
+    var instrucaoSql = `INSERT INTO fazenda (nome, fkTipoCafe, fkEmpresa, fkEstadoMunicipio) 
+                        VALUES ('${nomeFazenda}', ${tipoCafe}, '${idEmpresa}', '${estadoMunicipio}');`;
 
     console.log("Executando a instrução SQL para inserir a fazenda: \n" + instrucaoSql);
     return database.executar(instrucaoSql)
-        // .then(() => {
+        .then(() => {
 
-        //     var instrucaoSql = `SELECT id FROM fazenda WHERE nome = '${nomeFazenda}' AND fkEmpresa = '${idEmpresa}'`;
+            var instrucaoSql = `SELECT id FROM fazenda WHERE nome = '${nomeFazenda}' AND fkEmpresa = '${idEmpresa}'`;
 
-        //     console.log("Executando a instrução SQL para verificar a fazenda: \n" + instrucaoSql);
-        //     return database.executar(instrucaoSql);
-        // })
-        // .then(resultado => {
-        //     if (resultado.length > 0) {
+            console.log("Executando a instrução SQL para verificar a fazenda: \n" + instrucaoSql);
+            return database.executar(instrucaoSql);
+        }).catch(error => {
 
-        //         var idFazenda = resultado[0].id;
-
-        //         var instrucaoSql = `INSERT INTO tipoCafePlantacao (fkFazenda, Fazenda_fkEmpresa, fkTipoCafe) 
-        //                                     VALUES ('${idFazenda}', '${idEmpresa}', '${tipoCafe}');`;
-
-        //         console.log("Executando a instrução SQL para inserir no tipoCafePlantacao: \n" + instrucaoSql);
-        //         return database.executar(instrucaoSql);
-        //     } else {
-        //         throw new Error("Fazenda não encontrada após inserção.");
-        //     }
-        // })
-        .catch(error => {
             console.error("Erro ao adicionar fazenda ou tipoCafePlantacao:", error.message);
             throw error;
         });
 }
 
 
-function listarFazendas() {
+function listarFazendas(empresa) {
     console.log("ACESSEI O FAZENDA MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ");
 
     // var instrucaoSql = ` SELECT faz.*, em.estado AS estado
     // FROM fazenda faz
     // JOIN EstadoMunicipio em ON faz.fkEstadosMunicipio = em.id;`;
 
-
     var instrucaoSql = `
-  SELECT 
-    f.*,
-    e.estado AS estado,
-     e.id AS estado_municipio_id,
-    e.idUf AS estado_id,
-    e.municipio AS municipio,
-    t.id AS tipo_cafe_id,
-    t.nome AS tipo_cafe_nome
+SELECT 
+    f.*,  
+    em.estado, 
+    em.municipio,
+    em.idUf AS id_uf, 
+    em.id AS id_municipio,
+    tc.id,
+    tc.nome AS tipo_cafe
 FROM 
-    fazenda f
-JOIN 
-    estadoMunicipio e ON f.fkEstadoMunicipio = e.id
-JOIN 
-    tipoCafe t ON f.fkTipoCafe = t.id;
-`;
+    datatech.fazenda f
+LEFT JOIN 
+    datatech.estadoMunicipio em ON f.fkEstadoMunicipio = em.id
+LEFT JOIN 
+    datatech.tipoCafe tc ON f.fkTipoCafe = tc.id
+WHERE
+    f.fkEmpresa = ${empresa};`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
