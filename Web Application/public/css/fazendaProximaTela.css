@@ -384,7 +384,7 @@ h1 {
     font-weight: 500;
     font-size: 16px;
     cursor: pointer;
-    display: none;
+    /* display: none; */
 }
 
 .button-remover {
@@ -399,5 +399,5 @@ h1 {
     font-size: 16px;
     color: white;
     cursor: pointer;
-    display: none;
+    /* display: none; */
 }

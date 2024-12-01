@@ -23,32 +23,32 @@ function adicionarFazenda(nomeFazenda, tipoCafe, estadoMunicipio, idEmpresa) {
     console.log("ACESSEI O FAZENDA MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", nomeFazenda, tipoCafe, estadoMunicipio, idEmpresa);
 
 
-    var instrucaoSql = `INSERT INTO fazenda (nome, fkEmpresa, fkEstadoMunicipio) 
-                        VALUES ('${nomeFazenda}', '${idEmpresa}', '${estadoMunicipio}');`;
+    var instrucaoSql = `INSERT INTO fazenda (nome, fkEmpresa, fkEstadoMunicipio, fkTipoCafe) 
+                        VALUES ('${nomeFazenda}', '${idEmpresa}', '${estadoMunicipio}', '${tipoCafe}');`;
 
     console.log("Executando a instrução SQL para inserir a fazenda: \n" + instrucaoSql);
     return database.executar(instrucaoSql)
-        .then(() => {
+        // .then(() => {
 
-            var instrucaoSql = `SELECT id FROM fazenda WHERE nome = '${nomeFazenda}' AND fkEmpresa = '${idEmpresa}'`;
+        //     var instrucaoSql = `SELECT id FROM fazenda WHERE nome = '${nomeFazenda}' AND fkEmpresa = '${idEmpresa}'`;
 
-            console.log("Executando a instrução SQL para verificar a fazenda: \n" + instrucaoSql);
-            return database.executar(instrucaoSql);
-        })
-        .then(resultado => {
-            if (resultado.length > 0) {
+        //     console.log("Executando a instrução SQL para verificar a fazenda: \n" + instrucaoSql);
+        //     return database.executar(instrucaoSql);
+        // })
+        // .then(resultado => {
+        //     if (resultado.length > 0) {
 
-                var idFazenda = resultado[0].id;
+        //         var idFazenda = resultado[0].id;
 
-                var instrucaoSql = `INSERT INTO tipoCafePlantacao (fkFazenda, Fazenda_fkEmpresa, fkTipoCafe) 
-                                            VALUES ('${idFazenda}', '${idEmpresa}', '${tipoCafe}');`;
+        //         var instrucaoSql = `INSERT INTO tipoCafePlantacao (fkFazenda, Fazenda_fkEmpresa, fkTipoCafe) 
+        //                                     VALUES ('${idFazenda}', '${idEmpresa}', '${tipoCafe}');`;
 
-                console.log("Executando a instrução SQL para inserir no tipoCafePlantacao: \n" + instrucaoSql);
-                return database.executar(instrucaoSql);
-            } else {
-                throw new Error("Fazenda não encontrada após inserção.");
-            }
-        })
+        //         console.log("Executando a instrução SQL para inserir no tipoCafePlantacao: \n" + instrucaoSql);
+        //         return database.executar(instrucaoSql);
+        //     } else {
+        //         throw new Error("Fazenda não encontrada após inserção.");
+        //     }
+        // })
         .catch(error => {
             console.error("Erro ao adicionar fazenda ou tipoCafePlantacao:", error.message);
             throw error;
@@ -65,33 +65,31 @@ function listarFazendas() {
 
 
     var instrucaoSql = `
-   SELECT 
-    f.*,  
-    em.estado, 
-    em.municipio,
-    em.idUf AS id_uf, 
-    em.idMunicipio AS id_municipio,
-    tcp.fkTipoCafe,
-    tc.nome AS tipo_cafe
+  SELECT 
+    f.*,
+    e.estado AS estado,
+     e.id AS estado_municipio_id,
+    e.idUf AS estado_id,
+    e.municipio AS municipio,
+    t.id AS tipo_cafe_id,
+    t.nome AS tipo_cafe_nome
 FROM 
-    datatech.fazenda f
-LEFT JOIN 
-    datatech.estadoMunicipio em ON f.fkEstadoMunicipio = em.id
-LEFT JOIN 
-    datatech.tipoCafePlantacao tcp ON f.id = tcp.fkFazenda AND f.fkEmpresa = tcp.Fazenda_fkEmpresa
-LEFT JOIN 
-    datatech.tipoCafe tc ON tcp.fkTipoCafe = tc.id;`;
+    fazenda f
+JOIN 
+    estadoMunicipio e ON f.fkEstadoMunicipio = e.id
+JOIN 
+    tipoCafe t ON f.fkTipoCafe = t.id;
+`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-function removerFazenda(idFazenda) {
-    console.log("Removendo a fazenda com ID:", idFazenda);
+function removerFazenda(idFazenda, idEmpresa, idEstadoMunicipio) {
+    console.log("Removendo a fazenda com ID:", idFazenda, idEmpresa, idEstadoMunicipio);
 
     const instrucoesSql = [
-        `DELETE FROM cargo WHERE fkFazenda = '${idFazenda}';`,
-        `DELETE FROM tipocafeplantacao WHERE fkFazenda = '${idFazenda}';`,
+        // Apenas a exclusão da fazenda
         `DELETE FROM datatech.fazenda WHERE id = '${idFazenda}';`
     ];
 
@@ -116,6 +114,7 @@ function removerFazenda(idFazenda) {
             console.error('Houve um erro ao remover a fazenda:', erro);
         });
 }
+
 
 function editarFazenda(nomeFazenda, tipoCafe, estadoMunicipio, idFazenda) {
     console.log("ACESSEI O FAZENDA MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", idFazenda, nomeFazenda, tipoCafe, estadoMunicipio);
