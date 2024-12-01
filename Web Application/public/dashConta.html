@@ -15,123 +15,120 @@
 
     <title>Conta • DataTech</title>
 </head>
-    <body>
 
-        <section class="menu-lateral">
-            <div class="identificacao-empresa">
-                <h1 id="name_equipe">Empresa</h1>
-            </div>
+<body>
 
-            <div>
-                <b>
-                    <p>Menu</p>
-                </b>
-                <a href="dashboard.html"><button class="btn-dashboard"><img src="./assets/Chart.png"
-                            alt="dashboard icon" class="dashboard icon"> Dashboard</button></a>
-                <a href="fazendas.html"><button class="btn-fazenda"> <img src="./assets/Vector.png" alt="fazenda icon"
-                            class="icon">Fazendas</button></a>
-                <!-- <a href="equipe.html"><button class="btn-equipe"><img src="./assets/Group.png" alt="equipe icon"
+    <section class="menu-lateral">
+        <div class="identificacao-empresa">
+            <h1 id="name_equipe">Empresa</h1>
+        </div>
+
+        <div>
+            <b>
+                <p>Menu</p>
+            </b>
+            <a href="dashboard.html"><button class="btn-dashboard"><img src="./assets/Chart.png" alt="dashboard icon"
+                        class="dashboard icon"> Dashboard</button></a>
+            <a href="fazendas.html"><button class="btn-fazenda"> <img src="./assets/Vector.png" alt="fazenda icon"
+                        class="icon">Fazendas</button></a>
+            <!-- <a href="equipe.html"><button class="btn-equipe"><img src="./assets/Group.png" alt="equipe icon"
                             class="icon">
                         Equipe</button></a>
                 <a href="recomendacoes.html"><button class="btn-recomendacoes"><img src="./assets/Chat.png"
                             alt="recomendacoes icon" class="icon"> Recomendações</button></a> -->
 
-                <b>
-                    <p>Outros</p>
-                </b>
-                <a href="dashConta.html"><button class="btn-conta"><img src="./assets/Profile.png" alt="conta icon"
-                            class="icon">
-                        Conta</button></a>
-                <a href="suporte.html"><button class="btn-suporte"> <img src="./assets/Info Square.png"
-                            alt="suporte icon" class="icon">Suporte</button></a>
-                <a href="login.html"><button onclick="limparSessao()" class="btn-sair"><img
-                            src="./assets/icons8-exit-50.png" alt="exit icon" class="icon"> Sair</button></a>
+            <b>
+                <p>Outros</p>
+            </b>
+            <a href="dashConta.html"><button class="btn-conta"><img src="./assets/Profile.png" alt="conta icon"
+                        class="icon">
+                    Conta</button></a>
+            <a href="suporte.html"><button class="btn-suporte"> <img src="./assets/Info Square.png" alt="suporte icon"
+                        class="icon">Suporte</button></a>
+            <a href="login.html"><button onclick="limparSessao()" class="btn-sair"><img
+                        src="./assets/icons8-exit-50.png" alt="exit icon" class="icon"> Sair</button></a>
+        </div>
+
+    </section>
+
+    <section class="main-section">
+        <div class="navbar">
+            <img src="./assets/Group 376.png" alt="perfil icon" class="icon">
+            <h3 id="b_usuario"></h3>
+        </div>
+
+        <div class="titulo">
+            <h3> Conta </h3>
+        </div>
+
+        <div class="containerConta">
+
+            <div class="containerFormulario">
+
+                <div class="perfil">
+                    <img src="./assets/Group 415.png" alt="">
+                </div>
+                <div class="formulario">
+
+                    Nome:
+                    <p id="nome_funcionario"></p>
+                    <br>
+                    CPF:
+                    <p id="cpf_funcionario"> </p>
+                    <br>
+                    Equipe:
+                    <p id="equipe_funcionario"></p>
+                    <br>
+                    Cargo:
+                    <p id="cargo_funcionario"></p>
+                </div>
             </div>
 
-        </section>
-
-        <section class="main-section">
-            <div class="navbar">
-                <img src="./assets/Group 376.png" alt="perfil icon" class="icon">
-                <h3 id="b_usuario"></h3>
-            </div>
-
-            <div class="titulo">
-                <h3> Conta </h3>
-            </div>
-
-            <div class="containerConta">
-
-                <div class="containerFormulario">
-
-                    <div class="perfil">
-                        <img src="./assets/Group 415.png" alt="">
-                    </div>
-                    <div class="formulario">
-
-                        Nome:
-                        <p id="nome_funcionario"></p>
-                        <br>
-                        CPF:
-                        <p id="cpf_funcionario">    </p>
-                        <br>
-                        Equipe:
-                        <p id="equipe_funcionario"></p>
-                        <br>
-                        Cargo:
-                        <p id="cargo_funcionario"></p>
-                    </div>
+            <div class="email-section">
+                <div class="email-text">
+                    Email:
+                    <p id="email_funcionario"></p>
+                </div>
+                <div class="email-button">
+                    <button onclick="modalAlterarSenha()">Alterar senha</button>
                 </div>
 
-                <div class="email-section">
-                    <div class="email-text">
-                        Email:
-                        <p id="email_funcionario"></p>
-                    </div>
-                    <div class="email-button">
-                        <button onclick="modalAlterarSenha()">Alterar senha</button>
-                    </div>
+                <section class="janela-modal" id="janela-modal">
 
-                    <section class="janela-modal" id="janela-modal">
-
-                        <div class="modal">
-                            <button class="fechar" id="fechar">&times;</button>
-                            <div class="tituloModal">
-                                <span>Alterar Senha</span>
-                            </div>
-                            <div class="box-modal">
-                                <div class="formularioModal">
-                                    <div class="inputs">
-                                        <span id="spanSenha">Senha Atual:</span>
-                                        <input class="inputs-modal" id="input_senha" type="password">
-                                        <p class="mensagemErroCampo" id="mensagemErroSenha"></p>
-                                    </div>
-                                    <div class="inputs">
-                                        <span id="spanNovaSenha">Nova Senha:</span>
-                                        <input class="inputs-modal" id="input_nova_senha" type="password">
-                                        <p class="mensagemErroCampo" id="mensagemErroNovaSenha"></p>
-                                    </div>
-                                    <div class="inputs">
-                                        <span id="spanConfirmarSenha">Confirmar Nova Senha:</span>
-                                        <input class="inputs-modal" id="input_confirmacaoSenha" type="password">
-                                        <p id="erro_confirmacaoSenha" class="mensagemErroCampo"></p>
-                                    </div>
+                    <div class="modal">
+                        <button class="fechar" id="fechar">&times;</button>
+                        <div class="tituloModal">
+                            <span>Alterar Senha</span>
+                        </div>
+                        <div class="box-modal">
+                            <div class="formularioModal">
+                                <div class="inputs">
+                                    <span id="spanNovaSenha">Nova Senha:</span>
+                                    <input class="inputs-modal" id="input_nova_senha" type="password">
+                                    <p class="mensagemErroCampo" id="mensagemErroNovaSenha"></p>
                                 </div>
+                                <div class="inputs">
+                                    <span id="spanConfirmarSenha">Confirmar Nova Senha:</span>
+                                    <input class="inputs-modal" id="input_confirmacao_senha" type="password">
+                                    <p class="mensagemErroCampo" id="erroConfirmacaoSenha"></p>
+                                </div>
+                                <p id="message"></p>
                             </div>
-                            <div class="botao-modal">
-                                <button class="button-modal" onclick="alterarSenha()">Alterar Senha</button>
-                            </div>
-                        </div>   
-                    </section>
-                </div>
-
-
+                        </div>
+                        <div class="botao-modal">
+                            <button class="button-modal" onclick="alterarSenha()">Alterar Senha</button>
+                        </div>
+                    </div>
+                </section>
             </div>
 
-        </section>
 
-    </body>
+        </div>
 
-    <script src="./js/dashConta.js"></script>
+    </section>
+
+</body>
+
+<script src="./js/dashConta.js"></script>
 
 </html>
