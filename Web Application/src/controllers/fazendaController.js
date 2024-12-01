@@ -70,12 +70,12 @@ function listarTipoCafe(req, res) {
 
 
 function removerFazenda(req, res) {
-    var { idFazenda } = req.body;
+    var { idFazenda, idEmpresa, idEstadoMunicipio} = req.body;
 
     if (!idFazenda) {
         res.status(400).send("O ID da fazenda está undefined");
     } else {
-        fazendaModel.removerFazenda(idFazenda).then(function (resultado) {
+        fazendaModel.removerFazenda(idFazenda, idEmpresa, idEstadoMunicipio).then(function (resultado) {
             console.log(`Fazenda "${idFazenda}" foi remvodida no banco de dados.`);
             res.status(200).json({
                 message: 'Fazenda removida com sucesso!', resultado
