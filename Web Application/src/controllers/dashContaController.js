@@ -18,7 +18,8 @@ function mostrarInformacoesConta(req, res) {
 }
 
 function alterarSenha(req, res){
-    var {idUsuario, novaSenha} = req.params;
+    var {idUsuario} = req.params;
+    var novaSenha = req.body.novaSenhaServer;
 
     if (idUsuario == undefined) {
         res.status(400).send("idUsuario está undefined!");

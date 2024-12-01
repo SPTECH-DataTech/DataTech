@@ -63,7 +63,6 @@ function enviarEmailSuporte(name, email, phone, tipoProblema, descricao) {
             if (erro) {
                 return reject(erro);
             }
-            // Enviar o e-mail de confirmação para o usuário
             enviarEmailConfirmacao(name, email, tipoProblema, descricao).then(() => {
                 resolve(success);
             }).catch((err) => {
@@ -121,7 +120,7 @@ function enviarEmailConfirmacao(name, email, tipoProblema, descricao) {
             `
         };
 
-        // Enviar o e-mail
+        // envia o e-mail
         transporter.sendMail(emailOptions, function (erro, success) {
             if (erro) {
                 return reject(erro);
@@ -131,12 +130,105 @@ function enviarEmailConfirmacao(name, email, tipoProblema, descricao) {
     });
 }
 
+function enviarEmailContratar(nome, empresa, email, assunto, mensagem) {
+    return new Promise((resolve, reject) => {
+        const emailOptions = {
+            from: process.env.EMAIL_USER,
+            to: process.env.EMAIL_USER, 
+            subject: `Contato: ${assunto}`,
+            html: `
+            <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+                <h1 style="color: #333;">Nova Solicitação de Contato</h1>
+                <p><strong>Nome:</strong> ${nome}</p>
+                <p><strong>Empresa:</strong> ${empresa}</p>
+                <p><strong>E-mail:</strong> ${email}</p>
+                <p><strong>Assunto:</strong> ${assunto}</p>
+                <p><strong>Mensagem:</strong></p>
+                <p style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; border: 1px solid #ddd;">
+                    ${mensagem}
+                </p>
+            </div>
+            `,
+        };
+
+        transporter.sendMail(emailOptions, (erro, info) => {
+            if (erro) {
+                return reject(erro);
+            }
+              // depois enviar o e-mail para a empresa, envia o e-mail de confirmação para o cliente
+              enviarEmailConfirmacaoContrato(nome, empresa, email, assunto, mensagem)
+              .then(info => {
+                  resolve(info); 
+              })
+              .catch(erro => {
+                  reject(erro); 
+              });
+
+
+        });
+    });
+}
+
+
+function enviarEmailConfirmacaoContrato(nome, empresa, email, assunto, mensagem) {
+    return new Promise((resolve, reject) => {
+        const emailOptions = {
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: 'Solicitação de Contato Recebida',
+            html: `
+            <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+                <h1 style="color: #333;">Sua Solicitação de Contato Foi Recebida!</h1>
+                <p style="color: #333;">Olá ${nome},</p>
+                <p style="color: #333;">Recebemos sua solicitação de contato com as seguintes informações:</p>
+
+                <h3 style="color: #333;">Detalhes da Solicitação:</h3>
+                <p style="color: #333;"><strong>Assunto:</strong> ${assunto}</p>
+                 <p style="color: #333;"><strong>Empresa:</strong> ${empresa}</p>
+                <p style="color: #333;"><strong>Mensagem:</strong></p>
+                <p style="color: #333; background-color: #f9f9f9; padding: 15px; border-radius: 5px; border: 1px solid #ddd;">
+                    ${mensagem}
+                </p>
+
+                <p style="color: #333;">Sua solicitação foi recebida e nossa equipe entrará em contato o mais breve possível.</p>
+                <p style="color: #333;">Agradecemos por entrar em contato com a DataTech.</p>
+                <p style="color: #333;"><strong>Atenciosamente,</strong></p>
+                <p style="color: #333;">Equipe da DataTech</p>
+            </div>
+
+            <hr style="border: 0; border-top: 2px solid #7F00FF; margin: 30px 0;">
+            <footer style="font-size: 0.9em; color: #777; display: flex; align-items: center; justify-content: space-between; padding: 20px 0;">
+                <!-- Logo -->
+                <div style="text-align: start; margin-right: 20px;">
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczPkuou3SKc21i8vsKILECf4spmkoG7iXNNWeW8td2KpOeG5Yoe3oWKYTwCLemxXPcMKgQditsxx9YluBiuZdYrSQrHRcARc4tWc9bCwfeunmXqaeQ5IWC6U490KRdOEFVcAyTtESMSETRL4qz1XHP4=w55-h58-s-no-gm?authuser=0"
+                        alt="Logo da DataTech" style="max-width: 500px;" />
+                </div>
+                <!-- Informações da Empresa -->
+                <div style="flex: 1;">
+                    <p style="margin: 0; font-size: 1.1em; color: #333;"><strong>DataTech</strong></p>
+                    <p style="margin: 0;">Endereço: </p>
+                    <p style="margin: 0;">Telefone: (11) 1111-1111</p>
+                    <p style="margin: 0;">E-mail: datatech.suporte@datatech.com</p>
+                </div>
+            </footer>
+        </div>
+        `
+            
+        };
+
+        // envia o e-mail de confirmação
+        transporter.sendMail(emailOptions, function (erro, success) {
+            if (erro) {
+                return reject(erro);
+            }
+            resolve(success);
+        });
+    });
+}
 module.exports = {
     enviarEmail,
     enviarEmailSuporte,
-    enviarEmailConfirmacao
+    enviarEmailConfirmacao,
+    enviarEmailContratar,
+    enviarEmailConfirmacaoContrato
 };
-
-
-
-

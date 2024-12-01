@@ -104,7 +104,13 @@ function removerFazenda(idFazenda, idEmpresa, idEstadoMunicipio) {
 function editarFazenda(nomeFazenda, tipoCafe, estadoMunicipio, idFazenda) {
     console.log("ACESSEI O FAZENDA MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", idFazenda, nomeFazenda, tipoCafe, estadoMunicipio);
 
-    var instrucaoSql = `UPDATE fazenda SET nome = '${nomeFazenda}', fkEstadoMunicipio = '${estadoMunicipio}' WHERE id = '${idFazenda}';`;
+    var instrucaoSql = `
+    UPDATE fazenda 
+    SET nome = '${nomeFazenda}', 
+        fkEstadoMunicipio = '${estadoMunicipio}',
+        fkTipoCafe = '${tipoCafe}'
+    WHERE id = '${idFazenda}';
+`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -127,6 +133,26 @@ function listarPermissoes(idFuncionario) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+function listarMunicipios(estado) {
+    console.log("ACESSEI O FAZENDA MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", estado);
+
+    var instrucaoSql = `SELECT id, municipio
+FROM estadoMunicipio
+WHERE idUf = '${estado}';`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function listarEstadosUnicos() {
+    console.log("ACESSEI O FAZENDA MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", );
+
+    var instrucaoSql = `SELECT DISTINCT idUf , estado FROM estadoMunicipio;
+`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 
 
 module.exports = {
@@ -136,5 +162,7 @@ module.exports = {
     removerFazenda,
     editarFazenda,
     listarTipoCafe,
-    listarPermissoes
+    listarPermissoes,
+    listarMunicipios,
+    listarEstadosUnicos
 }

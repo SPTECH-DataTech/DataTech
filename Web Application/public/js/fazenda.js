@@ -230,6 +230,8 @@ function listarFazendas() {
                             sessionStorage.setItem('TIPO_CAFE_FAZENDA', tipoCafeFazenda);
                             sessionStorage.setItem('ESTADO_FAZENDA', estadoFazenda);
                             sessionStorage.setItem('MUNICIPIO_FAZENDA', municipioFazenda);
+                            sessionStorage.setItem('NOME_ESTADO_FAZENDA', nomeEstadoFazenda);
+                            sessionStorage.setItem('NOME_MUNICIPIO_FAZENDA', nomeMucipioFazenda);
 
 
                         });
