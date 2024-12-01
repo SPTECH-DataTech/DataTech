@@ -1,4 +1,5 @@
 var usuarioModel = require("../models/usuarioModel");
+var cargoModel = require("../models/cargoModel");
 const consultarEmail = require('../models/recuperarSenhaModel');
 
 function autenticar(req, res) {
@@ -19,8 +20,8 @@ function autenticar(req, res) {
 
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
-                        res.status(200).json({ 
-                            message: "Login realizado com sucesso!", 
+                        res.status(200).json({
+                            message: "Login realizado com sucesso!",
                             id: resultadoAutenticar[0].id,
                             nome: resultadoAutenticar[0].nome,
                             email: resultadoAutenticar[0].email,
@@ -68,18 +69,17 @@ function cadastrar(req, res) {
     } else if (fkEmpresa == undefined) {
         res.status(400).send("Sua empresa a vincular está undefined!");
     } else {
-
         usuarioModel.cadastrar(nome, email, senha, fkEmpresa, cpf)
             .then(
                 function (resultado) {
-                    if (resultado.length > 0){
-                        res.status(409).json({erro: "Usuário já cadastrado!"});
+                    if (resultado.length > 0) {
+                        res.status(409).json({ erro: "Usuário já cadastrado!" });
                     }
-                    res.status(200).json({ 
+                    res.status(200).json({
                         resultado,
                         fkEmpresa,
                         message: "Cadastro realizado com sucesso!"
-                     });
+                    });
                 })
             .catch(
                 function (erro) {
