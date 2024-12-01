@@ -14,7 +14,7 @@
     <title>Cargos • DataTech</title>
 </head>
 
-<body onload="conultarNomeFazenda(), listarCargos()">
+<body onload="conultarNomeFazenda(), listarCargos(), verificarPermissoes()">
 
     <section class="menu-lateral">
         <div class="identificacao-empresa">
@@ -67,13 +67,16 @@
                 <div class="input_busca">
                     <input type="search" onkeyup="procurarCargo()" placeholder="Buscar..." id="input-search">
                 </div>
-                <div class="botoes-add-remove">
-                    <button id="adicionar-funcionario" onclick="modalAdicionarCargo()" class="add-button"><i
-                            class="fa-solid fa-user-plus"></i></button>
-                    <button id="remover-funcionario" onclick="modalRemoverCargo()" class="remove-button"><i
-                            class="fas fa-trash"></i></button>
-                    <button id="editar-funcionario" onclick="modalEditarCargo()" class="edit-button"><i
-                            class="fas fa-pencil"></i></button>
+                <div class="botoes-add-remove" id="botoes-add-remove">
+                    <button id="adicionar-funcionario" onclick="modalAdicionarCargo()" class="add-button">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </button>
+                    <button id="remover-funcionario" onclick="modalRemoverCargo()" class="remove-button">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <button id="editar-funcionario" onclick="modalEditarCargo()" class="edit-button">
+                        <i class="fas fa-pencil"></i>
+                    </button>
                 </div>
             </div>
         </section>
@@ -86,7 +89,6 @@
                 <span>Permissão Funcionários</span>
             </div>
         </div>
-
 
         <section class="lista_cargos"></section>
 
@@ -156,7 +158,8 @@
                     </div>
 
                     <div class="botao-modal">
-                        <button class="button-modal" id="button-modal" onclick="lerCargosSelecionados()">Remover cargo</button>
+                        <button class="button-modal" id="button-modal" onclick="lerCargosSelecionados()">Remover
+                            cargo</button>
                     </div>
                 </div>
             </div>
@@ -189,14 +192,16 @@
                         <div class="check">
                             <div class="checks_editar">
                                 <input class="inputs-modal" id="check_permissao_fazendas_editar" type="checkbox">
-                                <span id="span_permissao_fazendas_editar">Permissão para fazer mudanças nas fazendas</span>
+                                <span id="span_permissao_fazendas_editar">Permissão para fazer mudanças nas
+                                    fazendas</span>
                             </div>
                             <span class="erro" id="erro_email"></span>
                         </div>
                         <div class="check">
                             <div class="checks_editar">
                                 <input class="inputs-modal" id="check_permissao_funcionarios_editar" type="checkbox">
-                                <span id="span_permissao_funcionarios_editar">Permissão para fazer mudanças nos funcionários</span>
+                                <span id="span_permissao_funcionarios_editar">Permissão para fazer mudanças nos
+                                    funcionários</span>
                             </div>
                             <span class="erro" id="erro_senha"></span>
                         </div>
@@ -213,3 +218,6 @@
 </body>
 
 </html>
+
+<script>
+</script>

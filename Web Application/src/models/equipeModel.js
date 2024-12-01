@@ -5,10 +5,8 @@ function listarFuncionarios(idFazenda) {
 
   var instrucaoSql = `SELECT fun.id,
 fun.nome,
-fun.email,
-car.nomeCargo
+fun.email
 FROM funcionario fun
-JOIN cargo car ON fun.fkCargo = car.id
 JOIN fazenda faz ON fun.fkFazenda = faz.id
 WHERE faz.id = ${idFazenda};`;
 

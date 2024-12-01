@@ -40,6 +40,7 @@ function listarFuncionarios() {
                     const div = document.createElement('div');
                     div.classList.add('campo');
 
+
                     if (sessionStorage.permissaoFuncionarios != 0) {
                         const checkbox = document.createElement('input');
                         checkbox.type = 'checkbox';
@@ -77,14 +78,39 @@ function listarFuncionarios() {
 
                     const cargoSpan = document.createElement('span');
                     cargoSpan.classList.add('cargo');
-                    cargoSpan.innerText = funcionario.nomeCargo;
-                    
+
+                    if (funcionario.nomeCargo == undefined) {
+                        cargoSpan.innerText = funcionario.nomeCargo;   
+                    } else {
+                        cargoSpan.innerText = "";
+                    }
+
+                    div.appendChild(checkbox);
+                    div.appendChild(img);
+
                     div.appendChild(nomeSpan);
                     div.appendChild(emailSpan);
                     div.appendChild(cargoSpan);
 
                     container.appendChild(div);
+
+                    checkbox.addEventListener('change', () => {
+                        var idFuncionario = checkbox.getAttribute('data-id');
+                        const nomeFuncionario = checkbox.getAttribute('data-nome');
+
+                        sessionStorage.setItem('ID_FUNCIONARIO', idFuncionario);
+
+                        if (checkbox.checked) {
+                            sessionStorage.setItem(`funcionario_${idFuncionario}`, JSON.stringify({ id: idFuncionario, nome: nomeFuncionario }));
+                        } else {
+                            sessionStorage.removeItem(`funcionario_${idFuncionario}`);
+                        }
+
+                        console.log('Funcionário atualizado no sessionStorage:', idFuncionario, nomeFuncionario);
+                    });
+
                 });
+                verificarPermissoes();
             });
         })
         .catch(error => console.error('Erro ao listar funcionários:', error));
@@ -742,3 +768,13 @@ window.addEventListener("load", function () {
         }
     }
 });
+
+function verificarPermissoes() {
+    let botoesEdicao = document.getElementById("botoes-add-remove");
+    const permissaoFazendas = parseInt(sessionStorage.PERMISSAO_FUNCIONARIOS);
+    if (permissaoFazendas != 1) {
+        botoesEdicao.style.display = "none";
+        return;
+    }
+    botoesEdicao.style.display = 'flex';
+}
