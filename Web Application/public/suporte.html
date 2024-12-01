@@ -6,51 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="assets/logo_datatech_-_roxa_escuro.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/suporte.css">
-
+    <script src="./js/suporte.js"></script>
     <title>Suporte • DataTech</title>
-
-
 </head>
 
 <body>
-
+    <!-- Menu Lateral -->
     <section class="menu-lateral">
         <div class="identificacao-empresa">
             <h1>Empresa</h1>
         </div>
 
         <div>
-            <b>
-                <p>Menu</p>
-            </b>
-            <a href="dashboard.html"><button class="btn-dashboard"><img src="./assets/Chart.png" alt="dashboard icon"
-                        class="icon"> Dashboard</button></a>
-            <a href="fazendas.html"><button class="btn-fazenda"> <img src="./assets/Vector.png" alt="fazenda icon"
-                        class="icon">Fazendas</button></a>
-            <!-- <a href="equipe.html"><button class="btn-equipe"><img src="./assets/Group.png" alt="equipe icon"
-                        class="icon"> Equipe</button></a>
-            <a href="recomendacoes.html"><button class="btn-recomendacoes"><img src="./assets/Chat.png"
-                        alt="recomendacoes icon" class="icon"> Recomendações</button></a> -->
-            <b>
-                <p>Outros</p>
-            </b>
-            <a href="dashConta.html"><button class="btn-conta"><img src="./assets/Profile.png" alt="conta icon"
-                        class="icon">Conta</button></a>
-            <a href="suporte.html"><button class="btn-suporte"> <img src="./assets/Info Square.png"
-                        alt="suporte icon" class="icon">Suporte</button></a>
-            <a href="login.html"><button onclick="limparSessao()" class="btn-sair"><img
-                        src="./assets/icons8-exit-50.png" alt="exit icon" class="icon"> Sair</button></a>
-        </div>
+            <!-- Menu -->
+            <b><p>Menu</p></b>
+            <a href="dashboard.html">
+                <button class="btn-dashboard">
+                    <img src="./assets/Chart.png" alt="dashboard icon" class="icon"> Dashboard
+                </button>
+            </a>
+            <a href="fazendas.html">
+                <button class="btn-fazenda">
+                    <img src="./assets/Vector.png" alt="fazenda icon" class="icon">Fazendas
+                </button>
+            </a>
+            <!-- <a href="equipe.html"><button class="btn-equipe"><img src="./assets/Group.png" alt="equipe icon" class="icon"> Equipe</button></a>
+            <a href="recomendacoes.html"><button class="btn-recomendacoes"><img src="./assets/Chat.png" alt="recomendacoes icon" class="icon"> Recomendações</button></a> -->
 
+            <!-- Outros -->
+            <b><p>Outros</p></b>
+            <a href="dashConta.html">
+                <button class="btn-conta">
+                    <img src="./assets/Profile.png" alt="conta icon" class="icon">Conta
+                </button>
+            </a>
+            <a href="suporte.html">
+                <button class="btn-suporte">
+                    <img src="./assets/Info Square.png" alt="suporte icon" class="icon">Suporte
+                </button>
+            </a>
+            <a href="login.html">
+                <button onclick="limparSessao()" class="btn-sair">
+                    <img src="./assets/icons8-exit-50.png" alt="exit icon" class="icon"> Sair
+                </button>
+            </a>
+        </div>
     </section>
 
     <section class="main-section">
-
         <img src="./img/icon-suporte.svg" alt="icone de suporte" class="imagemsuporte">
-
         <img src="./img/fundoSuporte.png" class="imagemfundo">
-
-
 
         <div class="formulario">
             <h2>Suporte</h2>
@@ -61,9 +66,6 @@
             <form id="suporteForm" onsubmit="enviarEmail(event)" method="POST">
                 <label for="name">Nome:</label>
                 <input type="text" id="name" name="name" required>
-
-                <label for="email">E-mail para Contato:</label>
-                <input type="email" id="email" name="email" required placeholder="email@email.com">
 
                 <label for="phone">Telefone:</label>
                 <input type="text" id="phone" name="phone" onkeyup="mascaraTelefone()" maxlength="15"
@@ -82,54 +84,8 @@
 
                 <button type="submit" id="botaoEnviar">Enviar</button>
             </form>
-
         </div>
-        </div>
-
-
-
+    </section>
 </body>
-<script>
-    async function enviarEmail(event) {
-        event.preventDefault();
-
-        const nameInput = document.querySelector('#name').value;
-        const emailInput = document.querySelector('#email').value;
-        const phoneInput = document.querySelector('#phone').value;
-        const tipoProblemaInput = document.querySelector('#tipo').value;
-        const messageInput = document.querySelector('#message').value;
-
-        try {
-            const response = await fetch('/enviarEmailSuporte', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    toName: nameInput,
-                    toEmail: emailInput,
-                    toPhone: phoneInput,
-                    toTipo: tipoProblemaInput,
-                    toMessage: messageInput,
-                }),
-            });
-
-            const message = await response.text();
-            alert(message); // Exibe uma mensagem de sucesso ou erro
-        } catch (error) {
-            console.error('Erro ao enviar e-mail:', error);
-            alert('Erro ao enviar e-mail.');
-        }
-    }
-
-    function mascaraTelefone() {
-        var phone = document.querySelector("#phone");
-
-        phone.value = phone.value.replace(/\D+/g, '')
-            .replace(/(\d{2})(\d)/, '($1) $2')
-            .replace(/(\d{5})(\d)/, '$1-$2')
-            .replace(/(-\d{4})\d+?$/, '$1')
-    }
-</script>
 
 </html>
