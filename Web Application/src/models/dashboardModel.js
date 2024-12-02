@@ -9,7 +9,7 @@ function listarProducaoCafe(ano, tipoCafe) {
         from plantacaoFazenda as pf
         inner join fazenda f on pf.fkFazenda = f.id
         inner join estadoMunicipio em on f.fkEstadoMunicipio = em.id
-        where pf.ano = 1985 and f.fkTipoCafe = 1
+        where pf.ano = ${ano} and f.fkTipoCafe = ${tipoCafe}
         group by em.estado
         order by toneladasColhidas desc
         limit 5;
@@ -61,9 +61,34 @@ function obterMenorEficiencia(ano, tipoCafe) {
     return database.executar(instrucaoSql);
 }
 
+
+function listarAnos() {
+    let instrucaoSql = `
+        SELECT DISTINCT ano 
+        FROM plantacaoFazenda
+        ORDER BY ano;
+    `;
+    return database.executar(instrucaoSql);  // Executa a consulta
+}
+
+
+function listarTiposDeCafe() {
+    let instrucaoSql = `
+        SELECT DISTINCT tc.nome AS TipoCafeNome
+        FROM datatech.tipoCafe tc
+        JOIN datatech.fazenda f ON tc.id = f.fkTipoCafe;
+    `;
+    
+    return database.executar(instrucaoSql);
+}
+
+
+
 module.exports = {
     listarProducaoCafe,
     obterMaiorEficiencia,
-    obterMenorEficiencia
+    obterMenorEficiencia,
+    listarAnos,
+    listarTiposDeCafe
 };
 

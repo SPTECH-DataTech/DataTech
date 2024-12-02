@@ -16,5 +16,13 @@ router.post("/obterMenorEficiencia", function (req, res) {
     dashboardController.obterMenorEficiencia(req, res);
 });
 
+router.get("/listarAnos", function (req, res) {
+    dashboardController.listarAnos(req, res);
+});
+
+
+router.post("/listarTiposDeCafe", function (req, res) {
+    dashboardController.listarTiposDeCafe(req, res);
+});
 
 module.exports = router;

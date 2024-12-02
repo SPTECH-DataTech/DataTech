@@ -70,10 +70,6 @@
                     <div class="container">
                         <form id="filtroForm">
                             <select id="select-ano" class="select-ano">
-                                <option value="1985">1985</option>
-                                <option value="1995">1995</option>
-                                <option value="2006">2006</option>
-                                <option value="2017">2017</option>
                             </select>
 
                             <select id="select-cafe" class="select-cafe">
@@ -81,7 +77,8 @@
                                 <option value="2">Café Robusta</option>
                             </select>
 
-                            <button type="submit" class="btn-atualizar">Atualizar</button>
+                            <button type="button" class="btn-atualizar" id="btn-atualizar" onclick="atualizaSelects()">Atualizar</button>
+
                         </form>
                     </div>
 
@@ -221,174 +218,215 @@
 </body>
 
 <script>
-    function carregarGrafico() {
-        const ano = document.getElementById("select-ano").value;
-        const tipoCafe = document.getElementById("select-cafe").value;
 
-        fetch("/dashboard/listarProducaoCafe", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                anoServer: ano,
-                tipoCafeServer: tipoCafe
-            })
-        })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error("Erro ao buscar dados.");
-                }
-            })
-            .then(data => {
-                console.log("Dados recebidos:", data);
-                if (data.length > 0) {
-                    const estados = data.map(item => item.estado);
-                    const cafePlantado = data.map(item => parseFloat(item.toneladasPlantadas));
-                    const cafeColhido = data.map(item => parseFloat(item.toneladasColhidas));
-
-                    console.log(estados, cafePlantado, cafeColhido);
-                    criarGrafico(estados, cafePlantado, cafeColhido);
-                } else {
-                    alert("Não há dados para o ano e tipo de café selecionados.");
-                }
-            })
-            .catch(error => {
-                console.error("Erro:", error);
-                alert("Erro ao buscar os dados da produção de café. O banco de dados não possui esse dado! Ano: " + ano + " ou o tipo de café: " + tipoCafe);
+function carregarAnos() {
+    fetch('/dashboard/listarAnos')
+        .then((resposta) => resposta.json())
+        .then((dados) => {
+            const selectAno = document.getElementById('select-ano');
+            dados.forEach((ano) => {
+                const opcao = document.createElement('option');
+                opcao.value = ano.ano;
+                opcao.textContent = ano.ano; 
+                selectAno.appendChild(opcao);
             });
+            if (dados.length > 0) {
+                selectAno.value = dados[0].ano;
+                const tipoCafe = document.getElementById("select-cafe").value;
+                atualizaSelects(); 
+            }
+        })
+        .catch((erro) => {
+            console.error('Erro ao carregar os anos:', erro);
+        });
+}
+
+function carregarTiposCafe() {
+    const selectCafe = document.getElementById("select-cafe");
+    if (selectCafe.options.length > 0) {
+        selectCafe.value = selectCafe.options[0].value;
+    }
+}
+
+window.onload = function() {
+    carregarAnos();
+    carregarTiposCafe();
+    atualizarDashboard();
+};
+
+function atualizaSelects() {
+    const ano = document.getElementById("select-ano").value;
+    const tipoCafe = document.getElementById("select-cafe").value;
+
+    if (ano !== "#" && tipoCafe !== "#") {
+        carregarGrafico(ano, tipoCafe);
+        carregarMaiorEficiencia(ano, tipoCafe);
+        carregarMenorEficiencia(ano, tipoCafe);
+    } else {
+        alert("Por favor, selecione um ano e tipo de café válidos.");
+    }
+}
+
+
+
+let chartInstance; 
+
+function criarGrafico(estados, cafePlantado, cafeColhido) {
+    const ctx = document.getElementById("graficoCafe").getContext("2d");
+
+    // Verifica se há um gráfico existente e o destrói
+    if (chartInstance) {
+        chartInstance.destroy();
     }
 
-    function criarGrafico(estados, cafePlantado, cafeColhido) {
-        const ctx = document.getElementById("graficoCafe").getContext("2d");
-
-        new Chart(ctx, {
-            type: "bar",
-            data: {
-                labels: estados,
-                datasets: [
-                    {
-                        label: "Café Plantado (Toneladas)",
-                        data: cafePlantado,
-                        backgroundColor: '#a56aec',
-                        borderWidth: 1,
-                        barThickness: 20
-                    },
-                    {
-                        label: "Café Colhido (Toneladas)",
-                        data: cafeColhido,
-                        backgroundColor: '#6c81dd',
-                        borderWidth: 1,
-                        barThickness: 20
-                    }
-                ]
+    chartInstance = new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: estados,
+            datasets: [
+                {
+                    label: "Café Plantado (Toneladas)",
+                    data: cafePlantado,
+                    backgroundColor: '#a56aec',
+                    borderWidth: 1,
+                    barThickness: 20
+                },
+                {
+                    label: "Café Colhido (Toneladas)",
+                    data: cafeColhido,
+                    backgroundColor: '#6c81dd',
+                    borderWidth: 1,
+                    barThickness: 20
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: "top"
+                }
             },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: "top"
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: "Toneladas"
-                        }
-                    },
-                    x: {
-                        stacked: false,
-                        categoryPercentage: 100,
-                        barPercentage: 0.5
-                    }
-                },
-                plugins: {
+            scales: {
+                y: {
+                    beginAtZero: true,
                     title: {
                         display: true,
-                        text: 'Produção de Café por Estado (Toneladas)'
+                        text: "Toneladas"
                     }
+                },
+                x: {
+                    stacked: false,
+                    categoryPercentage: 100,
+                    barPercentage: 0.5
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Produção de Café por Estado (Toneladas)'
                 }
             }
+        }
+    });
+}
+
+
+function carregarGrafico(ano, tipoCafe) {
+    fetch("/dashboard/listarProducaoCafe", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            anoServer: ano,
+            tipoCafeServer: tipoCafe
+        })
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Erro ao buscar dados.");
+            }
+        })
+        .then(data => {
+            console.log("Dados recebidos:", data);
+            if (data.length > 0) {
+                const estados = data.map(item => item.estado);
+                const cafePlantado = data.map(item => parseFloat(item.toneladasPlantadas));
+                const cafeColhido = data.map(item => parseFloat(item.toneladasColhidas));
+
+                console.log(estados, cafePlantado, cafeColhido);
+                criarGrafico(estados, cafePlantado, cafeColhido);
+            } else {
+                alert("Não há dados para o ano e tipo de café selecionados.");
+            }
+        })
+        .catch(error => {
+            console.error("Erro:", error);
+            alert("Erro ao buscar os dados da produção de café. O banco de dados não possui esse dado! Ano: " + ano + " ou o tipo de café: " + tipoCafe);
         });
-    }
+}
 
-    function carregarMaiorEficiencia() {
-        const ano = document.getElementById("select-ano").value;
-        const tipoCafe = document.getElementById("select-cafe").value;
-
-        fetch("/dashboard/obterMaiorEficiencia", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                anoServer: ano,
-                tipoCafeServer: tipoCafe
-            })
+function carregarMaiorEficiencia(ano, tipoCafe) {
+    fetch("/dashboard/obterMaiorEficiencia", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            anoServer: ano,
+            tipoCafeServer: tipoCafe
         })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error("Erro ao buscar dados.");
-                }
-            })
-            .then(data => {
-                document.getElementById("estado_maior_eficiencia").textContent = data.estado;
-                document.getElementById("quantidade_perdida_plantada_maior").textContent = data.quantidadePerdida + " / " + data.quantidadePlantada + " (t)";
-                document.getElementById("maior_eficiencia_porcentagem_perdida").textContent = data.porcentagemPerda + "%";
-            })
-            .catch(error => {
-                console.error("Erro:", error);
-                alert("Erro ao buscar os dados da maior eficiência. O banco de dados não possui esse dado! Ano: " + ano + " ou o tipo de café: " + tipoCafe);
-            });
-    }
-
-    function carregarMenorEficiencia() {
-        const ano = document.getElementById("select-ano").value;
-        const tipoCafe = document.getElementById("select-cafe").value;
-
-        fetch("/dashboard/obterMenorEficiencia", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                anoServer: ano,
-                tipoCafeServer: tipoCafe
-            })
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Erro ao buscar dados.");
+            }
         })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error("Erro ao buscar dados.");
-                }
-            })
-            .then(data => {
-                document.getElementById("estado_menor_eficiencia").textContent = data.estadoMenor;
-                document.getElementById("quantidade_perdida_plantada_menor").textContent = data.quantidadePerdidaMenor + " / " + data.quantidadePlantadaMenor + " (t)";
-                document.getElementById("menor_eficiencia_porcentagem_perdida").textContent = data.porcentagemPerdaMenor + "%";
+        .then(data => {
+            document.getElementById("estado_maior_eficiencia").textContent = data.estado;
+            document.getElementById("quantidade_perdida_plantada_maior").textContent = data.quantidadePerdida + " / " + data.quantidadePlantada + " (t)";
+            document.getElementById("maior_eficiencia_porcentagem_perdida").textContent = data.porcentagemPerda + "%";
+        })
+        .catch(error => {
+            console.error("Erro:", error);
+            alert("Erro ao buscar os dados da maior eficiência. O banco de dados não possui esse dado! Ano: " + ano + " ou o tipo de café: " + tipoCafe);
+        });
+}
 
-            })
-            .catch(error => {
-                console.error("Erro:", error);
-                alert("Erro ao buscar os dados da menor eficiência. O banco de dados não possui esse dado! Ano: " + ano + " ou o tipo de café: " + tipoCafe);
-            });
-    }
+function carregarMenorEficiencia(ano, tipoCafe) {
+    fetch("/dashboard/obterMenorEficiencia", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            anoServer: ano,
+            tipoCafeServer: tipoCafe
+        })
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Erro ao buscar dados.");
+            }
+        })
+        .then(data => {
+            document.getElementById("estado_menor_eficiencia").textContent = data.estadoMenor;
+            document.getElementById("quantidade_perdida_plantada_menor").textContent = data.quantidadePerdidaMenor + " / " + data.quantidadePlantadaMenor + " (t)";
+            document.getElementById("menor_eficiencia_porcentagem_perdida").textContent = data.porcentagemPerdaMenor + "%";
+        })
+        .catch(error => {
+            console.error("Erro:", error);
+            alert("Erro ao buscar os dados da menor eficiência. O banco de dados não possui esse dado! Ano: " + ano + " ou o tipo de café: " + tipoCafe);
+        });
+}
 
-
-
-    document.getElementById("select-ano").addEventListener("change", carregarGrafico);
-    document.getElementById("select-cafe").addEventListener("change", carregarGrafico);
-
-    carregarGrafico();
-    carregarMaiorEficiencia();
-    carregarMenorEficiencia();
 </script>
 <script>
     const ctx1 = document.getElementById('climograma').getContext('2d');

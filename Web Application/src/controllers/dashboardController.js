@@ -100,9 +100,46 @@ function obterMenorEficiencia(req, res) {
     }
 }
 
+function listarAnos(req, res) {
+    dashboardModel.listarAnos()
+        .then(function (resultado) {
+            if (resultado && resultado.length > 0) {
+                res.json(resultado);  // Retorna os anos encontrados
+            } else {
+                res.status(404).send("Nenhum ano encontrado.");
+            }
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            res.status(500).json({ erro: "Erro ao consultar anos", erroDetalhado: erro.sqlMessage });
+        });
+}
+
+
+function listarTiposDeCafe(req, res) {
+    dashboardModel.listarTiposDeCafe()
+        .then(
+            function (resultado) {
+                if (resultado && resultado.length > 0) {
+                    res.json(resultado);
+                } else {
+                    res.status(404).send("Nenhum tipo de café encontrado.");
+                }
+            }
+        ).catch(
+            function (erro) {
+                console.log(erro);
+                res.status(500).json({ erro: "Erro ao consultar tipos de café", erroDetalhado: erro.sqlMessage });
+            }
+        );
+}
+
+
 module.exports = {
     listarProducaoCafe,
     obterMaiorEficiencia,
-    obterMenorEficiencia
+    obterMenorEficiencia,
+    listarAnos,
+    listarTiposDeCafe
 };
 
