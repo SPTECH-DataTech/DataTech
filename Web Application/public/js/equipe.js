@@ -84,8 +84,6 @@ function listarFuncionarios() {
                         cargoSpan.innerText = "";
                     }
 
-                    div.appendChild(checkbox);
-                    div.appendChild(img);
 
                     div.appendChild(nomeSpan);
                     div.appendChild(emailSpan);

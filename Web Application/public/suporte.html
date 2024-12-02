@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="assets/logo_datatech_-_roxa_escuro.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/suporte.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/suporte.js"></script>
     <title>Suporte • DataTech</title>
 </head>
@@ -19,7 +20,9 @@
 
         <div>
             <!-- Menu -->
-            <b><p>Menu</p></b>
+            <b>
+                <p>Menu</p>
+            </b>
             <a href="dashboard.html">
                 <button class="btn-dashboard">
                     <img src="./assets/Chart.png" alt="dashboard icon" class="icon"> Dashboard
@@ -34,7 +37,9 @@
             <a href="recomendacoes.html"><button class="btn-recomendacoes"><img src="./assets/Chat.png" alt="recomendacoes icon" class="icon"> Recomendações</button></a> -->
 
             <!-- Outros -->
-            <b><p>Outros</p></b>
+            <b>
+                <p>Outros</p>
+            </b>
             <a href="dashConta.html">
                 <button class="btn-conta">
                     <img src="./assets/Profile.png" alt="conta icon" class="icon">Conta
@@ -96,7 +101,7 @@
         event.preventDefault();
 
         const nameInput = document.querySelector('#name').value;
-        const emailInput = document.querySelector('#email').value;
+        const emailInput = sessionStorage.EMAIL_USUARIO;
         const phoneInput = document.querySelector('#phone').value;
         const tipoProblemaInput = document.querySelector('#tipo').value;
         const messageInput = document.querySelector('#message').value;
@@ -116,13 +121,34 @@
                 }),
             });
 
-            const message = await response.text();
-            alert(message); // Exibe uma mensagem de sucesso ou erro
+            Swal.fire({
+                icon: 'sucess',
+                title: 'Enviado!',
+                html: 'Confira sua caixa de entrada!',
+                confirmButtonText: 'OK',
+                confirmButtonColor: "#20BF55",
+            })
         } catch (error) {
             console.error('Erro ao enviar e-mail:', error);
-            alert('Erro ao enviar e-mail.');
+            Swal.fire({
+                icon: "error",
+                title: "Erro ao enviar e-mail",
+                timer: 2000,
+                timerProgressBar: true,
+                confirmButtonText: '',
+                confirmButtonColor: '#fff',
+                didOpen: () => {
+                    Swal.showLoading();
+                },
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log("I was closed by the timer");
+                }
+            });
         }
+
     }
+
 
     function mascaraTelefone() {
         var phone = document.querySelector("#phone");
