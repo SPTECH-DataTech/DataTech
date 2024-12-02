@@ -7,6 +7,7 @@ window.onload = function() {
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
     };
 
+    name_empresa.innerHTML = sessionStorage.NOME_FAZENDA;
 
 let listaEstadoMunicipio = [];
 listarEstados(); 
@@ -97,12 +98,12 @@ function removerFazenda() {
     return false;
 }
 
-const equipe = document.getElementById('card-cargos');
+const equipe = document.getElementById('card-equipe');
 equipe.addEventListener('click', function () {
     window.location.href = "equipe.html";
 });
 
-const cargos = document.getElementById('card-equipe');
+const cargos = document.getElementById('card-cargos');
 cargos.addEventListener('click', function () {
     window.location.href = "cargos.html";
 });
