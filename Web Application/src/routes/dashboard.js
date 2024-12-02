@@ -12,5 +12,10 @@ router.post("/obterMaiorEficiencia", function (req, res) {
     dashboardController.obterMaiorEficiencia(req, res);
 });
 
+router.post("/obterMenorEficiencia", function (req, res) {
+    dashboardController.obterMenorEficiencia(req, res);
+});
+
+
 
 module.exports = router;

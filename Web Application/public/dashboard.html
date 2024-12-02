@@ -345,10 +345,9 @@
             })
             .catch(error => {
                 console.error("Erro:", error);
-                alert("Erro ao buscar os dados da maior eficiência. O banco de dados não possui esse dado! Ano: " + ano + " ou o tipo de café: " + tipoCafe);
+                alert("Erro ao buscar os dados da maior eficiência.");
             });
     }
-
     function carregarMenorEficiencia() {
         const ano = document.getElementById("select-ano").value;
         const tipoCafe = document.getElementById("select-cafe").value;
@@ -371,9 +370,9 @@
                 }
             })
             .then(data => {
-                document.getElementById("estado_menor_eficiencia").textContent = data.estado;
-                document.getElementById("quantidade_perdida_plantada_menor").textContent = data.quantidadePerdida + " / " + data.quantidadePlantada + " (t)";
-                document.getElementById("menor_eficiencia_porcentagem_perdida").textContent = data.porcentagemPerda + "%";
+                document.getElementById("estado_menor_eficiencia").textContent = data.estadoMenor;
+                document.getElementById("quantidade_perdida_plantada_menor").textContent = data.quantidadePerdidaMenor + " / " + data.quantidadePlantadaMenor + " (t)";
+                document.getElementById("menor_eficiencia_porcentagem_perdida").textContent = data.porcentagemPerdaMenor + "%";
 
             })
             .catch(error => {
@@ -381,7 +380,6 @@
                 alert("Erro ao buscar os dados da menor eficiência. O banco de dados não possui esse dado! Ano: " + ano + " ou o tipo de café: " + tipoCafe);
             });
     }
-
 
 
     document.getElementById("select-ano").addEventListener("change", carregarGrafico);
