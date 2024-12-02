@@ -49,7 +49,7 @@
   border-radius: 5px;
   border: #A9ADB3 solid 1px;
   width: 100%;
-  height: 100%;
+  height: 41px;
   box-shadow: 1px 1px rgba(7, 6, 6, 0.2);
 }
 
@@ -81,7 +81,7 @@
 
 .fa-pencil,
 .fa-trash,
-.fa-user-plus {
+.fa-address-card {
   color: #785DC8;
 }
 

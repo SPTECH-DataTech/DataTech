@@ -5,6 +5,9 @@ let cargos;
 
 name_empresa.innerHTML = sessionStorage.NOME_EMPRESA;
 b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+nome_fazenda1.innerHTML = sessionStorage.NOME_FAZENDA
+nome_fazenda2.innerHTML = sessionStorage.NOME_FAZENDA
+
 
 function conultarNomeFazenda() {
     fetch('cargo/consultarFazenda', {
