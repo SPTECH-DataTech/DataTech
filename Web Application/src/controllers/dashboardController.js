@@ -76,16 +76,16 @@ function obterMenorEficiencia(req, res) {
             .then(
                 function (resultado) {
                     if (resultado && resultado.length > 0) {
-                        let estado = resultado[0].estado;
-                        let quantidadePlantada = resultado[0].quantidadePlantada;
-                        let quantidadePerdida = resultado[0].quantidadePerdida;
-                        let porcentagemPerda = resultado[0].porcentagemPerda;
+                        let estadoMenor = resultado[0].estadoMenor;
+                        let quantidadePlantadaMenor = resultado[0].quantidadePlantadaMenor;
+                        let quantidadePerdidaMenor = resultado[0].quantidadePerdidaMenor;
+                        let porcentagemPerdaMenor = resultado[0].porcentagemPerdaMenor;
 
                         res.json({
-                            estado: estado,
-                            quantidadePlantada: quantidadePlantada,
-                            quantidadePerdida: quantidadePerdida,
-                            porcentagemPerda: porcentagemPerda
+                            estadoMenor: estadoMenor,
+                            quantidadePlantadaMenor: quantidadePlantadaMenor,
+                            quantidadePerdidaMenor: quantidadePerdidaMenor,
+                            porcentagemPerdaMenor: porcentagemPerdaMenor
                         });
                     } else {
                         res.status(404).send("Nenhum resultado encontrado.");
