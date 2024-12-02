@@ -32,3 +32,5 @@ if (currentPath.includes('dashboard.html') || currentPath.includes('dashProximaT
 } else if (currentPath.includes('suporte.html')) {
   setActiveButton(suporteButton);
 }
+
+

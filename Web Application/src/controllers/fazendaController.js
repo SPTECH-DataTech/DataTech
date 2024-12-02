@@ -26,7 +26,6 @@ function adicionarFazenda(req, res) {
 }
 
 function listarEstados(req, res) {
-
     fazendaModel.listarEstados().then((resultado) => {
         res.status(200).json(resultado)
     })
@@ -35,21 +34,21 @@ function listarEstados(req, res) {
             res.status(500).json(erro);
         })
 }
-function definirLocalidade(req, res) {
 
-    fazendaModel.definirLocalidade().then((resultado) => {
+function listarEstadosUnicos(req, res) {
+    fazendaModel.listarEstadosUnicos().then((resultado) => {
         res.status(200).json(resultado)
     })
         .catch((erro) => {
-            console.error("Houve um erro ao listar a tabela EstadoMunicipio");
+            console.error("Houve um erro ao listar os estados unicos!");
             res.status(500).json(erro);
-        })
+        });
 }
 
 function listarFazendas(req, res) {
-
     fazendaModel.listarFazendas().then((resultado) => {
         console.log(`Resultados: ${JSON.stringify(resultado)}`);
+
         res.status(200).json(resultado);
     })
         .catch((erro) => {
@@ -57,6 +56,20 @@ function listarFazendas(req, res) {
             res.status(500).json(erro);
         });
 }
+
+function listarMunicipios(req, res) {
+    var { estado } = req.body;
+
+    fazendaModel.listarMunicipios(estado).then((resultado) => {
+        console.log(`Resultados: ${JSON.stringify(resultado)}`);
+        res.status(200).json(resultado);
+    })
+        .catch((erro) => {
+            console.error("Houve um erro ao listar os municipios!");
+            res.status(500).json(erro);
+        });
+}
+
 function listarTipoCafe(req, res) {
     fazendaModel.listarTipoCafe().then((resultado) => {
         console.log(`Resultados: ${JSON.stringify(resultado)}`);
@@ -68,9 +81,8 @@ function listarTipoCafe(req, res) {
         });
 }
 
-
 function removerFazenda(req, res) {
-    var { idFazenda, idEmpresa, idEstadoMunicipio} = req.body;
+    var { idFazenda, idEmpresa, idEstadoMunicipio } = req.body;
 
     if (!idFazenda) {
         res.status(400).send("O ID da fazenda está undefined");
@@ -88,7 +100,6 @@ function removerFazenda(req, res) {
     }
 }
 
-
 function editarFazenda(req, res) {
     var { idFazenda, nomeFazenda, tipoCafe, estadoMunicipio } = req.body;
 
@@ -102,11 +113,11 @@ function editarFazenda(req, res) {
         res.status(400).send("O estado da fazenda está undefined!")
     } else {
         fazendaModel.editarFazenda(nomeFazenda, tipoCafe, estadoMunicipio, idFazenda).then(function (resultado) {
+          
             console.log(`Fazenda "${nomeFazenda}" foi editada no banco de dados.`);
             res.status(200).json({
                 message: 'Fazenda editada com sucesso!', resultado
             });
-
         }).catch(function (erro) {
             console.error(`Houve um erro ao editar a Fazenda "${nomeFazenda}": `, erro.sqlMessage)
             res.status(500).json({ erro: 'Houve um erro ao editar a fazenda.' });
@@ -127,8 +138,6 @@ function listarPermissoes(req, res) {
         });
 }
 
-
-
 module.exports = {
     listarEstados,
     adicionarFazenda,
@@ -136,5 +145,7 @@ module.exports = {
     removerFazenda,
     editarFazenda,
     listarTipoCafe,
-    listarPermissoes
+    listarPermissoes,
+    listarMunicipios,
+    listarEstadosUnicos
 }

@@ -313,23 +313,34 @@
           </div>
           <img class="imagem-contato-mobile" src="./assets/imagem_contato.png" alt="">
           <div class="campo">
-            <span>Nome</span>
-            <input id="ctt_nome">
+            <label for="tipoProblema">Assunto:</label>
+            <select id="tipo" name="tipo"
+              style="border: 2px solid #7F00FF; border-radius: 5px; padding: 8px; font-size: 16px; color: #333;">
+              <option value="Contratar Servicos">Contratar Serviços</option>
+              <option value="Suporte-Inicial">Suporte Técnico</option>
+            </select>
           </div>
           <div class="campo">
-            <span>Empresa</span>
-            <input id="ctt_empresa">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name" required placeholder="Nome Representante">
           </div>
           <div class="campo">
-            <span>E-mail</span>
-            <input id="ctt_email">
+            <label for="name">Empresa:</label>
+            <input type="text" id="empresa" name="empresa" required placeholder="Empresa XPTO LTDA">
           </div>
           <div class="campo">
-            <span>Mensagem</span>
-            <textarea id="input_mensagem" name=""></textarea>
+            <label for="email">E-mail para Contato:</label>
+            <input type="email" id="email" name="email" required placeholder="email@email.com">
           </div>
+
+          <div class="campo">
+            <label for="descricao">Mensagem:</label>
+            <textarea id="message" name="descricao" rows="4" required
+              placeholder="Gostaria de contratar o serviço..."></textarea>
+          </div>
+
           <div class="contato_button">
-            <button>Enviar</button>
+            <button onclick="enviarEmailContratar(event)">Enviar Mensagem</button>
           </div>
         </div>
       </div>

@@ -7,7 +7,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="./css/fazendaProximaTela.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  
+
+
 </head>
 
 <body>
@@ -52,7 +53,7 @@
         <!-- Conteúdo principal -->
         <div class="container-group">
             <div class="gerenciar-fazenda">
-                <div class="card-cargos" id="card-cargos">
+                <div class="card-cargos" id="card-equipe">
                     <div class="info-card">
                         <h1>Equipe</h1>
                         <span>Acesse os membros cadastrados na equipe dessa fazenda.</span>
@@ -61,7 +62,7 @@
                         <img class="img-fundo" src="./assets/imgs/image 15.png" alt="">
                     </div>
                 </div>
-                <div class="card-equipe" id="card-equipe">
+                <div class="card-equipe" id="card-cargos" onclick="irParaTelaCargos()">
                     <div class="info-card">
                         <h1>Cargo</h1>
                         Acesse os membros cadastrados na equipe dessa fazenda.
@@ -80,24 +81,25 @@
 
                         <div class="group-fields">
                             <span class="label">Nome Fazenda:</span>
-                            <input disabled type="text" id="input_nome_fazenda_edit">
+                            <input disabled type="text" id="input_nome_fazenda">
                         </div>
                         <div class="group-fields">
                             <span class="label">Tipo Café:</span>
-                            <select disabled name="" id="select_tipo_cafe_edit">
+                            <select disabled name="" id="select_tipo_cafe">
                                 <option value="#">-</option>
                             </select>
                         </div>
                         <div class="group-fields">
                             <span class="label">Estado da Fazenda:</span>
-                            <select disabled name="" id="select_estado_fazenda">
-                                <option value="#">-</option>
+                            <select disabled name="estado" id="select_estado_fazenda">
+                                <option value="">Selecione um estado</option>
                             </select>
+                            
                         </div>
                         <div class="group-fields">
                             <span class="label">Município da Fazenda:</span>
                             <select disabled name="" id="select_municipio_fazenda">
-                                <option value="#">-</option>
+                                <option value="#">Selecione um município</option>
                             </select>
                         </div>
                         <div class="group-buttons">
@@ -111,10 +113,8 @@
         </div>
     </div>
 
-
-
 </body>
 
 </html>
-<!-- <script src="./js/fazenda.js"></script> -->
-<script src="./js/fazendaProximaTela.js "></script>
+
+<script src="./js/fazendaProximaTela.js"></script>

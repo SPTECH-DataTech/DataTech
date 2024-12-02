@@ -264,7 +264,7 @@ h1 {
         background-color: transparent;
         border: none;
         position: absolute;
-        right: 280px;
+        right: 155px;
         cursor: pointer;
     }
 }
@@ -374,27 +374,26 @@ h1 {
 }
 
 .farmList {
-    display: none;
-    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
+    gap: 15px;
+    padding: 20px;
+    overflow: auto;
     width: 100%;
-    height: 100%;
-    overflow: scroll;
+    margin-left: 50px;
 }
 
-.farmList{
-    padding: 20px;
-    display: none;
-    
-}
 .div-fazenda {
-    width: 445px;
-    height: 196px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
     position: relative;
     margin-bottom: 15px;
     cursor: pointer;
+    width: 100%; 
+    max-width: 480px; 
+    height: 210px;
 }
 
 .div-fazenda .image-buttonn {
@@ -404,12 +403,12 @@ h1 {
     z-index: -1;
     user-select: none;
     pointer-events: none;
-    
 }
 
 .div-fazenda .nomeFazenda {
     position: absolute;
     top: 15px;
+    padding: 7px;
     font-size: 18px;
     color: white;
     font-weight: bold;
