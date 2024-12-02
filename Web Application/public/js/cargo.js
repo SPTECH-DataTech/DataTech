@@ -1,4 +1,4 @@
-let idFazenda = sessionStorage.FAZENDA;
+let idFazenda = sessionStorage.ID_FAZENDA;
 let idEmpresa = sessionStorage.ID_EMPRESA;
 let idMunicipio = sessionStorage.MUNICIPIO_FAZENDA;
 let cargos;
@@ -191,8 +191,8 @@ function modalAdicionarCargo() {
 
 function lerPermissoesSelecionadas() {
     let check_cargo = false;
-    let fazenda = false;
-    let funcionario = false;
+    let check_fazenda = false;
+    let check_funcionario = false;
     const nomeCargo = document.getElementById("input_nome_cargo").value.trim();
     const checkCargos = document.getElementById("check_permissao_cargos");
     const checkFazendas = document.getElementById("check_permissao_fazendas");
@@ -211,6 +211,9 @@ function lerPermissoesSelecionadas() {
     }
     adicionarCargo(nomeCargo, check_cargo, check_fazenda, check_funcionario);
 }
+
+console.log("idFazenda no frontend", idFazenda)
+
 function adicionarCargo(nomeCargo, check_cargo, check_fazenda, check_funcionario) {
     fetch('/cargo/adicionar', {
         method: "POST",
