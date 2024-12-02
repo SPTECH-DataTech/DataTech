@@ -42,19 +42,19 @@ function obterMaiorEficiencia(ano, tipoCafe) {
 function obterMenorEficiencia(ano, tipoCafe) {
     let instrucaoSql = `
         select 
-        em.estado as estado,
-        round(sum((pf.areaplantada * 39 * 60) / 1000), 0) as quantidadePlantada,  
-        round(sum((pf.areaplantada * 39 * 60) / 1000) - sum(pf.quantidadecolhida), 0) as quantidadePerdida,
+        em.estado as estadoMenor,
+        round(sum((pf.areaplantada * 39 * 60) / 1000), 0) as quantidadePlantadaMenor,  
+        round(sum((pf.areaplantada * 39 * 60) / 1000) - sum(pf.quantidadecolhida), 0) as quantidadePerdidaMenor,
         round(
             ((sum((pf.areaplantada * 39 * 60) / 1000) - sum(pf.quantidadecolhida)) / 
             sum((pf.areaplantada * 39 * 60) / 1000)) * 100, 2
-        ) as porcentagemPerda  
+        ) as porcentagemPerdaMenor  
         from plantacaoFazenda as pf
         inner join fazenda f on pf.fkFazenda = f.id
         inner join estadoMunicipio em on f.fkEstadoMunicipio = em.id
-        where pf.ano = ${ano} and f.fktipocafe = ${tipocafe}
+        where pf.ano = ${ano} and f.fktipocafe = ${tipoCafe}
         group by em.estado
-        order by porcentagemPerda desc 
+        order by porcentagemPerdaMenor desc 
         limit 1; 
     `;
 
