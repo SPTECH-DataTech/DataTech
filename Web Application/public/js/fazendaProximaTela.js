@@ -1,3 +1,4 @@
+
 window.onload = function() {
     select_estado_fazenda.value = sessionStorage.NOME_ESTADO_FAZENDA;
     select_municipio_fazenda.value = sessionStorage.MUNICIPIO_FAZENDA;
@@ -5,6 +6,7 @@ window.onload = function() {
     select_tipo_cafe.value = sessionStorage.TIPO_CAFE_FAZENDA;
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
     };
+
 
 let listaEstadoMunicipio = [];
 listarEstados(); 

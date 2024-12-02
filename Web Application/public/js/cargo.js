@@ -3,6 +3,9 @@ let idEmpresa = sessionStorage.ID_EMPRESA;
 let idMunicipio = sessionStorage.MUNICIPIO_FAZENDA;
 let cargos;
 
+name_empresa.innerHTML = sessionStorage.NOME_EMPRESA;
+b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
 function conultarNomeFazenda() {
     fetch('cargo/consultarFazenda', {
         method: "POST",

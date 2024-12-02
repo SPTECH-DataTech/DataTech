@@ -145,11 +145,15 @@ function login() {
                     sessionStorage.NOME_USUARIO = data.nome;
                     sessionStorage.ID_USUARIO = data.id;
                     sessionStorage.ID_EMPRESA = data.idEmpresa;
+
+                    sessionStorage.NOME_EMPRESA = data.nomeEmpresa;
+
                     sessionStorage.CARGO = data.idCargo;
                     sessionStorage.FAZENDA = data.idFazenda;
                     sessionStorage.PERMISSAO_CARGOS = data.permissaoCargos;
                     sessionStorage.PERMISSAO_FAZENDAS = data.permissaoFazendas;
                     sessionStorage.PERMISSAO_FUNCIONARIOS = data.permissaoFuncionarios;
+
 
                     setTimeout(() => {
                         Swal.fire({
