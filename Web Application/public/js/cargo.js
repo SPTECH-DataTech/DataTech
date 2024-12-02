@@ -1,6 +1,8 @@
 let idFazenda = 3;
 let cargos;
 
+name_empresa.innerHTML = sessionStorage.NOME_EMPRESA;
+b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
 
 function conultarNomeFazenda() {

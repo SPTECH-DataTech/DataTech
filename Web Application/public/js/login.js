@@ -145,6 +145,7 @@ function login() {
                     sessionStorage.NOME_USUARIO = data.nome;
                     sessionStorage.ID_USUARIO = data.id;
                     sessionStorage.ID_EMPRESA = data.idEmpresa;
+                    sessionStorage.NOME_EMPRESA = data.nomeEmpresa;
 
                     setTimeout(() => {
                         Swal.fire({

@@ -16,7 +16,7 @@
 
     <section class="menu-lateral">
         <div class="identificacao-empresa">
-            <h1>Empresa</h1>
+            <h1 id="name_empresa"></h1>
         </div>
 
         <div>
@@ -90,6 +90,9 @@
 
 </body>
 <script>
+
+    name_empresa.innerHTML = sessionStorage.NOME_EMPRESA;
+
     async function enviarEmail(event) {
         event.preventDefault();
 

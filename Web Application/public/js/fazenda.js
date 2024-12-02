@@ -1,4 +1,5 @@
-
+name_empresa.innerHTML = sessionStorage.NOME_EMPRESA;
+name_empresa_modal.innerHTML = sessionStorage.NOME_EMPRESA;
 
 function openModal() {
     document.getElementById('modal-fazenda').style.display = 'block';

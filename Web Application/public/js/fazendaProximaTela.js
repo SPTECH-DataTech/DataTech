@@ -1,3 +1,6 @@
+name_empresa.innerHTML = sessionStorage.NOME_EMPRESA;
+b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
 let listaEstadoMunicipio = [];
 // listarEstados(); 
 function listarEstados() {

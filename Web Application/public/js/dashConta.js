@@ -7,6 +7,8 @@
 var nomeUsuario = sessionStorage.NOME_USUARIO;
 document.getElementById("b_usuario").innerHTML = `${nomeUsuario}`;
 
+name_empresa.innerHTML = sessionStorage.NOME_EMPRESA;
+
 var idUsuario = sessionStorage.ID_USUARIO;
 
 function modalAlterarSenha() {
