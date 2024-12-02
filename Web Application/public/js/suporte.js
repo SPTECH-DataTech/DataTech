@@ -7,7 +7,7 @@ async function enviarEmail(event) {
     const messageInput = document.querySelector('#message').value;
 
     try {
-        const response = await fetch('/enviarEmailSuporte', {
+        fetch('/enviarEmailSuporte', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -21,8 +21,13 @@ async function enviarEmail(event) {
             }),
         });
 
-        const message = await response.text();
-        alert(message); 
+        Swal.fire({
+            icon: 'sucess',
+            title: 'Enviado!',
+            html: 'Confira sua caixa de entrada!',
+            confirmButtonText: 'OK',
+            confirmButtonColor: "#20BF55",
+        })
     } catch (error) {
         console.error('Erro ao enviar e-mail:', error);
         alert('Erro ao enviar e-mail.');
