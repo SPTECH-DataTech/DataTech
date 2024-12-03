@@ -46,7 +46,9 @@ function listarEstadosUnicos(req, res) {
 }
 
 function listarFazendas(req, res) {
-    fazendaModel.listarFazendas().then((resultado) => {
+    let empresa = req.params.empresa;
+
+    fazendaModel.listarFazendas(empresa).then((resultado) => {
         console.log(`Resultados: ${JSON.stringify(resultado)}`);
 
         res.status(200).json(resultado);

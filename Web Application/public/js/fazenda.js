@@ -1,3 +1,11 @@
+document.addEventListener("DOMContentLoaded", function () {
+    listarFazendas();
+    listarEstados();
+    listarPermissoes()
+    listarTipoCafe();
+});
+
+
 function openModal() {
     document.getElementById('modal-fazenda').style.display = 'block';
     document.getElementById('modal-overlay').style.display = 'block';
@@ -77,10 +85,10 @@ function adicionarFazenda() {
     return false;
 }
 
-function mudarTela() {
-    document.getElementById('container').style.display = "none";
-    // document.getElementById('farmList').style.display = "block";
-}
+// function mudarTela() {
+//     document.getElementById('container').style.display = "none";
+//     document.getElementById('farmList').style.display = "block";
+// }
 
 function limparCampos() {
     input_nome_fazenda.value = '';
@@ -88,8 +96,8 @@ function limparCampos() {
     select_estado_fazenda.value = '';
     message.innerHTML = '';
 }
-window.listaEstadoMunicipio = [];
-listarEstados();
+var listaEstadoMunicipio = [];
+
 function listarEstados() {
     fetch("/fazenda/listarEstados", {
         method: "GET",
@@ -117,7 +125,7 @@ function listarEstados() {
             console.log(`#ERRO: ${resposta}`);
         });
 }
-listarTipoCafe();
+
 function listarTipoCafe() {
     fetch("/fazenda/listarTipoCafe", {
         method: "GET",
@@ -151,11 +159,15 @@ function buscarIdPorEstadoMunicipio(estado, municipio) {
 }
 
 
-listarFazendas()
 function listarFazendas() {
     let content = '';
     const container = document.getElementById('container');
-    fetch("/fazenda/listarFazendas", {
+      const farmList = document.getElementById('farmList');
+    farmList.innerHTML = '';
+ 
+    const empresa = sessionStorage.ID_EMPRESA;
+
+    fetch(`/fazenda/listarFazendas/${empresa}`, {
         method: "GET",
     })
         .then(function (resposta) {
@@ -185,7 +197,7 @@ function listarFazendas() {
 
                    
 
-                    content += `<div class="adcionarFazenda" id="adcionarFazenda">
+                    content  += `<div class="adcionarFazenda" id="adcionarFazenda">
                                 <img src="./assets/imgs/Group 413 (1).png" alt="" class="image-button">
                                 <button class="botton-add-farm" onclick="openModal()"><img src="./assets/imgs/add (1).png" alt=""></button>
                                 </div>`
@@ -250,7 +262,7 @@ select_estado_fazenda.addEventListener('change', function (e) {
     }
 });
 
-listarPermissoes()
+
 function listarPermissoes() {
     const id = sessionStorage.ID_USUARIO;
 

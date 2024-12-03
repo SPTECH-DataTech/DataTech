@@ -27,7 +27,7 @@ router.get("/listarTipoCafe", (req, res) => {
    fazendaController.listarTipoCafe(req, res);
 });
 
-router.get("/listarFazendas", (req, res) => {
+router.get("/listarFazendas/:empresa", (req, res) => {
    fazendaController.listarFazendas(req, res);
 });
 

@@ -21,6 +21,7 @@ body {
     height: 100vh;
 
     overflow: hidden;
+    overflow-x: hidden;
 }
 
 ::selection {
@@ -379,6 +380,7 @@ h1 {
     overflow: auto;
     width: 100%;
     margin-left: 50px;
+    overflow-x: hidden;
 }
 
 .div-fazenda {
@@ -389,7 +391,7 @@ h1 {
     position: relative;
     margin-bottom: 15px;
     cursor: pointer;
-    width: 100%; 
+    width: 100%;
     max-width: 480px; 
     height: 210px;
 }

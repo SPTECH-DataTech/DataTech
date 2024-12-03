@@ -29,8 +29,8 @@ function adicionarFazenda(nomeFazenda, tipoCafe, estadoMunicipio, idEmpresa) {
 }
 
 
-function listarFazendas() {
-    console.log("ACESSEI O FAZENDA MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ");
+function listarFazendas(empresa) {
+    console.log("ACESSEI O FAZENDA MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", empresa);
 
     var instrucaoSql = `
         SELECT 
@@ -46,7 +46,7 @@ function listarFazendas() {
         JOIN 
             estadoMunicipio e ON f.fkEstadoMunicipio = e.id
         JOIN 
-            tipoCafe t ON f.fkTipoCafe = t.id;`;
+            tipoCafe t ON f.fkTipoCafe = t.id WHERE f.fkEmpresa = '${empresa}';`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
