@@ -3,13 +3,18 @@ var dashboardModel = require("../models/dashboardModel");
 function listarProducaoCafe(req, res) {
     let ano = req.body.anoServer;
     let tipoCafe = req.body.tipoCafeServer;
+    let idEmpresa = req.body.idEmpresa;
 
+    if (!idEmpresa) {
+        res.status(400).send("ID da empresa não fornecido");
+        return;
+    }
     if (ano == undefined) {
         res.status(400).send("Ano está undefined");
     } else if (tipoCafe == undefined) {
         res.status(400).send("Tipo de café está undefined");
     } else {
-        dashboardModel.listarProducaoCafe(ano, tipoCafe)
+        dashboardModel.listarProducaoCafe(ano, tipoCafe, idEmpresa)
             .then(
                 function (resultado) {
                     console.log(`\nResultados encontrados: ${resultado.length}`);
@@ -29,13 +34,18 @@ function listarProducaoCafe(req, res) {
 function obterMaiorEficiencia(req, res) {
     let ano = req.body.anoServer;
     let tipoCafe = req.body.tipoCafeServer;
+    let idEmpresa = req.body.idEmpresa;
 
+    if (!idEmpresa) {
+        res.status(400).send("ID da empresa não fornecido");
+        return;
+    }
     if (ano == undefined) {
         res.status(400).send("Ano está undefined");
     } else if (tipoCafe == undefined) {
         res.status(400).send("Tipo de café está undefined");
     } else {
-        dashboardModel.obterMaiorEficiencia(ano, tipoCafe)
+        dashboardModel.obterMaiorEficiencia(ano, tipoCafe, idEmpresa)
             .then(
                 function (resultado) {
                     if (resultado && resultado.length > 0) {
@@ -66,13 +76,18 @@ function obterMaiorEficiencia(req, res) {
 function obterMenorEficiencia(req, res) {
     let ano = req.body.anoServer;
     let tipoCafe = req.body.tipoCafeServer;
+    let idEmpresa = req.body.idEmpresa;
 
+    if (!idEmpresa) {
+        res.status(400).send("ID da empresa não fornecido");
+        return;
+    }
     if (ano == undefined) {
         res.status(400).send("Ano está undefined");
     } else if (tipoCafe == undefined) {
         res.status(400).send("Tipo de café está undefined");
     } else {
-        dashboardModel.obterMenorEficiencia(ano, tipoCafe)
+        dashboardModel.obterMenorEficiencia(ano, tipoCafe, idEmpresa)
             .then(
                 function (resultado) {
                     if (resultado && resultado.length > 0) {
@@ -101,7 +116,9 @@ function obterMenorEficiencia(req, res) {
 }
 
 function listarAnos(req, res) {
-    dashboardModel.listarAnos()
+    var idEmpresa = req.params.idEmpresa;
+
+    dashboardModel.listarAnos(idEmpresa)
         .then(function (resultado) {
             if (resultado && resultado.length > 0) {
                 res.json(resultado);  // Retorna os anos encontrados
@@ -117,7 +134,8 @@ function listarAnos(req, res) {
 
 
 function listarTiposDeCafe(req, res) {
-    dashboardModel.listarTiposDeCafe()
+    var idEmpresa = req.params.idEmpresa;
+    dashboardModel.listarTiposDeCafe(idEmpresa)
         .then(function (resultado) {
             if (resultado && resultado.length > 0) {
                 res.json(resultado); // Retorna os tipos de café
