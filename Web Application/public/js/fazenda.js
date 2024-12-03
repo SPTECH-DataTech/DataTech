@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
     listarTipoCafe();
     verificarPermissoes()
 });
-// name_empresa.innerHTML = sessionStorage.NOME_EMPRESA;
-// name_empresa_modal.innerHTML = sessionStorage.NOME_EMPRESA;
+ name_empresa.innerHTML = sessionStorage.NOME_EMPRESA;
+ name_empresa_modal.innerHTML = sessionStorage.NOME_EMPRESA;
 
 
 function openModal() {

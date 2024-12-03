@@ -10,8 +10,8 @@ b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 name_empresa.innerHTML = sessionStorage.NOME_EMPRESA;
 
 gerenciarPermissoes()
-function gerenciarPermissoes(){
-    if (sessionStorage.permissaoFuncionarios == 0){
+function gerenciarPermissoes() {
+    if (sessionStorage.permissaoFuncionarios == 0) {
         document.getElementById("botoes").style.display = 'none';
         document.getElementById("input-search").style.height = '40px';
 
@@ -33,7 +33,7 @@ function listarFuncionarios() {
         .then(function (resposta) {
             resposta.json().then((dados) => {
                 const container = document.querySelector('.funcionarios');
-                container.innerHTML = ''; 
+                container.innerHTML = '';
 
                 dados.forEach(funcionario => {
                     const div = document.createElement('div');
@@ -77,13 +77,7 @@ function listarFuncionarios() {
 
                     const cargoSpan = document.createElement('span');
                     cargoSpan.classList.add('cargo');
-
-                    if (funcionario.nomeCargo == undefined) {
-                        cargoSpan.innerText = funcionario.nomeCargo;   
-                    } else {
-                        cargoSpan.innerText = "";
-                    }
-
+                    cargoSpan.innerText = funcionario.nomeCargo;
 
                     div.appendChild(nomeSpan);
                     div.appendChild(emailSpan);
@@ -351,17 +345,17 @@ function adicionar() {
                 senhaServer: senha,
             }),
         })
-        .then(resposta => {
-            resposta.json().then(data => {
+            .then(resposta => {
+                resposta.json().then(data => {
                     console.log("Resposta do servidor: ", data);
-    
+
                     if (!resposta.ok) {
                         throw new Error(data.erro);
                     }
                     else {
-    
+
                         document.getElementById('janela-modal').style.display = 'none';
-    
+
                         Swal.fire({
                             title: 'Funcionário Adicionado',
                             text: 'Avise para alterar a senha!',
@@ -379,7 +373,7 @@ function adicionar() {
                                 location.reload();
                             }
                         });
-    
+
                     }
                 })
             })
@@ -387,62 +381,62 @@ function adicionar() {
                 console.log(`#ERRO: ${erro}`);
                 habilitarMensagem(erro.message);
             });
-    
+
         return false;
 
     } else {
 
-    fetch(`equipe/editarExistente/${idUsuario}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            idCargoServer: idCargo,
-            idFazendaServer: idFazenda,
-        }),
-    })
-        .then(resposta => {
-            resposta.json().then(data => {
-                console.log("Resposta do servidor: ", data);
-
-                if (!resposta.ok) {
-                    throw new Error(data.erro);
-                }
-                else {
-
-                    document.getElementById('janela-modal-editar').style.display = 'none';
-
-                    Swal.fire({
-                        icon: 'info',
-                        title: 'Funcionário Editado!',
-                        text: 'Fucionário já existente, editamos seu cargo e sua fazenda!',
-                        confirmButtonText: 'OK',
-                        confirmButtonColor: "#20BF55",
-                        didOpen: () => {
-                            document.querySelector('.menu-lateral').classList.add('ajuste-modal');
-                        },
-                        willClose: () => {
-                            document.querySelector('.menu-lateral').classList.remove('ajuste-modal');
-                        }
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload();
-                        }
-                    });
-
-                }
-            })
+        fetch(`equipe/editarExistente/${idUsuario}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idCargoServer: idCargo,
+                idFazendaServer: idFazenda,
+            }),
         })
-        .catch(function (erro) {
-            console.log(`#ERRO: ${erro}`);
-            habilitarMensagem(erro.message);
-        });
+            .then(resposta => {
+                resposta.json().then(data => {
+                    console.log("Resposta do servidor: ", data);
 
-    return false;
+                    if (!resposta.ok) {
+                        throw new Error(data.erro);
+                    }
+                    else {
+
+                        document.getElementById('janela-modal-editar').style.display = 'none';
+
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Funcionário Editado!',
+                            text: 'Fucionário já existente, editamos seu cargo e sua fazenda!',
+                            confirmButtonText: 'OK',
+                            confirmButtonColor: "#20BF55",
+                            didOpen: () => {
+                                document.querySelector('.menu-lateral').classList.add('ajuste-modal');
+                            },
+                            willClose: () => {
+                                document.querySelector('.menu-lateral').classList.remove('ajuste-modal');
+                            }
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+
+                    }
+                })
+            })
+            .catch(function (erro) {
+                console.log(`#ERRO: ${erro}`);
+                habilitarMensagem(erro.message);
+            });
+
+        return false;
     }
 
-    
+
 }
 
 function fomatarCpf(input) {
