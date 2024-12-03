@@ -1,7 +1,6 @@
 var dashContaModel = require("../models/dashContaModel");
 
 function mostrarInformacoesConta(req, res) {
-
     var idUsuario = req.params.idUsuario
 
     if (idUsuario == undefined) {

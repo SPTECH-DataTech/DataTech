@@ -188,9 +188,9 @@
 </body>
 
 <script>
-
 function carregarAnos() {
-    fetch('/dashboard/listarAnos')
+    const idEmpresa = sessionStorage.ID_EMPRESA
+    fetch(`/dashboard/listarAnos/${idEmpresa}`)
         .then((resposta) => resposta.json())
         .then((dados) => {
             const selectAno = document.getElementById('select-ano');
@@ -201,7 +201,6 @@ function carregarAnos() {
                 selectAno.appendChild(opcao);
             });
 
-            // Define o valor padrão e chama atualizaSelects se ambos os selects estiverem preenchidos
             if (dados.length > 0) {
                 selectAno.value = dados[0].ano;
                 if (document.getElementById('select-cafe').options.length > 0) {
@@ -215,7 +214,8 @@ function carregarAnos() {
 }
 
 function carregarTiposCafe() {
-    fetch('/dashboard/listarTiposDeCafe')
+    const idEmpresa = sessionStorage.ID_EMPRESA
+    fetch(`/dashboard/listarTiposDeCafe/${idEmpresa}`)
         .then((resposta) => resposta.json())
         .then((dados) => {
             const selectCafe = document.getElementById('select-cafe');
@@ -331,7 +331,8 @@ function carregarGrafico(ano, tipoCafe) {
         },
         body: JSON.stringify({
             anoServer: ano,
-            tipoCafeServer: tipoCafe
+            tipoCafeServer: tipoCafe,
+            idEmpresa: sessionStorage.ID_EMPRESA
         })
     })
         .then(response => {
@@ -368,7 +369,8 @@ function carregarMaiorEficiencia(ano, tipoCafe) {
         },
         body: JSON.stringify({
             anoServer: ano,
-            tipoCafeServer: tipoCafe
+            tipoCafeServer: tipoCafe,
+            idEmpresa: sessionStorage.ID_EMPRESA
         })
     })
         .then(response => {
@@ -397,7 +399,8 @@ function carregarMenorEficiencia(ano, tipoCafe) {
         },
         body: JSON.stringify({
             anoServer: ano,
-            tipoCafeServer: tipoCafe
+            tipoCafeServer: tipoCafe,
+            idEmpresa: sessionStorage.ID_EMPRESA
         })
     })
         .then(response => {

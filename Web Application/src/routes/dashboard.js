@@ -16,12 +16,12 @@ router.post("/obterMenorEficiencia", function (req, res) {
     dashboardController.obterMenorEficiencia(req, res);
 });
 
-router.get("/listarAnos", function (req, res) {
+router.get("/listarAnos/:idEmpresa", function (req, res) {
     dashboardController.listarAnos(req, res);
 });
 
 
-router.get("/listarTiposDeCafe", function (req, res) {
+router.get("/listarTiposDeCafe/:idEmpresa", function (req, res) {
     dashboardController.listarTiposDeCafe(req, res);
 });
 

@@ -1,6 +1,6 @@
 var database = require("../database/config");
 
-function listarProducaoCafe(ano, tipoCafe) {
+function listarProducaoCafe(ano, tipoCafe, idEmpresa) {
     let instrucaoSql = `
  select 
             em.estado as estado,
@@ -9,7 +9,7 @@ function listarProducaoCafe(ano, tipoCafe) {
         from plantacaoFazenda as pf
         inner join fazenda f on pf.fkFazenda = f.id
         inner join estadoMunicipio em on f.fkEstadoMunicipio = em.id
-        where pf.ano = ${ano} and f.fkTipoCafe = ${tipoCafe} and pf.fazenda_fkEmpresa = 3
+        where pf.ano = ${ano} and f.fkTipoCafe = ${tipoCafe} and pf.fazenda_fkEmpresa = ${idEmpresa}
         group by em.estado
         order by toneladasColhidas desc
         limit 5;
@@ -17,7 +17,7 @@ function listarProducaoCafe(ano, tipoCafe) {
 
     return database.executar(instrucaoSql);
 }
-function obterMaiorEficiencia(ano, tipoCafe) {
+function obterMaiorEficiencia(ano, tipoCafe, idEmpresa) {
     let instrucaoSql = `
          select 
             em.estado as estado,
@@ -30,7 +30,7 @@ function obterMaiorEficiencia(ano, tipoCafe) {
         from plantacaoFazenda as pf
         inner join fazenda f on pf.fkfazenda = f.id
         inner join estadoMunicipio em on f.fkestadomunicipio = em.id 
-        where pf.ano = ${ano} and  f.fkTipoCafe = ${tipoCafe} and pf.fazenda_fkEmpresa = 3
+        where pf.ano = ${ano} and  f.fkTipoCafe = ${tipoCafe} and pf.fazenda_fkEmpresa = ${idEmpresa}
         group by em.estado
         order by porcentagemPerda asc
         limit 1;
@@ -39,7 +39,7 @@ function obterMaiorEficiencia(ano, tipoCafe) {
     return database.executar(instrucaoSql);
 }
 
-function obterMenorEficiencia(ano, tipoCafe) {
+function obterMenorEficiencia(ano, tipoCafe, idEmpresa) {
     let instrucaoSql = `
         select 
         em.estado as estadoMenor,
@@ -52,7 +52,7 @@ function obterMenorEficiencia(ano, tipoCafe) {
         from plantacaoFazenda as pf
         inner join fazenda f on pf.fkFazenda = f.id
         inner join estadoMunicipio em on f.fkEstadoMunicipio = em.id
-        where pf.ano = ${ano} and f.fktipocafe = ${tipoCafe} and pf.fazenda_fkEmpresa = 3
+        where pf.ano = ${ano} and f.fktipocafe = ${tipoCafe} and pf.fazenda_fkEmpresa = ${idEmpresa}
         group by em.estado
         order by porcentagemPerdaMenor desc 
         limit 1; 
@@ -62,11 +62,11 @@ function obterMenorEficiencia(ano, tipoCafe) {
 }
 
 
-function listarAnos() {
+function listarAnos(idEmpresa) {
     let instrucaoSql = `
         SELECT DISTINCT ano 
         FROM plantacaoFazenda
-        where fazenda_fkEmpresa = 3
+        where fazenda_fkEmpresa = ${idEmpresa}
         ORDER BY ano;
     ;
     `;
@@ -74,7 +74,7 @@ function listarAnos() {
 }
 
 
-function listarTiposDeCafe() {
+function listarTiposDeCafe(idEmpresa) {
     let instrucaoSql = `
         SELECT DISTINCT 
             tc.id as idCafe,
@@ -82,7 +82,7 @@ function listarTiposDeCafe() {
         FROM datatech.tipoCafe tc
         INNER JOIN datatech.fazenda f ON tc.id = f.fkTipoCafe
         INNER JOIN plantacaoFazenda pf ON pf.fkFazenda = f.id
-        WHERE f.fkEmpresa = 3;
+        WHERE f.fkEmpresa = ${idEmpresa};
     `;
     return database.executar(instrucaoSql);
 }
