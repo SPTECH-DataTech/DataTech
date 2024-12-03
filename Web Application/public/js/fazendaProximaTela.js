@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     verificarPermissoes()
 });
 
-    name_empresa.innerHTML = sessionStorage.NOME_FAZENDA;
+    name_empresa.innerHTML = sessionStorage.NOME_EMPRESA;
 
 let listaEstadoMunicipio = [];
 listarEstados(); 

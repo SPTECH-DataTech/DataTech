@@ -118,20 +118,17 @@ function listarAnos(req, res) {
 
 function listarTiposDeCafe(req, res) {
     dashboardModel.listarTiposDeCafe()
-        .then(
-            function (resultado) {
-                if (resultado && resultado.length > 0) {
-                    res.json(resultado);
-                } else {
-                    res.status(404).send("Nenhum tipo de café encontrado.");
-                }
+        .then(function (resultado) {
+            if (resultado && resultado.length > 0) {
+                res.json(resultado); // Retorna os tipos de café
+            } else {
+                res.status(404).send("Nenhum tipo de café encontrado.");
             }
-        ).catch(
-            function (erro) {
-                console.log(erro);
-                res.status(500).json({ erro: "Erro ao consultar tipos de café", erroDetalhado: erro.sqlMessage });
-            }
-        );
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            res.status(500).json({ erro: "Erro ao consultar tipos de café", erroDetalhado: erro.sqlMessage });
+        });
 }
 
 

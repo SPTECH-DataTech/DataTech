@@ -5,9 +5,11 @@ function listarFuncionarios(idFazenda) {
 
   var instrucaoSql = `SELECT fun.id,
 fun.nome,
-fun.email
+fun.email,
+car.nomeCargo
 FROM funcionario fun
 JOIN fazenda faz ON fun.fkFazenda = faz.id
+JOIN cargo car ON fun.fkCargo = car.id
 WHERE faz.id = ${idFazenda};`;
 
   return database.executar(instrucaoSql);

@@ -73,8 +73,6 @@
                             </select>
 
                             <select id="select-cafe" class="select-cafe">
-                                <option value="1">Café Arábica</option>
-                                <option value="2">Café Robusta</option>
                             </select>
 
                             <button type="button" class="btn-atualizar" id="btn-atualizar" onclick="atualizaSelects()">Atualizar</button>
@@ -215,6 +213,7 @@
 
     </section>
     <script src="./js/dashboard.js"></script>
+    <script src="./js/sessao.js"></script>
 </body>
 
 <script>
@@ -230,10 +229,13 @@ function carregarAnos() {
                 opcao.textContent = ano.ano; 
                 selectAno.appendChild(opcao);
             });
+
+            // Define o valor padrão e chama atualizaSelects se ambos os selects estiverem preenchidos
             if (dados.length > 0) {
                 selectAno.value = dados[0].ano;
-                const tipoCafe = document.getElementById("select-cafe").value;
-                atualizaSelects(); 
+                if (document.getElementById('select-cafe').options.length > 0) {
+                    atualizaSelects();
+                }
             }
         })
         .catch((erro) => {
@@ -242,23 +244,41 @@ function carregarAnos() {
 }
 
 function carregarTiposCafe() {
-    const selectCafe = document.getElementById("select-cafe");
-    if (selectCafe.options.length > 0) {
-        selectCafe.value = selectCafe.options[0].value;
-    }
+    fetch('/dashboard/listarTiposDeCafe')
+        .then((resposta) => resposta.json())
+        .then((dados) => {
+            const selectCafe = document.getElementById('select-cafe');
+            dados.forEach((cafe) => {
+                const opcao = document.createElement('option');
+                opcao.value = cafe.idCafe; // Define o valor como o ID do café
+                opcao.textContent = cafe.nomeCafe; // Define o texto como o nome do café
+                selectCafe.appendChild(opcao);
+            });
+
+            // Define o valor padrão e chama atualizaSelects se ambos os selects estiverem preenchidos
+            if (dados.length > 0) {
+                selectCafe.value = dados[0].idCafe;
+                if (document.getElementById('select-ano').options.length > 0) {
+                    atualizaSelects();
+                }
+            }
+        })
+        .catch((erro) => {
+            console.error('Erro ao carregar os tipos de café:', erro);
+        });
 }
+
 
 window.onload = function() {
     carregarAnos();
     carregarTiposCafe();
-    atualizarDashboard();
 };
 
 function atualizaSelects() {
     const ano = document.getElementById("select-ano").value;
     const tipoCafe = document.getElementById("select-cafe").value;
 
-    if (ano !== "#" && tipoCafe !== "#") {
+    if (ano && tipoCafe) { // Verifica se ambos os valores estão preenchidos
         carregarGrafico(ano, tipoCafe);
         carregarMaiorEficiencia(ano, tipoCafe);
         carregarMenorEficiencia(ano, tipoCafe);
@@ -285,7 +305,7 @@ function criarGrafico(estados, cafePlantado, cafeColhido) {
             labels: estados,
             datasets: [
                 {
-                    label: "Café Plantado (Toneladas)",
+                    label: "Estimativa Café Plantado (Toneladas)",
                     data: cafePlantado,
                     backgroundColor: '#a56aec',
                     borderWidth: 1,
@@ -390,7 +410,7 @@ function carregarMaiorEficiencia(ano, tipoCafe) {
         .then(data => {
             document.getElementById("estado_maior_eficiencia").textContent = data.estado;
             document.getElementById("quantidade_perdida_plantada_maior").textContent = data.quantidadePerdida + " / " + data.quantidadePlantada + " (t)";
-            document.getElementById("maior_eficiencia_porcentagem_perdida").textContent = data.porcentagemPerda + "%";
+            document.getElementById("maior_eficiencia_porcentagem_perdida").textContent = data.porcentagemPerda + "% Perdido";
         })
         .catch(error => {
             console.error("Erro:", error);
@@ -419,7 +439,7 @@ function carregarMenorEficiencia(ano, tipoCafe) {
         .then(data => {
             document.getElementById("estado_menor_eficiencia").textContent = data.estadoMenor;
             document.getElementById("quantidade_perdida_plantada_menor").textContent = data.quantidadePerdidaMenor + " / " + data.quantidadePlantadaMenor + " (t)";
-            document.getElementById("menor_eficiencia_porcentagem_perdida").textContent = data.porcentagemPerdaMenor + "%";
+            document.getElementById("menor_eficiencia_porcentagem_perdida").textContent = data.porcentagemPerdaMenor + "% Perdido";
         })
         .catch(error => {
             console.error("Erro:", error);
