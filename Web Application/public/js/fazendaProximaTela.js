@@ -1,11 +1,12 @@
 
-window.onload = function() {
+document.addEventListener("DOMContentLoaded", function () {
     select_estado_fazenda.value = sessionStorage.NOME_ESTADO_FAZENDA;
     select_municipio_fazenda.value = sessionStorage.MUNICIPIO_FAZENDA;
     input_nome_fazenda.value = sessionStorage.NOME_FAZENDA;
     select_tipo_cafe.value = sessionStorage.TIPO_CAFE_FAZENDA;
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-    };
+    verificarPermissoes()
+});
 
     name_empresa.innerHTML = sessionStorage.NOME_FAZENDA;
 
@@ -241,4 +242,19 @@ function listarMunicipios(estadoSelecionado) {
         .catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
         });
+}
+
+function verificarPermissoes() {
+    let botoesEdicao = document.getElementById("button-editar");
+    let botaoRemover = document.getElementById("button-remover");
+    let botaoAdcionarFazenda = document.getElementById("adicionarFazenda");
+    const permissaoFazendas = parseInt(sessionStorage.PERMISSAO_FAZENDAS);
+    if (permissaoFazendas != 1) {
+        botoesEdicao.style.display = "none";
+        botaoRemover.style.display = "none";
+        botaoAdcionarFazenda.style.display = "none";
+        return;
+    }
+
+
 }

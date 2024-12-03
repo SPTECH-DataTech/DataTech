@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     listarEstados();
     listarPermissoes()
     listarTipoCafe();
+    verificarPermissoes()
 });
 // name_empresa.innerHTML = sessionStorage.NOME_EMPRESA;
 // name_empresa_modal.innerHTML = sessionStorage.NOME_EMPRESA;
@@ -200,10 +201,14 @@ function listarFazendas() {
 
                    
 
-                    content  += `<div class="adcionarFazenda" id="adcionarFazenda">
-                                <img src="./assets/imgs/Group 413 (1).png" alt="" class="image-button">
-                                <button class="botton-add-farm" onclick="openModal()"><img src="./assets/imgs/add (1).png" alt=""></button>
-                                </div>`
+                    const permissaoFazendas = parseInt(sessionStorage.PERMISSAO_FAZENDAS);
+                    if (permissaoFazendas == 1) {
+                        content  += `<div class="adcionarFazenda" id="adcionarFazenda">
+                        <img src="./assets/imgs/Group 413 (1).png" alt="" class="image-button">
+                        <button class="botton-add-farm" onclick="openModal()"><img src="./assets/imgs/add (1).png" alt=""></button>
+                        </div>`
+                    }
+                   
 
                     document.getElementById('farmList').insertAdjacentHTML('beforeend', content);
 
@@ -287,3 +292,14 @@ function listarPermissoes() {
         });
 }
 
+
+function verificarPermissoes() {
+    let botaoAdcionarFazenda = document.getElementById("adcionarFazenda");
+    const permissaoFazendas = parseInt(sessionStorage.PERMISSAO_FAZENDAS);
+    if (permissaoFazendas != 1) {
+        botaoAdcionarFazenda.style.display = "none";
+        return;
+    }
+
+
+}
