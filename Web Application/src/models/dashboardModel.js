@@ -66,7 +66,9 @@ function listarAnos() {
     let instrucaoSql = `
         SELECT DISTINCT ano 
         FROM plantacaoFazenda
+        where fazenda_fkEmpresa = 3
         ORDER BY ano;
+    ;
     `;
     return database.executar(instrucaoSql);  // Executa a consulta
 }
@@ -84,6 +86,7 @@ function listarTiposDeCafe() {
     `;
     return database.executar(instrucaoSql);
 }
+
 
 
 module.exports = {
