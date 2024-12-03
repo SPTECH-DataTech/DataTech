@@ -1,14 +1,13 @@
 var idFazenda = sessionStorage.ID_FAZENDA;
-var nomeFazenda = sessionStorage.NOME_FAZENDA;
 var idFuncionario = sessionStorage.ID_FUNCIONARIO;
-var nomeUsuario = sessionStorage.NOME_USUARIO;
 var idUsuario = sessionStorage.ID_USUARIO;
 var idEmpresa = sessionStorage.ID_EMPRESA;
 var cpfSessionStorage = sessionStorage.CPF_USUARIO;
 
-nome_fazenda1.innerHTML = `${nomeFazenda}`;
-nome_fazenda2.innerHTML = `${nomeFazenda}`;
-b_usuario.innerHTML = `${nomeUsuario}`;
+nome_fazenda1.innerHTML = sessionStorage.NOME_FAZENDA;
+nome_fazenda2.innerHTML = sessionStorage.NOME_FAZENDA;
+b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+name_empresa.innerHTML = sessionStorage.NOME_EMPRESA;
 
 gerenciarPermissoes()
 function gerenciarPermissoes(){
@@ -85,8 +84,6 @@ function listarFuncionarios() {
                         cargoSpan.innerText = "";
                     }
 
-                    div.appendChild(checkbox);
-                    div.appendChild(img);
 
                     div.appendChild(nomeSpan);
                     div.appendChild(emailSpan);

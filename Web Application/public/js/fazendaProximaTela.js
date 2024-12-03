@@ -1,3 +1,4 @@
+
 window.onload = function() {
     select_estado_fazenda.value = sessionStorage.NOME_ESTADO_FAZENDA;
     select_municipio_fazenda.value = sessionStorage.MUNICIPIO_FAZENDA;
@@ -5,6 +6,8 @@ window.onload = function() {
     select_tipo_cafe.value = sessionStorage.TIPO_CAFE_FAZENDA;
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
     };
+
+    name_empresa.innerHTML = sessionStorage.NOME_FAZENDA;
 
 let listaEstadoMunicipio = [];
 listarEstados(); 
@@ -95,12 +98,12 @@ function removerFazenda() {
     return false;
 }
 
-const equipe = document.getElementById('card-cargos');
+const equipe = document.getElementById('card-equipe');
 equipe.addEventListener('click', function () {
     window.location.href = "equipe.html";
 });
 
-const cargos = document.getElementById('card-equipe');
+const cargos = document.getElementById('card-cargos');
 cargos.addEventListener('click', function () {
     window.location.href = "cargos.html";
 });

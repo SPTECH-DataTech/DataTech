@@ -47,7 +47,9 @@ body {
     background-color: #210042;
 }
 
-
+button {
+    cursor: pointer;
+}
 
 /* -------------------------MENU LATERAL------------------------- */
 
