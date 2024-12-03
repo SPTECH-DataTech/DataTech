@@ -51,14 +51,14 @@ function obterMaiorEficiencia(req, res) {
                     if (resultado && resultado.length > 0) {
                         let estado = resultado[0].estado;
                         let quantidadePlantada = resultado[0].quantidadePlantada;
-                        let quantidadePerdida = resultado[0].quantidadePerdida;
-                        let porcentagemPerda = resultado[0].porcentagemPerda;
+                        let quantidadeColhida = resultado[0].quantidadeColhida;
+                        let porcentagemGanho = resultado[0].porcentagemGanho;
 
                         res.json({
                             estado: estado,
                             quantidadePlantada: quantidadePlantada,
-                            quantidadePerdida: quantidadePerdida,
-                            porcentagemPerda: porcentagemPerda
+                            quantidadeColhida: quantidadeColhida,
+                            porcentagemGanho: porcentagemGanho
                         });
                     } else {
                         res.status(404).send("Nenhum resultado encontrado.");

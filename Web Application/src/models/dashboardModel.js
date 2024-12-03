@@ -19,21 +19,22 @@ function listarProducaoCafe(ano, tipoCafe, idEmpresa) {
 }
 function obterMaiorEficiencia(ano, tipoCafe, idEmpresa) {
     let instrucaoSql = `
-         select 
-            em.estado as estado,
-            round(sum((pf.areaplantada * 39 * 60) / 1000), 0) as quantidadePlantada,  -- quantidade plantada em toneladas
-            round(sum((pf.areaplantada * 39 * 60) / 1000) - sum(pf.quantidadecolhida), 0) as quantidadePerdida, -- quantidade perdida em toneladas
-            round(
-                ((sum((pf.areaplantada * 39 * 60) / 1000) - sum(pf.quantidadecolhida)) / 
-                sum((pf.areaplantada * 39 * 60) / 1000)) * 100, 2
-            ) as porcentagemPerda
-        from plantacaoFazenda as pf
-        inner join fazenda f on pf.fkfazenda = f.id
-        inner join estadoMunicipio em on f.fkestadomunicipio = em.id 
-        where pf.ano = ${ano} and  f.fkTipoCafe = ${tipoCafe} and pf.fazenda_fkEmpresa = ${idEmpresa}
-        group by em.estado
-        order by porcentagemPerda asc
-        limit 1;
+
+    select 
+    em.estado as estado,
+    round(sum((pf.areaplantada * 39 * 60) / 1000), 0) as quantidadePlantada, -- quantidade plantada em toneladas
+    round(sum(pf.quantidadecolhida), 0) as quantidadeColhida, -- quantidade efetivamente colhida em toneladas
+    round(
+        (sum(pf.quantidadecolhida) / sum((pf.areaplantada * 39 * 60) / 1000)) * 100, 2
+    ) as porcentagemGanho
+    from plantacaoFazenda as pf
+    inner join fazenda f on pf.fkfazenda = f.id
+    inner join estadoMunicipio em on f.fkestadomunicipio = em.id 
+    where pf.ano = ${ano} and f.fkTipoCafe = ${tipoCafe} and pf.fazenda_fkEmpresa = ${idEmpresa}
+    group by em.estado
+    order by porcentagemGanho desc
+    limit 1;
+
     `;
 
     return database.executar(instrucaoSql);

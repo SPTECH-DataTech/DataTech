@@ -94,7 +94,7 @@
                                     <h3 id="quantidade_perdida_plantada_maior"></h3>
                                 </div>
                                 <div class="percentagem">
-                                    <h4 style="color: #10BB00; font-size: 20px;"
+                                    <h4 style="color: #10BB00; font-size: 15px; margin: 3px;"
                                         id="maior_eficiencia_porcentagem_perdida"></h4>
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                                     <h3 id="quantidade_perdida_plantada_menor"></h3>
                                 </div>
                                 <div class="percentagem">
-                                    <h4 style="color: #ff0000; font-size: 20px;"
+                                    <h4 style="color: #ff0000;font-size: 15px; margin: 3px;"
                                         id="menor_eficiencia_porcentagem_perdida"></h4>
                                 </div>
                             </div>
@@ -382,8 +382,8 @@ function carregarMaiorEficiencia(ano, tipoCafe) {
         })
         .then(data => {
             document.getElementById("estado_maior_eficiencia").textContent = data.estado;
-            document.getElementById("quantidade_perdida_plantada_maior").textContent = data.quantidadePerdida + " / " + data.quantidadePlantada + " (t)";
-            document.getElementById("maior_eficiencia_porcentagem_perdida").textContent = data.porcentagemPerda + "% Perdido";
+            document.getElementById("quantidade_perdida_plantada_maior").textContent = data.quantidadeColhida + " / " + data.quantidadePlantada + " (t)";
+            document.getElementById("maior_eficiencia_porcentagem_perdida").textContent =  "Rendimento de " + data.porcentagemGanho + "%";
         })
         .catch(error => {
             console.error("Erro:", error);
