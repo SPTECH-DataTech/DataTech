@@ -20,7 +20,7 @@ body {
   width: 100vw;
   height: 100vh;
 
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 ::selection {
@@ -136,9 +136,8 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  /* background-color: #ffffff; */
   width: 90%;
-  overflow-x: hidden;
+  /* overflow-y: hidden; */
 }
 
 .navbar {
@@ -172,7 +171,7 @@ h1 {
 .dashboard {
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 100%;
 }
 
 .titulo-dash {
@@ -254,7 +253,7 @@ canvas {
   margin: 14px 15px;
 }
 
-.select-ano {
+#select-ano {
   margin: 0;
   padding: 6px;
   border: 1px solid #ccc;

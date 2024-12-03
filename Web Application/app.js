@@ -23,6 +23,7 @@ var fazendaRouter = require("./src/routes/fazenda");
 var cargoRouter = require("./src/routes/cargo")
 var dashContaRouter = require("./src/routes/dashConta");
 var dashboardRouter = require("./src/routes/dashboard");
+var dash2 = require("./src/routes/dash2");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -39,7 +40,7 @@ app.use("/fazenda", fazendaRouter);
 app.use("/cargo", cargoRouter);
 app.use("/dashConta", dashContaRouter);
 app.use("/dashboard", dashboardRouter);
-
+app.use("/dash2", dash2);
 
 
 

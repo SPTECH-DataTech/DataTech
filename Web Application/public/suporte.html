@@ -107,7 +107,7 @@
         const messageInput = document.querySelector('#message').value;
 
         try {
-            const response = await fetch('/enviarEmailSuporte', {
+            const response = await fetch('/enviarEmailSuporte/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
