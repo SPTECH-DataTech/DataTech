@@ -9,7 +9,7 @@ function listarProducaoCafe(ano, tipoCafe) {
         from plantacaoFazenda as pf
         inner join fazenda f on pf.fkFazenda = f.id
         inner join estadoMunicipio em on f.fkEstadoMunicipio = em.id
-        where pf.ano = ${ano} and f.fkTipoCafe = ${tipoCafe}
+        where pf.ano = ${ano} and f.fkTipoCafe = ${tipoCafe} and pf.fazenda_fkEmpresa = 3
         group by em.estado
         order by toneladasColhidas desc
         limit 5;
@@ -29,8 +29,8 @@ function obterMaiorEficiencia(ano, tipoCafe) {
             ) as porcentagemPerda
         from plantacaoFazenda as pf
         inner join fazenda f on pf.fkfazenda = f.id
-        inner join estadoMunicipio em on f.fkestadomunicipio = em.id
-        where pf.ano = ${ano} and ${tipoCafe}
+        inner join estadoMunicipio em on f.fkestadomunicipio = em.id 
+        where pf.ano = ${ano} and  f.fkTipoCafe = ${tipoCafe} and pf.fazenda_fkEmpresa = 3
         group by em.estado
         order by porcentagemPerda asc
         limit 1;
@@ -52,7 +52,7 @@ function obterMenorEficiencia(ano, tipoCafe) {
         from plantacaoFazenda as pf
         inner join fazenda f on pf.fkFazenda = f.id
         inner join estadoMunicipio em on f.fkEstadoMunicipio = em.id
-        where pf.ano = ${ano} and f.fktipocafe = ${tipoCafe}
+        where pf.ano = ${ano} and f.fktipocafe = ${tipoCafe} and pf.fazenda_fkEmpresa = 3
         group by em.estado
         order by porcentagemPerdaMenor desc 
         limit 1; 
