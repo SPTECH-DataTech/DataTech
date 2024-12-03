@@ -74,14 +74,16 @@ function listarAnos() {
 
 function listarTiposDeCafe() {
     let instrucaoSql = `
-        SELECT DISTINCT tc.nome AS TipoCafeNome
+        SELECT DISTINCT 
+            tc.id as idCafe,
+            tc.nome as nomeCafe
         FROM datatech.tipoCafe tc
-        JOIN datatech.fazenda f ON tc.id = f.fkTipoCafe;
+        INNER JOIN datatech.fazenda f ON tc.id = f.fkTipoCafe
+        INNER JOIN plantacaoFazenda pf ON pf.fkFazenda = f.id
+        WHERE f.fkEmpresa = 3;
     `;
-    
     return database.executar(instrucaoSql);
 }
-
 
 
 module.exports = {

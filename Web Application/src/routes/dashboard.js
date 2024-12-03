@@ -21,7 +21,7 @@ router.get("/listarAnos", function (req, res) {
 });
 
 
-router.post("/listarTiposDeCafe", function (req, res) {
+router.get("/listarTiposDeCafe", function (req, res) {
     dashboardController.listarTiposDeCafe(req, res);
 });
 
