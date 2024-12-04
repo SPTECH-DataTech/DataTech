@@ -192,6 +192,31 @@ function listarClimogramaPorAno(req, res) {
         });
 }
 
+function listarClimaInadequado(req, res) {
+    let ano = req.body.anoServer;
+    let idUf = req.body.idUf;
+
+    console.log(`Ano: ${ano}, ID da UF: ${idUf}`);  // Adicionando para depuração
+
+    if (ano == undefined) {
+        res.status(400).send("Ano está undefined");
+    } else if (idUf == undefined) {
+        res.status(400).send("ID da UF está undefined");
+    } else {
+        dashboardModel.listarClimaInadequado(ano, idUf)
+            .then(function (resultado) {
+                console.log(`Resultados encontrados: ${resultado.length}`);  // Verifique o tamanho do resultado
+                res.json(resultado);
+            })
+            .catch(function (erro) {
+                console.log(erro);
+                console.log("\nHouve um erro ao consultar o clima inadequado", erro.sqlMessage);
+                res.status(500).json({ erro: "Houve um erro ao consultar o clima inadequado", erro: erro.sqlMessage });
+            });
+    }
+}
+
+
 module.exports = {
     listarProducaoCafe,
     obterMaiorEficiencia,
@@ -199,6 +224,7 @@ module.exports = {
     listarAnos,
     listarTiposDeCafe,
     listarEstados,
-    listarClimogramaPorAno
+    listarClimogramaPorAno,
+    listarClimaInadequado
 };
 
