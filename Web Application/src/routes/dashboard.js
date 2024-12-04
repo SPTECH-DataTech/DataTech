@@ -25,4 +25,17 @@ router.get("/listarTiposDeCafe/:idEmpresa", function (req, res) {
     dashboardController.listarTiposDeCafe(req, res);
 });
 
+
+router.post("/listarEstados", function (req, res) {
+    dashboardController.listarEstados(req, res);
+});
+
+
+router.post("/listarClimogramaPorAno", function (req, res) {
+    dashboardController.listarClimogramaPorAno(req, res);
+});
+
+
+
+
 module.exports = router;

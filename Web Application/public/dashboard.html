@@ -127,16 +127,16 @@
                     </div>
 
                     <div class="container">
-                        <select class="select-ano2">
+                        <!-- <select class="select-ano2">
+                        
+                        </select> -->
+
+                        <select id="select-estado" class="select-estado">
                         
                         </select>
 
-                        <select class="select-estado">
-                        
-                        </select>
 
-
-                        <button type="submit" class="btn-atualizar">Atualizar</button>
+                        <button type="submit" class="btn-atualizar" id="btn-atualizar-estado" onclick="atualizaSelectEstado()">Atualizar</button>
                     </div>
 
 
@@ -221,12 +221,12 @@ function carregarTiposCafe() {
             const selectCafe = document.getElementById('select-cafe');
             dados.forEach((cafe) => {
                 const opcao = document.createElement('option');
-                opcao.value = cafe.idCafe; // Define o valor como o ID do café
-                opcao.textContent = cafe.nomeCafe; // Define o texto como o nome do café
+                opcao.value = cafe.idCafe; 
+                opcao.textContent = cafe.nomeCafe; 
                 selectCafe.appendChild(opcao);
             });
 
-            // Define o valor padrão e chama atualizaSelects se ambos os selects estiverem preenchidos
+        
             if (dados.length > 0) {
                 selectCafe.value = dados[0].idCafe;
                 if (document.getElementById('select-ano').options.length > 0) {
@@ -243,6 +243,7 @@ function carregarTiposCafe() {
 window.onload = function() {
     carregarAnos();
     carregarTiposCafe();
+    carregarEstados();
 };
 
 function atualizaSelects() {
@@ -254,10 +255,21 @@ function atualizaSelects() {
         carregarMaiorEficiencia(ano, tipoCafe);
         carregarMenorEficiencia(ano, tipoCafe);
     } else {
-        alert("Por favor, selecione um ano e tipo de café válidos.");
+        alert("Por favor, selecione um ano e tipo de café ou Estado válidos.");
     }
 }
 
+
+function atualizaSelectEstado() {
+    const ano = document.getElementById("select-ano").value;
+    const idUf = document.getElementById("select-estado").value;
+
+    if (ano && idUf) {
+        carregarGraficoClimograma(ano, idUf);
+    } else {
+        alert("Por favor, selecione um Estado válidos.");
+    }
+}
 
 
 let chartInstance; 
@@ -265,7 +277,6 @@ let chartInstance;
 function criarGrafico(estados, cafePlantado, cafeColhido) {
     const ctx = document.getElementById("graficoCafe").getContext("2d");
 
-    // Verifica se há um gráfico existente e o destrói
     if (chartInstance) {
         chartInstance.destroy();
     }
@@ -421,70 +432,161 @@ function carregarMenorEficiencia(ano, tipoCafe) {
         });
 }
 
-</script>
-<script>
-    const ctx1 = document.getElementById('climograma').getContext('2d');
-    const climograma = new Chart(ctx1, {
-        type: 'bar',
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            datasets: [
-                {
-                    label: 'Temperatura Média (°C)',
-                    data: [22, 23, 24, 26, 28, 30, 31, 30, 28, 25, 23, 21],
-                    type: 'line',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 2,
-                    fill: false,
-                    yAxisID: 'y temperature'
-                },
-                {
-                    label: 'Umidade (%)',
-                    data: [85, 80, 75, 70, 65, 60, 55, 60, 70, 75, 80, 85],
-                    backgroundColor: '#6c81dd',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1,
-                    yAxisID: 'y moisture',
-                    barThickness: 20
-                },
 
-            ]
+
+
+
+function carregarEstados() {
+    fetch('/dashboard/listarEstados', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
         },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                },
-                'y moisture': {
-                    type: 'linear',
-                    position: 'left',
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Umidade (%)'
-                    }
-                },
-                'y temperature': {
-                    type: 'linear',
-                    position: 'right',
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Temperatura Média (°C)'
-                    },
-                    grid: {
-                        drawOnChartArea: false,
-                    }
-                }
-            },
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Climograma: Temperatura e Umidade'
+        body: JSON.stringify({}) 
+    })
+    .then(response => response.json())
+    .then(data => {
+        const selectEstado = document.getElementById('select-estado');
+        if (!selectEstado) {
+            console.error('Elemento select-estado não encontrado');
+            return;
+        }
+
+        data.forEach(estado => {
+            const option = document.createElement('option');
+            option.value = estado.idUf;
+            option.textContent = estado.estado;
+            selectEstado.appendChild(option);
+        });
+        if (data.length > 0) {
+            const primeiroEstado = data[0];  // aqui pega o primeiro estado da lista do select
+            selectEstado.value = primeiroEstado.idUf;  // seleciona o primeiro estado no select
+
+            // Agora aqui chama o gráfico de climograma com o idUf do primeiro estado
+            carregarGraficoClimograma(idUf);
+        }
+        else {
+            console.error('Nenhum estado encontrado.');
+        }
+    })
+    .catch(error => {
+        console.error('Erro ao carregar estados:', error);
+    });
+}
+
+
+   function carregarGraficoClimograma(ano, idUf) {
+    fetch("/dashboard/listarClimogramaPorAno", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            anoServer: ano,
+            idUfServer: idUf 
+        })
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Erro ao buscar dados.");
+            }
+        })
+        .then(data => {
+            console.log("Dados recebidos do climograma:", data);
+            if (data.length > 0) {
+                const meses = data.map(item => item.mes);
+                const temperaturaMedia = data.map(item => parseFloat(item.temperaturaMedia));
+                const umidadeMedia = data.map(item => parseFloat(item.umidadeMedia));
+
+                console.log(meses, temperaturaMedia, umidadeMedia); 
+                criarGraficoClimograma(meses, temperaturaMedia, umidadeMedia);
+            } else {
+                alert("Não há dados para o ano e município selecionados PARA PLOTAR GRAFICO DE CLIMOGRAMA.");
+                if (chartClimogramaInstance) {
+                    chartClimogramaInstance.destroy();
                 }
             }
-        }
-    });
+        })
+
+        .catch(error => {
+            console.error("Erro:", error);
+            alert("Erro ao buscar os dados do climograma. O banco de dados não possui esses dados para o ano ou município.");
+        });
+}
+let chartClimogramaInstance;
+
+function criarGraficoClimograma(meses, temperaturaMedia, umidadeMedia) {
+    const ctx = document.getElementById("climograma").getContext("2d");
+
+    if (chartClimogramaInstance) {
+        chartClimogramaInstance.destroy();
+    }
+
+    chartClimogramaInstance = new Chart(ctx, {
+        type: 'bar',
+            data: {
+                labels: meses, 
+                datasets: [
+                    {
+                        label: 'Temperatura Média (°C)',
+                        data: temperaturaMedia,
+                        type: 'line',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 2,
+                        fill: false,
+                        yAxisID: 'y temperature'
+                    },
+                    {
+                        label: 'Umidade (%)',
+                        data: umidadeMedia,
+                        backgroundColor: '#6c81dd',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1,
+                        yAxisID: 'y moisture',
+                        barThickness: 20
+                    },
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                    },
+                    'y moisture': {
+                        type: 'linear',
+                        position: 'left',
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Umidade (%)'
+                        }
+                    },
+                    'y temperature': {
+                        type: 'linear',
+                        position: 'right',
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Temperatura Média (°C)'
+                        },
+                        grid: {
+                            drawOnChartArea: false,
+                        }
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Climograma: Temperatura e Umidade'
+                    }
+                }
+            }
+        });
+    }
+
+
 </script>
 
 </html>
