@@ -32,8 +32,8 @@ function obterCafeMaisEficiente(idEmpresa, ano) {
     INNER JOIN fazenda f
         ON pf.fkFazenda = f.id
     WHERE
-        pf.ano = 1985
-        AND f.fkEmpresa = 3
+        pf.ano = ${ano}
+        AND f.fkEmpresa = ${idEmpresa}
 )
 SELECT
     ROUND(SUM((pf.areaPlantada * 38.74 * 60) / 1000), 2) AS especulacaoToneladasPlantadas,
@@ -52,8 +52,8 @@ INNER JOIN estadoMunicipio em
 INNER JOIN tipoCafe tc
     ON f.fkTipoCafe = tc.id
 WHERE
-    pf.ano = 1985
-    AND f.fkEmpresa = 3
+    pf.ano = ${ano}
+    AND f.fkEmpresa = ${idEmpresa}
 GROUP BY
     tc.nome
 ORDER BY
@@ -74,8 +74,8 @@ function obterCafeMenosEficiente(idEmpresa, ano) {
     INNER JOIN fazenda f
         ON pf.fkFazenda = f.id
     WHERE
-        pf.ano = 1985
-        AND f.fkEmpresa = 3
+        pf.ano = ${ano}
+        AND f.fkEmpresa = ${idEmpresa}
 )
 SELECT
     ROUND(SUM((pf.areaPlantada * 38.74 * 60) / 1000), 2) AS especulacaoToneladasPlantadas,
@@ -94,8 +94,8 @@ INNER JOIN estadoMunicipio em
 INNER JOIN tipoCafe tc
     ON f.fkTipoCafe = tc.id
 WHERE
-    pf.ano = 1985
-    AND f.fkEmpresa = 3
+    pf.ano = ${ano}
+    AND f.fkEmpresa = ${idEmpresa}
 GROUP BY
     tc.nome
 ORDER BY
@@ -107,20 +107,39 @@ LIMIT 1;
 
 function obterTop5(idEmpresa, ano) {
     let instrucaoSql = `
-    select
-	estado,
-    ROUND(((SUM(quantidadeColhida * 100)) / ROUND(SUM((areaPlantada * 38.74 * 60) / 1000), 0)), 2) percentualEfeciencia,
-    SUM(pf.quantidadeColhida) totalColhido
-from plantacaoFazenda pf
-inner join fazenda f
-on pf.fkFazenda = f.id
-inner join estadoMunicipio em
-on pf.fazenda_fkEstadoMunicipio = em.id
-where ano = ${ano} and f.fkEmpresa = ${idEmpresa}
-group by
-estado
-order by totalColhido desc
-limit 5;
+    WITH TotalColhido AS (
+    SELECT
+        SUM(pf.quantidadeColhida) AS totalColhido
+    FROM
+        plantacaoFazenda pf
+    INNER JOIN fazenda f
+        ON pf.fkFazenda = f.id
+    WHERE
+        pf.ano = ${ano}
+    AND f.fkEmpresa = ${idEmpresa}
+)
+SELECT
+    ROUND(SUM((pf.areaPlantada * 38.74 * 60) / 1000), 2) AS especulacaoToneladasPlantadas,
+    SUM(pf.quantidadeColhida) AS totalColhido,
+    ROUND(
+        (SUM(pf.quantidadeColhida) * 100) / (SELECT totalColhido FROM TotalColhido),
+        2
+    ) AS percentualEfeciencia,
+    em.estado
+FROM
+    plantacaoFazenda pf
+INNER JOIN fazenda f
+    ON pf.fkFazenda = f.id
+INNER JOIN estadoMunicipio em
+    ON pf.fazenda_fkEstadoMunicipio = em.id
+WHERE
+    pf.ano = ${ano}
+    AND f.fkEmpresa = ${idEmpresa}
+GROUP BY
+    em.estado
+ORDER BY
+    percentualEfeciencia DESC
+LIMIT 5;
     `;
 
     return database.executar(instrucaoSql);
