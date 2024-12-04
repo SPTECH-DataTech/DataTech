@@ -221,12 +221,12 @@ function carregarTiposCafe() {
             const selectCafe = document.getElementById('select-cafe');
             dados.forEach((cafe) => {
                 const opcao = document.createElement('option');
-                opcao.value = cafe.idCafe; 
-                opcao.textContent = cafe.nomeCafe; 
+                opcao.value = cafe.idCafe; // Define o valor como o ID do café
+                opcao.textContent = cafe.nomeCafe; // Define o texto como o nome do café
                 selectCafe.appendChild(opcao);
             });
 
-        
+            // Define o valor padrão e chama atualizaSelects se ambos os selects estiverem preenchidos
             if (dados.length > 0) {
                 selectCafe.value = dados[0].idCafe;
                 if (document.getElementById('select-ano').options.length > 0) {
@@ -459,10 +459,10 @@ function carregarEstados() {
             selectEstado.appendChild(option);
         });
         if (data.length > 0) {
-            const primeiroEstado = data[0];  // aqui pega o primeiro estado da lista do select
-            selectEstado.value = primeiroEstado.idUf;  // seleciona o primeiro estado no select
+            const primeiroEstado = data[0];  
+            selectEstado.value = primeiroEstado.idUf; 
 
-            // Agora aqui chama o gráfico de climograma com o idUf do primeiro estado
+            atualizaSelectEstado();
             carregarGraficoClimograma(idUf);
         }
         else {
@@ -519,7 +519,6 @@ let chartClimogramaInstance;
 
 function criarGraficoClimograma(meses, temperaturaMedia, umidadeMedia) {
     const ctx = document.getElementById("climograma").getContext("2d");
-
     if (chartClimogramaInstance) {
         chartClimogramaInstance.destroy();
     }
@@ -531,7 +530,7 @@ function criarGraficoClimograma(meses, temperaturaMedia, umidadeMedia) {
                 datasets: [
                     {
                         label: 'Temperatura Média (°C)',
-                        data: temperaturaMedia,
+                        data: temperaturaMedia, 
                         type: 'line',
                         borderColor: 'rgba(255, 99, 132, 1)',
                         borderWidth: 2,
@@ -540,7 +539,7 @@ function criarGraficoClimograma(meses, temperaturaMedia, umidadeMedia) {
                     },
                     {
                         label: 'Umidade (%)',
-                        data: umidadeMedia,
+                        data: umidadeMedia, 
                         backgroundColor: '#6c81dd',
                         borderColor: 'rgba(54, 162, 235, 1)',
                         borderWidth: 1,
