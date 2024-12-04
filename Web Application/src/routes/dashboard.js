@@ -36,6 +36,9 @@ router.post("/listarClimogramaPorAno", function (req, res) {
 });
 
 
+router.post("/listarClimaInadequado", function (req, res) {
+    dashboardController.listarClimaInadequado(req, res);
+});
 
 
 module.exports = router;

@@ -160,17 +160,13 @@
                                     <h3 style="color: black;"> Temp. </h3>
                                 </div>
 
-                                <div class="infos-kpi2">
-                                    <h3> Junho </h3>
-                                    <h3> 60% </h3>
-                                    <h3> 30ºC </h3>
+                                <div class="infos-kpi2-2">
+                                    <h3 id="mes-inadequado"> </h3>
+                                    <h3 id="temp-inadequado"> </h3>
+                                    <h3 id="umidade-inadequado"> </h3>
                                 </div>
 
-                                <div class="infos-kpi2">
-                                    <h3> Julho </h3>
-                                    <h3> 55% </h3>
-                                    <h3> 31ºC </h3>
-                                </div>
+                               
 
 
                             </div>
@@ -244,13 +240,15 @@ window.onload = function() {
     carregarAnos();
     carregarTiposCafe();
     carregarEstados();
+    carregarClimaInadequado();
+    
 };
 
 function atualizaSelects() {
     const ano = document.getElementById("select-ano").value;
     const tipoCafe = document.getElementById("select-cafe").value;
 
-    if (ano && tipoCafe) { // Verifica se ambos os valores estão preenchidos
+    if (ano && tipoCafe) { 
         carregarGrafico(ano, tipoCafe);
         carregarMaiorEficiencia(ano, tipoCafe);
         carregarMenorEficiencia(ano, tipoCafe);
@@ -459,11 +457,13 @@ function carregarEstados() {
             selectEstado.appendChild(option);
         });
         if (data.length > 0) {
-            const primeiroEstado = data[0];  
-            selectEstado.value = primeiroEstado.idUf; 
-
-            atualizaSelectEstado();
-            carregarGraficoClimograma(idUf);
+                selectEstado.value = data[0].idUf;
+                if (document.getElementById('select-estado').options.length > 0) {
+                    atualizaSelectEstado();
+                }
+                else{
+                    alert('nao tem dado no select')
+                }
         }
         else {
             console.error('Nenhum estado encontrado.');
@@ -584,6 +584,44 @@ function criarGraficoClimograma(meses, temperaturaMedia, umidadeMedia) {
             }
         });
     }
+
+    function carregarClimaInadequado(ano, idUf) {
+    fetch("/dashboard/listarClimaInadequado", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            anoServer: ano,
+            idUf: idUf
+        })
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error("Erro ao buscar dados.");
+        }
+    })
+    .then(data => {
+        console.log("Dados recebidos:", data); // Verifique os dados retornados
+        if (data.length > 0) {
+            // Assumindo que a API retorna uma lista de dados com 'mes', 'temperaturaMedia' e 'umidadeMedia'
+            data.forEach(item => {
+                // Sobrescreve as informações nos elementos com os IDs específicos
+                document.getElementById("mes-inadequado").textContent = item.mes;
+                document.getElementById("temp-inadequado").textContent = item.temperaturaMedia + "°C";
+                document.getElementById("umidade-inadequado").textContent = item.umidadeMedia + "%";
+            });
+        } else {
+            alert("Não há dados para o ano e ID da UF selecionados.");
+        }
+    })
+    .catch(error => {
+        console.error("Erro:", error);
+        alert("Erro ao buscar os dados do clima inadequado.");
+    });
+}
 
 
 </script>
