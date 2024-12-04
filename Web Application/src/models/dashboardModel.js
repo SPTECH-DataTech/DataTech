@@ -91,21 +91,20 @@ function listarTiposDeCafe(idEmpresa) {
 
 function listarEstados() {
     let instrucaoSql = `
-        SELECT DISTINCT 
-            em.idUf, 
+        SELECT DISTINCT
             em.estado
         FROM 
-            climaMunicipioDash2 AS cm
+            climaMunicipioDash AS cm
         INNER JOIN 
             estadoMunicipio AS em ON cm.fkMunicipio = em.id
-        ORDER BY 
+        ORDER BY
             em.estado;
     `;
     
     return database.executar(instrucaoSql);
 }
 
-function listarClimogramaPorAno(ano, idUf) {
+function listarClimogramaPorAno(ano, estado) {
     let instrucaoSql = `
   SELECT 
     mes, 
@@ -130,11 +129,11 @@ FROM (
         (cmd.temperaturaMax + cmd.temperaturaMin) / 2 AS temperaturaMedia,
         cmd.umidadeMedia
     FROM 
-        climaMunicipioDash2 AS cmd
+        climaMunicipioDash AS cmd
     INNER JOIN 
         estadoMunicipio AS em ON cmd.fkMunicipio = em.id
     WHERE 
-        em.idUf = ${idUf} AND YEAR(cmd.dataCaptura) = ${ano}
+        em.estado = "${estado}" AND YEAR(cmd.dataCaptura) = ${ano}
 ) AS subquery
 GROUP BY 
     mes
@@ -146,15 +145,15 @@ ORDER BY
 }
 
 
-function listarClimaInadequado(ano, idUf) {
+function listarClimaInadequado(ano, estado) {
     let instrucaoSql = `
     SELECT 
         MONTH(cmd.dataCaptura) AS mes,
         AVG((cmd.temperaturaMax + cmd.temperaturaMin) / 2) AS temperaturaMedia,
         AVG(cmd.umidadeMedia) AS umidadeMedia
-    FROM climaMunicipioDash2 cmd
+    FROM climaMunicipioDash cmd
     INNER JOIN estadoMunicipio em ON cmd.fkMunicipio = em.id 
-    WHERE YEAR(cmd.dataCaptura) = ${ano} AND em.idUf = ${idUf}
+    WHERE YEAR(cmd.dataCaptura) = ${ano} AND em.estado = "${estado}"
     GROUP BY YEAR(cmd.dataCaptura), MONTH(cmd.dataCaptura)
     HAVING 
         (temperaturaMedia < 18 OR temperaturaMedia > 24) 

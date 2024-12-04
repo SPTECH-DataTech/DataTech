@@ -155,7 +155,7 @@ function listarEstados(req, res) {
             console.log(`\nResultados encontrados: ${resultado.length}`);
             console.log(`Resultados: ${JSON.stringify(resultado)}`);
             if (resultado && resultado.length > 0) {
-                res.json(resultado);  // Retorna a lista de estados e idUf
+                res.json(resultado);  // Retorna a lista de estados
             } else {
                 res.status(404).json({ erro: "Nenhum estado encontrado" });
             }
@@ -169,17 +169,17 @@ function listarEstados(req, res) {
 
 function listarClimogramaPorAno(req, res) {
     let ano = req.body.anoServer;
-    let idUf = req.body.idUfServer;
+    let estado = req.body.estadoServer;
   
-    if (ano == undefined || idUf == undefined) {
-        res.status(400).send("Ano ou idUf está undefined");
+    if (ano == undefined || estado == undefined) {
+        res.status(400).send("Ano ou estado está undefined");
         return;
     }
 
-    dashboardModel.listarClimogramaPorAno(ano, idUf)
+    dashboardModel.listarClimogramaPorAno(ano, estado)
         .then(function(resultado) {
             if (resultado.length === 0) {
-                console.log("Nenhum dado encontrado para o ano e município:", ano, idUf);
+                console.log("Nenhum dado encontrado para o ano e município:", ano, estado);
                 res.status(404).json({ erro: "Nenhum dado encontrado" });
             } else {
                 console.log("Dados encontrados:", resultado);
@@ -194,16 +194,16 @@ function listarClimogramaPorAno(req, res) {
 
 function listarClimaInadequado(req, res) {
     let ano = req.body.anoServer;
-    let idUf = req.body.idUf;
+    let estado = req.body.estado;
 
-    console.log(`Ano: ${ano}, ID da UF: ${idUf}`);  // Adicionando para depuração
+    console.log(`Ano: ${ano}, estado: ${estado}`);  // Adicionando para depuração
 
     if (ano == undefined) {
         res.status(400).send("Ano está undefined");
-    } else if (idUf == undefined) {
-        res.status(400).send("ID da UF está undefined");
+    } else if (estado == undefined) {
+        res.status(400).send("Estado está undefined");
     } else {
-        dashboardModel.listarClimaInadequado(ano, idUf)
+        dashboardModel.listarClimaInadequado(ano, estado)
             .then(function (resultado) {
                 console.log(`Resultados encontrados: ${resultado.length}`);  // Verifique o tamanho do resultado
                 res.json(resultado);
