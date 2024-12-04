@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -240,8 +240,6 @@ window.onload = function() {
     carregarAnos();
     carregarTiposCafe();
     carregarEstados();
-    carregarClimaInadequado();
-    
 };
 
 function atualizaSelects() {
@@ -256,7 +254,6 @@ function atualizaSelects() {
         alert("Por favor, selecione um ano e tipo de café ou Estado válidos.");
     }
 }
-
 
 function atualizaSelectEstado() {
     const ano = document.getElementById("select-ano").value;
@@ -585,6 +582,9 @@ function criarGraficoClimograma(meses, temperaturaMedia, umidadeMedia) {
         });
     }
 
+    let ano = document.getElementById("select-ano").value;
+    let idUf = sessionStorage.ESTADO_FAZENDA;
+    carregarClimaInadequado(ano, idUf) 
     function carregarClimaInadequado(ano, idUf) {
     fetch("/dashboard/listarClimaInadequado", {
         method: "POST",

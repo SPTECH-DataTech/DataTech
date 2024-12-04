@@ -154,8 +154,7 @@ function listarClimaInadequado(ano, idUf) {
         AVG(cmd.umidadeMedia) AS umidadeMedia
     FROM climaMunicipioDash2 cmd
     INNER JOIN estadoMunicipio em ON cmd.fkMunicipio = em.id 
-    WHERE YEAR(cmd.dataCaptura) = ${ano}  
-      AND em.idUf = ${idUf}              
+    WHERE YEAR(cmd.dataCaptura) = ${ano} AND em.idUf = ${idUf}
     GROUP BY YEAR(cmd.dataCaptura), MONTH(cmd.dataCaptura)
     HAVING 
         (temperaturaMedia < 18 OR temperaturaMedia > 24) 
