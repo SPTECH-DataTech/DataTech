@@ -2,7 +2,7 @@ let idFazenda = sessionStorage.FAZENDA;
 let idEmpresa = sessionStorage.ID_EMPRESA;
 let idMunicipio = sessionStorage.MUNICIPIO_FAZENDA;
 let cargos;
-
+    
 function conultarNomeFazenda() {
     fetch('cargo/consultarFazenda', {
         method: "POST",
