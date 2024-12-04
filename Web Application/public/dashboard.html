@@ -91,7 +91,7 @@
                                     <h2 style="color: #10BB00;">Maior eficiência de Produção</h2>
                                 </div>
                                 <div class="infos-kpi">
-                                    <h3 id="estado_maior_eficiencia"></h3>
+                                    <h3 id="estado_maior_eficiencia" style="font-size: 10px;"></h3>
                                     <h3 id="quantidade_perdida_plantada_maior"></h3>
                                 </div>
                                 <div class="percentagem">
@@ -160,20 +160,20 @@
                                     </center>
                                 </div>
 
-                                <div class="infos-kpi2">
-                                    <h3 style="color: black;"> Mês </h3>
-                                    <h3 style="color: black;"> Umid. </h3>
-                                    <h3 style="color: black;"> Temp. </h3>
-                                </div>
+                                <table class="tabelaClima"  id="mesesInadequados" >
+                                    <tr>
+                                        <th>Mês</th>
+                                        <th>Umid.</th>
+                                        <th>Temp.</th>
+                                    </tr>
 
-                                <div class="infos-kpi2-2" id="mesesInadequados">
-                                    <!-- <h3 id="mes-inadequado"> </h3>
-                                    <h3 id="temp-inadequado"> </h3>
-                                    <h3 id="umidade-inadequado"> </h3> -->
-                                </div>
+                                    <!-- <tr>
+                                        <td>7</td>
+                                        <td>30,00%</td>
+                                        <td>30,00°</td>
+                                    </tr> -->
 
-
-
+                                </table>
 
                             </div>
                         </div>
@@ -622,15 +622,30 @@
                 const mesesInadequados = document.getElementById("mesesInadequados");
                 if (data.length > 0) {
                     // Assumindo que a API retorna uma lista de dados com 'mes', 'temperaturaMedia' e 'umidadeMedia'
-                    mesesInadequados.innerHTML = ``;
+                    mesesInadequados.innerHTML = `
+                <tr>
+                    <th>Mês</th>
+                    <th>Umid.</th>
+                    <th>Temp.</th>
+                </tr>
+                `;
                     data.forEach(data => {
                         // Sobrescreve as informações nos elementos com os IDs específicos
                     
                         mesesInadequados.innerHTML += `
-                <h3 id="mes-inadequado"> ${data.mes} </h3>
-                <h3 id="temp-inadequado"> ${data.temperaturaMedia}°C </h3>
-                <h3 id="umidade-inadequado"> ${data.umidadeMedia}% </h3>
-                `;
+
+                        <tr>
+                            <td>${data.mes}</td>
+                            <td>${Math.round(data.temperaturaMedia).toFixed(2)}°C</td>
+                            <td>${Math.round(data.umidadeMedia).toFixed(2)}%</td>
+                        </tr>`;
+
+    // <div style="display: flex; flex-direction: column; gap: 50px; margin-bottom: 10px;">
+    //     <h3 id="mes-inadequado" style="font-size:15px; margin: 0;"> </h3>
+    //     <h3 id="temp-inadequado" style="font-size:15px; margin: 0;"></h3>
+    //     <h3 id="umidade-inadequado" style="font-size:15px; margin: 0;"></h3>
+    // </div>
+
 
                     });
                 } else {

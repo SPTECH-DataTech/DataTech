@@ -354,7 +354,7 @@ canvas {
   border: 2px solid #C8CBD9;
   border-radius: 8px;
   gap: 0;
-  width: 80%;
+  width: 100%;
 }
 
 .infos-kpi {
@@ -428,15 +428,30 @@ h1 {
 
 }
 
-.infos-kpi2 {
-  display: flex;
+.tabelaClima {
+  /* display: flex; */
   width: 85%;
   justify-content: space-between;
   align-items: center;
   padding: 5px 15px;
   margin: 6px 0;
+
+  width: 100%;
+  border-spacing: 0;
+  text-align: center;
+
+}
+
+.tabelaClima th {
+
   border-bottom: 1px solid #C8CBD9;
-  gap: 20px;
+
+}
+
+.tabelaClima td {
+
+  padding: 1%;
+
 }
 
 .infos-kpi2 h3 {
