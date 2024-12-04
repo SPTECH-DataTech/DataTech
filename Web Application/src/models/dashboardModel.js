@@ -19,21 +19,22 @@ function listarProducaoCafe(ano, tipoCafe, idEmpresa) {
 }
 function obterMaiorEficiencia(ano, tipoCafe, idEmpresa) {
     let instrucaoSql = `
-         select 
-            em.estado as estado,
-            round(sum((pf.areaplantada * 39 * 60) / 1000), 0) as quantidadePlantada,  -- quantidade plantada em toneladas
-            round(sum((pf.areaplantada * 39 * 60) / 1000) - sum(pf.quantidadecolhida), 0) as quantidadePerdida, -- quantidade perdida em toneladas
-            round(
-                ((sum((pf.areaplantada * 39 * 60) / 1000) - sum(pf.quantidadecolhida)) / 
-                sum((pf.areaplantada * 39 * 60) / 1000)) * 100, 2
-            ) as porcentagemPerda
-        from plantacaoFazenda as pf
-        inner join fazenda f on pf.fkfazenda = f.id
-        inner join estadoMunicipio em on f.fkestadomunicipio = em.id 
-        where pf.ano = ${ano} and  f.fkTipoCafe = ${tipoCafe} and pf.fazenda_fkEmpresa = ${idEmpresa}
-        group by em.estado
-        order by porcentagemPerda asc
-        limit 1;
+
+    select 
+    em.estado as estado,
+    round(sum((pf.areaplantada * 39 * 60) / 1000), 2) as quantidadePlantada, -- quantidade plantada em toneladas
+    round(sum(pf.quantidadecolhida), 2) as quantidadeColhida, -- quantidade efetivamente colhida em toneladas
+    round(
+        (sum(pf.quantidadecolhida) / sum((pf.areaplantada * 39 * 60) / 1000)) * 100, 2
+    ) as porcentagemGanho
+    from plantacaoFazenda as pf
+    inner join fazenda f on pf.fkfazenda = f.id
+    inner join estadoMunicipio em on f.fkestadomunicipio = em.id 
+    where pf.ano = ${ano} and f.fkTipoCafe = ${tipoCafe} and pf.fazenda_fkEmpresa = ${idEmpresa}
+    group by em.estado
+    order by porcentagemGanho desc
+    limit 1;
+
     `;
 
     return database.executar(instrucaoSql);
@@ -43,8 +44,8 @@ function obterMenorEficiencia(ano, tipoCafe, idEmpresa) {
     let instrucaoSql = `
         select 
         em.estado as estadoMenor,
-        round(sum((pf.areaplantada * 39 * 60) / 1000), 0) as quantidadePlantadaMenor,  
-        round(sum((pf.areaplantada * 39 * 60) / 1000) - sum(pf.quantidadecolhida), 0) as quantidadePerdidaMenor,
+        round(sum((pf.areaplantada * 39 * 60) / 1000), 2) as quantidadePlantadaMenor,  
+        round(sum((pf.areaplantada * 39 * 60) / 1000) - sum(pf.quantidadecolhida), 2) as quantidadePerdidaMenor,
         round(
             ((sum((pf.areaplantada * 39 * 60) / 1000) - sum(pf.quantidadecolhida)) / 
             sum((pf.areaplantada * 39 * 60) / 1000)) * 100, 2
@@ -88,12 +89,73 @@ function listarTiposDeCafe(idEmpresa) {
 }
 
 
+function listarEstados() {
+    let instrucaoSql = `
+        SELECT DISTINCT 
+            em.idUf, 
+            em.estado
+        FROM 
+            climaMunicipioDash2 AS cm
+        INNER JOIN 
+            estadoMunicipio AS em ON cm.fkMunicipio = em.id
+        ORDER BY 
+            em.estado;
+    `;
+    
+    return database.executar(instrucaoSql);
+}
+
+function listarClimogramaPorAno(ano, idUf) {
+    let instrucaoSql = `
+  SELECT 
+    mes, 
+    AVG(temperaturaMedia) AS temperaturaMedia, 
+    AVG(umidadeMedia) AS umidadeMedia
+FROM (
+    SELECT
+        CASE 
+            WHEN MONTH(cmd.dataCaptura) = 1 THEN 'Jan'
+            WHEN MONTH(cmd.dataCaptura) = 2 THEN 'Fev'
+            WHEN MONTH(cmd.dataCaptura) = 3 THEN 'Mar'
+            WHEN MONTH(cmd.dataCaptura) = 4 THEN 'Abr'
+            WHEN MONTH(cmd.dataCaptura) = 5 THEN 'Mai'
+            WHEN MONTH(cmd.dataCaptura) = 6 THEN 'Jun'
+            WHEN MONTH(cmd.dataCaptura) = 7 THEN 'Jul'
+            WHEN MONTH(cmd.dataCaptura) = 8 THEN 'Ago'
+            WHEN MONTH(cmd.dataCaptura) = 9 THEN 'Set'
+            WHEN MONTH(cmd.dataCaptura) = 10 THEN 'Out'
+            WHEN MONTH(cmd.dataCaptura) = 11 THEN 'Nov'
+            WHEN MONTH(cmd.dataCaptura) = 12 THEN 'Dez'
+        END AS mes,
+        (cmd.temperaturaMax + cmd.temperaturaMin) / 2 AS temperaturaMedia,
+        cmd.umidadeMedia
+    FROM 
+        climaMunicipioDash2 AS cmd
+    INNER JOIN 
+        estadoMunicipio AS em ON cmd.fkMunicipio = em.id
+    WHERE 
+        em.idUf = ${idUf} AND YEAR(cmd.dataCaptura) = ${ano}
+) AS subquery
+GROUP BY 
+    mes
+ORDER BY 
+    FIELD(mes, 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez');
+
+    `;
+    return database.executar(instrucaoSql);
+}
+
+
+
+
 
 module.exports = {
     listarProducaoCafe,
     obterMaiorEficiencia,
     obterMenorEficiencia,
     listarAnos,
-    listarTiposDeCafe
+    listarTiposDeCafe,
+    listarEstados,
+    listarClimogramaPorAno
 };
 

@@ -51,14 +51,14 @@ function obterMaiorEficiencia(req, res) {
                     if (resultado && resultado.length > 0) {
                         let estado = resultado[0].estado;
                         let quantidadePlantada = resultado[0].quantidadePlantada;
-                        let quantidadePerdida = resultado[0].quantidadePerdida;
-                        let porcentagemPerda = resultado[0].porcentagemPerda;
+                        let quantidadeColhida = resultado[0].quantidadeColhida;
+                        let porcentagemGanho = resultado[0].porcentagemGanho;
 
                         res.json({
                             estado: estado,
                             quantidadePlantada: quantidadePlantada,
-                            quantidadePerdida: quantidadePerdida,
-                            porcentagemPerda: porcentagemPerda
+                            quantidadeColhida: quantidadeColhida,
+                            porcentagemGanho: porcentagemGanho
                         });
                     } else {
                         res.status(404).send("Nenhum resultado encontrado.");
@@ -149,12 +149,56 @@ function listarTiposDeCafe(req, res) {
         });
 }
 
+function listarEstados(req, res) {
+    dashboardModel.listarEstados()
+        .then(function (resultado) {
+            console.log(`\nResultados encontrados: ${resultado.length}`);
+            console.log(`Resultados: ${JSON.stringify(resultado)}`);
+            if (resultado && resultado.length > 0) {
+                res.json(resultado);  // Retorna a lista de estados e idUf
+            } else {
+                res.status(404).json({ erro: "Nenhum estado encontrado" });
+            }
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            console.log("\nHouve um erro ao consultar os estados", erro.sqlMessage);
+            res.status(500).json({ erro: "Houve um erro ao consultar os estados", erro: erro.sqlMessage });
+        });
+}
+
+function listarClimogramaPorAno(req, res) {
+    let ano = req.body.anoServer;
+    let idUf = req.body.idUfServer;
+  
+    if (ano == undefined || idUf == undefined) {
+        res.status(400).send("Ano ou idUf está undefined");
+        return;
+    }
+
+    dashboardModel.listarClimogramaPorAno(ano, idUf)
+        .then(function(resultado) {
+            if (resultado.length === 0) {
+                console.log("Nenhum dado encontrado para o ano e município:", ano, idUf);
+                res.status(404).json({ erro: "Nenhum dado encontrado" });
+            } else {
+                console.log("Dados encontrados:", resultado);
+                res.json(resultado);
+            }
+        })
+        .catch(function(erro) {
+            console.error("Erro na consulta ao banco de dados:", erro);
+            res.status(500).json({ erro: "Erro ao consultar os dados do climograma", erro: erro.sqlMessage });
+        });
+}
 
 module.exports = {
     listarProducaoCafe,
     obterMaiorEficiencia,
     obterMenorEficiencia,
     listarAnos,
-    listarTiposDeCafe
+    listarTiposDeCafe,
+    listarEstados,
+    listarClimogramaPorAno
 };
 
