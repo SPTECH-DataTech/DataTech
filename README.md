@@ -2,10 +2,6 @@
 
 ![Logo DataTech](https://github.com/user-attachments/assets/91bb4825-0634-41a7-b4b4-32c2e0bc9190)
 
-<p align="center">
-<img loading="lazy" src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge"/>
-</p>
-
 # Índice
 
 * [Descrição do Projeto](#descrição-do-projeto)
